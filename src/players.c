@@ -500,6 +500,8 @@ GameContext *game_init(void)
     ctx->sm.p2SwapBtn.rect = (SDL_Rect){650 + (180 - BUTTON_W) / 2, 490, BUTTON_W, BUTTON_H};
     ctx->sm.p2SwapBtn.hovered = 0;
 
+    initEnigme(&ctx->en, ctx->renderer);
+
     return ctx;
 }
 
@@ -632,7 +634,7 @@ if (moved) {
         /* attack animation */
         if (ctx->player1.attacking) {
             ctx->player1.attackTimer++;
-            if (ctx->player1.attackTimer >= 4) {
+            if (ctx->player1.attackTimer >= 2) {
                 ctx->player1.attackTimer = 0;
                 ctx->player1.attackFrame++;
 
@@ -880,7 +882,7 @@ if (moved2) {
         /* attack animation — only extend hitbox on frame 3 */
         if (ctx->player2.attacking) {
             ctx->player2.attackTimer++;
-            if (ctx->player2.attackTimer >= 4) {
+            if (ctx->player2.attackTimer >= 2) {
                 ctx->player2.attackTimer = 0;
                 ctx->player2.attackFrame++;
 
@@ -936,11 +938,25 @@ int  keys_cnt = (ctx->map.level == LEVEL_1) ? ctx->map.keys1_cnt : ctx->map.keys
 
 for (int i = 0; i < keys_cnt; i++) {
     if (!keys[i].collected && keys[i].visible) {
-        if (map_rects_overlap(ctx->player1.rect, keys[i].rect) ||
-            map_rects_overlap(ctx->player2.rect, keys[i].rect)) {
+        if (map_rects_overlap(ctx->player1.rect, keys[i].rect)) {
+            ctx->lastPlayerToPickupKey = 1;
+        } else if (map_rects_overlap(ctx->player2.rect, keys[i].rect)) {
+            ctx->lastPlayerToPickupKey = 2;
+        }
+
+        if (ctx->lastPlayerToPickupKey != 0 && (map_rects_overlap(ctx->player1.rect, keys[i].rect) || map_rects_overlap(ctx->player2.rect, keys[i].rect))) {
             
             keys[i].collected = 1;
             keys[i].visible   = 0;
+            ctx->currentState = STATE_ENIGME;
+            ctx->en.over = 0;
+            ctx->en.showQuiz = 0; // Start at the "Quiz/Puzzle" selection screen
+
+            // Stop movement and sounds
+            ctx->player1.moving = 0;
+            ctx->player2.moving = 0;
+            Mix_HaltChannel(CH_P1_WALK);
+            Mix_HaltChannel(CH_P2_WALK);
 
             if (ctx->map.level == LEVEL_1 && i == 0) {
     ctx->isCameraPanning  = 1;
@@ -1189,7 +1205,28 @@ void game_update(GameContext *ctx)
 
     while (SDL_PollEvent(&ctx->event)) {
         if (ctx->event.type == SDL_QUIT) { ctx->running = 0; }
-        else if (ctx->event.type == SDL_KEYDOWN)
+        
+        if (ctx->currentState == STATE_ENIGME) {
+            handleEnigmeEvents(&ctx->en, ctx->event);
+            if (ctx->en.over) {
+                if (ctx->en.puzzleSelected) {
+                    ctx->currentState = STATE_PUZZLE;
+                    puzzle_init_state(&ctx->pz, ctx->renderer);
+                } else {
+                    ctx->currentState = STATE_PLAYING;
+                    if (ctx->map.level == LEVEL_1) Mix_PlayMusic(ctx->musicLevel1, -1);
+                    else Mix_PlayMusic(ctx->musicLevel2, -1);
+                }
+            }
+            continue; 
+        }
+
+        if (ctx->currentState == STATE_PUZZLE) {
+            puzzle_handle_event(&ctx->pz, &ctx->event);
+            continue;
+        }
+
+        if (ctx->event.type == SDL_KEYDOWN)
             ctx->keys[ctx->event.key.keysym.scancode] = 1;
         else if (ctx->event.type == SDL_KEYUP)
             ctx->keys[ctx->event.key.keysym.scancode] = 0;
@@ -1303,11 +1340,37 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
     }
     return;
 }
+if (ctx->currentState == STATE_ENIGME || ctx->currentState == STATE_PUZZLE) {
+    if (ctx->currentState == STATE_PUZZLE) {
+        puzzle_update(&ctx->pz);
+        if (ctx->pz.over) {
+            ctx->currentState = STATE_PLAYING;
+            
+            // Consequences
+            Player *p = (ctx->lastPlayerToPickupKey == 1) ? &ctx->player1 : &ctx->player2;
+            if (ctx->pz.result == 1) { // Win
+                p->score += 10;
+            } else if (ctx->pz.result == 0) { // Loss
+                p->score -= 10;
+                p->healthStatus += 1;
+                if (p->healthStatus >= 8) {
+                    p->alive = 0;
+                    p->healthStatus = 7;
+                }
+            }
+            ctx->lastPlayerToPickupKey = 0; // Reset
+
+            puzzle_free_state(&ctx->pz);
+            if (ctx->map.level == LEVEL_1) Mix_PlayMusic(ctx->musicLevel1, -1);
+            else Mix_PlayMusic(ctx->musicLevel2, -1);
+        }
+    }
+    return; // Skip mechanics
+}
+
     playerMechanics(ctx);
     if (ctx->map.level == LEVEL_2)
         enemy_update(ctx, dt);
-        if (ctx->map.level == LEVEL_2)
-            enemy_update(ctx, dt);
 
             /* ── Level 2 ending cutscene trigger ── */
             if (ctx->map.level == LEVEL_2 && !ctx->enemy.alive &&
@@ -1315,6 +1378,12 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
                 ctx->currentState    = STATE_CUTSCENE_L2_ENDING;
                 ctx->cutsceneL2Timer = 0;
                 ctx->cutsceneL2Alpha = 0;
+
+                // Stop movement and sounds for ending
+                ctx->player1.moving = 0;
+                ctx->player2.moving = 0;
+                Mix_HaltChannel(CH_P1_WALK);
+                Mix_HaltChannel(CH_P2_WALK);
             }
     if (ctx->map.level == LEVEL_2)
     printf("enemy pos: %.1f %.1f alive:%d\n", ctx->enemy.x, ctx->enemy.y, ctx->enemy.alive);
@@ -1393,6 +1462,8 @@ void game_cleanup(GameContext *ctx)
     map_cleanup(&ctx->map);
     liberer_minimap(&ctx->minimap);
     liberer_minimap(&ctx->minimap2);
+    freeEnigme(&ctx->en);
+    puzzle_free_state(&ctx->pz);
 
     if (ctx->font)     TTF_CloseFont(ctx->font);
     if (ctx->renderer) SDL_DestroyRenderer(ctx->renderer);
@@ -1409,6 +1480,18 @@ void game_render(GameContext *ctx)
     /* How many world pixels fit in each viewport at ZOOM_FACTOR */
     const int viewW = (int)(halfW / ZOOM_FACTOR);   /* 250 */
     const int viewH = (int)(fullH / ZOOM_FACTOR);   /* 325 */
+
+    if (ctx->currentState == STATE_ENIGME) {
+        renderEnigme(&ctx->en, ctx->renderer);
+        SDL_RenderPresent(ctx->renderer);
+        return;
+    }
+
+    if (ctx->currentState == STATE_PUZZLE) {
+        puzzle_render(&ctx->pz, ctx->renderer);
+        SDL_RenderPresent(ctx->renderer);
+        return;
+    }
 
     if (ctx->currentState == STATE_CUTSCENE) {
     SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 255);

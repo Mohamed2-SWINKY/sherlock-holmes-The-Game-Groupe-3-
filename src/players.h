@@ -4,6 +4,8 @@
 
 #include "minimap.h"
 #include "map.h"
+#include "enigme.h"
+#include "puzzle.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
@@ -70,7 +72,9 @@ typedef enum {
     STATE_PAUSED_PLAYERS,
     STATE_PAUSED_OUTFITS,
     STATE_PAUSED_CHARSELECT,
-    STATE_GAME_OVER
+    STATE_GAME_OVER,
+    STATE_ENIGME,
+    STATE_PUZZLE
 } GameState;
 
 typedef struct{
@@ -237,6 +241,9 @@ typedef struct {
     int cutsceneAlpha;
     int cutsceneL2Timer;
     int cutsceneL2Alpha;
+    Enigme en;
+    PuzzleState pz;
+    int lastPlayerToPickupKey;
 } GameContext;
 
 SDL_Texture* loadTexture(const char* path, SDL_Renderer* renderer);
