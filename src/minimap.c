@@ -1,4 +1,5 @@
 #include "minimap.h"
+#include <stdlib.h>
 
 void draw_filled_circle(SDL_Renderer *re, int cx, int cy, int r, SDL_Color col) {
     SDL_SetRenderDrawColor(re, col.r, col.g, col.b, col.a);
@@ -26,6 +27,10 @@ void init_minimap(MiniMap *m, SDL_Renderer *re, int screenH) {
     m->joueurY    = 0;
     m->joueur2X   = 0;
     m->joueur2Y   = 0;
+    m->shakeTimer     = 0;
+    m->shakeIntensity = 0;
+    m->shakeOffsetX   = 0;
+    m->shakeOffsetY   = 0;
 }
 
 // P2 minimap — shares textures/masks with m1, just different pos_map
@@ -47,27 +52,46 @@ void init_minimap2(MiniMap *m2, SDL_Renderer *re, int screenH, int screenW) {
     m2->joueurY    = 0;
     m2->joueur2X   = 0;
     m2->joueur2Y   = 0;
+    m2->shakeTimer     = 0;
+    m2->shakeIntensity = 0;
+    m2->shakeOffsetX   = 0;
+    m2->shakeOffsetY   = 0;
 }
 
 void afficher_minimap(MiniMap m, SDL_Renderer *re) {
+    // apply shake offset
+    SDL_Rect mapRect   = m.pos_map;
+    SDL_Rect pointRect = m.pos_point;
+    SDL_Rect point2Rect = m.pos_point2;
+    mapRect.x   += m.shakeOffsetX;
+    mapRect.y   += m.shakeOffsetY;
+    pointRect.x += m.shakeOffsetX;
+    pointRect.y += m.shakeOffsetY;
+    point2Rect.x += m.shakeOffsetX;
+    point2Rect.y += m.shakeOffsetY;
+
     // map background
     if (m.num_level == 1)
-        SDL_RenderCopy(re, m.img_map1, NULL, &m.pos_map);
+        SDL_RenderCopy(re, m.img_map1, NULL, &mapRect);
     else
-        SDL_RenderCopy(re, m.img_map2, NULL, &m.pos_map);
+        SDL_RenderCopy(re, m.img_map2, NULL, &mapRect);
 
     // P1 — red dot
     draw_filled_circle(re,
-        m.pos_point.x + 3, m.pos_point.y + 3,
+        pointRect.x + 3, pointRect.y + 3,
         4, (SDL_Color){255, 0, 0, 255});
 
     // P2 — blue dot
     draw_filled_circle(re,
-        m.pos_point2.x + 3, m.pos_point2.y + 3,
+        point2Rect.x + 3, point2Rect.y + 3,
         4, (SDL_Color){0, 100, 255, 255});
 
-    // cadre — same rect as the map so it perfectly overlays
-    SDL_RenderCopy(re, m.img_cadre, NULL, &m.pos_map);
+    // cadre — slightly larger than the map so it frames around it
+    SDL_Rect cadreRect = {
+        mapRect.x - 6, mapRect.y - 6,
+        mapRect.w + 12, mapRect.h + 12
+    };
+    SDL_RenderCopy(re, m.img_cadre, NULL, &cadreRect);
 }
 
 void afficher_minimap2(MiniMap m, SDL_Renderer *re) {
@@ -121,6 +145,27 @@ void animer_minimap(MiniMap *m, int frame) {
         SDL_SetTextureColorMod(m->img_point, 255, 0, 0);
     else
         SDL_SetTextureColorMod(m->img_point, 255, 255, 255);
+}
+
+/* --- Shake --- */
+void minimap_trigger_shake(MiniMap *m) {
+    if (m->shakeTimer <= 0) {
+        m->shakeTimer     = 15;
+        m->shakeIntensity = 4;
+    }
+}
+
+void minimap_update_shake(MiniMap *m) {
+    if (m->shakeTimer > 0) {
+        int intensity = m->shakeIntensity * m->shakeTimer / 15;
+        if (intensity < 1) intensity = 1;
+        m->shakeOffsetX = (rand() % (2 * intensity + 1)) - intensity;
+        m->shakeOffsetY = (rand() % (2 * intensity + 1)) - intensity;
+        m->shakeTimer--;
+    } else {
+        m->shakeOffsetX = 0;
+        m->shakeOffsetY = 0;
+    }
 }
 
 /* --- Sauvegarde / Chargement --- */

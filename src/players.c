@@ -561,6 +561,8 @@ void playerMechanics(GameContext *ctx)
           if (!is_blocked(testX, obs, obs_cnt, doors, dc, door_open)) {
               ctx->player1.rect.x += dx;
               moved = 1;
+          } else {
+              minimap_trigger_shake(&ctx->minimap);
           }
 
           SDL_Rect testY = ctx->player1.rect;
@@ -568,6 +570,8 @@ void playerMechanics(GameContext *ctx)
           if (!is_blocked(testY, obs, obs_cnt, doors, dc, door_open)) {
               ctx->player1.rect.y += dy;
               moved = 1;
+          } else {
+              minimap_trigger_shake(&ctx->minimap);
           }
 
           if (moved && !ctx->player1.attacking) {
@@ -761,6 +765,8 @@ testX.x += dx2;
 if (!is_blocked(testX, obs, obs_cnt, doors, dc, door_open)) {
     ctx->player2.rect.x += dx2;
     moved2 = 1;
+} else {
+    minimap_trigger_shake(&ctx->minimap2);
 }
 
 SDL_Rect testY = ctx->player2.rect;
@@ -768,6 +774,8 @@ testY.y += dy2;
 if (!is_blocked(testY, obs, obs_cnt, doors, dc, door_open)) {
     ctx->player2.rect.y += dy2;
     moved2 = 1;
+} else {
+    minimap_trigger_shake(&ctx->minimap2);
 }
 
 if (moved2 && !ctx->player2.attacking) {
@@ -1334,6 +1342,9 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
                                  ctx->player2.rect.x, ctx->player2.rect.y);
     MAJ_minimap(&ctx->minimap2, ctx->player1.rect.x, ctx->player1.rect.y,
                                  ctx->player2.rect.x, ctx->player2.rect.y);
+
+    minimap_update_shake(&ctx->minimap);
+    minimap_update_shake(&ctx->minimap2);
 }
 
 void game_cleanup(GameContext *ctx)

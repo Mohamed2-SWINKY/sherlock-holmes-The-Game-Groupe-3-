@@ -19,6 +19,10 @@ typedef struct {
     int joueurX, joueurY;
     int joueur2X, joueur2Y;
     int num_level;
+    int shakeTimer;
+    int shakeIntensity;
+    int shakeOffsetX;
+    int shakeOffsetY;
 } MiniMap;
 
 // --- Initialisation et affichage ---
@@ -37,6 +41,10 @@ int collision_BB(SDL_Rect joueur, SDL_Rect plateforme);
 
 // --- Animation ---
 void animer_minimap(MiniMap *m, int frame);
+
+// --- Shake ---
+void minimap_trigger_shake(MiniMap *m);
+void minimap_update_shake(MiniMap *m);
 
 // --- Sauvegarde / Chargement ---
 void sauvegarder_jeu(MiniMap m, int score, char *nomF);
