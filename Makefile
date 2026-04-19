@@ -1,5 +1,5 @@
-SH_UE: obj/main.o obj/players.o obj/minimap.o obj/map.o obj/enigme.o obj/puzzle.o
-	gcc obj/main.o obj/players.o obj/minimap.o obj/map.o obj/enigme.o obj/puzzle.o -o SH_UE -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lm
+SH_UE: obj/main.o obj/players.o obj/minimap.o obj/map.o obj/enigme.o obj/puzzle.o obj/quiz.o
+	gcc obj/main.o obj/players.o obj/minimap.o obj/map.o obj/enigme.o obj/puzzle.o obj/quiz.o -o SH_UE -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lm
 
 obj/main.o: src/main.c
 	mkdir -p obj
@@ -24,6 +24,10 @@ obj/enigme.o: src/enigme.c
 obj/puzzle.o: src/puzzle.c
 	mkdir -p obj
 	gcc -c src/puzzle.c -o obj/puzzle.o
+
+obj/quiz.o: src/quiz.c
+	mkdir -p obj
+	gcc -c src/quiz.c -o obj/quiz.o
 
 clean:
 	rm -f SH_UE obj/*.o

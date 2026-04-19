@@ -28,6 +28,7 @@ static void play_hover_sound(Enigme *e)
 // INITIALISATION
 void initEnigme(Enigme *e, SDL_Renderer *r)
 {
+    e->renderer = r;
     e->bg = IMG_LoadTexture(r, "assets/enigme/background4.png");
     if (!e->bg) fprintf(stderr, "Failed to load background4.png: %s\n", IMG_GetError());
 
@@ -71,6 +72,15 @@ void initEnigme(Enigme *e, SDL_Renderer *r)
     e->lastHover = -1;
     e->over = 0;
     e->puzzleSelected = 0;
+
+    e->font = TTF_OpenFont("assets/fonts/pixelFont.ttf", 24);
+    e->fontSmall = TTF_OpenFont("assets/fonts/pixelFont.ttf", 18);
+    e->numQuestions = 0;
+    charger(e->questions, &e->numQuestions);
+    e->currentQuestionIdx = -1;
+    e->result = -1;
+    e->texQText = e->texAText = e->texBText = e->texCText = NULL;
+    e->quizTimeLimit = 10000; // 10 seconds
 }
 
 // EVENTS
@@ -143,6 +153,19 @@ void handleEnigmeEvents(Enigme *e, SDL_Event event)
                 lastHovered = -1;
                 e->lastHover = -1;
                 if (e->quizMusic) Mix_PlayMusic(e->quizMusic, -1);
+
+                e->quizStartTime = SDL_GetTicks();
+
+                // Load random question
+                e->currentQuestionIdx = generer(e->questions, e->numQuestions);
+                if (e->currentQuestionIdx != -1) {
+                    SDL_Color white = {255, 255, 255, 255};
+                    QuizQuestion q = e->questions[e->currentQuestionIdx];
+                    e->texQText = renderText(q.question, e->fontSmall, white, e->renderer, 400); // Use fontSmall
+                    e->texAText = renderText(q.A, e->font, white, e->renderer, 0);
+                    e->texBText = renderText(q.B, e->font, white, e->renderer, 0);
+                    e->texCText = renderText(q.C, e->font, white, e->renderer, 0);
+                }
             }
 
             if (mx > e->puzzleRect.x && mx < e->puzzleRect.x + e->puzzleRect.w &&
@@ -153,21 +176,27 @@ void handleEnigmeEvents(Enigme *e, SDL_Event event)
                 e->over = 1;
             }
         }
-
-        if (e->showQuiz)
+        else if (e->showQuiz)
         {
+            char choice = ' ';
             if (mx > e->A.x && mx < e->A.x + e->A.w && my > e->A.y && my < e->A.y + e->A.h) {
-                printf("Answer A selected\n");
-                e->over = 1;
+                choice = 'A';
             }
-
             if (mx > e->B.x && mx < e->B.x + e->B.w && my > e->B.y && my < e->B.y + e->B.h) {
-                printf("Answer B selected\n");
-                e->over = 1;
+                choice = 'B';
+            }
+            if (mx > e->C.x && mx < e->C.x + e->C.w && my > e->C.y && my < e->C.y + e->C.h) {
+                choice = 'C';
             }
 
-            if (mx > e->C.x && mx < e->C.x + e->C.w && my > e->C.y && my < e->C.y + e->C.h) {
-                printf("Answer C selected\n");
+            if (choice != ' ' && e->currentQuestionIdx != -1) {
+                if (choice == e->questions[e->currentQuestionIdx].correcte) {
+                    printf("Correct!\n");
+                    e->result = 1;
+                } else {
+                    printf("Wrong!\n");
+                    e->result = 0;
+                }
                 e->over = 1;
             }
             
@@ -195,6 +224,21 @@ void renderEnigme(Enigme *e, SDL_Renderer *r)
 
     if (e->showQuiz)
     {
+        Uint32 elapsed = SDL_GetTicks() - e->quizStartTime;
+        if (elapsed > (Uint32)e->quizTimeLimit) {
+            e->result = 0;
+            e->over = 1;
+            e->showQuiz = 0;
+            Mix_HaltMusic();
+            return;
+        }
+
+        // Draw Timer Bar
+        float pct = 1.0f - (float)elapsed / e->quizTimeLimit;
+        SDL_Rect bar = { (1000 - 400) / 2, 435, (int)(400 * pct), 10 };
+        SDL_SetRenderDrawColor(r, 255, 0, 0, 255);
+        SDL_RenderFillRect(r, &bar);
+
         SDL_RenderCopy(r, e->texQuestion, NULL, &e->band);
 
         SDL_Rect destA = e->hoverA ? scaleRect(e->A, 1.15f) : e->A;
@@ -204,6 +248,32 @@ void renderEnigme(Enigme *e, SDL_Renderer *r)
         SDL_RenderCopy(r, e->texA, NULL, &destA);
         SDL_RenderCopy(r, e->texB, NULL, &destB);
         SDL_RenderCopy(r, e->texC, NULL, &destC);
+
+        // Draw Dynamic Text
+        if (e->texQText) {
+            SDL_Rect qr; SDL_QueryTexture(e->texQText, NULL, NULL, &qr.w, &qr.h);
+            qr.x = e->band.x + (e->band.w - qr.w) / 2;
+            qr.y = e->band.y + (e->band.h - qr.h) / 2;
+            SDL_RenderCopy(r, e->texQText, NULL, &qr);
+        }
+        if (e->texAText) {
+            SDL_Rect ar; SDL_QueryTexture(e->texAText, NULL, NULL, &ar.w, &ar.h);
+            ar.x = e->A.x + (e->A.w - ar.w) / 2;
+            ar.y = e->A.y + e->A.h + 10;
+            SDL_RenderCopy(r, e->texAText, NULL, &ar);
+        }
+        if (e->texBText) {
+            SDL_Rect br; SDL_QueryTexture(e->texBText, NULL, NULL, &br.w, &br.h);
+            br.x = e->B.x + (e->B.w - br.w) / 2;
+            br.y = e->B.y + e->B.h + 10;
+            SDL_RenderCopy(r, e->texBText, NULL, &br);
+        }
+        if (e->texCText) {
+            SDL_Rect cr; SDL_QueryTexture(e->texCText, NULL, NULL, &cr.w, &cr.h);
+            cr.x = e->C.x + (e->C.w - cr.w) / 2;
+            cr.y = e->C.y + e->C.h + 10;
+            SDL_RenderCopy(r, e->texCText, NULL, &cr);
+        }
     }
 }
 
@@ -218,6 +288,14 @@ void freeEnigme(Enigme *e)
     SDL_DestroyTexture(e->texB);
     SDL_DestroyTexture(e->texC);
     SDL_DestroyTexture(e->texQuestion);
+
+    if (e->texQText) SDL_DestroyTexture(e->texQText);
+    if (e->texAText) SDL_DestroyTexture(e->texAText);
+    if (e->texBText) SDL_DestroyTexture(e->texBText);
+    if (e->texCText) SDL_DestroyTexture(e->texCText);
+
+    if (e->font) TTF_CloseFont(e->font);
+    if (e->fontSmall) TTF_CloseFont(e->fontSmall);
 
     Mix_FreeChunk(e->hoverSound);
     Mix_FreeMusic(e->quizMusic);

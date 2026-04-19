@@ -1214,6 +1214,21 @@ void game_update(GameContext *ctx)
                     puzzle_init_state(&ctx->pz, ctx->renderer);
                 } else {
                     ctx->currentState = STATE_PLAYING;
+
+                    // Quiz Consequences
+                    Player *p = (ctx->lastPlayerToPickupKey == 1) ? &ctx->player1 : &ctx->player2;
+                    if (ctx->en.result == 1) { // Win
+                        p->score += 10;
+                    } else if (ctx->en.result == 0) { // Loss
+                        p->score -= 10;
+                        p->healthStatus += 1;
+                        if (p->healthStatus >= 8) {
+                            p->alive = 0;
+                            p->healthStatus = 7;
+                        }
+                    }
+                    ctx->lastPlayerToPickupKey = 0; // Reset
+
                     if (ctx->map.level == LEVEL_1) Mix_PlayMusic(ctx->musicLevel1, -1);
                     else Mix_PlayMusic(ctx->musicLevel2, -1);
                 }
@@ -1340,7 +1355,9 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
     }
     return;
 }
-if (ctx->currentState == STATE_ENIGME || ctx->currentState == STATE_PUZZLE) {
+if (ctx->currentState == STATE_ENIGME || ctx->currentState == STATE_PUZZLE ||
+    ctx->currentState == STATE_CUTSCENE || ctx->currentState == STATE_CUTSCENE_L2_INTRO ||
+    ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
     if (ctx->currentState == STATE_PUZZLE) {
         puzzle_update(&ctx->pz);
         if (ctx->pz.over) {
