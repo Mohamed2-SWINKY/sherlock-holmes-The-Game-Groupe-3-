@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <stddef.h>
 
 #define BUTTON_W 130
 #define BUTTON_H 40
@@ -59,7 +60,7 @@
 #define CH_P2_DEATH  10
 #define CH_BUTTONS 11
 
-#define ENEMY_FRAME_DELAY 8
+#define ENEMY_FRAME_DELAY 12
 
 typedef enum {
     STATE_CUTSCENE,
@@ -166,7 +167,7 @@ typedef struct{
 #define MAX_WALK_UP        4
 #define MAX_WALK_DOWN      4
 #define FRAME_DELAY        40
-#define ATTACK_DELAY       40
+#define ATTACK_DELAY       35
 
 typedef enum { DIR_DOWN=0, DIR_UP, DIR_RIGHT, DIR_LEFT } EnemyDir;
 typedef enum { ANIM_IDLE=0, ANIM_WALK, ANIM_ATTACK }    EnemyAnim;
@@ -176,6 +177,7 @@ typedef struct {
     SDL_Texture *walkUp[MAX_WALK_UP];
     SDL_Texture *walkDown[MAX_WALK_DOWN];
     SDL_Texture *attack[MAX_ATTACK_FRAMES];
+    SDL_Texture *hpBar[8];
 } EnemyAtlas;
 
 typedef struct {

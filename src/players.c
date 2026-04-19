@@ -43,6 +43,11 @@ void enemyAtlas_load(EnemyAtlas *a, SDL_Renderer *renderer) {
     for (int i=0;i<MAX_WALK_UP;      i++) a->walkUp[i]   =loadTexture(upFiles[i],     renderer);
     for (int i=0;i<MAX_WALK_DOWN;    i++) a->walkDown[i] =loadTexture(downFiles[i],   renderer);
     for (int i=0;i<MAX_ATTACK_FRAMES;i++) a->attack[i]   =loadTexture(attackFiles[i], renderer);
+    for (int i=0;i<8;i++) {
+        char hpPath[64];
+        sprintf(hpPath, "assets/hpBar/hpBar%d.png", i+1);
+        a->hpBar[i] = loadTexture(hpPath, renderer);
+    }
 }
 
 void enemy_anim_update(EnemyAnimation *a, float dx, float dy) {
@@ -68,6 +73,43 @@ void enemy_anim_render(SDL_Renderer *r, EnemyAnimation *a, EnemyAtlas *atlas, SD
     if (a->state == ANIM_ATTACK) {
         frame = atlas->attack[a->attackFrame];
         if (frame) SDL_RenderCopyEx(r, frame, NULL, dst, 0, NULL, a->flip);
+        
+        // --- HIT FRAME LOGIC ---
+        // Deal damage only on the middle frame of the 3-frame animation
+        if (a->attackFrame == 1 && a->attackCounter == 0) {
+            GameContext *ctx = (GameContext*)((char*)atlas - offsetof(GameContext, enemyAtlas));
+            // Check P1
+            if (ctx->player1.alive && map_rects_overlap(ctx->enemy.rect, ctx->player1.rect)) {
+                ctx->player1.knockbackX = (ctx->enemy.x < ctx->player1.rect.x) ? 12 : -12;
+                ctx->player1.knockbackXTimer = 15;
+                if (ctx->player1.healthStatus < 6) {
+                    ctx->player1.healthStatus++;
+                    if (ctx->player1.healthStatus == 6) {
+                        ctx->player1.alive = 0;
+                        ctx->player1.healthStatus = 7;
+                        Mix_PlayChannel(CH_P1_DEATH, ctx->player1.deathSound, 0);
+                    }
+                }
+                if (!Mix_Playing(CH_P1_GETHIT))
+                    Mix_PlayChannel(CH_P1_GETHIT, ctx->player1.gettingHitSound, 0);
+            }
+            // Check P2
+            if (ctx->player2.alive && map_rects_overlap(ctx->enemy.rect, ctx->player2.rect)) {
+                ctx->player2.knockbackX = (ctx->enemy.x < ctx->player2.rect.x) ? 12 : -12;
+                ctx->player2.knockbackXTimer = 15;
+                if (ctx->player2.healthStatus < 6) {
+                    ctx->player2.healthStatus++;
+                    if (ctx->player2.healthStatus == 6) {
+                        ctx->player2.alive = 0;
+                        ctx->player2.healthStatus = 7;
+                        Mix_PlayChannel(CH_P2_DEATH, ctx->player2.deathSound, 0);
+                    }
+                }
+                if (!Mix_Playing(CH_P2_GETHIT))
+                    Mix_PlayChannel(CH_P2_GETHIT, ctx->player2.gettingHitSound, 0);
+            }
+        }
+
         if (++a->attackCounter >= ATTACK_DELAY) {
             a->attackCounter = 0;
             if (++a->attackFrame >= MAX_ATTACK_FRAMES) {
@@ -112,7 +154,7 @@ void enemy_init(GameContext *ctx) {
     e->anim.attackFrame  = 0;
     e->anim.attackCounter= 0;
     e->healthStatus = 0;
-    e->maxHealth    = 4;  /* change this to whatever you want */
+    e->maxHealth    = 6;
     e->knockbackX     = 0;
     e->knockbackY     = 0;
     e->knockbackTimer = 0;
@@ -165,49 +207,37 @@ void enemy_update(GameContext *ctx, float dt) {
     e->rect.y = (int)e->y;
     enemy_anim_update(&e->anim, dx, dy);
 
-    /* enemy touches player1 */
-if (ctx->player1.alive && map_rects_overlap(e->rect, ctx->player1.rect)) {
-    ctx->player1.knockbackX      = (e->x < ctx->player1.rect.x) ? 8 : -8;
-    ctx->player1.knockbackXTimer = 15;
-    if (ctx->player1.healthStatus < 6) {
-        ctx->player1.healthStatus++;
-        if (ctx->player1.healthStatus == 6) {
-            ctx->player1.alive        = 0;
-            ctx->player1.healthStatus = 7;
-            Mix_PlayChannel(CH_P1_DEATH, ctx->player1.deathSound, 0);
-        }
+    /* --- ATTACK TRIGGER LOGIC --- */
+    float distP1 = 9999, distP2 = 9999;
+    if (ctx->player1.alive) {
+        float ddx = (ctx->player1.rect.x + ctx->player1.rect.w/2) - (e->x + e->w/2);
+        float ddy = (ctx->player1.rect.y + ctx->player1.rect.h/2) - (e->y + e->h/2);
+        distP1 = sqrtf(ddx*ddx + ddy*ddy);
     }
-    if (!Mix_Playing(CH_P1_GETHIT))
-        Mix_PlayChannel(CH_P1_GETHIT, ctx->player1.gettingHitSound, 0);
-    /* push enemy back so it doesn't keep dealing damage every frame */
-    e->x -= (e->x < ctx->player1.rect.x) ? 20.0f : -20.0f;
-    enemy_choose_target(e);
-}
+    if (ctx->player2.alive) {
+        float ddx = (ctx->player2.rect.x + ctx->player2.rect.w/2) - (e->x + e->w/2);
+        float ddy = (ctx->player2.rect.y + ctx->player2.rect.h/2) - (e->y + e->h/2);
+        distP2 = sqrtf(ddx*ddx + ddy*ddy);
+    }
 
-/* enemy touches player2 */
-if (ctx->player2.alive && map_rects_overlap(e->rect, ctx->player2.rect)) {
-    ctx->player2.knockbackX      = (e->x < ctx->player2.rect.x) ? 8 : -8;
-    ctx->player2.knockbackXTimer = 15;
-    if (ctx->player2.healthStatus < 6) {
-        ctx->player2.healthStatus++;
-        if (ctx->player2.healthStatus == 6) {
-            ctx->player2.alive        = 0;
-            ctx->player2.healthStatus = 7;
-            Mix_PlayChannel(CH_P2_DEATH, ctx->player2.deathSound, 0);
+    if ( (ctx->player1.alive && map_rects_overlap(e->rect, ctx->player1.rect)) ||
+         (ctx->player2.alive && map_rects_overlap(e->rect, ctx->player2.rect)) ) {
+        e->anim.state = ANIM_ATTACK;
+        // Face the target
+        if (distP1 < distP2) {
+            e->anim.flip = (ctx->player1.rect.x > e->x) ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL;
+        } else {
+            e->anim.flip = (ctx->player2.rect.x > e->x) ? SDL_FLIP_NONE : SDL_FLIP_HORIZONTAL;
         }
     }
-    if (!Mix_Playing(CH_P2_GETHIT))
-        Mix_PlayChannel(CH_P2_GETHIT, ctx->player2.gettingHitSound, 0);
-    e->x -= (e->x < ctx->player2.rect.x) ? 20.0f : -20.0f;
-    enemy_choose_target(e);
-}
-if (e->knockbackTimer > 0) {
-    SDL_Rect testK = { (int)(e->x + e->knockbackX * dt), (int)e->y, e->w, e->h };
-    if (!is_blocked(testK, obs, obs_cnt, doors, dc, door_open))
-        e->x += e->knockbackX * dt;
-    e->knockbackX *= 0.85f;
-    e->knockbackTimer--;
-}
+
+    if (e->knockbackTimer > 0) {
+        float kbX = e->knockbackX * (e->knockbackTimer / 15.0f);
+        SDL_Rect testK = { (int)(e->x + kbX * dt), (int)e->y, e->w, e->h };
+        if (!is_blocked(testK, obs, obs_cnt, doors, dc, door_open))
+            e->x += kbX * dt;
+        e->knockbackTimer--;
+    }
 }
 
 void enemy_render(GameContext *ctx, int camX, int camY) {
@@ -220,6 +250,17 @@ void enemy_render(GameContext *ctx, int camX, int camY) {
         (int)(e->h * ZOOM_FACTOR)
     };
     enemy_anim_render(ctx->renderer, &e->anim, e->atlas, &dst);
+
+    /* Draw HP bar above head */
+    if (e->healthStatus >= 0 && e->healthStatus < 8) {
+        SDL_Rect hpDst = {
+            dst.x + (dst.w - (int)(100 * ZOOM_FACTOR)) / 2,
+            dst.y - (int)(15 * ZOOM_FACTOR),
+            (int)(100 * ZOOM_FACTOR),
+            (int)(20 * ZOOM_FACTOR)
+        };
+        SDL_RenderCopy(ctx->renderer, e->atlas->hpBar[e->healthStatus], NULL, &hpDst);
+    }
 }
 
 
@@ -634,7 +675,7 @@ if (moved) {
         /* attack animation */
         if (ctx->player1.attacking) {
             ctx->player1.attackTimer++;
-            if (ctx->player1.attackTimer >= 2) {
+            if (ctx->player1.attackTimer >= 4) {
                 ctx->player1.attackTimer = 0;
                 ctx->player1.attackFrame++;
 
@@ -664,6 +705,9 @@ if (moved) {
                 if (ctx->map.level == LEVEL_2 && ctx->enemy.alive &&
                   hasIntersection(ctx->player1.rect, ctx->enemy.rect)) {
                   ctx->enemy.healthStatus++;
+                  if (!Mix_Playing(CH_P1_GETHIT))
+                      Mix_PlayChannel(CH_P1_GETHIT, ctx->player1.gettingHitSound, 0);
+
 if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth)
     ctx->enemy.healthStatus++;
 ctx->enemy.knockbackX     = (ctx->player1.lastHDir == SDL_SCANCODE_D) ? 120.0f : -120.0f;
@@ -882,7 +926,7 @@ if (moved2) {
         /* attack animation — only extend hitbox on frame 3 */
         if (ctx->player2.attacking) {
             ctx->player2.attackTimer++;
-            if (ctx->player2.attackTimer >= 2) {
+            if (ctx->player2.attackTimer >= 4) {
                 ctx->player2.attackTimer = 0;
                 ctx->player2.attackFrame++;
 
@@ -911,6 +955,9 @@ if (moved2) {
                 if (ctx->map.level == LEVEL_2 && ctx->enemy.alive &&
                   hasIntersection(ctx->player2.rect, ctx->enemy.rect)) {
                   ctx->enemy.healthStatus++;
+                  if (!Mix_Playing(CH_P2_GETHIT))
+                      Mix_PlayChannel(CH_P2_GETHIT, ctx->player2.gettingHitSound, 0);
+
 if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth)
     ctx->enemy.healthStatus++;
 ctx->enemy.knockbackX = (ctx->player2.lastHDir == SDL_SCANCODE_RIGHT) ? 120.0f : -120.0f;
@@ -1228,9 +1275,6 @@ void game_update(GameContext *ctx)
                         }
                     }
                     ctx->lastPlayerToPickupKey = 0; // Reset
-
-                    if (ctx->map.level == LEVEL_1) Mix_PlayMusic(ctx->musicLevel1, -1);
-                    else Mix_PlayMusic(ctx->musicLevel2, -1);
                 }
             }
             continue; 
@@ -1341,6 +1385,7 @@ if (ctx->currentState == STATE_CUTSCENE_L2_INTRO) {
     else {
         ctx->currentState    = STATE_PLAYING;
         ctx->cutsceneL2Timer = 0;
+        Mix_PlayMusic(ctx->musicLevel2, -1);
     }
     return;
 }
@@ -1378,8 +1423,6 @@ if (ctx->currentState == STATE_ENIGME || ctx->currentState == STATE_PUZZLE ||
             ctx->lastPlayerToPickupKey = 0; // Reset
 
             puzzle_free_state(&ctx->pz);
-            if (ctx->map.level == LEVEL_1) Mix_PlayMusic(ctx->musicLevel1, -1);
-            else Mix_PlayMusic(ctx->musicLevel2, -1);
         }
     }
     return; // Skip mechanics
@@ -1444,6 +1487,7 @@ void game_cleanup(GameContext *ctx)
     for (int i=0;i<MAX_WALK_UP;      i++) SDL_DestroyTexture(ctx->enemyAtlas.walkUp[i]);
     for (int i=0;i<MAX_WALK_DOWN;    i++) SDL_DestroyTexture(ctx->enemyAtlas.walkDown[i]);
     for (int i=0;i<MAX_ATTACK_FRAMES;i++) SDL_DestroyTexture(ctx->enemyAtlas.attack[i]);
+    for (int i=0;i<8;i++) SDL_DestroyTexture(ctx->enemyAtlas.hpBar[i]);
 
     SDL_DestroyTexture(ctx->player1.idle);
     for (int i=0;i<5;i++) SDL_DestroyTexture(ctx->player1.walkRight[i]);

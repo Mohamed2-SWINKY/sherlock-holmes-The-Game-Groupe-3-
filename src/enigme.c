@@ -152,7 +152,7 @@ void handleEnigmeEvents(Enigme *e, SDL_Event event)
                 e->showQuiz = 1;
                 lastHovered = -1;
                 e->lastHover = -1;
-                if (e->quizMusic) Mix_PlayMusic(e->quizMusic, -1);
+                // if (e->quizMusic) Mix_PlayMusic(e->quizMusic, -1);
 
                 e->quizStartTime = SDL_GetTicks();
 
