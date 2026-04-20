@@ -2,8 +2,8 @@
 Members :
 
           Mohamed Hammami,
-          Raef Bjaoui,     
-          Ahmed amine Jabou,
+          Raef Bejaoui,     
+          Ahmed Amine Jabou,
           Ahmed Cheour,
           Dhia Bouali,
           Amine Jedli
