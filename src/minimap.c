@@ -135,8 +135,11 @@ int collision_PP(MiniMap *m, int x, int y) {
 }
 
 /* --- 4.4 : Collision BB --- */
-int collision_BB(SDL_Rect joueur, SDL_Rect plateforme) {
-    return SDL_HasIntersection(&joueur, &plateforme);
+int collision_BB(SDL_Rect a, SDL_Rect b) {
+    return (a.x < b.x + b.w &&
+            a.x + a.w > b.x &&
+            a.y < b.y + b.h &&
+            a.y + a.h > b.y);
 }
 
 /* --- 4.5 : Animation --- */
