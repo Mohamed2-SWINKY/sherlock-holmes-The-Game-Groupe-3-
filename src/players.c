@@ -156,7 +156,7 @@ void enemy_init(GameContext *ctx) {
     e->anim.attackFrame  = 0;
     e->anim.attackCounter= 0;
     e->healthStatus = 0;
-    e->maxHealth    = 12;
+    e->maxHealth    = 40;
     e->knockbackX     = 0;
     e->knockbackY     = 0;
     e->knockbackTimer = 0;
@@ -254,15 +254,14 @@ void enemy_render(GameContext *ctx, int camX, int camY) {
     enemy_anim_render(ctx->renderer, &e->anim, e->atlas, &dst);
 
     /* Draw HP bar above head */
-    if (e->healthStatus >= 0 && e->healthStatus < 8) {
-        SDL_Rect hpDst = {
-            dst.x + (dst.w - (int)(100 * ZOOM_FACTOR)) / 2,
-            dst.y - (int)(15 * ZOOM_FACTOR),
-            (int)(100 * ZOOM_FACTOR),
-            (int)(20 * ZOOM_FACTOR)
-        };
-        SDL_RenderCopy(ctx->renderer, e->atlas->hpBar[e->healthStatus], NULL, &hpDst);
-    }
+    int barFrame = e->healthStatus % 7; 
+    SDL_Rect hpDst = {
+        dst.x + (dst.w - (int)(100 * ZOOM_FACTOR)) / 2,
+        dst.y - (int)(15 * ZOOM_FACTOR),
+        (int)(100 * ZOOM_FACTOR),
+        (int)(20 * ZOOM_FACTOR)
+    };
+    SDL_RenderCopy(ctx->renderer, e->atlas->hpBar[barFrame], NULL, &hpDst);
 }
 
 
@@ -1003,6 +1002,22 @@ if (moved2) {
                 }
             }
         }
+    }
+
+    /* ── DEBUG: Teleport to Level 2 ── */
+    if (ctx->keys[SDL_SCANCODE_O]) {
+        ctx->map.level = LEVEL_2;
+        setup_level2(&ctx->map);
+        ctx->minimap.num_level  = 2;  
+        ctx->minimap2.num_level = 2;   
+        ctx->player1.rect.x = 200; ctx->player1.rect.y = 550;
+        ctx->player2.rect.x = 230; ctx->player2.rect.y = 550;
+        Mix_HaltMusic();
+        Mix_PlayMusic(ctx->musicLevel2, -1);
+        ctx->currentState    = STATE_PLAYING; 
+        ctx->paused          = 0;
+        ctx->keys[SDL_SCANCODE_O] = 0;
+        return;
     }
 
     /* ── Key pickup ── */
