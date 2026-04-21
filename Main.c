@@ -1,4 +1,4 @@
-
+/* main.c – Entry point, SDL event loop, per-frame update */
 #include "header.h"
 
 int main(int argc, char *argv[])
