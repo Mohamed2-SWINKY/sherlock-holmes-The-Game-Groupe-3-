@@ -10,14 +10,19 @@
 #include <string.h>
 #include <math.h>
 
-/* --- Window & Map dimensions --- */
+/* --- Window dimensions (fixed screen size) --- */
 #define WINDOW_W   1400
-#define WINDOW_H   742
+#define WINDOW_H    742
+
+/* --- Map dimensions (the full world, same as original) --- */
 #define MAP_W      1400
-#define MAP_H      742
+#define MAP_H       742
 
 /* --- Camera zoom --- */
 #define ZOOM_FACTOR 2.0f
+
+/* --- Camera scroll speed (pixels per frame, in map coordinates) --- */
+#define CAM_SCROLL_SPEED 5
 
 /* --- Player --- */
 #define PLAYER_W   22
@@ -106,6 +111,16 @@ typedef struct {
 } FallingBox;
 
 /* ======================================================
+   Camera – tracks player position for 4-direction scrolling
+   ====================================================== */
+typedef struct {
+    int x;   /* top-left corner of the camera view on the map */
+    int y;
+    int w;   /* viewport width  (pixels)                      */
+    int h;   /* viewport height (pixels)                      */
+} Camera;
+
+/* ======================================================
    Main game context
    ====================================================== */
 typedef struct {
@@ -150,6 +165,10 @@ typedef struct {
     Door     doors2[MAX_DOORS];
     int      doors2_cnt;
 
+    /* --- Cameras (one per player, used for 4-direction scrolling) --- */
+    Camera cam1;   /* follows p1 */
+    Camera cam2;   /* follows p2 */
+
     /* --- Timer --- */
     Uint32 timer_start; /* SDL_GetTicks at game start */
     int    timer_on;
@@ -162,6 +181,14 @@ typedef struct {
 /* ======================================================
    Function declarations (implemented in source.c)
    ====================================================== */
+
+/* scrolling dans les quatre sens */
+void camera_init(Camera *cam, int vp_w, int vp_h);
+void scroll_camera_left(Camera *cam);    /* défilement gauche  */
+void scroll_camera_right(Camera *cam);   /* défilement droite  */
+void scroll_camera_up(Camera *cam);      /* défilement haut    */
+void scroll_camera_down(Camera *cam);    /* défilement bas     */
+void afficher_scrolling(Camera *cam, int left, int right, int up, int down);
 
 /* Initialisation / teardown */
 int  game_init(Game *g);
