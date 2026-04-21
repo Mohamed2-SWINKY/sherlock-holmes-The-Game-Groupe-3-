@@ -208,6 +208,14 @@ typedef struct {
     int   knockbackTimer;
 } Enemy;
 
+#define MAX_STARS 4
+
+typedef struct {
+    SDL_Rect rect;
+    int      collected;
+    int      visible;
+} Star;
+
 typedef struct {
     SDL_Window *window;
     SDL_Renderer *renderer;
@@ -246,6 +254,12 @@ typedef struct {
     Enigme en;
     PuzzleState pz;
     int lastPlayerToPickupKey;
+
+    /* --- Star system --- */
+    Star stars[MAX_STARS];
+    SDL_Texture *starTexture;
+    SDL_Texture *keyTexture;
+    SDL_Texture *hpSpritesheet;
 } GameContext;
 
 SDL_Texture* loadTexture(const char* path, SDL_Renderer* renderer);

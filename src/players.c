@@ -543,6 +543,25 @@ GameContext *game_init(void)
 
     initEnigme(&ctx->en, ctx->renderer);
 
+    /* --- Star (Coffee) initialization --- */
+    ctx->starTexture = loadTexture("assets/collectibles/coffee.png", ctx->renderer);
+    ctx->keyTexture  = loadTexture("assets/collectibles/key.png",    ctx->renderer);
+    
+    int starCoords[MAX_STARS][2] = {
+        {300, 300},
+        {1150, 300},
+        {600, 600},
+        {1000, 600}
+    };
+    for (int i = 0; i < MAX_STARS; i++) {
+        ctx->stars[i].rect = (SDL_Rect){starCoords[i][0], starCoords[i][1], 32, 32};
+        ctx->stars[i].collected = 0;
+        ctx->stars[i].visible = 1;
+    }
+
+    /* --- HP Spritesheet --- */
+    ctx->hpSpritesheet = loadTexture("assets/hpBar/healthbarSpritesheet.png", ctx->renderer);
+
     return ctx;
 }
 
@@ -1015,6 +1034,31 @@ for (int i = 0; i < keys_cnt; i++) {
     }
 }
 
+
+/* ── Star collection ── */
+for (int i = 0; i < MAX_STARS; i++) {
+    if (ctx->stars[i].visible && !ctx->stars[i].collected) {
+        int p1_coll = hasIntersection(ctx->player1.rect, ctx->stars[i].rect);
+        int p2_coll = hasIntersection(ctx->player2.rect, ctx->stars[i].rect);
+        
+        if (p1_coll || p2_coll) {
+            ctx->stars[i].collected = 1;
+            ctx->stars[i].visible = 0;
+            
+            if (p1_coll) {
+                ctx->player1.score += 5;
+                if (ctx->player1.healthStatus > 0) ctx->player1.healthStatus--;
+            }
+            if (p2_coll) {
+                ctx->player2.score += 5;
+                if (ctx->player2.healthStatus > 0) ctx->player2.healthStatus--;
+            }
+            // Optional: Play sound
+            if (ctx->sm.hoverSound) Mix_PlayChannel(-1, ctx->sm.hoverSound, 0); 
+        }
+    }
+}
+
 /* ── Door triggers ── */
 for (int i = 0; i < dc; i++) {
     int p1_at = hasIntersection(ctx->player1.rect, doors[i].rect);
@@ -1051,7 +1095,6 @@ for (int i = 0; i < dc; i++) {
     }
     }
 }
-
 
 
 }
@@ -1527,6 +1570,9 @@ void game_cleanup(GameContext *ctx)
     puzzle_free_state(&ctx->pz);
 
     if (ctx->font)     TTF_CloseFont(ctx->font);
+    if (ctx->starTexture) SDL_DestroyTexture(ctx->starTexture);
+    if (ctx->keyTexture)  SDL_DestroyTexture(ctx->keyTexture);
+    if (ctx->hpSpritesheet) SDL_DestroyTexture(ctx->hpSpritesheet);
     if (ctx->renderer) SDL_DestroyRenderer(ctx->renderer);
     if (ctx->window)   SDL_DestroyWindow(ctx->window);
     Mix_CloseAudio(); Mix_Quit(); IMG_Quit(); TTF_Quit(); SDL_Quit();
@@ -1772,7 +1818,29 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
                         (int)(keys[i].rect.w  * ZOOM_FACTOR),
                         (int)(keys[i].rect.h  * ZOOM_FACTOR)
                     };
-                    SDL_RenderFillRect(ctx->renderer, &kr);
+                    if (ctx->keyTexture) {
+                        SDL_RenderCopy(ctx->renderer, ctx->keyTexture, NULL, &kr);
+                    } else {
+                        SDL_RenderFillRect(ctx->renderer, &kr);
+                    }
+                }
+            }
+        }
+
+        /* ── Stars ── */
+        for (int i = 0; i < MAX_STARS; i++) {
+            if (ctx->stars[i].visible && !ctx->stars[i].collected) {
+                SDL_Rect sr = {
+                    (int)((ctx->stars[i].rect.x - camX) * ZOOM_FACTOR),
+                    (int)((ctx->stars[i].rect.y - camY) * ZOOM_FACTOR),
+                    (int)(ctx->stars[i].rect.w  * ZOOM_FACTOR),
+                    (int)(ctx->stars[i].rect.h  * ZOOM_FACTOR)
+                };
+                if (ctx->starTexture) {
+                    SDL_RenderCopy(ctx->renderer, ctx->starTexture, NULL, &sr);
+                } else {
+                    SDL_SetRenderDrawColor(ctx->renderer, 255, 255, 0, 255);
+                    SDL_RenderFillRect(ctx->renderer, &sr);
                 }
             }
         }
@@ -1843,6 +1911,7 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
         SDL_DestroyTexture(stx);
  
         SDL_Rect hp = {10, 20, PLAYER1HP_W, PLAYER1HP_H};
+        /* Reverted to individual images for debugging */
         SDL_RenderCopy(ctx->renderer,
             side == 0 ? ctx->player1.hpBar[ctx->player1.healthStatus]
                       : ctx->player2.hpBar[ctx->player2.healthStatus],
