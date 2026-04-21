@@ -1,4 +1,4 @@
-
+/* source.c - All game logic and rendering functions */
 #include "header.h"
 
 /* -------------------------------------------------------
@@ -67,13 +67,13 @@ int game_init(Game *g)
        Map 1: assets/Gemini_Generated_Image_lvee1dlvee1dlvee.png
        Map 2: assets/Gemini_Generated_Image_9hznjl9hznjl9hzn.png  */
     g->tex_map1 = IMG_LoadTexture(g->renderer,
-        "assets/Gemini_Generated_Image_lvee1dlvee1dlvee.png");
+        "assets/background/background1.png");
     g->tex_map2 = IMG_LoadTexture(g->renderer,
-        "assets/Gemini_Generated_Image_9hznjl9hznjl9hzn.png");
+        "assets/background/background2.png");
 
     /* Load box textures */
     g->tex_box        = IMG_LoadTexture(g->renderer, "assets/box.png");
-    g->tex_broken_box = IMG_LoadTexture(g->renderer, "assets/broken_box.png");
+    g->tex_broken_box = IMG_LoadTexture(g->renderer, "assets/broken box.png");
 
     if (!g->tex_map1 || !g->tex_map2 || !g->tex_box || !g->tex_broken_box) {
         fprintf(stderr, "IMG_LoadTexture: %s\n", IMG_GetError());
@@ -99,6 +99,11 @@ int game_init(Game *g)
     g->timer_start = 0;
 
     setup_level1(g);
+
+    /* Initialise 4-direction scroll cameras */
+    camera_init(&g->cam1, WINDOW_W, WINDOW_H);
+    camera_init(&g->cam2, WINDOW_W / 2, WINDOW_H);
+
     return 1;
 }
 
@@ -480,21 +485,14 @@ void update_player(Game *g, Player *p, int up, int dn, int lt, int rt)
 
     /* Obstacle collisions (X) */
     int blocked_x = 0;
-    for (int i = 0; i < obs_cnt; i++) {
-        if (rects_overlap(next, obs[i])) {
-            blocked_x = 1;
-            break;
-        }
-    }
+    for (int i = 0; i < obs_cnt; i++)
+        if (rects_overlap(next, obs[i])) { blocked_x = 1; break; }
 
     /* Door collisions (X) – locked doors block */
     if (!blocked_x) {
-        for (int i = 0; i < dc; i++) {
-            if (dl[i].locked && !door_open[i] && rects_overlap(next, dl[i].rect)) {
-                blocked_x = 1;
-                break;
-            }
-        }
+        for (int i = 0; i < dc; i++)
+            if (dl[i].locked && !door_open[i] && rects_overlap(next, dl[i].rect))
+            { blocked_x = 1; break; }
     }
     if (blocked_x) next.x = p->rect.x;
 
@@ -506,20 +504,13 @@ void update_player(Game *g, Player *p, int up, int dn, int lt, int rt)
     if (next.y + next.h > MAP_H)  next.y = MAP_H - next.h;
 
     int blocked_y = 0;
-    for (int i = 0; i < obs_cnt; i++) {
-        if (rects_overlap(next, obs[i])) {
-            blocked_y = 1;
-            break;
-        }
-    }
+    for (int i = 0; i < obs_cnt; i++)
+        if (rects_overlap(next, obs[i])) { blocked_y = 1; break; }
 
     if (!blocked_y) {
-        for (int i = 0; i < dc; i++) {
-            if (dl[i].locked && !door_open[i] && rects_overlap(next, dl[i].rect)) {
-                blocked_y = 1;
-                break;
-            }
-        }
+        for (int i = 0; i < dc; i++)
+            if (dl[i].locked && !door_open[i] && rects_overlap(next, dl[i].rect))
+            { blocked_y = 1; break; }
     }
     if (blocked_y) next.y = p->rect.y;
 
@@ -697,45 +688,139 @@ void render_mode_menu(Game *g)
 }
 
 /* -------------------------------------------------------
-   render_viewport – draw one player's view into a viewport
+   scrolling dans les quatre sens
+   -------------------------------------------------------
+   La caméra se déplace indépendamment du joueur.
+   cam->x / cam->y = coin supérieur gauche de la vue
+                     en coordonnées MAP (avant zoom).
+   La portion visible est (vp_w/ZOOM) x (vp_h/ZOOM) pixels map.
+   ------------------------------------------------------- */
+
+void camera_init(Camera *cam, int vp_w, int vp_h)
+{
+    cam->x = 0;
+    cam->y = 0;
+    cam->w = vp_w;
+    cam->h = vp_h;
+}
+
+/* scroll_camera_left – déplace la caméra vers la gauche */
+void scroll_camera_left(Camera *cam)
+{
+    cam->x -= CAM_SCROLL_SPEED;
+    if (cam->x < 0) cam->x = 0;
+}
+
+/* scroll_camera_right – déplace la caméra vers la droite */
+void scroll_camera_right(Camera *cam)
+{
+    int view_w    = (int)(cam->w / ZOOM_FACTOR);
+    int max_cam_x = MAP_W - view_w;
+    cam->x += CAM_SCROLL_SPEED;
+    if (cam->x > max_cam_x) cam->x = max_cam_x;
+}
+
+/* scroll_camera_up – déplace la caméra vers le haut */
+void scroll_camera_up(Camera *cam)
+{
+    cam->y -= CAM_SCROLL_SPEED;
+    if (cam->y < 0) cam->y = 0;
+}
+
+/* scroll_camera_down – déplace la caméra vers le bas */
+void scroll_camera_down(Camera *cam)
+{
+    int view_h    = (int)(cam->h / ZOOM_FACTOR);
+    int max_cam_y = MAP_H - view_h;
+    cam->y += CAM_SCROLL_SPEED;
+    if (cam->y > max_cam_y) cam->y = max_cam_y;
+}
+
+/* afficher_scrolling – appelle les 4 fonctions selon les touches pressées
+   left/right/up/down : 1 si la touche est enfoncée, 0 sinon            */
+void afficher_scrolling(Camera *cam, int left, int right, int up, int down)
+{
+    if (left)  scroll_camera_left(cam);
+    if (right) scroll_camera_right(cam);
+    if (up)    scroll_camera_up(cam);
+    if (down)  scroll_camera_down(cam);
+}
+
+/* -------------------------------------------------------
+   partage d'écran
+   render_viewport – affiche la vue d'un joueur dans son viewport
+   (mono: viewport plein écran | multi: demi-écran gauche/droit)
    ------------------------------------------------------- */
 static void render_viewport(Game *g, SDL_Rect vp, Player *p,
                             int cam_scroll)
 {
     SDL_RenderSetViewport(g->renderer, &vp);
 
-    int vw = vp.w;
-    int zoomed_width = (int)(MAP_W / ZOOM_FACTOR);
-    int zoomed_height = (int)(MAP_H / ZOOM_FACTOR);
-    int cam_x = 0;
+    /* --- scrolling dans les quatre sens via Camera --- */
+    Camera *cam = (p == &g->p1) ? &g->cam1 : &g->cam2;
+
+    /* Re-initialise si le viewport change (mono ↔ split) */
+    if (cam->w != vp.w || cam->h != vp.h)
+        camera_init(cam, vp.w, vp.h);
 
     if (cam_scroll) {
-        cam_x = p->rect.x + PLAYER_W/2 - vw/2;
-        if (cam_x < 0)           cam_x = 0;
-        if (cam_x > MAP_W - vw)  cam_x = MAP_W - vw;
+        /* Lire les touches de défilement :
+           Mono   → touches fléchées
+           Multi  → P1: WASD   P2: touches fléchées                */
+        const Uint8 *ks = SDL_GetKeyboardState(NULL);
+        int left, right, up, down;
+
+        if (p == &g->p2) {
+            /* P2 scrolls with arrow keys in split mode */
+            left  = ks[SDL_SCANCODE_LEFT];
+            right = ks[SDL_SCANCODE_RIGHT];
+            up    = ks[SDL_SCANCODE_UP];
+            down  = ks[SDL_SCANCODE_DOWN];
+        } else {
+            /* P1 (and mono) scrolls with WASD */
+            left  = ks[SDL_SCANCODE_A];
+            right = ks[SDL_SCANCODE_D];
+            up    = ks[SDL_SCANCODE_W];
+            down  = ks[SDL_SCANCODE_S];
+        }
+
+        afficher_scrolling(cam, left, right, up, down);
+    } else {
+        cam->x = 0;
+        cam->y = 0;
     }
 
-    /* Apply zoom: camera sees a zoomed-in portion of the map */
-    int zoom_cam_x = (int)(cam_x / ZOOM_FACTOR);
-    int zoom_cam_y = (int)((MAP_H - zoomed_height) / 2 / ZOOM_FACTOR);
+    /* cam->x / cam->y sont en coordonnées MAP (avant zoom).
+       src_rect indique quelle portion du background on affiche. */
+    int src_w = (int)(vp.w / ZOOM_FACTOR);   /* portion visible en pixels map */
+    int src_h = (int)(vp.h / ZOOM_FACTOR);
 
-    /* Draw map with zoom */
+    /* Clamp camera to map bounds */
+    if (cam->x + src_w > MAP_W) cam->x = MAP_W - src_w;
+    if (cam->y + src_h > MAP_H) cam->y = MAP_H - src_h;
+    if (cam->x < 0) cam->x = 0;
+    if (cam->y < 0) cam->y = 0;
+
+    /* --- initialiser et afficher background --- */
     SDL_Texture *tex_map = (g->level == LEVEL_1) ? g->tex_map1 : g->tex_map2;
-    SDL_Rect src_rect = {zoom_cam_x, zoom_cam_y, zoomed_width, zoomed_height};
-    SDL_Rect map_dst = {0, 0, vp.w, vp.h};
-    SDL_RenderCopy(g->renderer, tex_map, &src_rect, &map_dst);
+    SDL_Rect src_rect = { cam->x, cam->y, src_w, src_h };
+    SDL_Rect dst_rect = { 0, 0, vp.w, vp.h };
+    SDL_RenderCopy(g->renderer, tex_map, &src_rect, &dst_rect);
 
-    /* --- Draw doors --- */
-    Door *dl = (g->level == LEVEL_1) ? g->doors1 : g->doors2;
-    int   dc = (g->level == LEVEL_1) ? g->doors1_cnt : g->doors2_cnt;
+/* Helper macro: convert a map-space rect to viewport-space screen rect */
+#define MAP_TO_SCREEN(r) (SDL_Rect){ \
+    (int)(((r).x - cam->x) * ZOOM_FACTOR), \
+    (int)(((r).y - cam->y) * ZOOM_FACTOR), \
+    (int)((r).w * ZOOM_FACTOR), \
+    (int)((r).h * ZOOM_FACTOR) }
+
+    /* --- Draw doors (plateformes fixes) --- */
+    Door *dl     = (g->level == LEVEL_1) ? g->doors1    : g->doors2;
+    int   dc     = (g->level == LEVEL_1) ? g->doors1_cnt: g->doors2_cnt;
     int  *door_open = (g->level == LEVEL_1) ? g->door1_open : g->door2_open;
 
     for (int i = 0; i < dc; i++) {
-        SDL_Rect dr = dl[i].rect;
-        dr.x = (int)((dr.x - zoom_cam_x * ZOOM_FACTOR) * ZOOM_FACTOR);
-        dr.y = (int)((dr.y - zoom_cam_y * ZOOM_FACTOR) * ZOOM_FACTOR);
-        dr.w = (int)(dr.w * ZOOM_FACTOR);
-        dr.h = (int)(dr.h * ZOOM_FACTOR);
+        SDL_Rect dr = MAP_TO_SCREEN(dl[i].rect);
         if (door_open[i]) {
             SDL_Color oc = {20, 180, 40, 100};
             filled_rect(g->renderer, dr, oc);
@@ -751,49 +836,42 @@ static void render_viewport(Game *g, SDL_Rect vp, Player *p,
 
     for (int i = 0; i < kc; i++) {
         if (!kl[i].visible || kl[i].collected) continue;
-        SDL_Rect kr = kl[i].rect;
-        kr.x = (int)((kr.x - zoom_cam_x * ZOOM_FACTOR) * ZOOM_FACTOR);
-        kr.y = (int)((kr.y - zoom_cam_y * ZOOM_FACTOR) * ZOOM_FACTOR);
-        kr.w = (int)(kr.w * ZOOM_FACTOR);
-        kr.h = (int)(kr.h * ZOOM_FACTOR);
+        SDL_Rect kr = MAP_TO_SCREEN(kl[i].rect);
         SDL_Color kc_col = {255, 215, 0, 255};
         filled_rect(g->renderer, kr, kc_col);
         /* Key shine */
         SDL_Color shine = {255, 255, 180, 180};
-        SDL_Rect shine_r = {kr.x + (int)(4 * ZOOM_FACTOR), kr.y + (int)(3 * ZOOM_FACTOR),
-                           (int)(8 * ZOOM_FACTOR), (int)(6 * ZOOM_FACTOR)};
+        SDL_Rect shine_r = { kr.x + (int)(4 * ZOOM_FACTOR),
+                             kr.y + (int)(3 * ZOOM_FACTOR),
+                             (int)(8 * ZOOM_FACTOR),
+                             (int)(6 * ZOOM_FACTOR) };
         filled_rect(g->renderer, shine_r, shine);
     }
 
-    /* --- Draw falling box (level 1 only) --- */
+    /* --- Draw falling box – plateforme destructible (level 1 only) --- */
     if (g->level == LEVEL_1) {
         FallingBox *fb = &g->fbox;
-        SDL_Rect box_dst = {(int)((fb->rect.x - zoom_cam_x * ZOOM_FACTOR) * ZOOM_FACTOR),
-                           (int)((fb->rect.y - zoom_cam_y * ZOOM_FACTOR) * ZOOM_FACTOR),
-                           (int)(fb->rect.w * ZOOM_FACTOR),
-                           (int)(fb->rect.h * ZOOM_FACTOR)};
-        if (fb->state == BOX_BROKEN) {
+        SDL_Rect box_dst = MAP_TO_SCREEN(fb->rect);
+        if (fb->state == BOX_BROKEN)
             SDL_RenderCopy(g->renderer, g->tex_broken_box, NULL, &box_dst);
-        } else {
-            SDL_RenderCopy(g->renderer, g->tex_box, NULL, &box_dst);
-        }
+        else
+            SDL_RenderCopy(g->renderer, g->tex_box,        NULL, &box_dst);
     }
 
     /* --- Draw player --- */
-    SDL_Rect pr = p->rect;
-    pr.x = (int)((pr.x - zoom_cam_x * ZOOM_FACTOR) * ZOOM_FACTOR);
-    pr.y = (int)((pr.y - zoom_cam_y * ZOOM_FACTOR) * ZOOM_FACTOR);
-    pr.w = (int)(pr.w * ZOOM_FACTOR);
-    pr.h = (int)(pr.h * ZOOM_FACTOR);
-    /* Body */
+    SDL_Rect pr = MAP_TO_SCREEN(p->rect);
     SDL_Color body = (p == &g->p1) ?
         (SDL_Color){30, 180, 255, 210} : (SDL_Color){255, 100, 40, 210};
     filled_rect(g->renderer, pr, body);
     /* Head highlight */
-    SDL_Rect head = {pr.x + (int)(4 * ZOOM_FACTOR), pr.y + (int)(2 * ZOOM_FACTOR),
-                    (int)((pr.w - 8) * ZOOM_FACTOR), (int)(9 * ZOOM_FACTOR)};
+    SDL_Rect head = { pr.x + (int)(4 * ZOOM_FACTOR),
+                      pr.y + (int)(2 * ZOOM_FACTOR),
+                      (int)((p->rect.w - 8) * ZOOM_FACTOR),
+                      (int)(9 * ZOOM_FACTOR) };
     SDL_Color hcol = {220, 220, 220, 180};
     filled_rect(g->renderer, head, hcol);
+
+#undef MAP_TO_SCREEN
 
     SDL_RenderSetViewport(g->renderer, NULL);
 }
@@ -842,7 +920,11 @@ static void render_hud(Game *g)
 }
 
 /* -------------------------------------------------------
-   render_game – full frame render
+   partage d'écran – render_game
+   Appelle render_viewport avec le mode (mono / multi).
+   En mono  : un seul viewport plein écran, scrolling activé.
+   En multi : deux demi-écrans côte à côte (partage d'écran),
+              chaque joueur a sa propre caméra 4-directions.
    ------------------------------------------------------- */
 void render_game(Game *g)
 {
@@ -850,26 +932,27 @@ void render_game(Game *g)
     SDL_RenderClear(g->renderer);
 
     if (g->mode == MODE_MONO) {
+        /* Mode mono : viewport plein écran, scrolling dans les 4 sens */
         SDL_Rect vp = {0, 0, WINDOW_W, WINDOW_H};
-        render_viewport(g, vp, &g->p1, 0);
+        render_viewport(g, vp, &g->p1, 1);   /* 1 = cam_scroll activé */
     } else {
-        /* Split screen */
+        /* partage d'écran (split screen) : chaque joueur = demi-écran */
         int hw = WINDOW_W / 2;
         SDL_Rect vp1 = {0,  0, hw, WINDOW_H};
         SDL_Rect vp2 = {hw, 0, hw, WINDOW_H};
         render_viewport(g, vp1, &g->p1, 1);
         render_viewport(g, vp2, &g->p2, 1);
 
-        /* Divider line */
+        /* Ligne de séparation centrale */
         SDL_RenderSetViewport(g->renderer, NULL);
         SDL_SetRenderDrawColor(g->renderer, 255, 215, 0, 255);
-        SDL_RenderDrawLine(g->renderer, hw, 0, hw, WINDOW_H);
+        SDL_RenderDrawLine(g->renderer, hw,     0, hw,     WINDOW_H);
         SDL_RenderDrawLine(g->renderer, hw - 1, 0, hw - 1, WINDOW_H);
 
-        /* Player labels */
+        /* Labels joueurs */
         SDL_Color p1col = {30, 180, 255, 255};
         SDL_Color p2col = {255, 100, 40, 255};
-        draw_text(g, g->font_sm, "P1", 6, 6, p1col);
+        draw_text(g, g->font_sm, "P1", 6,      6, p1col);
         draw_text(g, g->font_sm, "P2", hw + 6, 6, p2col);
     }
 
