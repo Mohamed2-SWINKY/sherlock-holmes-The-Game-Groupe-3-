@@ -84,6 +84,7 @@ void enemy_anim_render(SDL_Renderer *r, EnemyAnimation *a, EnemyAtlas *atlas, SD
                 ctx->player1.knockbackXTimer = 15;
                 if (ctx->player1.healthStatus < 6) {
                     ctx->player1.healthStatus++;
+                    ctx->hitFlashTimer = 15;
                     if (ctx->player1.healthStatus == 6) {
                         ctx->player1.alive = 0;
                         ctx->player1.healthStatus = 7;
@@ -99,6 +100,7 @@ void enemy_anim_render(SDL_Renderer *r, EnemyAnimation *a, EnemyAtlas *atlas, SD
                 ctx->player2.knockbackXTimer = 15;
                 if (ctx->player2.healthStatus < 6) {
                     ctx->player2.healthStatus++;
+                    ctx->hitFlashTimer = 15;
                     if (ctx->player2.healthStatus == 6) {
                         ctx->player2.alive = 0;
                         ctx->player2.healthStatus = 7;
@@ -154,7 +156,7 @@ void enemy_init(GameContext *ctx) {
     e->anim.attackFrame  = 0;
     e->anim.attackCounter= 0;
     e->healthStatus = 0;
-    e->maxHealth    = 6;
+    e->maxHealth    = 12;
     e->knockbackX     = 0;
     e->knockbackY     = 0;
     e->knockbackTimer = 0;
@@ -550,7 +552,7 @@ GameContext *game_init(void)
     int starCoords[MAX_STARS][2] = {
         {300, 300},
         {1150, 300},
-        {600, 600},
+        {500, 580},
         {1000, 600}
     };
     for (int i = 0; i < MAX_STARS; i++) {
@@ -561,6 +563,7 @@ GameContext *game_init(void)
 
     /* --- HP Spritesheet --- */
     ctx->hpSpritesheet = loadTexture("assets/hpBar/healthbarSpritesheet.png", ctx->renderer);
+    ctx->hitFlashTimer = 0;
 
     return ctx;
 }
@@ -706,6 +709,7 @@ if (moved) {
 
                         if (ctx->player2.healthStatus < 6) {
                             ctx->player2.healthStatus++;
+                            ctx->hitFlashTimer = 15;
                             if (ctx->player2.healthStatus == 6) {
                                 ctx->player2.alive        = 0;
                                 ctx->player2.healthStatus = 7;
@@ -727,13 +731,14 @@ if (moved) {
                   if (!Mix_Playing(CH_P1_GETHIT))
                       Mix_PlayChannel(CH_P1_GETHIT, ctx->player1.gettingHitSound, 0);
 
-if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth)
-    ctx->enemy.healthStatus++;
-ctx->enemy.knockbackX     = (ctx->player1.lastHDir == SDL_SCANCODE_D) ? 120.0f : -120.0f;
-ctx->enemy.knockbackY     = 0;
-ctx->enemy.knockbackTimer = 12;
-if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth)
-    ctx->enemy.alive = 0;
+                  ctx->enemy.knockbackX     = (ctx->player1.lastHDir == SDL_SCANCODE_D) ? 120.0f : -120.0f;
+                  ctx->enemy.knockbackY     = 0;
+                  ctx->enemy.knockbackTimer = 12;
+                  
+                  if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth) {
+                      ctx->enemy.alive        = 0;
+                      ctx->enemy.healthStatus = ctx->enemy.maxHealth;
+                  }
               }
 
                 if (ctx->player1.attackFrame >= 6) {
@@ -957,6 +962,7 @@ if (moved2) {
 
                         if (ctx->player1.healthStatus < 6) {
                             ctx->player1.healthStatus++;
+                            ctx->hitFlashTimer = 15;
                             if (ctx->player1.healthStatus == 6) {
                                 ctx->player1.alive        = 0;
                                 ctx->player1.healthStatus = 7;
@@ -977,13 +983,14 @@ if (moved2) {
                   if (!Mix_Playing(CH_P2_GETHIT))
                       Mix_PlayChannel(CH_P2_GETHIT, ctx->player2.gettingHitSound, 0);
 
-if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth)
-    ctx->enemy.healthStatus++;
-ctx->enemy.knockbackX = (ctx->player2.lastHDir == SDL_SCANCODE_RIGHT) ? 120.0f : -120.0f;
-ctx->enemy.knockbackY     = 0;
-ctx->enemy.knockbackTimer = 12;
-if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth)
-    ctx->enemy.alive = 0;
+                  ctx->enemy.knockbackX = (ctx->player2.lastHDir == SDL_SCANCODE_RIGHT) ? 120.0f : -120.0f;
+                  ctx->enemy.knockbackY     = 0;
+                  ctx->enemy.knockbackTimer = 12;
+
+                  if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth) {
+                      ctx->enemy.alive        = 0;
+                      ctx->enemy.healthStatus = ctx->enemy.maxHealth;
+                  }
               }
 
                 if (ctx->player2.attackFrame >= 6) {
@@ -1004,14 +1011,28 @@ int  keys_cnt = (ctx->map.level == LEVEL_1) ? ctx->map.keys1_cnt : ctx->map.keys
 
 for (int i = 0; i < keys_cnt; i++) {
     if (!keys[i].collected && keys[i].visible) {
-        if (map_rects_overlap(ctx->player1.rect, keys[i].rect)) {
-            ctx->lastPlayerToPickupKey = 1;
-        } else if (map_rects_overlap(ctx->player2.rect, keys[i].rect)) {
-            ctx->lastPlayerToPickupKey = 2;
+        SDL_Rect kr = keys[i].rect;
+        SDL_Rect prox = { kr.x - 40, kr.y - 40, kr.w + 80, kr.h + 80 };
+        int p1_near = map_rects_overlap(ctx->player1.rect, prox);
+        int p2_near = map_rects_overlap(ctx->player2.rect, prox);
+        int p1_over = map_rects_overlap(ctx->player1.rect, keys[i].rect);
+        int p2_over = map_rects_overlap(ctx->player2.rect, keys[i].rect);
+
+        int eligible = 0;
+        if (ctx->map.level == LEVEL_2) {
+            if ((p1_near || p2_near) && ctx->keys[SDL_SCANCODE_F]) {
+                eligible = 1;
+                ctx->lastPlayerToPickupKey = p1_near ? 1 : 2;
+                ctx->keys[SDL_SCANCODE_F] = 0; // Reset F key to prevent double trigger
+            }
+        } else {
+            if (p1_over || p2_over) {
+                eligible = 1;
+                ctx->lastPlayerToPickupKey = p1_over ? 1 : 2;
+            }
         }
 
-        if (ctx->lastPlayerToPickupKey != 0 && (map_rects_overlap(ctx->player1.rect, keys[i].rect) || map_rects_overlap(ctx->player2.rect, keys[i].rect))) {
-            
+        if (eligible) {
             keys[i].collected = 1;
             keys[i].visible   = 0;
             ctx->currentState = STATE_ENIGME;
@@ -1312,6 +1333,7 @@ void game_update(GameContext *ctx)
                     } else if (ctx->en.result == 0) { // Loss
                         p->score -= 10;
                         p->healthStatus += 1;
+                        ctx->hitFlashTimer = 30;
                         if (p->healthStatus >= 8) {
                             p->alive = 0;
                             p->healthStatus = 7;
@@ -1895,6 +1917,14 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
         if (ctx->map.level == LEVEL_2)
             enemy_render(ctx, camX, camY);
  
+        /* ── Hit Flash Overlay ── */
+        if (ctx->hitFlashTimer > 0) {
+            SDL_SetRenderDrawBlendMode(ctx->renderer, SDL_BLENDMODE_BLEND);
+            SDL_SetRenderDrawColor(ctx->renderer, 255, 0, 0, 100); 
+            SDL_RenderFillRect(ctx->renderer, NULL);
+            ctx->hitFlashTimer--;
+        }
+
         /* ── HUD (score + HP bar — fixed screen positions) ── */
         char scoreText[32];
         snprintf(scoreText, sizeof(scoreText),
@@ -1939,6 +1969,28 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
         else if (ctx->currentState == STATE_PAUSED_CHARSELECT) charSelectFn(ctx);
     }
  
+    /* ── Interaction Prompts ── */
+    if (ctx->map.level == LEVEL_2 && !ctx->paused) {
+        Key *keys2 = ctx->map.keys2;
+        if (keys2[0].visible && !keys2[0].collected) {
+            SDL_Rect kr = keys2[0].rect;
+            SDL_Rect prox = { kr.x - 40, kr.y - 40, kr.w + 80, kr.h + 80 };
+            if (map_rects_overlap(ctx->player1.rect, prox) || map_rects_overlap(ctx->player2.rect, prox)) {
+                SDL_Surface *surf = TTF_RenderText_Blended(ctx->font, "Press F to get the key", (SDL_Color){255, 215, 0, 255});
+                if (surf) {
+                    SDL_Texture *tex = SDL_CreateTextureFromSurface(ctx->renderer, surf);
+                    SDL_FreeSurface(surf);
+                    if (tex) {
+                        int tw, th; SDL_QueryTexture(tex, NULL, NULL, &tw, &th);
+                        SDL_Rect dst = { (WINDOW_WIDTH - tw) / 2, WINDOW_HEIGHT - 60, tw, th };
+                        SDL_RenderCopy(ctx->renderer, tex, NULL, &dst);
+                        SDL_DestroyTexture(tex);
+                    }
+                }
+            }
+        }
+    }
+
     SDL_RenderPresent(ctx->renderer);
 }
 

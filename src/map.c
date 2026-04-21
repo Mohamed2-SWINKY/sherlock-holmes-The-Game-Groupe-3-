@@ -185,7 +185,7 @@ void setup_level2(MapData *m)
     /* ── KEYS ── */
     m->keys2_cnt = 1;
 
-    m->keys2[0].rect      = (SDL_Rect){ 145, 640, 24, 24 };
+    m->keys2[0].rect      = (SDL_Rect){ 400, 640, 24, 24 };
     m->keys2[0].id        = 0;
     m->keys2[0].visible   = 1;
     m->keys2[0].collected = 0;

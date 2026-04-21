@@ -167,7 +167,7 @@ typedef struct{
 #define MAX_WALK_UP        4
 #define MAX_WALK_DOWN      4
 #define FRAME_DELAY        40
-#define ATTACK_DELAY       35
+#define ATTACK_DELAY       20
 
 typedef enum { DIR_DOWN=0, DIR_UP, DIR_RIGHT, DIR_LEFT } EnemyDir;
 typedef enum { ANIM_IDLE=0, ANIM_WALK, ANIM_ATTACK }    EnemyAnim;
@@ -255,11 +255,12 @@ typedef struct {
     PuzzleState pz;
     int lastPlayerToPickupKey;
 
-    /* --- Star system --- */
+    /* --- Star system & Feedback --- */
     Star stars[MAX_STARS];
     SDL_Texture *starTexture;
     SDL_Texture *keyTexture;
     SDL_Texture *hpSpritesheet;
+    int hitFlashTimer;
 } GameContext;
 
 SDL_Texture* loadTexture(const char* path, SDL_Renderer* renderer);
