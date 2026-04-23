@@ -122,6 +122,7 @@ typedef struct{
   int selectedOutfit;
   int moving;
   int selectedChar;
+  int keyCount;
 
 } Player;
 
@@ -261,6 +262,8 @@ typedef struct {
     SDL_Texture *keyTexture;
     SDL_Texture *hpSpritesheet;
     int hitFlashTimer;
+    Uint32 startTime;
+    int timerRunning;
 } GameContext;
 
 SDL_Texture* loadTexture(const char* path, SDL_Renderer* renderer);

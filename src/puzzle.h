@@ -52,6 +52,8 @@ typedef struct {
     int         result; // -1: playing, 1: win, 0: loss
     int         over;   // Flag to signal main game loop
     int         fate;   // Which puzzle image to use
+    double      angle;
+    float       scale;
 } PuzzleState;
 
 void puzzle_init_state (PuzzleState *ps, SDL_Renderer *rend);

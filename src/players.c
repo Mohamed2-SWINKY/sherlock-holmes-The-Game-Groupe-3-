@@ -350,6 +350,7 @@ void initPlayer1(GameContext *ctx)
     ctx->player1.moving          = 0;
     ctx->player1.selectedOutfit  = 1;
     ctx->player1.selectedChar    = 1;
+    ctx->player1.keyCount        = 0;
 }
 
 void initPlayer2(GameContext *ctx)
@@ -400,6 +401,7 @@ void initPlayer2(GameContext *ctx)
     ctx->player2.moving          = 0;
     ctx->player2.selectedOutfit  = 1;
     ctx->player2.selectedChar    = 2;
+    ctx->player2.keyCount        = 0;
 }
 
 GameContext *game_init(void)
@@ -563,6 +565,8 @@ GameContext *game_init(void)
     /* --- HP Spritesheet --- */
     ctx->hpSpritesheet = loadTexture("assets/hpBar/healthbarSpritesheet.png", ctx->renderer);
     ctx->hitFlashTimer = 0;
+    ctx->startTime     = SDL_GetTicks();
+    ctx->timerRunning  = 1;
 
     return ctx;
 }
@@ -1053,6 +1057,11 @@ for (int i = 0; i < keys_cnt; i++) {
             ctx->currentState = STATE_ENIGME;
             ctx->en.over = 0;
             ctx->en.showQuiz = 0; // Start at the "Quiz/Puzzle" selection screen
+            ctx->en.puzzleSelected = 0; // Fix: Reset puzzleSelected flag
+
+            // Increment individual key count
+            if (ctx->lastPlayerToPickupKey == 1) ctx->player1.keyCount++;
+            else if (ctx->lastPlayerToPickupKey == 2) ctx->player2.keyCount++;
 
             // Stop movement and sounds
             ctx->player1.moving = 0;
@@ -1940,22 +1949,36 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
             ctx->hitFlashTimer--;
         }
 
-        /* ── HUD (score + HP bar — fixed screen positions) ── */
-        char scoreText[32];
+        /* ── HUD (score + keys + HP bar — fixed screen positions) ── */
+        char scoreText[64];
         snprintf(scoreText, sizeof(scoreText),
-                 side == 0 ? "P1 Score: %d" : "P2 Score: %d",
-                 side == 0 ? ctx->player1.score : ctx->player2.score);
+                 side == 0 ? "P1 Score: %d | Keys: %d" : "P2 Score: %d | Keys: %d",
+                 side == 0 ? ctx->player1.score : ctx->player2.score,
+                 side == 0 ? ctx->player1.keyCount : ctx->player2.keyCount);
  
         SDL_Surface *surf = TTF_RenderText_Blended(
             ctx->font, scoreText, (SDL_Color){255, 255, 255, 255});
         SDL_Texture *stx = SDL_CreateTextureFromSurface(ctx->renderer, surf);
         SDL_FreeSurface(surf);
         SDL_Rect sd; SDL_QueryTexture(stx, NULL, NULL, &sd.w, &sd.h);
-        sd.x = 10; sd.y = 70;
+        
+        /* Position HUD on the outer side of each viewport */
+        if (side == 0) {
+            sd.x = 10;
+        } else {
+            sd.x = halfW - sd.w - 10;
+        }
+        sd.y = 70;
         SDL_RenderCopy(ctx->renderer, stx, NULL, &sd);
         SDL_DestroyTexture(stx);
  
-        SDL_Rect hp = {10, 20, PLAYER1HP_W, PLAYER1HP_H};
+        SDL_Rect hp = {0, 20, PLAYER1HP_W, PLAYER1HP_H};
+        if (side == 0) {
+            hp.x = 10;
+        } else {
+            hp.x = halfW - PLAYER1HP_W - 10;
+        }
+
         /* Reverted to individual images for debugging */
         SDL_RenderCopy(ctx->renderer,
             side == 0 ? ctx->player1.hpBar[ctx->player1.healthStatus]
@@ -1963,8 +1986,39 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
             NULL, &hp);
     }
  
-    /* ── Minimap + divider line (drawn over both viewports) ── */
+    /* ── Global Timer ── */
     SDL_RenderSetViewport(ctx->renderer, NULL);
+    if (ctx->timerRunning) {
+        Uint32 elapsed = SDL_GetTicks() - ctx->startTime;
+        int totalSeconds = (int)(elapsed / 1000);
+        int mins = totalSeconds / 60;
+        int secs = totalSeconds % 60;
+        char timerText[16];
+        snprintf(timerText, sizeof(timerText), "%02d:%02d", mins, secs);
+
+        SDL_Surface *tsurf = TTF_RenderText_Blended(ctx->font, timerText, (SDL_Color){255, 215, 0, 255});
+        if (tsurf) {
+            SDL_Texture *ttex = SDL_CreateTextureFromSurface(ctx->renderer, tsurf);
+            SDL_FreeSurface(tsurf);
+            if (ttex) {
+                int tw, th;
+                SDL_QueryTexture(ttex, NULL, NULL, &tw, &th);
+                SDL_Rect tr = { (WINDOW_WIDTH - tw) / 2, 10, tw, th };
+                /* Semi-transparent background for timer */
+                SDL_Rect bg = { tr.x - 10, tr.y - 5, tw + 20, th + 10 };
+                SDL_SetRenderDrawBlendMode(ctx->renderer, SDL_BLENDMODE_BLEND);
+                SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 150);
+                SDL_RenderFillRect(ctx->renderer, &bg);
+                SDL_SetRenderDrawColor(ctx->renderer, 255, 215, 0, 200);
+                SDL_RenderDrawRect(ctx->renderer, &bg);
+
+                SDL_RenderCopy(ctx->renderer, ttex, NULL, &tr);
+                SDL_DestroyTexture(ttex);
+            }
+        }
+    }
+
+    /* ── Minimap + divider line (drawn over both viewports) ── */
     afficher_minimap(ctx->minimap,   ctx->renderer);
     afficher_minimap2(ctx->minimap2, ctx->renderer);
  
@@ -2005,7 +2059,7 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
             }
         }
     }
-
+ 
     SDL_RenderPresent(ctx->renderer);
 }
 

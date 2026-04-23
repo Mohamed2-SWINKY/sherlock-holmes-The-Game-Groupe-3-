@@ -18,9 +18,10 @@ void puzzle_init_state(PuzzleState *ps, SDL_Renderer *rend) {
     ps->snd = Mix_LoadWAV("assets/enigme/hover.wav"); // Reusing enigme sound for now
     ps->fnt = TTF_OpenFont("assets/fonts/pixelFont.ttf", 48);
 
-    SDL_Color wh = {255, 255, 255, 255};
-    SDL_Surface *ws = TTF_RenderText_Solid(ps->fnt, "You have won !", wh);
-    SDL_Surface *ls = TTF_RenderText_Solid(ps->fnt, "Time is out - You lost !", wh);
+    SDL_Color gold = {255, 215, 0, 255};
+    SDL_Color red  = {210, 55, 55, 255};
+    SDL_Surface *ws = TTF_RenderText_Solid(ps->fnt, "You have won !", gold);
+    SDL_Surface *ls = TTF_RenderText_Solid(ps->fnt, "Time is out - You lost !", red);
     ps->wTex = SDL_CreateTextureFromSurface(rend, ws);
     ps->lTex = SDL_CreateTextureFromSurface(rend, ls);
     SDL_FreeSurface(ws);
@@ -74,6 +75,8 @@ void puzzle_init_state(PuzzleState *ps, SDL_Renderer *rend) {
     ps->run = 1;
     ps->result = -1;
     ps->over = 0;
+    ps->angle = 0.0;
+    ps->scale = 1.0f;
 }
 
 void puzzle_handle_event(PuzzleState *ps, SDL_Event *ev) {
@@ -122,13 +125,20 @@ void puzzle_handle_event(PuzzleState *ps, SDL_Event *ev) {
 
 void puzzle_update(PuzzleState *ps) {
     if (!ps->run) {
-        // Handle transitions or rotozoom if we wanted to
-        // For now, just mark it as over after a short delay or immediately
+        ps->angle += 5.0;
+        if (ps->angle >= 360.0) ps->angle -= 360.0;
+
+        // Pulsing scale effect
+        static float t = 0.0f;
+        t += 0.1f;
+        ps->scale = 1.0f + 0.2f * sinf(t);
+
         static Uint32 endT = 0;
         if (endT == 0) endT = SDL_GetTicks();
-        if (SDL_GetTicks() - endT > 2000) {
+        if (SDL_GetTicks() - endT > 3000) { // Increased delay to see animation
             ps->over = 1;
             endT = 0;
+            t = 0.0f;
         }
         return;
     }
@@ -174,8 +184,12 @@ void puzzle_render(PuzzleState *ps, SDL_Renderer *rend) {
         SDL_Texture *resTex = ps->result == 1 ? ps->wTex : ps->lTex;
         int tw, th;
         SDL_QueryTexture(resTex, NULL, NULL, &tw, &th);
-        SDL_Rect dst = { 500 - tw/2, 325 - th/2, tw, th };
-        SDL_RenderCopy(rend, resTex, NULL, &dst);
+        
+        int dw = (int)(tw * ps->scale);
+        int dh = (int)(th * ps->scale);
+        SDL_Rect dst = { 500 - dw/2, 325 - dh/2, dw, dh };
+        
+        SDL_RenderCopyEx(rend, resTex, NULL, &dst, ps->angle, NULL, SDL_FLIP_NONE);
     }
 }
 
