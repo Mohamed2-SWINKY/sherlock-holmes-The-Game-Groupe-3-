@@ -1038,17 +1038,10 @@ for (int i = 0; i < keys_cnt; i++) {
         int p2_over = map_rects_overlap(ctx->player2.rect, keys[i].rect);
 
         int eligible = 0;
-        if (ctx->map.level == LEVEL_2) {
-            if ((p1_near || p2_near) && ctx->keys[SDL_SCANCODE_F]) {
-                eligible = 1;
-                ctx->lastPlayerToPickupKey = p1_near ? 1 : 2;
-                ctx->keys[SDL_SCANCODE_F] = 0; // Reset F key to prevent double trigger
-            }
-        } else {
-            if (p1_over || p2_over) {
-                eligible = 1;
-                ctx->lastPlayerToPickupKey = p1_over ? 1 : 2;
-            }
+        if ((p1_near || p2_near) && ctx->keys[SDL_SCANCODE_F]) {
+            eligible = 1;
+            ctx->lastPlayerToPickupKey = p1_near ? 1 : 2;
+            ctx->keys[SDL_SCANCODE_F] = 0; // Reset F key to prevent double trigger
         }
 
         if (eligible) {
@@ -2038,23 +2031,29 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
         else if (ctx->currentState == STATE_PAUSED_CHARSELECT) charSelectFn(ctx);
     }
  
-    /* ── Interaction Prompts ── */
-    if (ctx->map.level == LEVEL_2 && !ctx->paused) {
-        Key *keys2 = ctx->map.keys2;
-        if (keys2[0].visible && !keys2[0].collected) {
-            SDL_Rect kr = keys2[0].rect;
-            SDL_Rect prox = { kr.x - 40, kr.y - 40, kr.w + 80, kr.h + 80 };
-            if (map_rects_overlap(ctx->player1.rect, prox) || map_rects_overlap(ctx->player2.rect, prox)) {
-                SDL_Surface *surf = TTF_RenderText_Blended(ctx->font, "Press F to get the key", (SDL_Color){255, 215, 0, 255});
-                if (surf) {
-                    SDL_Texture *tex = SDL_CreateTextureFromSurface(ctx->renderer, surf);
-                    SDL_FreeSurface(surf);
-                    if (tex) {
-                        int tw, th; SDL_QueryTexture(tex, NULL, NULL, &tw, &th);
-                        SDL_Rect dst = { (WINDOW_WIDTH - tw) / 2, WINDOW_HEIGHT - 60, tw, th };
-                        SDL_RenderCopy(ctx->renderer, tex, NULL, &dst);
-                        SDL_DestroyTexture(tex);
+    /* ── Interaction Prompts (Generic for all keys) ── */
+    if (!ctx->paused) {
+        Key *keys     = (ctx->map.level == LEVEL_1) ? ctx->map.keys1     : ctx->map.keys2;
+        int  keys_cnt = (ctx->map.level == LEVEL_1) ? ctx->map.keys1_cnt : ctx->map.keys2_cnt;
+
+        for (int i = 0; i < keys_cnt; i++) {
+            if (keys[i].visible && !keys[i].collected) {
+                SDL_Rect kr = keys[i].rect;
+                SDL_Rect prox = { kr.x - 40, kr.y - 40, kr.w + 80, kr.h + 80 };
+                if (map_rects_overlap(ctx->player1.rect, prox) || map_rects_overlap(ctx->player2.rect, prox)) {
+                    SDL_Surface *surf = TTF_RenderText_Blended(ctx->font, "Press F to get the key", (SDL_Color){255, 215, 0, 255});
+                    if (surf) {
+                        SDL_Texture *tex = SDL_CreateTextureFromSurface(ctx->renderer, surf);
+                        SDL_FreeSurface(surf);
+                        if (tex) {
+                            int tw, th; SDL_QueryTexture(tex, NULL, NULL, &tw, &th);
+                            SDL_Rect dst = { (WINDOW_WIDTH - tw) / 2, WINDOW_HEIGHT - 60, tw, th };
+                            SDL_RenderCopy(ctx->renderer, tex, NULL, &dst);
+                            SDL_DestroyTexture(tex);
+                        }
                     }
+                    /* Break after drawing one prompt - only one needs to show at a time */
+                    break;
                 }
             }
         }

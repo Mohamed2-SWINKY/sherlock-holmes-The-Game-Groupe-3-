@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 #include <math.h>
 
 /* ── Dimensions ─────────────────────────────────────────────────────── */
@@ -65,6 +66,7 @@ typedef struct {
 	int      keys1_cnt;
 	Key      keys2[MAX_KEYS];
 	int      keys2_cnt;
+    Mix_Chunk *boxFallSound;
 } MapData;
 
 /* ── Function declarations ───────────────────────────────────────────── */

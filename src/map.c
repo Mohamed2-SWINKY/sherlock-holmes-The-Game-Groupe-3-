@@ -9,11 +9,21 @@ int map_rects_overlap(SDL_Rect a, SDL_Rect b)
 void map_init(MapData *m, SDL_Renderer *renderer)
 {
     // Updated paths to include the /map/ subdirectory
+    m->door1_open[0]  = 0; // ensure initialized
+    m->boxFallSound   = NULL;
+
     m->tex_map1       = IMG_LoadTexture(renderer, "assets/map/background/background1.png");
     m->tex_map2       = IMG_LoadTexture(renderer, "assets/map/background/background2.png");
     m->tex_box        = IMG_LoadTexture(renderer, "assets/map/box.png");
     m->tex_broken_box = IMG_LoadTexture(renderer, "assets/map/broken box.png");
     
+    m->boxFallSound = Mix_LoadWAV("assets/sounds/box_fall.mp3");
+    if (!m->boxFallSound) {
+        printf("Erreur sound box_fall.mp3: %s\n", Mix_GetError());
+    } else {
+        printf("Box fall sound loaded successfully.\n");
+    }
+
     m->level          = LEVEL_1;
     setup_level1(m);
 }
@@ -24,6 +34,7 @@ void map_cleanup(MapData *m)
     if (m->tex_map2)       SDL_DestroyTexture(m->tex_map2);
     if (m->tex_box)        SDL_DestroyTexture(m->tex_box);
     if (m->tex_broken_box) SDL_DestroyTexture(m->tex_broken_box);
+    if (m->boxFallSound)   Mix_FreeChunk(m->boxFallSound);
 }
 
 #define ADD_OBS1(X,Y,W,H) m->obs1[m->obs1_cnt++] = (SDL_Rect){X,Y,W,H}
@@ -222,9 +233,10 @@ void update_falling_box(MapData *m, int p1x, int p1y, int p2x, int p2y)
         fb->rect.y = 358;
         fb->fy     = 358.0f;
         fb->state  = BOX_BROKEN;
-        /* reveal the key hidden inside the box */
-        for (int i = 0; i < MAX_KEYS; i++) {
-           m->keys1[0].visible = 1;
+        if (m->boxFallSound) {
+            Mix_PlayChannel(-1, m->boxFallSound, 0);
         }
+        /* reveal the key hidden inside the box (key 0 in level 1) */
+        m->keys1[0].visible = 1;
     }
 }

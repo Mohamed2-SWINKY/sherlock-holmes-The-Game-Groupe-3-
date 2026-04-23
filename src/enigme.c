@@ -132,7 +132,6 @@ void handleEnigmeEvents(Enigme *e, SDL_Event event)
         if (e->showQuiz)
         {
             e->showQuiz = 0;
-            Mix_HaltMusic();
             lastHovered = -1;
             e->lastHover = -1;
             e->over = 1;
@@ -202,7 +201,6 @@ void handleEnigmeEvents(Enigme *e, SDL_Event event)
             
             if (e->over) {
                 e->showQuiz = 0;
-                Mix_HaltMusic();
             }
         }
     }
@@ -229,7 +227,6 @@ void renderEnigme(Enigme *e, SDL_Renderer *r)
             e->result = 0;
             e->over = 1;
             e->showQuiz = 0;
-            Mix_HaltMusic();
             return;
         }
 
