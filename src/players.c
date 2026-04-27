@@ -1,4 +1,5 @@
 #include "players.h"
+#include "serial_controller.h"
 
 static int is_blocked(SDL_Rect r,
                       SDL_Rect *obs,  int obs_cnt,
@@ -439,6 +440,9 @@ GameContext *game_init(void)
         SDL_DestroyWindow(ctx->window); free(ctx); return NULL;
     }
 
+    if (controller_open("/dev/ttyUSB0")< 0) {
+      printf("Controller not found, using keyboard only.\n");
+    }
     memset(ctx->keys, 0, sizeof(ctx->keys));
     ctx->musicLevel2 = Mix_LoadMUS("assets/sounds/level2music.mp3");
     ctx->musicLevel1 = Mix_LoadMUS("assets/sounds/level1music.mp3");
@@ -1439,6 +1443,20 @@ void game_update(GameContext *ctx)
         }
     }
 
+    // Arduino controller injection
+ControllerState ctrl = {0};
+controller_poll(&ctrl);
+
+    // Player 1 — maps to WASD + SPACE + B
+    if (ctrl.up)      ctx->keys[SDL_SCANCODE_W]     = 1;
+    if (ctrl.down)    ctx->keys[SDL_SCANCODE_S]     = 1;
+    if (ctrl.left)    ctx->keys[SDL_SCANCODE_A]     = 1;
+    if (ctrl.right)   ctx->keys[SDL_SCANCODE_D]     = 1;
+    if (ctrl.action1) ctx->keys[SDL_SCANCODE_B]     = 1; // attack
+    if (ctrl.action2) ctx->keys[SDL_SCANCODE_SPACE] = 1; // jump
+    if (ctrl.action3) ctx->keys[SDL_SCANCODE_RSHIFT]= 1; // sprint
+    if (ctrl.action4) ctx->keys[SDL_SCANCODE_ESCAPE]= 1; // pause
+
     if (ctx->keys[SDL_SCANCODE_ESCAPE] && !ctx->pauseSwitched) {
         ctx->paused = !ctx->paused;
         if (ctx->paused) Mix_HaltChannel(-1);
@@ -1607,6 +1625,7 @@ void game_cleanup(GameContext *ctx)
     liberer_minimap(&ctx->minimap2);
     freeEnigme(&ctx->en);
     puzzle_free_state(&ctx->pz);
+    controller_close();
 
     if (ctx->font)     TTF_CloseFont(ctx->font);
     if (ctx->starTexture) SDL_DestroyTexture(ctx->starTexture);
