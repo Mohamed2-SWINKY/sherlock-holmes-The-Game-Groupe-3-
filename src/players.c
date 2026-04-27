@@ -440,7 +440,7 @@ GameContext *game_init(void)
         SDL_DestroyWindow(ctx->window); free(ctx); return NULL;
     }
 
-    if (controller_open("/dev/ttyUSB0")< 0) {
+    if (controller_open("/dev/ttyACM0")< 0) {
       printf("Controller not found, using keyboard only.\n");
     }
     memset(ctx->keys, 0, sizeof(ctx->keys));
