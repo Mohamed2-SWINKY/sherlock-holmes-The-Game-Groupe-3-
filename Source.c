@@ -18,6 +18,21 @@ void filled_rect(SDL_Renderer *r, SDL_Rect rect, SDL_Color col)
     SDL_RenderFillRect(r, &rect);
 }
 
+
+ /* ── HUD (score + keys + HP bar — fixed screen positions) ── */
+        char scoreText[64];
+        snprintf(scoreText, sizeof(scoreText),
+                 side == 0 ? "P1 Score: %d | Keys: %d" : "P2 Score: %d | Keys: %d",
+                 side == 0 ? ctx->player1.score : ctx->player2.score,
+                 side == 0 ? ctx->player1.keyCount : ctx->player2.keyCount);
+ 
+        SDL_Surface *surf = TTF_RenderText_Blended(
+            ctx->font, scoreText, (SDL_Color){255, 255, 255, 255});
+        SDL_Texture *stx = SDL_CreateTextureFromSurface(ctx->renderer, surf);
+        SDL_FreeSurface(surf);
+        SDL_Rect sd; SDL_QueryTexture(stx, NULL, NULL, &sd.w, &sd.h);
+
+
 /* Helper: render UTF-8 text at (x,y) */
 void draw_text(Game *g, TTF_Font *fnt, const char *txt,
                int x, int y, SDL_Color col)
