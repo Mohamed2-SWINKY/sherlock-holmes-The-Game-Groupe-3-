@@ -611,6 +611,459 @@ void input_playing(Game *g, SDL_Event *e)
         }
     }
 }
+// TACHE BLANCHE DU LOT2 
+/*
+ * tache_blanche.c
+ * ─────────────────────────────────────────────────────────────
+ * Sous-menu "Meilleurs Scores" – Lot 2 / tâche blanche
+ *
+ * Compile avec le reste du projet :
+ *   gcc ... tache_blanche.c ... -lSDL2 -lSDL2_ttf -lSDL2_image \
+ *           -lSDL2_mixer -lm -I/usr/include/SDL2
+ *
+ * Ce fichier ne touche à AUCUN autre fichier du projet.
+ * ─────────────────────────────────────────────────────────────
+ */
+
+#include "tache_blanche.h"
+
+/* ════════════════════════════════════════════════════════════
+   COULEURS LOCALES (palette cohérente avec le jeu)
+   ════════════════════════════════════════════════════════════ */
+static const SDL_Color TB_NOIR       = {  10,  10,  20, 220 };
+static const SDL_Color TB_OR         = { 255, 215,   0, 255 };
+static const SDL_Color TB_BLANC      = { 230, 230, 230, 255 };
+static const SDL_Color TB_GRIS       = { 140, 140, 140, 255 };
+static const SDL_Color TB_ROUGE      = { 210,  55,  55, 255 };
+static const SDL_Color TB_BLEU       = {  55, 120, 210, 255 };
+static const SDL_Color TB_VERT       = {  55, 190,  90, 255 };
+static const SDL_Color TB_ARGENT     = { 192, 192, 192, 255 };
+static const SDL_Color TB_BRONZE     = { 205, 127,  50, 255 };
+
+/* ════════════════════════════════════════════════════════════
+   UTILITAIRES INTERNES
+   ════════════════════════════════════════════════════════════ */
+
+/* Dessine un rectangle plein semi-transparent */
+static void tb_fillRect(SDL_Renderer *r, SDL_Rect rect, SDL_Color c)
+{
+    SDL_SetRenderDrawBlendMode(r, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(r, c.r, c.g, c.b, c.a);
+    SDL_RenderFillRect(r, &rect);
+}
+
+/* Dessine le contour d'un rectangle */
+static void tb_drawRect(SDL_Renderer *r, SDL_Rect rect, SDL_Color c)
+{
+    SDL_SetRenderDrawColor(r, c.r, c.g, c.b, c.a);
+    SDL_RenderDrawRect(r, &rect);
+}
+
+/* Dessine une ligne horizontale décorative */
+static void tb_hline(SDL_Renderer *r, int x1, int x2, int y, SDL_Color c)
+{
+    SDL_SetRenderDrawColor(r, c.r, c.g, c.b, c.a);
+    SDL_RenderDrawLine(r, x1, y, x2, y);
+}
+
+/* Affiche du texte avec ctx->font (la police du jeu) */
+static void tb_texte(SDL_Renderer *r, TTF_Font *font,
+                     const char *txt, SDL_Color c,
+                     int x, int y, int centrerH)
+{
+    if (!font || !txt || !txt[0]) return;
+
+    SDL_Surface *s = TTF_RenderUTF8_Blended(font, txt, c);
+    if (!s) return;
+    SDL_Texture *t = SDL_CreateTextureFromSurface(r, s);
+    if (!t) { SDL_FreeSurface(s); return; }
+
+    SDL_Rect dst;
+    dst.w = s->w;
+    dst.h = s->h;
+    dst.x = centrerH ? (WINDOW_WIDTH - dst.w) / 2 : x;
+    dst.y = y;
+
+    SDL_RenderCopy(r, t, NULL, &dst);
+    SDL_DestroyTexture(t);
+    SDL_FreeSurface(s);
+}
+
+/* Fond dégradé vertical sombre */
+static void tb_fond(SDL_Renderer *r)
+{
+    for (int y = 0; y < WINDOW_HEIGHT; y++) {
+        Uint8 rv = (Uint8)(10 + 20 * y / WINDOW_HEIGHT);
+        Uint8 gv = (Uint8)(10 + 10 * y / WINDOW_HEIGHT);
+        Uint8 bv = (Uint8)(20 + 40 * y / WINDOW_HEIGHT);
+        SDL_SetRenderDrawColor(r, rv, gv, bv, 255);
+        SDL_RenderDrawLine(r, 0, y, WINDOW_WIDTH, y);
+    }
+}
+
+/* ════════════════════════════════════════════════════════════
+   GESTION DU FICHIER score.txt
+   Format d'une ligne : NOM SCORE JOUEUR\n
+   ════════════════════════════════════════════════════════════ */
+
+void tb_charger(ClassementTB *cl)
+{
+    cl->nb = 0;
+
+    FILE *f = fopen(SCORE_FILE, "r");
+    if (!f) {
+        /* Fichier inexistant : on le crée vide */
+        f = fopen(SCORE_FILE, "w");
+        if (f) fclose(f);
+        return;
+    }
+
+    while (cl->nb < MAX_SCORES_TB) {
+        EntreeTB *e = &cl->entrees[cl->nb];
+        if (fscanf(f, "%49s %d %d",
+                   e->nom, &e->score, &e->joueur) != 3)
+            break;
+        cl->nb++;
+    }
+
+    fclose(f);
+    tb_trier(cl);
+}
+
+void tb_sauvegarder(const ClassementTB *cl)
+{
+    FILE *f = fopen(SCORE_FILE, "w");
+    if (!f) {
+        fprintf(stderr,
+            "[TACHE_BLANCHE] Impossible d'ecrire dans %s\n", SCORE_FILE);
+        return;
+    }
+
+    for (int i = 0; i < cl->nb; i++)
+        fprintf(f, "%s %d %d\n",
+                cl->entrees[i].nom,
+                cl->entrees[i].score,
+                cl->entrees[i].joueur);
+
+    fclose(f);
+    printf("[TACHE_BLANCHE] %d score(s) sauvegardes dans %s\n",
+           cl->nb, SCORE_FILE);
+}
+
+/* Tri par insertion décroissant */
+void tb_trier(ClassementTB *cl)
+{
+    for (int i = 1; i < cl->nb; i++) {
+        EntreeTB cle = cl->entrees[i];
+        int j = i - 1;
+        while (j >= 0 && cl->entrees[j].score < cle.score) {
+            cl->entrees[j + 1] = cl->entrees[j];
+            j--;
+        }
+        cl->entrees[j + 1] = cle;
+    }
+}
+
+int tb_inserer(ClassementTB *cl, const char *nom, int score, int joueur)
+{
+    if (!nom || nom[0] == '\0') return 0;
+
+    /* Si classement plein et score trop faible → pas de place */
+    if (cl->nb >= MAX_SCORES_TB &&
+        score <= cl->entrees[MAX_SCORES_TB - 1].score)
+        return 0;
+
+    int idx = (cl->nb < MAX_SCORES_TB) ? cl->nb : MAX_SCORES_TB - 1;
+    strncpy(cl->entrees[idx].nom, nom, MAX_NOM_TB - 1);
+    cl->entrees[idx].nom[MAX_NOM_TB - 1] = '\0';
+    cl->entrees[idx].score  = score;
+    cl->entrees[idx].joueur = joueur;
+
+    if (cl->nb < MAX_SCORES_TB) cl->nb++;
+
+    tb_trier(cl);
+    return 1;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SOUS-MENU 1 : SAISIE DU NOM
+   ════════════════════════════════════════════════════════════ */
+
+int tb_saisir_nom(GameContext *ctx, char *nomSortie)
+{
+    char  buffer[MAX_NOM_TB] = "";
+    int   longueur  = 0;
+    int   valide    = 0;
+    int   running   = 1;
+
+    SDL_StartTextInput();
+
+    Uint32 dernierCligno  = SDL_GetTicks();
+    int    curseurVisible = 1;
+
+    SDL_Renderer *r    = ctx->renderer;
+    TTF_Font     *font = ctx->font;   /* police du jeu */
+
+    SDL_Event ev;
+
+    while (running) {
+
+        /* ── Événements ── */
+        while (SDL_PollEvent(&ev)) {
+
+            if (ev.type == SDL_QUIT) {
+                running = 0; valide = 0;
+            }
+            else if (ev.type == SDL_KEYDOWN) {
+                switch (ev.key.keysym.sym) {
+
+                    case SDLK_ESCAPE:
+                        running = 0; valide = 0;
+                        break;
+
+                    case SDLK_RETURN:
+                    case SDLK_KP_ENTER:
+                        if (longueur > 0) { running = 0; valide = 1; }
+                        break;
+
+                    case SDLK_BACKSPACE:
+                        if (longueur > 0)
+                            buffer[--longueur] = '\0';
+                        break;
+
+                    default: break;
+                }
+            }
+            else if (ev.type == SDL_TEXTINPUT) {
+                int ajout = (int)strlen(ev.text.text);
+                if (longueur + ajout < MAX_NOM_TB - 1) {
+                    strncat(buffer, ev.text.text,
+                            (size_t)(MAX_NOM_TB - longueur - 1));
+                    longueur += ajout;
+                }
+            }
+            else if (ev.type == SDL_MOUSEBUTTONDOWN &&
+                     ev.button.button == SDL_BUTTON_LEFT) {
+                /* Clic sur bouton VALIDER */
+                SDL_Rect btnOk = { (WINDOW_WIDTH - 200) / 2,
+                                   380, 200, 50 };
+                int mx = ev.button.x, my = ev.button.y;
+                if (mx >= btnOk.x && mx <= btnOk.x + btnOk.w &&
+                    my >= btnOk.y && my <= btnOk.y + btnOk.h &&
+                    longueur > 0) {
+                    running = 0; valide = 1;
+                }
+            }
+        }
+
+        /* ── Curseur clignotant (500 ms) ── */
+        if (SDL_GetTicks() - dernierCligno >= 500) {
+            curseurVisible  = !curseurVisible;
+            dernierCligno   = SDL_GetTicks();
+        }
+
+        /* ── Rendu ── */
+        tb_fond(r);
+
+        /* Titre */
+        tb_texte(r, font, "ENTREZ VOTRE NOM", TB_OR, 0, 80, 1);
+
+        /* Ligne décorative */
+        tb_hline(r, 150, WINDOW_WIDTH - 150, 120, TB_OR);
+
+        /* Sous-titre */
+        tb_texte(r, font,
+                 "Votre score sera sauvegarde dans " SCORE_FILE,
+                 TB_GRIS, 0, 140, 1);
+
+        /* Zone de saisie */
+        SDL_Rect boite = { (WINDOW_WIDTH - 400) / 2, 220, 400, 55 };
+        tb_fillRect(r, boite, (SDL_Color){30, 30, 60, 200});
+        tb_drawRect(r, boite, TB_BLEU);
+
+        /* Texte + curseur */
+        char affiche[MAX_NOM_TB + 2];
+        snprintf(affiche, sizeof(affiche), "%s%s",
+                 buffer, curseurVisible ? "|" : " ");
+        tb_texte(r, font, affiche, TB_BLEU,
+                 boite.x + 14, boite.y + 14, 0);
+
+        /* Aide */
+        tb_texte(r, font,
+                 "Entree : valider   |   Echap : passer",
+                 TB_GRIS, 0, 310, 1);
+
+        /* Bouton VALIDER */
+        int mx2, my2;
+        SDL_GetMouseState(&mx2, &my2);
+        SDL_Rect btnOk = { (WINDOW_WIDTH - 200) / 2, 380, 200, 50 };
+        int survol = (mx2 >= btnOk.x && mx2 <= btnOk.x + btnOk.w &&
+                      my2 >= btnOk.y && my2 <= btnOk.y + btnOk.h);
+        SDL_Color cBtn = survol ? TB_VERT
+                                : (SDL_Color){40, 150, 70, 255};
+        tb_fillRect(r, btnOk, cBtn);
+        tb_drawRect(r, btnOk, TB_BLANC);
+        tb_texte(r, font, "VALIDER",
+                 TB_BLANC, btnOk.x + 60, btnOk.y + 13, 0);
+
+        SDL_RenderPresent(r);
+        SDL_Delay(16);
+    }
+
+    SDL_StopTextInput();
+
+    if (valide) {
+        strncpy(nomSortie, buffer, MAX_NOM_TB - 1);
+        nomSortie[MAX_NOM_TB - 1] = '\0';
+    }
+    return valide;
+}
+
+/* ════════════════════════════════════════════════════════════
+   SOUS-MENU 2 : AFFICHAGE DU CLASSEMENT
+   ════════════════════════════════════════════════════════════ */
+
+void tb_afficher_classement(GameContext *ctx, const ClassementTB *cl)
+{
+    SDL_Renderer *r    = ctx->renderer;
+    TTF_Font     *font = ctx->font;
+
+    int      running = 1;
+    SDL_Event ev;
+
+    while (running) {
+        while (SDL_PollEvent(&ev)) {
+            if (ev.type == SDL_QUIT      ||
+                ev.type == SDL_KEYDOWN   ||
+                ev.type == SDL_MOUSEBUTTONDOWN)
+                running = 0;
+        }
+
+        /* ── Fond ── */
+        tb_fond(r);
+
+        /* ── Titre ── */
+        tb_texte(r, font, "MEILLEURS SCORES", TB_OR, 0, 28, 1);
+        tb_hline(r, 80, WINDOW_WIDTH - 80, 68, TB_OR);
+
+        /* ── En-têtes ── */
+        tb_texte(r, font, "RANG",    TB_BLEU,  70,  80, 0);
+        tb_texte(r, font, "NOM",     TB_BLEU, 170,  80, 0);
+        tb_texte(r, font, "JOUEUR",  TB_BLEU, 560,  80, 0);
+        tb_texte(r, font, "SCORE",   TB_BLEU, 720,  80, 0);
+        tb_hline(r, 60, WINDOW_WIDTH - 60, 106, TB_GRIS);
+
+        /* ── Lignes du classement ── */
+        if (cl->nb == 0) {
+            tb_texte(r, font,
+                     "Aucun score enregistre.", TB_GRIS, 0, 200, 1);
+        }
+
+        for (int i = 0; i < cl->nb; i++) {
+            int y = 115 + i * 44;
+
+            /* Fond alterné */
+            if (i % 2 == 0) {
+                SDL_Rect fond = { 55, y - 4, WINDOW_WIDTH - 110, 40 };
+                tb_fillRect(r, fond, (SDL_Color){255, 255, 255, 12});
+            }
+
+            /* Couleur selon rang */
+            SDL_Color cLigne;
+            if      (i == 0) cLigne = TB_OR;
+            else if (i == 1) cLigne = TB_ARGENT;
+            else if (i == 2) cLigne = TB_BRONZE;
+            else             cLigne = TB_BLANC;
+
+            /* Rang */
+            char sRang[8];
+            snprintf(sRang, sizeof(sRang), "%2d.", i + 1);
+            tb_texte(r, font, sRang, cLigne, 72, y, 0);
+
+            /* Nom */
+            tb_texte(r, font, cl->entrees[i].nom, cLigne, 170, y, 0);
+
+            /* Joueur (P1 / P2) */
+            char sJoueur[8];
+            snprintf(sJoueur, sizeof(sJoueur), "P%d",
+                     cl->entrees[i].joueur);
+            SDL_Color cJ = (cl->entrees[i].joueur == 1) ? TB_ROUGE : TB_BLEU;
+            tb_texte(r, font, sJoueur, cJ, 580, y, 0);
+
+            /* Score */
+            char sScore[16];
+            snprintf(sScore, sizeof(sScore), "%d",
+                     cl->entrees[i].score);
+            tb_texte(r, font, sScore, cLigne, 720, y, 0);
+        }
+
+        /* ── Pied de page ── */
+        tb_hline(r, 60, WINDOW_WIDTH - 60,
+                 WINDOW_HEIGHT - 55, TB_GRIS);
+        tb_texte(r, font,
+                 "Appuyez sur une touche pour continuer...",
+                 TB_GRIS, 0, WINDOW_HEIGHT - 42, 1);
+
+        SDL_RenderPresent(r);
+        SDL_Delay(16);
+    }
+}
+
+/* ════════════════════════════════════════════════════════════
+   FONCTION PRINCIPALE : afficherSousMenuScores
+   Appelez-la quand ctx->currentState == STATE_GAME_OVER
+   ════════════════════════════════════════════════════════════ */
+
+void afficherSousMenuScores(GameContext *ctx)
+{
+    /* ── Étape 0 : chargement du classement existant ── */
+    ClassementTB cl;
+    tb_charger(&cl);
+
+    /* ── Étape 1 : saisie du nom de Player 1 ── */
+    char nomP1[MAX_NOM_TB] = "";
+    printf("[TACHE_BLANCHE] Score Player 1 : %d\n", ctx->player1.score);
+
+    int valideP1 = tb_saisir_nom(ctx, nomP1);
+    if (valideP1 && ctx->player1.score > 0) {
+        int insere = tb_inserer(&cl, nomP1,
+                                ctx->player1.score, 1);
+        if (insere)
+            printf("[TACHE_BLANCHE] Player 1 (%s) insere avec %d pts.\n",
+                   nomP1, ctx->player1.score);
+        else
+            printf("[TACHE_BLANCHE] Score de Player 1 trop bas "
+                   "pour le top %d.\n", MAX_SCORES_TB);
+    }
+
+    /* ── Étape 2 : saisie du nom de Player 2 ── */
+    /*    (uniquement si Player 2 a participé)   */
+    if (ctx->player2.score > 0) {
+        char nomP2[MAX_NOM_TB] = "";
+        printf("[TACHE_BLANCHE] Score Player 2 : %d\n",
+               ctx->player2.score);
+
+        int valideP2 = tb_saisir_nom(ctx, nomP2);
+        if (valideP2) {
+            int insere = tb_inserer(&cl, nomP2,
+                                    ctx->player2.score, 2);
+            if (insere)
+                printf("[TACHE_BLANCHE] Player 2 (%s) insere "
+                       "avec %d pts.\n",
+                       nomP2, ctx->player2.score);
+            else
+                printf("[TACHE_BLANCHE] Score de Player 2 trop bas "
+                       "pour le top %d.\n", MAX_SCORES_TB);
+        }
+    }
+
+    /* ── Étape 3 : sauvegarde dans score.txt ── */
+    tb_sauvegarder(&cl);
+
+    /* ── Étape 4 : affichage du classement ── */
+    tb_afficher_classement(ctx, &cl);
+}
+
 
 /* -------------------------------------------------------
    render_guide – tutorial pages
