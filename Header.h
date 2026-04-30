@@ -119,6 +119,109 @@ typedef struct {
     int w;   /* viewport width  (pixels)                      */
     int h;   /* viewport height (pixels)                      */
 } Camera;
+// DECLARATION DU TACHE BLANCHE 
+#ifndef TACHE_BLANCHE_H
+#define TACHE_BLANCHE_H
+
+/*
+ * tache_blanche.h
+ * ─────────────────────────────────────────────────────────────
+ * Sous-menu "Meilleurs Scores" (Lot 2 – tâche blanche)
+ *
+ * Fonctionnalités :
+ *   1. Saisie du nom du joueur via clavier (SDL_TEXTINPUT)
+ *   2. Sauvegarde nom + score dans "score.txt"
+ *   3. Affichage du tableau des meilleurs scores (top 10)
+ *
+ * Usage dans votre jeu :
+ *   → Appelez  afficherSousMenuScores(ctx)  quand l'état
+ *     passe à STATE_GAME_OVER (ou à la fin d'une partie).
+ *
+ * Ce fichier ne modifie AUCUN fichier existant du projet.
+ * ─────────────────────────────────────────────────────────────
+ */
+
+#include "players.h"   /* GameContext, Player, WINDOW_WIDTH, etc. */
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+/* ── Paramètres ────────────────────────────────────────────── */
+#define SCORE_FILE      "score.txt"   /* fichier de sauvegarde  */
+#define MAX_SCORES_TB   10            /* taille du classement   */
+#define MAX_NOM_TB      NAME_LEN      /* réutilise NAME_LEN=50  */
+
+/* ── Structure d'une entrée du classement ──────────────────── */
+typedef struct {
+    char nom[MAX_NOM_TB];
+    int  score;
+    int  joueur;   /* 1 = Player 1, 2 = Player 2              */
+} EntreeTB;
+
+/* ── Tableau du classement ─────────────────────────────────── */
+typedef struct {
+    EntreeTB entrees[MAX_SCORES_TB];
+    int      nb;
+} ClassementTB;
+
+/* ══════════════════════════════════════════════════════════════
+   FONCTIONS PUBLIQUES
+   ══════════════════════════════════════════════════════════════ */
+
+/**
+ * tb_charger  –  Charge score.txt dans *cl.
+ *                Crée le fichier s'il n'existe pas encore.
+ */
+void tb_charger(ClassementTB *cl);
+
+/**
+ * tb_sauvegarder  –  Écrit *cl dans score.txt (trié).
+ */
+void tb_sauvegarder(const ClassementTB *cl);
+
+/**
+ * tb_inserer  –  Insère (nom, score, joueur) si ça mérite
+ *               une place dans le top MAX_SCORES_TB.
+ *               Retourne 1 si inséré, 0 sinon.
+ */
+int tb_inserer(ClassementTB *cl, const char *nom, int score, int joueur);
+
+/**
+ * tb_trier  –  Trie le classement par score décroissant.
+ */
+void tb_trier(ClassementTB *cl);
+
+/**
+ * tb_saisir_nom  –  Affiche une fenêtre SDL de saisie du nom.
+ *   nomSortie : buffer de taille MAX_NOM_TB rempli par la fonction.
+ *   Retourne 1 si validé (Entrée / bouton), 0 si annulé (Échap).
+ */
+int tb_saisir_nom(GameContext *ctx, char *nomSortie);
+
+/**
+ * tb_afficher_classement  –  Affiche le tableau des scores.
+ *   L'utilisateur ferme avec n'importe quelle touche / clic.
+ */
+void tb_afficher_classement(GameContext *ctx, const ClassementTB *cl);
+
+/**
+ * afficherSousMenuScores  –  Fonction principale à appeler en fin de jeu.
+ *
+ *   Enchaîne automatiquement :
+ *     ① Saisie du nom de Player 1 (si alive ou score > 0)
+ *     ② Saisie du nom de Player 2 (si le jeu est en mode 2 joueurs)
+ *     ③ Insertion des deux scores dans le classement
+ *     ④ Sauvegarde dans score.txt
+ *     ⑤ Affichage du tableau complet
+ *
+ *   Appelez cette fonction depuis game_update() ou game_render()
+ *   lorsque ctx->currentState == STATE_GAME_OVER.
+ */
+void afficherSousMenuScores(GameContext *ctx);
+
+#endif 
 
 /* ======================================================
    Main game context
