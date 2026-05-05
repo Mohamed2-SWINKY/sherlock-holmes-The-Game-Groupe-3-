@@ -1,3 +1,7 @@
+/**
+ * @file players.c
+ */
+ 
 #include "players.h"
 #include "serial_controller.h"
 
@@ -352,6 +356,16 @@ void initPlayer1(GameContext *ctx)
     ctx->player1.selectedOutfit  = 1;
     ctx->player1.selectedChar    = 1;
     ctx->player1.keyCount        = 0;
+
+    // Default Layout: WASD
+    ctx->player1.keyUp      = SDL_SCANCODE_W;
+    ctx->player1.keyDown    = SDL_SCANCODE_S;
+    ctx->player1.keyLeft    = SDL_SCANCODE_A;
+    ctx->player1.keyRight   = SDL_SCANCODE_D;
+    ctx->player1.keyJump    = SDL_SCANCODE_SPACE;
+    ctx->player1.keyAttack  = SDL_SCANCODE_B;
+    ctx->player1.keySprint  = SDL_SCANCODE_LSHIFT;
+    ctx->player1.layoutNum  = 1;
 }
 
 void initPlayer2(GameContext *ctx)
@@ -403,9 +417,23 @@ void initPlayer2(GameContext *ctx)
     ctx->player2.selectedOutfit  = 1;
     ctx->player2.selectedChar    = 2;
     ctx->player2.keyCount        = 0;
+
+    // Default Layout: Arrows
+    ctx->player2.keyUp      = SDL_SCANCODE_UP;
+    ctx->player2.keyDown    = SDL_SCANCODE_DOWN;
+    ctx->player2.keyLeft    = SDL_SCANCODE_LEFT;
+    ctx->player2.keyRight   = SDL_SCANCODE_RIGHT;
+    ctx->player2.keyJump    = SDL_SCANCODE_RSHIFT;
+    ctx->player2.keyAttack  = SDL_SCANCODE_RETURN;
+    ctx->player2.keySprint  = SDL_SCANCODE_M;
+    ctx->player2.layoutNum  = 1;
 }
 
-GameContext *game_init(void)
+void buttonFn(GameContext *ctx);
+void toggleLayout(Player *p);
+int* getRebindKeyRef(GameContext *ctx, int target);
+void buttonLayoutFn(GameContext *ctx);
+GameContext* game_init(void)
 {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
         fprintf(stderr, "SDL_Init failed: %s\n", SDL_GetError()); return NULL;
@@ -440,7 +468,7 @@ GameContext *game_init(void)
         SDL_DestroyWindow(ctx->window); free(ctx); return NULL;
     }
 
-    if (controller_open("/dev/ttyACM0")< 0) {
+    if (controller_open("/dev/ttyACM0") < 0){
       printf("Controller not found, using keyboard only.\n");
     }
     memset(ctx->keys, 0, sizeof(ctx->keys));
@@ -488,6 +516,7 @@ GameContext *game_init(void)
     ctx->running       = 1;
     ctx->isCameraPanning  = 0;
     ctx->cameraFocusTimer = 0;
+    ctx->rebindTarget      = 0;
 
 
     ctx->sm.resumeBtn.rect  = (SDL_Rect){60, 320, BUTTON_W, BUTTON_H};
@@ -510,6 +539,18 @@ GameContext *game_init(void)
     ctx->sm.outfitsBtn.rect    = (SDL_Rect){60, 365, BUTTON_W, BUTTON_H};
     ctx->sm.buttonsBtn.rect    = (SDL_Rect){60, 410, BUTTON_W, BUTTON_H};
     ctx->sm.playerBtnSwitched  = 0;
+
+    ctx->sm.p2SwapBtn.rect        = (SDL_Rect){650, 410, BUTTON_W, BUTTON_H};
+    ctx->sm.p2SwapBtn.hovered     = 0;
+    ctx->sm.p2SwapBtn.tex         = ctx->sm.resumeBtn.tex; // placeholder
+
+    ctx->sm.p1LayoutBtn.rect      = (SDL_Rect){130, 480, 220, 50};
+    ctx->sm.p1LayoutBtn.tex       = ctx->sm.okBtn.tex;
+    ctx->sm.p1LayoutBtn.hovered   = 0;
+
+    ctx->sm.p2LayoutBtn.rect      = (SDL_Rect){630, 480, 220, 50};
+    ctx->sm.p2LayoutBtn.tex       = ctx->sm.okBtn.tex;
+    ctx->sm.p2LayoutBtn.hovered   = 0;
 
     ctx->sm.playersBg    = loadTexture("assets/subMenu/backgrounds/playerSubMenuBg.jpg", ctx->renderer);
     ctx->sm.p1o1Btn.tex  = loadTexture("assets/subMenu/outfitFrames/p1o1.png",           ctx->renderer);
@@ -603,7 +644,7 @@ void playerMechanics(GameContext *ctx)
     if (ctx->player1.alive)
     {
         /* running */
-        if (ctx->keys[SDL_SCANCODE_LSHIFT]) {
+        if (ctx->keys[ctx->player1.keySprint]) {
             ctx->player1.speed      = 5;
             ctx->player1.frameDelay = 7;
             if (!ctx->player1.walkToRun) {
@@ -620,10 +661,10 @@ void playerMechanics(GameContext *ctx)
 
         /* OPTION B MOVE: compute intended dx/dy, test once, move only if NOT blocked */
         int dx = 0, dy = 0;
-        if (ctx->keys[SDL_SCANCODE_D]) dx += ctx->player1.speed;
-        if (ctx->keys[SDL_SCANCODE_A]) dx -= ctx->player1.speed;
-        if (ctx->keys[SDL_SCANCODE_S]) dy += ctx->player1.speed;
-        if (ctx->keys[SDL_SCANCODE_W]) dy -= ctx->player1.speed;
+        if (ctx->keys[ctx->player1.keyRight]) dx += ctx->player1.speed;
+        if (ctx->keys[ctx->player1.keyLeft])  dx -= ctx->player1.speed;
+        if (ctx->keys[ctx->player1.keyDown])  dy += ctx->player1.speed;
+        if (ctx->keys[ctx->player1.keyUp])    dy -= ctx->player1.speed;
 
         if (dx != 0 || dy != 0) {
           int moved = 0;
@@ -649,20 +690,20 @@ void playerMechanics(GameContext *ctx)
           if (moved && !ctx->player1.attacking) {
     if (abs(dx) >= abs(dy) && dx != 0) {
         if (dx > 0) {
-            ctx->player1.lastDir  = SDL_SCANCODE_D;
-            ctx->player1.lastHDir = SDL_SCANCODE_D;
+            ctx->player1.lastDir  = ctx->player1.keyRight;
+            ctx->player1.lastHDir = ctx->player1.keyRight;
             ctx->player1.currentState = ctx->player1.walkRight[ctx->player1.frame % 5];
         } else {
-            ctx->player1.lastDir  = SDL_SCANCODE_A;
-            ctx->player1.lastHDir = SDL_SCANCODE_A;
+            ctx->player1.lastDir  = ctx->player1.keyLeft;
+            ctx->player1.lastHDir = ctx->player1.keyLeft;
             ctx->player1.currentState = ctx->player1.walkLeft[ctx->player1.frame % 5];
         }
     } else if (dy != 0) {
         if (dy > 0) {
-            ctx->player1.lastDir = SDL_SCANCODE_S;
+            ctx->player1.lastDir = ctx->player1.keyDown;
             ctx->player1.currentState = ctx->player1.walkDown[ctx->player1.frame % 2];
         } else {
-            ctx->player1.lastDir = SDL_SCANCODE_W;
+            ctx->player1.lastDir = ctx->player1.keyUp;
             ctx->player1.currentState = ctx->player1.walkUp[ctx->player1.frame % 2];
         }
     }
@@ -680,7 +721,7 @@ if (moved) {
         }
 
         /* jump */
-        if (ctx->keys[SDL_SCANCODE_SPACE] && !ctx->player1.jumping) {
+        if (ctx->keys[ctx->player1.keyJump] && !ctx->player1.jumping) {
             ctx->player1.jumping   = 1;
             ctx->player1.jumpTimer = 0;
             Mix_HaltChannel(CH_P1_WALK);
@@ -689,13 +730,13 @@ if (moved) {
         }
 
         /* attack */
-        if (ctx->keys[SDL_SCANCODE_B] && !ctx->player1.attacking) {
+        if (ctx->keys[ctx->player1.keyAttack] && !ctx->player1.attacking) {
             ctx->player1.attacking   = 1;
             ctx->player1.attackTimer = 0;
             ctx->player1.attackFrame = 0;
             ctx->player1.baseX       = ctx->player1.rect.x;
             ctx->player1.currentState =
-                (ctx->player1.lastHDir == SDL_SCANCODE_A) ? ctx->player1.attackLeft[0]
+                (ctx->player1.lastHDir == ctx->player1.keyLeft) ? ctx->player1.attackLeft[0]
                                                          : ctx->player1.attackRight[0];
             if (!Mix_Playing(CH_P1_ATTACK))
                 Mix_PlayChannel(CH_P1_ATTACK, ctx->player1.attackingSound, 0);
@@ -812,7 +853,7 @@ if (moved) {
     if (ctx->player2.alive)
     {
         /* running */
-        if (ctx->keys[SDL_SCANCODE_M]) {
+        if (ctx->keys[ctx->player2.keySprint]) {
             ctx->player2.speed      = 5;
             ctx->player2.frameDelay = 7;
             if (!ctx->player2.walkToRun) {
@@ -829,10 +870,10 @@ if (moved) {
 
         /* OPTION B MOVE: compute intended dx/dy, test once, move only if NOT blocked */
         int dx2 = 0, dy2 = 0;
-        if (ctx->keys[SDL_SCANCODE_RIGHT]) dx2 += ctx->player2.speed;
-        if (ctx->keys[SDL_SCANCODE_LEFT])  dx2 -= ctx->player2.speed;
-        if (ctx->keys[SDL_SCANCODE_DOWN])  dy2 += ctx->player2.speed;
-        if (ctx->keys[SDL_SCANCODE_UP])    dy2 -= ctx->player2.speed;
+        if (ctx->keys[ctx->player2.keyRight]) dx2 += ctx->player2.speed;
+        if (ctx->keys[ctx->player2.keyLeft])  dx2 -= ctx->player2.speed;
+        if (ctx->keys[ctx->player2.keyDown])  dy2 += ctx->player2.speed;
+        if (ctx->keys[ctx->player2.keyUp])    dy2 -= ctx->player2.speed;
 
         if (dx2 != 0 || dy2 != 0) {
             int moved2 = 0;
@@ -855,23 +896,23 @@ if (!is_blocked(testY, obs, obs_cnt, doors, dc, door_open)) {
     minimap_trigger_shake(&ctx->minimap2);
 }
 
-if (moved2 && !ctx->player2.attacking) {
+          if (moved2 && !ctx->player2.attacking) {
     if (abs(dx2) >= abs(dy2) && dx2 != 0) {
         if (dx2 > 0) {
-            ctx->player2.lastDir  = SDL_SCANCODE_RIGHT;
-            ctx->player2.lastHDir = SDL_SCANCODE_RIGHT;
+            ctx->player2.lastDir  = ctx->player2.keyRight;
+            ctx->player2.lastHDir = ctx->player2.keyRight;
             ctx->player2.currentState = ctx->player2.walkRight[ctx->player2.frame % 5];
         } else {
-            ctx->player2.lastDir  = SDL_SCANCODE_LEFT;
-            ctx->player2.lastHDir = SDL_SCANCODE_LEFT;
+            ctx->player2.lastDir  = ctx->player2.keyLeft;
+            ctx->player2.lastHDir = ctx->player2.keyLeft;
             ctx->player2.currentState = ctx->player2.walkLeft[ctx->player2.frame % 5];
         }
     } else if (dy2 != 0) {
         if (dy2 > 0) {
-            ctx->player2.lastDir = SDL_SCANCODE_DOWN;
+            ctx->player2.lastDir = ctx->player2.keyDown;
             ctx->player2.currentState = ctx->player2.walkDown[ctx->player2.frame % 2];
         } else {
-            ctx->player2.lastDir = SDL_SCANCODE_UP;
+            ctx->player2.lastDir = ctx->player2.keyUp;
             ctx->player2.currentState = ctx->player2.walkUp[ctx->player2.frame % 2];
         }
     }
@@ -886,22 +927,23 @@ if (moved2) {
         }
 
         /* jump */
-        if (ctx->keys[SDL_SCANCODE_RSHIFT] && !ctx->player2.jumping) {
+        if (ctx->keys[ctx->player2.keyJump] && !ctx->player2.jumping) {
             ctx->player2.jumping   = 1;
             ctx->player2.jumpTimer = 0;
+            Mix_HaltChannel(CH_P2_WALK);
             if (!Mix_Playing(CH_P2_JUMP))
                 Mix_PlayChannel(CH_P2_JUMP, ctx->player2.jumpingSound, 0);
         }
 
         /* attack */
-        if (ctx->keys[SDL_SCANCODE_RETURN] && !ctx->player2.attacking) {
+        if (ctx->keys[ctx->player2.keyAttack] && !ctx->player2.attacking) {
             ctx->player2.attacking   = 1;
             ctx->player2.attackTimer = 0;
             ctx->player2.attackFrame = 0;
             ctx->player2.baseX       = ctx->player2.rect.x;
             ctx->player2.currentState =
-                (ctx->player2.lastHDir == SDL_SCANCODE_LEFT) ? ctx->player2.attackLeft[0]
-                                                            : ctx->player2.attackRight[0];
+                (ctx->player2.lastHDir == ctx->player2.keyLeft) ? ctx->player2.attackLeft[0]
+                                                         : ctx->player2.attackRight[0];
             if (!Mix_Playing(CH_P2_ATTACK))
                 Mix_PlayChannel(CH_P2_ATTACK, ctx->player2.attackingSound, 0);
         }
@@ -1042,10 +1084,14 @@ for (int i = 0; i < keys_cnt; i++) {
         int p2_over = map_rects_overlap(ctx->player2.rect, keys[i].rect);
 
         int eligible = 0;
-        if ((p1_near || p2_near) && ctx->keys[SDL_SCANCODE_F]) {
+        if (p1_near && ctx->keys[ctx->player1.keyAttack]) {
             eligible = 1;
-            ctx->lastPlayerToPickupKey = p1_near ? 1 : 2;
-            ctx->keys[SDL_SCANCODE_F] = 0; // Reset F key to prevent double trigger
+            ctx->lastPlayerToPickupKey = 1;
+            ctx->keys[ctx->player1.keyAttack] = 0; // Consume to avoid attack animation
+        } else if (p2_near && ctx->keys[ctx->player2.keyAttack]) {
+            eligible = 1;
+            ctx->lastPlayerToPickupKey = 2;
+            ctx->keys[ctx->player2.keyAttack] = 0;
         }
 
         if (eligible) {
@@ -1209,7 +1255,7 @@ void changeOutfitsFn(GameContext *ctx)
     int mx, my;
     SDL_GetMouseState(&mx, &my);
 
-    SDL_RenderCopy(ctx->renderer, ctx->sm.playersBg, NULL, NULL);
+    SDL_RenderCopy(ctx->renderer, ctx->sm.charSelectBg, NULL, NULL);
 
     SDL_Color white = {255,255,255,255}, gold = {180,150,80,255};
 
@@ -1325,6 +1371,143 @@ void charSelectFn(GameContext *ctx)
     SDL_RenderCopy(ctx->renderer, ctx->sm.okBtn.tex, NULL, &draw);
 }
 
+void toggleLayout(Player *p) {
+    if (p->layoutNum == 1) {
+        p->layoutNum = 2;
+        if (p->selectedChar == 1) {
+             p->keyUp = SDL_SCANCODE_UP; p->keyDown = SDL_SCANCODE_DOWN;
+             p->keyLeft = SDL_SCANCODE_LEFT; p->keyRight = SDL_SCANCODE_RIGHT;
+             p->keyJump = SDL_SCANCODE_RSHIFT; p->keyAttack = SDL_SCANCODE_RETURN;
+             p->keySprint = SDL_SCANCODE_M;
+        } else {
+             p->keyUp = SDL_SCANCODE_W; p->keyDown = SDL_SCANCODE_S;
+             p->keyLeft = SDL_SCANCODE_A; p->keyRight = SDL_SCANCODE_D;
+             p->keyJump = SDL_SCANCODE_SPACE; p->keyAttack = SDL_SCANCODE_B;
+             p->keySprint = SDL_SCANCODE_LSHIFT;
+        }
+    } else {
+        p->layoutNum = 1;
+        if (p->selectedChar == 1) {
+             p->keyUp = SDL_SCANCODE_W; p->keyDown = SDL_SCANCODE_S;
+             p->keyLeft = SDL_SCANCODE_A; p->keyRight = SDL_SCANCODE_D;
+             p->keyJump = SDL_SCANCODE_SPACE; p->keyAttack = SDL_SCANCODE_B;
+             p->keySprint = SDL_SCANCODE_LSHIFT;
+        } else {
+             p->keyUp = SDL_SCANCODE_UP; p->keyDown = SDL_SCANCODE_DOWN;
+             p->keyLeft = SDL_SCANCODE_LEFT; p->keyRight = SDL_SCANCODE_RIGHT;
+             p->keyJump = SDL_SCANCODE_RSHIFT; p->keyAttack = SDL_SCANCODE_RETURN;
+             p->keySprint = SDL_SCANCODE_M;
+        }
+    }
+}
+
+void buttonLayoutFn(GameContext *ctx) {
+    int mx, my;
+    SDL_GetMouseState(&mx, &my);
+
+    SDL_RenderCopy(ctx->renderer, ctx->sm.charSelectBg, NULL, NULL);
+
+    SDL_Color gold = {180,150,80,255}, white = {255,255,255,255}, green = {50, 255, 50, 255};
+    const char *actions[] = {"Up", "Down", "Left", "Right", "Jump", "Attack", "Sprint"};
+    
+    SDL_Surface *s; SDL_Texture *t; SDL_Rect d;
+
+    // Title
+    s = TTF_RenderText_Blended(ctx->font, "CONFIGURE BUTTONS", gold);
+    t = SDL_CreateTextureFromSurface(ctx->renderer, s); SDL_FreeSurface(s);
+    SDL_QueryTexture(t,NULL,NULL,&d.w,&d.h);
+    d.x = (WINDOW_WIDTH - d.w)/2; d.y = 30;
+    SDL_RenderCopy(ctx->renderer, t, NULL, &d); SDL_DestroyTexture(t);
+    
+    if (ctx->rebindTarget != 0) {
+        s = TTF_RenderText_Blended(ctx->font, "PRESS ANY KEY...", green);
+        t = SDL_CreateTextureFromSurface(ctx->renderer, s); SDL_FreeSurface(s);
+        SDL_QueryTexture(t,NULL,NULL,&d.w,&d.h);
+        d.x = (WINDOW_WIDTH - d.w)/2; d.y = 80;
+        SDL_RenderCopy(ctx->renderer, t, NULL, &d); SDL_DestroyTexture(t);
+    }
+
+    for (int p = 0; p < 2; p++) {
+        int startX = (p == 0) ? 100 : 600;
+        const char *pTitle = (p == 0) ? "PLAYER 1" : "PLAYER 2";
+        s = TTF_RenderText_Blended(ctx->font, pTitle, gold);
+        t = SDL_CreateTextureFromSurface(ctx->renderer, s); SDL_FreeSurface(s);
+        SDL_QueryTexture(t,NULL,NULL,&d.w,&d.h);
+        d.x = startX + (300 - d.w)/2; d.y = 120;
+        SDL_RenderCopy(ctx->renderer, t, NULL, &d); SDL_DestroyTexture(t);
+        
+        for (int i = 0; i < 7; i++) {
+            int targetId = p * 7 + i + 1;
+            int y = 180 + i * 50;
+            SDL_Rect row = {startX, y, 300, 45};
+            int hovered = point_in_rect(mx, my, &row);
+            
+            if (ctx->rebindTarget == targetId) {
+                SDL_SetRenderDrawBlendMode(ctx->renderer, SDL_BLENDMODE_BLEND);
+                SDL_SetRenderDrawColor(ctx->renderer, 0, 255, 0, 80);
+            } else if (hovered) {
+                SDL_SetRenderDrawBlendMode(ctx->renderer, SDL_BLENDMODE_BLEND);
+                SDL_SetRenderDrawColor(ctx->renderer, 255, 255, 255, 40);
+            } else {
+                SDL_SetRenderDrawBlendMode(ctx->renderer, SDL_BLENDMODE_BLEND);
+                SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 150);
+            }
+            SDL_RenderFillRect(ctx->renderer, &row);
+            
+            int *keyPtr = getRebindKeyRef(ctx, targetId);
+            char rowText[128];
+            snprintf(rowText, sizeof(rowText), "%s: %s", actions[i], SDL_GetScancodeName((SDL_Scancode)*keyPtr));
+            
+            s = TTF_RenderText_Blended(ctx->font, rowText, (ctx->rebindTarget == targetId) ? green : white);
+            t = SDL_CreateTextureFromSurface(ctx->renderer, s); SDL_FreeSurface(s);
+            SDL_QueryTexture(t,NULL,NULL,&d.w,&d.h);
+            d.x = startX + 10; d.y = y + (45 - d.h)/2;
+            SDL_RenderCopy(ctx->renderer, t, NULL, &d); SDL_DestroyTexture(t);
+        }
+    }
+    
+    // OK Button
+    SDL_Rect okRect = { (WINDOW_WIDTH - BUTTON_W)/2, 560, BUTTON_W, BUTTON_H };
+    SDL_Rect drawOk = point_in_rect(mx, my, &okRect) ? scale_rect(okRect, 1.1f) : okRect;
+    SDL_RenderCopy(ctx->renderer, ctx->sm.okBtn.tex, NULL, &drawOk);
+
+    if (point_in_rect(mx, my, &okRect)) {
+        if (!ctx->sm.okBtn.hovered) {
+             Mix_PlayChannel(CH_BUTTONS, ctx->sm.hoverSound, 0);
+             ctx->sm.okBtn.hovered = 1;
+        }
+    } else {
+        ctx->sm.okBtn.hovered = 0;
+    }
+}
+
+int* getRebindKeyRef(GameContext *ctx, int target) {
+    if (target >= 1 && target <= 7) {
+        Player *p = &ctx->player1;
+        switch(target) {
+            case 1: return &p->keyUp;
+            case 2: return &p->keyDown;
+            case 3: return &p->keyLeft;
+            case 4: return &p->keyRight;
+            case 5: return &p->keyJump;
+            case 6: return &p->keyAttack;
+            case 7: return &p->keySprint;
+        }
+    } else if (target >= 8 && target <= 14) {
+        Player *p = &ctx->player2;
+        switch(target - 7) {
+            case 1: return &p->keyUp;
+            case 2: return &p->keyDown;
+            case 3: return &p->keyLeft;
+            case 4: return &p->keyRight;
+            case 5: return &p->keyJump;
+            case 6: return &p->keyAttack;
+            case 7: return &p->keySprint;
+        }
+    }
+    return NULL;
+}
+
 void game_update(GameContext *ctx)
 {
     int mx, my;
@@ -1338,6 +1521,23 @@ void game_update(GameContext *ctx)
     while (SDL_PollEvent(&ctx->event)) {
         if (ctx->event.type == SDL_QUIT) { ctx->running = 0; }
         
+        if (ctx->currentState == STATE_GAME_OVER) {
+            if (ctx->event.type == SDL_KEYDOWN || ctx->event.type == SDL_MOUSEBUTTONDOWN) {
+                afficherSousMenuScores(ctx);
+                ctx->running = 0;
+            }
+            continue;
+        }
+
+        if (ctx->rebindTarget != 0) {
+            if (ctx->event.type == SDL_KEYDOWN) {
+                int *keyPtr = getRebindKeyRef(ctx, ctx->rebindTarget);
+                if (keyPtr) *keyPtr = ctx->event.key.keysym.scancode;
+                ctx->rebindTarget = 0;
+            }
+            continue;
+        }
+
         if (ctx->currentState == STATE_ENIGME) {
             handleEnigmeEvents(&ctx->en, ctx->event);
             if (ctx->en.over) {
@@ -1386,6 +1586,14 @@ void game_update(GameContext *ctx)
                     ctx->currentState = STATE_PAUSED_PLAYERS;
                     Mix_PlayChannel(CH_BUTTONS,ctx->sm.hoverSound,0);
                     ctx->sm.playerBtnSwitched = 1;
+                } else if (point_in_rect(mx,my,&ctx->sm.scoreBtn.rect)) {
+                    Mix_PlayChannel(CH_BUTTONS,ctx->sm.hoverSound,0);
+                    ClassementTB cl;
+                    tb_charger(&cl);
+                    tb_afficher_classement(ctx, &cl);
+                } else if (point_in_rect(mx,my,&ctx->sm.quitBtn.rect)) {
+                    Mix_PlayChannel(CH_BUTTONS,ctx->sm.hoverSound,0);
+                    ctx->running = 0;
                 }
             } else if (ctx->currentState == STATE_PAUSED_PLAYERS) {
                 if (point_in_rect(mx,my,&ctx->sm.outfitsBtn.rect)) {
@@ -1399,6 +1607,10 @@ void game_update(GameContext *ctx)
                 }
                 if (point_in_rect(mx,my,&ctx->sm.charSelectBtn.rect)) {
                     ctx->currentState = STATE_PAUSED_CHARSELECT;
+                    Mix_PlayChannel(CH_BUTTONS,ctx->sm.hoverSound,0);
+                }
+                if (point_in_rect(mx,my,&ctx->sm.buttonsBtn.rect)) {
+                    ctx->currentState = STATE_PAUSED_BUTTONS;
                     Mix_PlayChannel(CH_BUTTONS,ctx->sm.hoverSound,0);
                 }
             } else if (ctx->currentState == STATE_PAUSED_OUTFITS) {
@@ -1439,23 +1651,39 @@ void game_update(GameContext *ctx)
                     ctx->currentState = STATE_PAUSED_PLAYERS;
                     Mix_PlayChannel(CH_BUTTONS,ctx->sm.hoverSound,0);
                 }
+            } else if (ctx->currentState == STATE_PAUSED_BUTTONS) {
+                for (int p = 0; p < 2; p++) {
+                    int startX = (p == 0) ? 100 : 600;
+                    for (int i = 0; i < 7; i++) {
+                        SDL_Rect row = {startX, 180 + i * 50, 300, 45};
+                        if (point_in_rect(mx, my, &row)) {
+                            ctx->rebindTarget = p * 7 + i + 1;
+                            Mix_PlayChannel(CH_BUTTONS,ctx->sm.hoverSound,0);
+                        }
+                    }
+                }
+                SDL_Rect okRect = { (WINDOW_WIDTH - BUTTON_W)/2, 560, BUTTON_W, BUTTON_H };
+                if (point_in_rect(mx,my,&okRect)) {
+                    ctx->currentState = STATE_PAUSED_PLAYERS;
+                    Mix_PlayChannel(CH_BUTTONS,ctx->sm.hoverSound,0);
+                }
             }
         }
     }
 
-    // Arduino controller injection
-ControllerState ctrl = {0};
-controller_poll(&ctrl);
+    // Combine Keyboard + Controller state for keys handled by both
+    const Uint8 *kbdState = SDL_GetKeyboardState(NULL);
+    ControllerState ctrl = {0};
+    controller_poll(&ctrl);
 
-    // Player 1 — maps to WASD + SPACE + B
-    if (ctrl.up)      ctx->keys[SDL_SCANCODE_W]     = 1;
-    if (ctrl.down)    ctx->keys[SDL_SCANCODE_S]     = 1;
-    if (ctrl.left)    ctx->keys[SDL_SCANCODE_A]     = 1;
-    if (ctrl.right)   ctx->keys[SDL_SCANCODE_D]     = 1;
-    if (ctrl.action1) ctx->keys[SDL_SCANCODE_B]     = 1; // attack
-    if (ctrl.action2) ctx->keys[SDL_SCANCODE_SPACE] = 1; // jump
-    if (ctrl.action3) ctx->keys[SDL_SCANCODE_RSHIFT]= 1; // sprint
-    if (ctrl.action4) ctx->keys[SDL_SCANCODE_ESCAPE]= 1; // pause
+    ctx->keys[ctx->player1.keyUp]      = kbdState[ctx->player1.keyUp]      || ctrl.up;
+    ctx->keys[ctx->player1.keyDown]    = kbdState[ctx->player1.keyDown]    || ctrl.down;
+    ctx->keys[ctx->player1.keyLeft]    = kbdState[ctx->player1.keyLeft]    || ctrl.left;
+    ctx->keys[ctx->player1.keyRight]   = kbdState[ctx->player1.keyRight]   || ctrl.right;
+    ctx->keys[ctx->player1.keyAttack]  = kbdState[ctx->player1.keyAttack]  || ctrl.action1;
+    ctx->keys[ctx->player1.keyJump]    = kbdState[ctx->player1.keyJump]    || ctrl.action2;
+    ctx->keys[ctx->player1.keySprint]  = kbdState[ctx->player1.keySprint]  || ctrl.action3;
+    ctx->keys[SDL_SCANCODE_ESCAPE]     = kbdState[SDL_SCANCODE_ESCAPE]     || ctrl.action4;
 
     if (ctx->keys[SDL_SCANCODE_ESCAPE] && !ctx->pauseSwitched) {
         ctx->paused = !ctx->paused;
@@ -1496,6 +1724,7 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
     else if (ctx->cutsceneL2Timer <= 400) ctx->cutsceneL2Alpha = 255;
     else if (ctx->cutsceneL2Timer <= 460) ctx->cutsceneL2Alpha = (int)((460 - ctx->cutsceneL2Timer) * 255.0f / 60.0f);
     else {
+        afficherSousMenuScores(ctx);
         ctx->running = 0; /* or go to a credits screen */
     }
     return;
@@ -1574,6 +1803,13 @@ if (ctx->currentState == STATE_ENIGME || ctx->currentState == STATE_PUZZLE ||
 
     minimap_update_shake(&ctx->minimap);
     minimap_update_shake(&ctx->minimap2);
+
+    /* --- Losing condition: both players dead --- */
+    if (!ctx->player1.alive && !ctx->player2.alive && ctx->currentState == STATE_PLAYING) {
+        ctx->currentState = STATE_GAME_OVER;
+        Mix_HaltMusic();
+        // Optional: Play a game over sound if available
+    }
 }
 
 void game_cleanup(GameContext *ctx)
@@ -1654,6 +1890,38 @@ void game_render(GameContext *ctx)
 
     if (ctx->currentState == STATE_PUZZLE) {
         puzzle_render(&ctx->pz, ctx->renderer);
+        SDL_RenderPresent(ctx->renderer);
+        return;
+    }
+
+    if (ctx->currentState == STATE_GAME_OVER) {
+        SDL_SetRenderDrawColor(ctx->renderer, 20, 0, 0, 255);
+        SDL_RenderClear(ctx->renderer);
+        const char *msg = "GAME OVER";
+        const char *sub = "Both players have fallen...";
+        SDL_Color red = {255, 50, 50, 255};
+        SDL_Surface *s = TTF_RenderText_Blended(ctx->font, msg, red);
+        SDL_Texture *t = SDL_CreateTextureFromSurface(ctx->renderer, s);
+        int tw, th; SDL_QueryTexture(t, NULL, NULL, &tw, &th);
+        SDL_Rect r = {(WINDOW_WIDTH - tw)/2, WINDOW_HEIGHT/2 - 50, tw, th};
+        SDL_RenderCopy(ctx->renderer, t, NULL, &r);
+        SDL_FreeSurface(s); SDL_DestroyTexture(t);
+
+        SDL_Surface *s2 = TTF_RenderText_Blended(ctx->font, sub, (SDL_Color){200, 200, 200, 255});
+        SDL_Texture *t2 = SDL_CreateTextureFromSurface(ctx->renderer, s2);
+        SDL_QueryTexture(t2, NULL, NULL, &tw, &th);
+        SDL_Rect r2 = {(WINDOW_WIDTH - tw)/2, WINDOW_HEIGHT/2 + 20, tw, th};
+        SDL_RenderCopy(ctx->renderer, t2, NULL, &r2);
+        SDL_FreeSurface(s2); SDL_DestroyTexture(t2);
+
+        const char *prompt = "Press any key to enter score...";
+        SDL_Surface *s3 = TTF_RenderText_Blended(ctx->font, prompt, (SDL_Color){150, 150, 150, 255});
+        SDL_Texture *t3 = SDL_CreateTextureFromSurface(ctx->renderer, s3);
+        SDL_QueryTexture(t3, NULL, NULL, &tw, &th);
+        SDL_Rect r3 = {(WINDOW_WIDTH - tw)/2, WINDOW_HEIGHT - 40, tw, th};
+        SDL_RenderCopy(ctx->renderer, t3, NULL, &r3);
+        SDL_FreeSurface(s3); SDL_DestroyTexture(t3);
+
         SDL_RenderPresent(ctx->renderer);
         return;
     }
@@ -1953,6 +2221,31 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
         if (ctx->map.level == LEVEL_2)
             enemy_render(ctx, camX, camY);
  
+        /* ── Pickup Prompt ── */
+        Key *r_keys     = (ctx->map.level == LEVEL_1) ? ctx->map.keys1     : ctx->map.keys2;
+        int  r_keys_cnt = (ctx->map.level == LEVEL_1) ? ctx->map.keys1_cnt : ctx->map.keys2_cnt;
+        Player *currP   = (side == 0) ? &ctx->player1 : &ctx->player2;
+        int showPrompt = 0;
+        for (int i = 0; i < r_keys_cnt; i++) {
+            if (!r_keys[i].collected && r_keys[i].visible) {
+                SDL_Rect kr = r_keys[i].rect;
+                SDL_Rect prox = { kr.x - 40, kr.y - 40, kr.w + 80, kr.h + 80 };
+                if (map_rects_overlap(currP->rect, prox)) {
+                    showPrompt = 1; break;
+                }
+            }
+        }
+        if (showPrompt) {
+            const char *pText = (side == 0) ? "Press [B] to pickup" : "Press [ENTER] to pickup";
+            SDL_Color gold = {255, 215, 0, 255};
+            SDL_Surface *psurf = TTF_RenderText_Blended(ctx->font, pText, gold);
+            SDL_Texture *ptex = SDL_CreateTextureFromSurface(ctx->renderer, psurf);
+            int pw, ph; SDL_QueryTexture(ptex, NULL, NULL, &pw, &ph);
+            SDL_Rect pr = {(halfW - pw)/2, fullH - 100, pw, ph};
+            SDL_RenderCopy(ctx->renderer, ptex, NULL, &pr);
+            SDL_FreeSurface(psurf); SDL_DestroyTexture(ptex);
+        }
+ 
         /* ── Hit Flash Overlay ── */
         if (ctx->hitFlashTimer > 0) {
             SDL_SetRenderDrawBlendMode(ctx->renderer, SDL_BLENDMODE_BLEND);
@@ -2048,35 +2341,9 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
         else if (ctx->currentState == STATE_PAUSED_PLAYERS)    playersMenuFn(ctx);
         else if (ctx->currentState == STATE_PAUSED_OUTFITS)    changeOutfitsFn(ctx);
         else if (ctx->currentState == STATE_PAUSED_CHARSELECT) charSelectFn(ctx);
+        else if (ctx->currentState == STATE_PAUSED_BUTTONS) buttonLayoutFn(ctx);
     }
  
-    /* ── Interaction Prompts (Generic for all keys) ── */
-    if (!ctx->paused) {
-        Key *keys     = (ctx->map.level == LEVEL_1) ? ctx->map.keys1     : ctx->map.keys2;
-        int  keys_cnt = (ctx->map.level == LEVEL_1) ? ctx->map.keys1_cnt : ctx->map.keys2_cnt;
-
-        for (int i = 0; i < keys_cnt; i++) {
-            if (keys[i].visible && !keys[i].collected) {
-                SDL_Rect kr = keys[i].rect;
-                SDL_Rect prox = { kr.x - 40, kr.y - 40, kr.w + 80, kr.h + 80 };
-                if (map_rects_overlap(ctx->player1.rect, prox) || map_rects_overlap(ctx->player2.rect, prox)) {
-                    SDL_Surface *surf = TTF_RenderText_Blended(ctx->font, "Press F to get the key", (SDL_Color){255, 215, 0, 255});
-                    if (surf) {
-                        SDL_Texture *tex = SDL_CreateTextureFromSurface(ctx->renderer, surf);
-                        SDL_FreeSurface(surf);
-                        if (tex) {
-                            int tw, th; SDL_QueryTexture(tex, NULL, NULL, &tw, &th);
-                            SDL_Rect dst = { (WINDOW_WIDTH - tw) / 2, WINDOW_HEIGHT - 60, tw, th };
-                            SDL_RenderCopy(ctx->renderer, tex, NULL, &dst);
-                            SDL_DestroyTexture(tex);
-                        }
-                    }
-                    /* Break after drawing one prompt - only one needs to show at a time */
-                    break;
-                }
-            }
-        }
-    }
  
     SDL_RenderPresent(ctx->renderer);
 }

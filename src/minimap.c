@@ -1,3 +1,9 @@
+
+
+/**
+ * @file minimap.c
+ */
+ 
 #include "minimap.h"
 #include <stdlib.h>
 

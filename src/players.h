@@ -75,7 +75,8 @@ typedef enum {
     STATE_PAUSED_CHARSELECT,
     STATE_GAME_OVER,
     STATE_ENIGME,
-    STATE_PUZZLE
+    STATE_PUZZLE,
+    STATE_PAUSED_BUTTONS
 } GameState;
 
 typedef struct{
@@ -123,6 +124,9 @@ typedef struct{
   int moving;
   int selectedChar;
   int keyCount;
+  int keyUp, keyDown, keyLeft, keyRight;
+  int keyJump, keyAttack, keySprint;
+  int layoutNum;
 
 } Player;
 
@@ -157,6 +161,8 @@ typedef struct{
     Button backBtn;
     Button p1SwapBtn;
     Button p2SwapBtn;
+    Button p1LayoutBtn;
+    Button p2LayoutBtn;
     int playerBtnSwitched;
     Mix_Chunk *hoverSound;
 
@@ -264,6 +270,7 @@ typedef struct {
     int hitFlashTimer;
     Uint32 startTime;
     int timerRunning;
+    int rebindTarget; // 0=None, 1-7=P1, 8-14=P2
 } GameContext;
 
 SDL_Texture* loadTexture(const char* path, SDL_Renderer* renderer);
@@ -286,5 +293,28 @@ void game_render(GameContext *ctx);
 void game_run(GameContext *ctx);
 int hasIntersection(SDL_Rect r1, SDL_Rect r2);
 
+
+#define SCORE_FILE "scores.txt"
+#define MAX_SCORES_TB 10
+#define MAX_NOM_TB 50
+
+typedef struct {
+    char nom[MAX_NOM_TB];
+    int score;
+    int joueur;
+} EntreeTB;
+
+typedef struct {
+    EntreeTB entrees[MAX_SCORES_TB];
+    int nb;
+} ClassementTB;
+
+void tb_charger(ClassementTB *cl);
+void tb_sauvegarder(const ClassementTB *cl);
+void tb_trier(ClassementTB *cl);
+int tb_inserer(ClassementTB *cl, const char *nom, int score, int joueur);
+int tb_saisir_nom(GameContext *ctx, char *nomSortie, const char *promptTitle);
+void tb_afficher_classement(GameContext *ctx, const ClassementTB *cl);
+void afficherSousMenuScores(GameContext *ctx);
 
 #endif

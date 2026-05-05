@@ -1,3 +1,8 @@
+
+/**
+ * @file enigme.c
+ */
+
 #include "enigme.h"
 #include <stdio.h>
 

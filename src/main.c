@@ -1,3 +1,6 @@
+/**
+ * @file main.c
+ */
 #include "players.h"
 
 int main(void)

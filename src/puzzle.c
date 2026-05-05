@@ -1,3 +1,7 @@
+/**
+ * @file puzzle.c
+ */
+ 
 #include "puzzle.h"
 
 #define GRID 3

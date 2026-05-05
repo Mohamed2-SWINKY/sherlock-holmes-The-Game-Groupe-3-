@@ -1,0 +1,8 @@
+;ohq;ed 45 2
+batata 25 2
+ena 5 1
+5 0 2
+DHIA 0 2
+;ohq;ed 0 1
+AHMED -99 1
+123 -104 1

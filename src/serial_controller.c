@@ -1,3 +1,7 @@
+/**
+ * @file serial_controller.c
+ */
+
 // Linux only (including Ubuntu VM on Windows)
 #include "serial_controller.h"
 #include <stdio.h>

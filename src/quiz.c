@@ -1,3 +1,6 @@
+/**
+ * @file quizz.c
+ */
 #include "quiz.h"
 #include <stdio.h>
 #include <stdlib.h>
