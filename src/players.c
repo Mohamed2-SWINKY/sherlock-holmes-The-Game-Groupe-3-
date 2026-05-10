@@ -5,7 +5,7 @@
 #include "players.h"
 #include "serial_controller.h"
 
-static int is_blocked(SDL_Rect r,
+int is_blocked(SDL_Rect r,
                       SDL_Rect *obs,  int obs_cnt,
                       MapDoor  *doors, int dc, int *door_open)
 {
@@ -17,10 +17,10 @@ static int is_blocked(SDL_Rect r,
 }
 
 /* ── Enemy helpers ── */
-static float enemy_vec2len(float dx, float dy) {
+float enemy_vec2len(float dx, float dy) {
     return sqrtf(dx*dx + dy*dy);
 }
-static void enemy_normalize(float *dx, float *dy) {
+void enemy_normalize(float *dx, float *dy) {
     float len = enemy_vec2len(*dx, *dy);
     if (len > 0.0f) { *dx /= len; *dy /= len; }
 }
@@ -1700,10 +1700,9 @@ void game_update(GameContext *ctx)
     int mx, my;
     SDL_GetMouseState(&mx, &my);
 
-    static Uint32 lastTick = 0;
     Uint32 now = SDL_GetTicks();
-    float dt = lastTick == 0 ? 0.016f : (now - lastTick) / 1000.0f;
-    lastTick = now;
+    float dt = ctx->lastTick == 0 ? 0.016f : (now - ctx->lastTick) / 1000.0f;
+    ctx->lastTick = now;
 
     while (SDL_PollEvent(&ctx->event)) {
         if (ctx->event.type == SDL_QUIT) { ctx->running = 0; }
@@ -2151,7 +2150,7 @@ void game_render(GameContext *ctx)
     }
 
     if (ctx->currentState == STATE_GAME_OVER) {
-        SDL_SetRenderDrawColor(ctx->renderer, 20, 0, 0, 255);
+        SDL_SetRenderDrawColor(ctx->renderer, 40, 0, 0, 255);
         SDL_RenderClear(ctx->renderer);
         const char *msg = "GAME OVER";
         const char *sub = "Both players have fallen...";

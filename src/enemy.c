@@ -626,7 +626,7 @@ void Star_Update(Game *g)
 
 /*  Star_Render – draw the star texture or a simple yellow polygon.
     The polygon is a 5-point star drawn with SDL lines as fallback.     */
-static void DrawStarShape(SDL_Renderer *r, int cx, int cy, int radius)
+void DrawStarShape(SDL_Renderer *r, int cx, int cy, int radius)
 {
     /* 5-pointed star: alternate outer (72°) and inner (36°) points */
     float points[10][2];

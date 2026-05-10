@@ -246,35 +246,35 @@ void update_falling_box(MapData *m, int p1x, int p1y, int p2x, int p2y)
     }
 }
 
-static const SDL_Color TB_OR     = { 255, 215,   0, 255 };
-static const SDL_Color TB_BLANC  = { 230, 230, 230, 255 };
-static const SDL_Color TB_GRIS   = { 140, 140, 140, 255 };
-static const SDL_Color TB_ROUGE  = { 210,  55,  55, 255 };
-static const SDL_Color TB_BLEU   = {  55, 120, 210, 255 };
-static const SDL_Color TB_VERT   = {  55, 190,  90, 255 };
-static const SDL_Color TB_ARGENT = { 192, 192, 192, 255 };
-static const SDL_Color TB_BRONZE = { 205, 127,  50, 255 };
+const SDL_Color TB_OR     = { 255, 215,   0, 255 };
+const SDL_Color TB_BLANC  = { 230, 230, 230, 255 };
+const SDL_Color TB_GRIS   = { 140, 140, 140, 255 };
+const SDL_Color TB_ROUGE  = { 210,  55,  55, 255 };
+const SDL_Color TB_BLEU   = {  55, 120, 210, 255 };
+const SDL_Color TB_VERT   = {  55, 190,  90, 255 };
+const SDL_Color TB_ARGENT = { 192, 192, 192, 255 };
+const SDL_Color TB_BRONZE = { 205, 127,  50, 255 };
 
-static void tb_fillRect(SDL_Renderer *r, SDL_Rect rect, SDL_Color c)
+void tb_fillRect(SDL_Renderer *r, SDL_Rect rect, SDL_Color c)
 {
     SDL_SetRenderDrawBlendMode(r, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(r, c.r, c.g, c.b, c.a);
     SDL_RenderFillRect(r, &rect);
 }
 
-static void tb_drawRect(SDL_Renderer *r, SDL_Rect rect, SDL_Color c)
+void tb_drawRect(SDL_Renderer *r, SDL_Rect rect, SDL_Color c)
 {
     SDL_SetRenderDrawColor(r, c.r, c.g, c.b, c.a);
     SDL_RenderDrawRect(r, &rect);
 }
 
-static void tb_hline(SDL_Renderer *r, int x1, int x2, int y, SDL_Color c)
+void tb_hline(SDL_Renderer *r, int x1, int x2, int y, SDL_Color c)
 {
     SDL_SetRenderDrawColor(r, c.r, c.g, c.b, c.a);
     SDL_RenderDrawLine(r, x1, y, x2, y);
 }
 
-static void tb_texte(SDL_Renderer *r, TTF_Font *font,
+void tb_texte(SDL_Renderer *r, TTF_Font *font,
                      const char *txt, SDL_Color c,
                      int x, int y, int centrerH)
 {
@@ -293,7 +293,7 @@ static void tb_texte(SDL_Renderer *r, TTF_Font *font,
     SDL_FreeSurface(s);
 }
 
-static void tb_fond(SDL_Renderer *r)
+void tb_fond(SDL_Renderer *r)
 {
     for (int y = 0; y < WINDOW_HEIGHT; y++) {
         Uint8 rv = (Uint8)(10 + 20 * y / WINDOW_HEIGHT);

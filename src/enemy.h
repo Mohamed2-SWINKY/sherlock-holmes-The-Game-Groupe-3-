@@ -27,18 +27,16 @@
 /* ─────────────────────────────────────────────
    ENUMS
 ───────────────────────────────────────────── */
-typedef enum {
-    DIR_DOWN = 0,
-    DIR_UP,
-    DIR_RIGHT,
-    DIR_LEFT
-} Direction;
+#define DIR_DOWN  0
+#define DIR_UP    1
+#define DIR_RIGHT 2
+#define DIR_LEFT  3
+typedef int Direction;
 
-typedef enum {
-    ANIM_IDLE = 0,
-    ANIM_WALK,
-    ANIM_ATTACK
-} AnimState;
+#define ANIM_IDLE   0
+#define ANIM_WALK   1
+#define ANIM_ATTACK 2
+typedef int AnimState;
 
 /* ─────────────────────────────────────────────
    STRUCTS

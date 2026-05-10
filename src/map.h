@@ -22,7 +22,9 @@ typedef struct {
 } Key;
 
 /* ── Structs ─────────────────────────────────────────────────────────── */
-typedef enum { LEVEL_1, LEVEL_2 } LevelID;
+#define LEVEL_1 0
+#define LEVEL_2 1
+typedef int LevelID;
 
 typedef struct {
     SDL_Rect rect;
@@ -31,7 +33,10 @@ typedef struct {
     int      to_level;
 } MapDoor;
 
-typedef enum { BOX_IDLE, BOX_FALLING, BOX_BROKEN } BoxState;
+#define BOX_IDLE    0
+#define BOX_FALLING 1
+#define BOX_BROKEN  2
+typedef int BoxState;
 
 typedef struct {
     SDL_Rect rect;

@@ -10,9 +10,9 @@
 #include <termios.h>
 #include <unistd.h>
 
-static int fd = -1;
-static char buffer[64];
-static int  buf_len = 0;
+int fd = -1;
+char buffer[64];
+int  buf_len = 0;
 
 int controller_open(const char* port) {
     fd = open(port, O_RDONLY | O_NOCTTY | O_NONBLOCK);

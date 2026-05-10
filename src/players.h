@@ -62,23 +62,22 @@
 
 #define ENEMY_FRAME_DELAY 12
 
-typedef enum {
-    STATE_CUTSCENE,
-    STATE_CUTSCENE_L2_INTRO,
-    STATE_CUTSCENE_L2_ENDING,
-    STATE_CUTSCENE_LOADING,
-    STATE_MENU,
-    STATE_PLAYING,
-    STATE_PAUSED,
-    STATE_PAUSED_MAIN,
-    STATE_PAUSED_PLAYERS,
-    STATE_PAUSED_OUTFITS,
-    STATE_PAUSED_CHARSELECT,
-    STATE_GAME_OVER,
-    STATE_ENIGME,
-    STATE_PUZZLE,
-    STATE_PAUSED_BUTTONS
-} GameState;
+#define STATE_CUTSCENE          0
+#define STATE_CUTSCENE_L2_INTRO 1
+#define STATE_CUTSCENE_L2_ENDING 2
+#define STATE_CUTSCENE_LOADING  3
+#define STATE_MENU              4
+#define STATE_PLAYING           5
+#define STATE_PAUSED            6
+#define STATE_PAUSED_MAIN       7
+#define STATE_PAUSED_PLAYERS    8
+#define STATE_PAUSED_OUTFITS    9
+#define STATE_PAUSED_CHARSELECT 10
+#define STATE_GAME_OVER         11
+#define STATE_ENIGME            12
+#define STATE_PUZZLE            13
+#define STATE_PAUSED_BUTTONS    14
+typedef int GameState;
 
 typedef struct{
   SDL_Texture *currentState;
@@ -177,9 +176,21 @@ typedef struct{
 #define FRAME_DELAY        40
 #define ATTACK_DELAY       20
 
-typedef enum { DIR_DOWN=0, DIR_UP, DIR_RIGHT, DIR_LEFT } EnemyDir;
-typedef enum { ANIM_IDLE=0, ANIM_WALK, ANIM_ATTACK }    EnemyAnim;
-typedef enum { ENEMY_WAITING=0, ENEMY_FOLLOWING, ENEMY_ATTACKING } EnemyState;
+#define DIR_DOWN  0
+#define DIR_UP    1
+#define DIR_RIGHT 2
+#define DIR_LEFT  3
+typedef int EnemyDir;
+
+#define ANIM_IDLE   0
+#define ANIM_WALK   1
+#define ANIM_ATTACK 2
+typedef int EnemyAnim;
+
+#define ENEMY_WAITING   0
+#define ENEMY_FOLLOWING 1
+#define ENEMY_ATTACKING 2
+typedef int EnemyState;
 
 typedef struct {
     SDL_Texture *walkRight[MAX_WALK_RIGHT];
@@ -279,6 +290,7 @@ typedef struct {
     int rebindTarget; // 0=None, 1-7=P1, 8-14=P2
     int saveFeedbackTimer;
     int loadingTimer;
+    Uint32 lastTick;
 } GameContext;
 
 SDL_Texture* loadTexture(const char* path, SDL_Renderer* renderer);

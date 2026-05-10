@@ -33,6 +33,7 @@ typedef struct {
     int hoverB;
     int hoverC;
     int lastHover;
+    int lastHovered;
     int over;
     int puzzleSelected;
 

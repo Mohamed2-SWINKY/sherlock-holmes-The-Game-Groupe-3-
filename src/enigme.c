@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 // Helper: scale a rect outward from its center
-static SDL_Rect scaleRect(SDL_Rect r, float scale)
+SDL_Rect scaleRect(SDL_Rect r, float scale)
 {
     int nw = (int)(r.w * scale);
     int nh = (int)(r.h * scale);
@@ -20,7 +20,7 @@ static SDL_Rect scaleRect(SDL_Rect r, float scale)
 }
 
 // HOVER SOUND — dedicated channel 1, same as reference
-static void play_hover_sound(Enigme *e)
+void play_hover_sound(Enigme *e)
 {
     if (e->hoverSound)
     {
@@ -75,6 +75,7 @@ void initEnigme(Enigme *e, SDL_Renderer *r)
     e->showQuiz = 0;
     e->hoverQuiz = e->hoverPuzzle = e->hoverA = e->hoverB = e->hoverC = 0;
     e->lastHover = -1;
+    e->lastHovered = -1;
     e->over = 0;
     e->puzzleSelected = 0;
 
@@ -92,7 +93,6 @@ void initEnigme(Enigme *e, SDL_Renderer *r)
 void handleEnigmeEvents(Enigme *e, SDL_Event event)
 {
     int mx, my;
-    static int lastHovered = -1;
 
     if (event.type == SDL_MOUSEMOTION)
     {
@@ -125,10 +125,10 @@ void handleEnigmeEvents(Enigme *e, SDL_Event event)
             { e->hoverC = 1; currentHover = 5; }
         }
 
-        if (currentHover != lastHovered && currentHover != -1)
+        if (currentHover != e->lastHovered && currentHover != -1)
             play_hover_sound(e);
 
-        lastHovered = currentHover;
+        e->lastHovered = currentHover;
         e->lastHover = currentHover;
     }
 
@@ -137,7 +137,7 @@ void handleEnigmeEvents(Enigme *e, SDL_Event event)
         if (e->showQuiz)
         {
             e->showQuiz = 0;
-            lastHovered = -1;
+            e->lastHovered = -1;
             e->lastHover = -1;
             e->over = 1;
         }
@@ -154,7 +154,7 @@ void handleEnigmeEvents(Enigme *e, SDL_Event event)
                 my > e->quizRect.y && my < e->quizRect.y + e->quizRect.h)
             {
                 e->showQuiz = 1;
-                lastHovered = -1;
+                e->lastHovered = -1;
                 e->lastHover = -1;
                 // if (e->quizMusic) Mix_PlayMusic(e->quizMusic, -1);
 
