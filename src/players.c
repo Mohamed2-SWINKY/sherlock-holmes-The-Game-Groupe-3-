@@ -176,10 +176,10 @@ void enemy_init(GameContext *ctx) {
     Enemy *e2 = &ctx->enemy2;
     e2->w      = 80;
     e2->h      = 90;
-    e2->x      = 1227.0f;
-    e2->y      = 195.0f;
+    e2->x      = 1126.0f;
+    e2->y      = 170.0f;
     e2->speed  = 120.0f;
-    e2->alive  = 1;
+    e2->alive  = 0;
     e2->atlas  = &ctx->enemyAtlas;
     e2->rect   = (SDL_Rect){(int)e2->x, (int)e2->y, e2->w, e2->h};
     e2->anim.state        = ANIM_IDLE;
@@ -202,7 +202,6 @@ void enemy_init(GameContext *ctx) {
 
 void enemy_update(GameContext *ctx, float dt) {
     Enemy *e = &ctx->enemy;
-    if (!e->alive || e->anim.state == ANIM_ATTACK) return;
 
     SDL_Rect *obs     = ctx->map.obs2;
     int       obs_cnt = ctx->map.obs2_cnt;
@@ -629,6 +628,11 @@ GameContext* game_init(void)
     memset(ctx->keys, 0, sizeof(ctx->keys));
     ctx->musicLevel2 = Mix_LoadMUS("assets/sounds/level2music.mp3");
     ctx->musicLevel1 = Mix_LoadMUS("assets/sounds/level1music.mp3");
+    ctx->musicLevel2Phase2 = Mix_LoadMUS("assets/sounds/level2music2.mp3");
+    ctx->bossPhase2Triggered  = 0;
+    ctx->cutscenePhase2Timer  = 0;
+    ctx->cutscenePhase2Alpha  = 0;
+    ctx->bossPhase2CameraPan  = 0;
 
     map_init(&ctx->map, ctx->renderer);
     init_minimap(&ctx->minimap,   ctx->renderer, WINDOW_HEIGHT);
@@ -743,6 +747,11 @@ GameContext* game_init(void)
     ctx->sm.p2SwapBtn.tex  = loadTexture("assets/subMenu/buttons/swap.png", ctx->renderer);
     ctx->sm.p2SwapBtn.rect = (SDL_Rect){650 + (180 - BUTTON_W) / 2, 490, BUTTON_W, BUTTON_H};
     ctx->sm.p2SwapBtn.hovered = 0;
+
+    ctx->isEnding = 0;
+    ctx->deathSequenceTimer = 0.0f;
+    ctx->screenFlash = 0.0f;
+    ctx->shakeIntensity = 0.0f;
 
     initEnigme(&ctx->en, ctx->renderer);
 
@@ -941,6 +950,25 @@ if (moved) {
                   if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth) {
                       ctx->enemy.alive        = 0;
                       ctx->enemy.healthStatus = ctx->enemy.maxHealth;
+                      if (!ctx->bossPhase2Triggered) {
+                          ctx->bossPhase2Triggered  = 1;
+                          ctx->enemy2.x             = 1126.0f;
+                          ctx->enemy2.y             = 170.0f;
+                          ctx->enemy2.rect.x        = (int)ctx->enemy2.x;
+                          ctx->enemy2.rect.y        = (int)ctx->enemy2.y;
+                          ctx->enemy2.alive         = 1;
+                          ctx->enemy2.healthStatus  = 0;
+                          ctx->enemy2.speed         = 160.0f;
+                          ctx->enemy2.state         = ENEMY_FOLLOWING;
+                          ctx->enemy2.anim.state    = ANIM_IDLE;
+                          ctx->enemy2.detectionRange = 9999.0f;
+                          ctx->bossPhase2CameraPan  = 1;
+                          Mix_HaltMusic();
+                          Mix_PlayMusic(ctx->musicLevel2Phase2, -1);
+                          ctx->currentState         = STATE_CUTSCENE_BOSS_PHASE2;
+                          ctx->cutscenePhase2Timer  = 0;
+                          ctx->cutscenePhase2Alpha  = 0;
+                      }
                   }
               }
               
@@ -957,6 +985,11 @@ if (moved) {
                   if (ctx->enemy2.healthStatus >= ctx->enemy2.maxHealth) {
                       ctx->enemy2.alive        = 0;
                       ctx->enemy2.healthStatus = ctx->enemy2.maxHealth;
+
+                      ctx->isEnding = 1;
+                        ctx->deathSequenceTimer = 0.0f;
+                        ctx->screenFlash = 1.0f;     // Start bright
+                        ctx->shakeIntensity = 20.0f; // Strong initial burst
                   }
               }
 
@@ -1210,6 +1243,25 @@ if (moved2) {
                   if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth) {
                       ctx->enemy.alive        = 0;
                       ctx->enemy.healthStatus = ctx->enemy.maxHealth;
+                      if (!ctx->bossPhase2Triggered) {
+                          ctx->bossPhase2Triggered  = 1;
+                          ctx->enemy2.x             = 1126.0f;
+                          ctx->enemy2.y             = 170.0f;
+                          ctx->enemy2.rect.x        = (int)ctx->enemy2.x;
+                          ctx->enemy2.rect.y        = (int)ctx->enemy2.y;
+                          ctx->enemy2.alive         = 1;
+                          ctx->enemy2.healthStatus  = 0;
+                          ctx->enemy2.speed         = 160.0f;
+                          ctx->enemy2.state         = ENEMY_FOLLOWING;
+                          ctx->enemy2.anim.state    = ANIM_IDLE;
+                          ctx->enemy2.detectionRange = 9999.0f;
+                          ctx->bossPhase2CameraPan  = 1;
+                          Mix_HaltMusic();
+                          Mix_PlayMusic(ctx->musicLevel2Phase2, -1);
+                          ctx->currentState         = STATE_CUTSCENE_BOSS_PHASE2;
+                          ctx->cutscenePhase2Timer  = 0;
+                          ctx->cutscenePhase2Alpha  = 0;
+                      }
                   }
               }
 
@@ -1226,6 +1278,12 @@ if (moved2) {
                   if (ctx->enemy2.healthStatus >= ctx->enemy2.maxHealth) {
                       ctx->enemy2.alive        = 0;
                       ctx->enemy2.healthStatus = ctx->enemy2.maxHealth;
+
+                      ctx->isEnding = 1;
+                        ctx->deathSequenceTimer = 0.0f;
+                        ctx->screenFlash = 1.0f;     // Start bright
+                        ctx->shakeIntensity = 20.0f; // Strong initial burst
+                        printf(">>> ISENDING SET TO 1\n");
                   }
               }
 
@@ -1794,7 +1852,6 @@ void game_update(GameContext *ctx)
                         ctx->map.level = targetLevel;
                         if (targetLevel == LEVEL_2) {
                             setup_level2(&ctx->map);
-                            Mix_PlayMusic(ctx->musicLevel2, -1);
                         } else {
                             setup_level1(&ctx->map);
                             Mix_PlayMusic(ctx->musicLevel1, -1);
@@ -1941,7 +1998,6 @@ if (ctx->currentState == STATE_CUTSCENE_L2_INTRO) {
     else {
         ctx->currentState    = STATE_PLAYING;
         ctx->cutsceneL2Timer = 0;
-        Mix_PlayMusic(ctx->musicLevel2, -1);
     }
     return;
 }
@@ -1966,9 +2022,30 @@ if (ctx->currentState == STATE_CUTSCENE_LOADING) {
     return;
 }
 
+if (ctx->currentState == STATE_CUTSCENE_BOSS_PHASE2) {
+    ctx->cutscenePhase2Timer++;
+    // 3 seconds ~180 frames: fade in 0-40, hold 40-140, fade out 140-180
+    if      (ctx->cutscenePhase2Timer <= 40)  ctx->cutscenePhase2Alpha = (int)(ctx->cutscenePhase2Timer * 255.0f / 40.0f);
+    else if (ctx->cutscenePhase2Timer <= 140) ctx->cutscenePhase2Alpha = 255;
+    else if (ctx->cutscenePhase2Timer <= 180) ctx->cutscenePhase2Alpha = (int)((180 - ctx->cutscenePhase2Timer) * 255.0f / 40.0f);
+    else {
+        ctx->currentState        = STATE_PLAYING;
+        ctx->cutscenePhase2Timer = 0;
+        if (ctx->bossPhase2CameraPan) {
+            ctx->isCameraPanning     = 1;
+            ctx->cameraFocusTimer    = 120;
+            ctx->cameraTarget.x      = (int)ctx->enemy2.x + ctx->enemy2.w / 2;
+            ctx->cameraTarget.y      = (int)ctx->enemy2.y + ctx->enemy2.h / 2;
+            ctx->bossPhase2CameraPan = 0;
+        }
+    }
+    return;
+}
+
 if (ctx->currentState == STATE_ENIGME || ctx->currentState == STATE_PUZZLE ||
     ctx->currentState == STATE_CUTSCENE || ctx->currentState == STATE_CUTSCENE_L2_INTRO ||
-    ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
+    ctx->currentState == STATE_CUTSCENE_L2_ENDING ||
+    ctx->currentState == STATE_CUTSCENE_BOSS_PHASE2) {
     if (ctx->currentState == STATE_PUZZLE) {
         puzzle_update(&ctx->pz);
         if (ctx->pz.over) {
@@ -1997,10 +2074,34 @@ if (ctx->currentState == STATE_ENIGME || ctx->currentState == STATE_PUZZLE ||
     playerMechanics(ctx);
     if (ctx->map.level == LEVEL_2)
         enemy_update(ctx, dt);
+        /* ── Death sequence (enemy2 killed) ── */
+if (ctx->isEnding) {
+    printf(">>> isEnding active, timer=%.2f flash=%.2f shake=%.2f\n", ctx->deathSequenceTimer, ctx->screenFlash, ctx->shakeIntensity);
+    ctx->deathSequenceTimer += dt;
+
+    /* Shake decays quickly */
+    ctx->shakeIntensity *= 0.85f;
+    if (ctx->shakeIntensity < 0.5f) ctx->shakeIntensity = 0.0f;
+
+    /* White flash fades out over ~0.6s */
+    ctx->screenFlash -= dt / 0.6f;
+    if (ctx->screenFlash < 0.0f) ctx->screenFlash = 0.0f;
+
+    /* After 1.5s, start the ending cutscene */
+    if (ctx->deathSequenceTimer >= 1.5f) {
+        ctx->isEnding              = 0;
+        ctx->currentState          = STATE_CUTSCENE_L2_ENDING;
+        ctx->cutsceneL2Timer       = 0;
+        ctx->cutsceneL2Alpha       = 0;
+        ctx->shakeIntensity        = 0.0f;
+        ctx->screenFlash           = 0.0f;
+        ctx->deathSequenceTimer    = 0.0f;
+    }
+}
 
             /* ── Level 2 ending cutscene trigger ── */
             if (ctx->map.level == LEVEL_2 && (!ctx->enemy.alive && !ctx->enemy2.alive) &&
-                ctx->currentState == STATE_PLAYING) {
+                ctx->currentState == STATE_PLAYING && !ctx->isEnding) {
                 ctx->currentState    = STATE_CUTSCENE_L2_ENDING;
                 ctx->cutsceneL2Timer = 0;
                 ctx->cutsceneL2Alpha = 0;
@@ -2092,6 +2193,7 @@ void game_cleanup(GameContext *ctx)
     Mix_FreeChunk(ctx->player2.attackingSound);
     Mix_FreeChunk(ctx->player2.gettingHitSound);
     Mix_FreeChunk(ctx->player2.deathSound);
+    Mix_FreeMusic(ctx->musicLevel2Phase2);
 
     map_cleanup(&ctx->map);
     liberer_minimap(&ctx->minimap);
@@ -2142,6 +2244,8 @@ void game_render(GameContext *ctx)
         SDL_RenderPresent(ctx->renderer);
         return;
     }
+
+    
 
     if (ctx->currentState == STATE_PUZZLE) {
         puzzle_render(&ctx->pz, ctx->renderer);
@@ -2308,6 +2412,43 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
     return;
 }
  
+    if (ctx->currentState == STATE_CUTSCENE_BOSS_PHASE2) {
+    SDL_SetRenderDrawColor(ctx->renderer, 8, 0, 0, 255);
+    SDL_RenderClear(ctx->renderer);
+
+    Uint8 alpha = (Uint8)ctx->cutscenePhase2Alpha;
+
+    const char *lines[] = {
+        "...",
+        "Quelque chose s'eveille.",
+        " ",
+        "L'obscurite n'est pas encore vaincue."
+    };
+    int lineCount = 4;
+    int lineH     = 44;
+    int startY    = WINDOW_HEIGHT / 2 - (lineCount * lineH) / 2;
+
+    for (int i = 0; i < lineCount; i++) {
+        if (lines[i][0] == ' ') continue;
+        SDL_Color col;
+        if (i == 1)
+            col = (SDL_Color){210, 20, 20, alpha};   // blood red for the awakening line
+        else
+            col = (SDL_Color){180, 170, 200, alpha}; // cold pale purple
+        SDL_Surface *surf = TTF_RenderText_Blended(ctx->font, lines[i], col);
+        SDL_Texture *tex  = SDL_CreateTextureFromSurface(ctx->renderer, surf);
+        SDL_FreeSurface(surf);
+        SDL_SetTextureAlphaMod(tex, alpha);
+        int tw, th;
+        SDL_QueryTexture(tex, NULL, NULL, &tw, &th);
+        SDL_Rect dst = { (WINDOW_WIDTH - tw) / 2, startY + i * lineH, tw, th };
+        SDL_RenderCopy(ctx->renderer, tex, NULL, &dst);
+        SDL_DestroyTexture(tex);
+    }
+
+    SDL_RenderPresent(ctx->renderer);
+    return;
+}
     SDL_RenderSetViewport(ctx->renderer, NULL);
     SDL_SetRenderDrawColor(ctx->renderer, 20, 20, 20, 255);
     SDL_RenderClear(ctx->renderer);
@@ -2475,6 +2616,26 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
 
         if (ctx->map.level == LEVEL_2)
             enemy_render(ctx, camX, camY);
+                    /* ── Death sequence effects ── */
+if (ctx->isEnding) {
+    /* Screen shake — offset the viewport */
+    if (ctx->shakeIntensity > 0.5f) {
+        int shakeX = (int)((((float)rand()/RAND_MAX) * 2.0f - 1.0f) * ctx->shakeIntensity);
+        int shakeY = (int)((((float)rand()/RAND_MAX) * 2.0f - 1.0f) * ctx->shakeIntensity);
+        SDL_Rect shook = viewports[side];
+        shook.x += shakeX;
+        shook.y += shakeY;
+        SDL_RenderSetViewport(ctx->renderer, &shook);
+    }
+
+    /* White flash overlay */
+    if (ctx->screenFlash > 0.0f) {
+        Uint8 alpha = (Uint8)(ctx->screenFlash * 255.0f);
+        SDL_SetRenderDrawBlendMode(ctx->renderer, SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawColor(ctx->renderer, 255, 255, 255, alpha);
+        SDL_RenderFillRect(ctx->renderer, NULL); /* fills current viewport */
+    }
+}
  
         /* ── Pickup Prompt ── */
         Key *r_keys     = (ctx->map.level == LEVEL_1) ? ctx->map.keys1     : ctx->map.keys2;
@@ -2538,6 +2699,8 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
         } else {
             hp.x = halfW - PLAYER1HP_W - 10;
         }
+
+
 
         /* Reverted to individual images for debugging */
         SDL_RenderCopy(ctx->renderer,
@@ -2613,7 +2776,18 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
             SDL_FreeSurface(sf);
         }
     }
- 
+
+    /* ── Full-screen fade to black during death sequence ── */
+if (ctx->isEnding && ctx->deathSequenceTimer > 0.8f) {
+    float fadeProgress = (ctx->deathSequenceTimer - 0.8f) / 0.7f; /* 0→1 over 0.7s */
+    if (fadeProgress > 1.0f) fadeProgress = 1.0f;
+    Uint8 blackAlpha = (Uint8)(fadeProgress * 255.0f);
+    SDL_RenderSetViewport(ctx->renderer, NULL);
+    SDL_SetRenderDrawBlendMode(ctx->renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, blackAlpha);
+    SDL_Rect full = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
+    SDL_RenderFillRect(ctx->renderer, &full);
+}
     SDL_RenderPresent(ctx->renderer);
 }
 

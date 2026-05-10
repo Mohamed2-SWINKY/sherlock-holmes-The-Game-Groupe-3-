@@ -1,8 +1,10 @@
 ;ohq;ed 45 2
 batata 25 2
+g 10 1
 ena 5 1
+heheheha 5 1
+ss 5 1
+f 5 1
+\s 5 2
+raef 5 1
 5 0 2
-DHIA 0 2
-;ohq;ed 0 1
-AHMED -99 1
-123 -104 1

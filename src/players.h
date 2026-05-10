@@ -77,6 +77,9 @@
 #define STATE_ENIGME            12
 #define STATE_PUZZLE            13
 #define STATE_PAUSED_BUTTONS    14
+#define STATE_CUTSCENE_BOSS_PHASE2 15
+
+#define ZOOM_FACTOR 2.0f
 typedef int GameState;
 
 typedef struct{
@@ -270,11 +273,16 @@ typedef struct {
     Enemy      enemy2;
     EnemyAtlas enemyAtlas;
     Mix_Music *musicLevel2;
+    Mix_Music *musicLevel2Phase2;
+    int        bossPhase2Triggered;
+    int        cutscenePhase2Timer;
+    int        cutscenePhase2Alpha;
     Mix_Music *musicLevel1;
     int cutsceneTimer;
     int cutsceneAlpha;
     int cutsceneL2Timer;
     int cutsceneL2Alpha;
+    int bossPhase2CameraPan;  // 1 while panning to enemy2 after cutscene
     Enigme en;
     PuzzleState pz;
     int lastPlayerToPickupKey;
@@ -291,6 +299,10 @@ typedef struct {
     int saveFeedbackTimer;
     int loadingTimer;
     Uint32 lastTick;
+    float deathSequenceTimer; // Tracks overall progress
+    int   isEnding;           // Flag to start the sequence
+    float screenFlash;        // 1.0 down to 0.0
+    float shakeIntensity;     // Screen shake amount
 } GameContext;
 
 SDL_Texture* loadTexture(const char* path, SDL_Renderer* renderer);
