@@ -47,8 +47,8 @@ void minimap_trigger_shake(MiniMap *m);
 void minimap_update_shake(MiniMap *m);
 
 // --- Sauvegarde / Chargement ---
-void sauvegarder_jeu(MiniMap m, int score, char *nomF);
-void charger_jeu(MiniMap *m, int *score, char *nomF);
+void sauvegarder_jeu(MiniMap m, int p1_score, int p2_score, int p1_hp, int p2_hp, Uint32 elapsed, int p1_keys, int p2_keys, char *nomF);
+void charger_jeu(MiniMap *m, int *p1_score, int *p2_score, int *p1_hp, int *p2_hp, Uint32 *elapsed, int *p1_keys, int *p2_keys, char *nomF);
 
 // --- Nettoyage ---
 void liberer_minimap(MiniMap *m);

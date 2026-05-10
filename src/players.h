@@ -66,6 +66,7 @@ typedef enum {
     STATE_CUTSCENE,
     STATE_CUTSCENE_L2_INTRO,
     STATE_CUTSCENE_L2_ENDING,
+    STATE_CUTSCENE_LOADING,
     STATE_MENU,
     STATE_PLAYING,
     STATE_PAUSED,
@@ -178,6 +179,7 @@ typedef struct{
 
 typedef enum { DIR_DOWN=0, DIR_UP, DIR_RIGHT, DIR_LEFT } EnemyDir;
 typedef enum { ANIM_IDLE=0, ANIM_WALK, ANIM_ATTACK }    EnemyAnim;
+typedef enum { ENEMY_WAITING=0, ENEMY_FOLLOWING, ENEMY_ATTACKING } EnemyState;
 
 typedef struct {
     SDL_Texture *walkRight[MAX_WALK_RIGHT];
@@ -213,6 +215,9 @@ typedef struct {
     float knockbackX;
     float knockbackY;
     int   knockbackTimer;
+    float        detectionRange;
+    float        attackRange;
+    EnemyState   state;
 } Enemy;
 
 #define MAX_STARS 4
@@ -251,6 +256,7 @@ typedef struct {
     SDL_Point cameraTarget;   // Where we want to look (the door)
     int isCameraPanning;      // Boolean flag
     Enemy      enemy;
+    Enemy      enemy2;
     EnemyAtlas enemyAtlas;
     Mix_Music *musicLevel2;
     Mix_Music *musicLevel1;
@@ -271,6 +277,8 @@ typedef struct {
     Uint32 startTime;
     int timerRunning;
     int rebindTarget; // 0=None, 1-7=P1, 8-14=P2
+    int saveFeedbackTimer;
+    int loadingTimer;
 } GameContext;
 
 SDL_Texture* loadTexture(const char* path, SDL_Renderer* renderer);

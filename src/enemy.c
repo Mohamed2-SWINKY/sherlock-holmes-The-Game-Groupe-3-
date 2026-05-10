@@ -5,10 +5,6 @@
             -lSDL2_image -lm
 */
 
-/**
- * @file enemy.c
- */
- 
 #include "enemy.h"
 
 /* ═══════════════════════════════════════════════
@@ -36,6 +32,61 @@ void Vec2Normalize(float *dx, float *dy)
 {
     float len = Vec2Length(*dx, *dy);
     if (len > 0.0f) { *dx /= len; *dy /= len; }
+}
+
+
+float Distance(float x1, float y1, float x2, float y2)
+{
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    return sqrtf(dx * dx + dy * dy);
+}
+
+void Enemy_UpdateState(Enemy *e, Player *p)
+{
+    float d = Distance(e->x, e->y, p->x, p->y);
+
+    switch (e->state)
+    {
+        case ENEMY_WAITING:
+            if (d <= e->detectionRange && d > e->attackRange)
+                e->state = ENEMY_FOLLOWING;
+        break;
+
+        case ENEMY_FOLLOWING:
+            if (d <= e->attackRange)
+                e->state = ENEMY_ATTACKING;
+            else if (d > e->detectionRange)
+                e->state = ENEMY_WAITING;
+        break;
+
+        case ENEMY_ATTACKING:
+            if (d > e->attackRange)
+                e->state = ENEMY_FOLLOWING;
+        break;
+    }
+}
+
+void Enemy_MoveTowardPlayer(Enemy *e, Player *p, float dt)
+{
+    float dx = p->x - e->x;
+    float dy = p->y - e->y;
+
+    float length = sqrtf(dx * dx + dy * dy);
+
+    if (length != 0)
+    {
+        dx /= length;
+        dy /= length;
+    }
+
+    e->x += dx * e->speed * dt;
+    e->y += dy * e->speed * dt;
+
+    e->rect.x = (int)e->x;
+    e->rect.y = (int)e->y;
+
+    Animation_Update(&e->anim, dx, dy, e->atlas);
 }
 
 /* ═══════════════════════════════════════════════
@@ -102,10 +153,27 @@ void Animation_Update(Animation *a, float dx, float dy, SpriteAtlas *atlas)
     if (a->state == ANIM_ATTACK) return; /* attack manages itself */
 
     /* choose direction & frame set */
-    if (dy < 0)       { a->dir = DIR_UP;    a->maxFrames = MAX_WALK_UP;    a->flip = SDL_FLIP_NONE; }
-    else if (dy > 0)  { a->dir = DIR_DOWN;  a->maxFrames = MAX_WALK_DOWN;  a->flip = SDL_FLIP_NONE; }
-    else if (dx > 0)  { a->dir = DIR_RIGHT; a->maxFrames = MAX_WALK_RIGHT; a->flip = SDL_FLIP_NONE; }
-    else if (dx < 0)  { a->dir = DIR_RIGHT; a->maxFrames = MAX_WALK_RIGHT; a->flip = SDL_FLIP_HORIZONTAL; }
+    if (fabs(dx) > fabs(dy)) {
+        if (dx > 0) {
+            a->dir = DIR_RIGHT;
+            a->maxFrames = MAX_WALK_RIGHT;
+            a->flip = SDL_FLIP_NONE;
+        } else if (dx < 0) {
+            a->dir = DIR_LEFT;
+            a->maxFrames = MAX_WALK_RIGHT;
+            a->flip = SDL_FLIP_HORIZONTAL;
+        }
+    } else {
+        if (dy < 0) {
+            a->dir = DIR_UP;
+            a->maxFrames = MAX_WALK_UP;
+            a->flip = SDL_FLIP_NONE;
+        } else if (dy > 0) {
+            a->dir = DIR_DOWN;
+            a->maxFrames = MAX_WALK_DOWN;
+            a->flip = SDL_FLIP_NONE;
+        }
+    }
 
     if (dx != 0 || dy != 0) {
         a->state = ANIM_WALK;
@@ -301,6 +369,23 @@ void Enemy_Init(Game *g)
     Enemy_ChooseNewTarget(e, g->screenW, g->screenH);
     Animation_Init(&e->anim);
     e->rect = (SDL_Rect){ (int)e->x, (int)e->y, e->w, e->h };
+
+    e->state = ENEMY_WAITING;
+    e->detectionRange = 300.0f;
+    e->attackRange = 80.0f;
+
+    Enemy *e2 = &g->enemy2;
+    e2->w = 64;
+    e2->h = 64;
+    e2->x = 700;
+    e2->y = 400;
+    e2->speed = 120.0f;
+    e2->atlas = &g->atlas;
+    e2->state = ENEMY_WAITING;
+    e2->detectionRange = 300.0f;
+    e2->attackRange = 80.0f;
+    Animation_Init(&e2->anim);
+    e2->rect = (SDL_Rect){ (int)e2->x, (int)e2->y, e2->w, e2->h };
 }
 
 void Enemy_Update(Enemy *e, float dt, int screenW, int screenH)
@@ -333,6 +418,9 @@ void Enemy_Render(Game *g)
 {
     SDL_Rect dst = { (int)g->enemy.x, (int)g->enemy.y, g->enemy.w, g->enemy.h };
     Animation_Render(g->renderer, &g->enemy.anim, g->enemy.atlas, &dst);
+
+    SDL_Rect dst2 = { (int)g->enemy2.x, (int)g->enemy2.y, g->enemy2.w, g->enemy2.h };
+    Animation_Render(g->renderer, &g->enemy2.anim, g->enemy2.atlas, &dst2);
 }
 
 /* ═══════════════════════════════════════════════
@@ -648,16 +736,56 @@ void Game_Run(Game *g)
         if (!g->paused) {
             /* Save old positions for collision revert */
             float oldEX = g->enemy.x,  oldEY = g->enemy.y;
+            float oldE2X = g->enemy2.x, oldE2Y = g->enemy2.y;
             float oldPX = g->player.x, oldPY = g->player.y;
 
             Enemy_Update(&g->enemy, dt, g->screenW, g->screenH);
+
+            Enemy_UpdateState(&g->enemy2, &g->player);
+
+            switch (g->enemy2.state)
+            {
+                case ENEMY_WAITING:
+                    Animation_Update(&g->enemy2.anim, 0, 0, g->enemy2.atlas);
+                    break;
+
+                case ENEMY_FOLLOWING:
+                    Enemy_MoveTowardPlayer(&g->enemy2, &g->player, dt);
+                    break;
+
+                case ENEMY_ATTACKING:
+                    g->enemy2.anim.state = ANIM_ATTACK;
+                    break;
+            }
+
             Player_Update(g, dt);
             Attack_Update(&g->attack, dt);
             Star_Update(g);
 
-            /* Collision: enemy vs player block */
+            /* Collision: first enemy vs player */
             if (Collision_Check(&g->enemy.rect, &g->player.rect))
                 Collision_ResolveEnemyPlayer(g, oldEX, oldEY, oldPX, oldPY);
+
+            /* Collision: second enemy vs player */
+            if (Collision_Check(&g->enemy2.rect, &g->player.rect))
+            {
+                g->enemy2.x = oldE2X;
+                g->enemy2.y = oldE2Y;
+
+                g->enemy2.rect.x = (int)g->enemy2.x;
+                g->enemy2.rect.y = (int)g->enemy2.y;
+
+                g->player.x = oldPX;
+                g->player.y = oldPY;
+
+                g->player.rect.x = (int)g->player.x;
+                g->player.rect.y = (int)g->player.y;
+
+                g->enemy2.anim.state = ANIM_ATTACK;
+
+                if (!Health_IsDead(&g->health))
+                    Health_Damage(&g->health, 1);
+            }
         }
 
         /* ── Render ── */
@@ -674,4 +802,3 @@ void Game_Run(Game *g)
         SDL_RenderPresent(g->renderer);
     }
 }
-

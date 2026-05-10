@@ -83,9 +83,11 @@ void enemy_anim_render(SDL_Renderer *r, EnemyAnimation *a, EnemyAtlas *atlas, SD
         // Deal damage only on the middle frame of the 3-frame animation
         if (a->attackFrame == 1 && a->attackCounter == 0) {
             GameContext *ctx = (GameContext*)((char*)atlas - offsetof(GameContext, enemyAtlas));
+            Enemy *attacker = (Enemy*)((char*)a - offsetof(Enemy, anim));
+            
             // Check P1
-            if (ctx->player1.alive && map_rects_overlap(ctx->enemy.rect, ctx->player1.rect)) {
-                ctx->player1.knockbackX = (ctx->enemy.x < ctx->player1.rect.x) ? 12 : -12;
+            if (ctx->player1.alive && map_rects_overlap(attacker->rect, ctx->player1.rect)) {
+                ctx->player1.knockbackX = (attacker->x < ctx->player1.rect.x) ? 12 : -12;
                 ctx->player1.knockbackXTimer = 15;
                 if (ctx->player1.healthStatus < 6) {
                     ctx->player1.healthStatus++;
@@ -100,8 +102,8 @@ void enemy_anim_render(SDL_Renderer *r, EnemyAnimation *a, EnemyAtlas *atlas, SD
                     Mix_PlayChannel(CH_P1_GETHIT, ctx->player1.gettingHitSound, 0);
             }
             // Check P2
-            if (ctx->player2.alive && map_rects_overlap(ctx->enemy.rect, ctx->player2.rect)) {
-                ctx->player2.knockbackX = (ctx->enemy.x < ctx->player2.rect.x) ? 12 : -12;
+            if (ctx->player2.alive && map_rects_overlap(attacker->rect, ctx->player2.rect)) {
+                ctx->player2.knockbackX = (attacker->x < ctx->player2.rect.x) ? 12 : -12;
                 ctx->player2.knockbackXTimer = 15;
                 if (ctx->player2.healthStatus < 6) {
                     ctx->player2.healthStatus++;
@@ -146,8 +148,8 @@ void enemy_init(GameContext *ctx) {
     Enemy *e  = &ctx->enemy;
     e->w      = 80;
     e->h      = 90;
-    e->x      = 1220.0f;
-    e->y      = 190.0f;
+    e->x      = 1100.0f;
+    e->y      = 600.0f;
     e->speed  = 80.0f;
     e->alive  = 1;
     e->atlas  = &ctx->enemyAtlas;
@@ -161,11 +163,41 @@ void enemy_init(GameContext *ctx) {
     e->anim.attackFrame  = 0;
     e->anim.attackCounter= 0;
     e->healthStatus = 0;
-    e->maxHealth    = 40;
+    e->maxHealth    = 21; // 3 bars x 7 hits each
     e->knockbackX     = 0;
     e->knockbackY     = 0;
     e->knockbackTimer = 0;
+    e->state          = ENEMY_WAITING;
+    e->detectionRange = 300.0f;
+    e->attackRange    = 80.0f;
     enemy_choose_target(e);
+
+    /* Initialize Enemy 2 */
+    Enemy *e2 = &ctx->enemy2;
+    e2->w      = 80;
+    e2->h      = 90;
+    e2->x      = 681.0f;
+    e2->y      = 159.0f;
+    e2->speed  = 120.0f;
+    e2->alive  = 1;
+    e2->atlas  = &ctx->enemyAtlas;
+    e2->rect   = (SDL_Rect){(int)e2->x, (int)e2->y, e2->w, e2->h};
+    e2->anim.state        = ANIM_IDLE;
+    e2->anim.dir          = DIR_DOWN;
+    e2->anim.currentFrame = 0;
+    e2->anim.frameCounter = 0;
+    e2->anim.maxFrames    = MAX_WALK_DOWN;
+    e2->anim.flip         = SDL_FLIP_NONE;
+    e2->anim.attackFrame  = 0;
+    e2->anim.attackCounter= 0;
+    e2->healthStatus = 0;
+    e2->maxHealth    = 21; // 3 bars x 7 hits each
+    e2->knockbackX     = 0;
+    e2->knockbackY     = 0;
+    e2->knockbackTimer = 0;
+    e2->state          = ENEMY_WAITING;
+    e2->detectionRange = 300.0f;
+    e2->attackRange    = 80.0f;
 }
 
 void enemy_update(GameContext *ctx, float dt) {
@@ -245,28 +277,151 @@ void enemy_update(GameContext *ctx, float dt) {
             e->x += kbX * dt;
         e->knockbackTimer--;
     }
+
+    /* --- ENEMY 2 (State Machine AI) --- */
+    Enemy *e2 = &ctx->enemy2;
+    if (e2->alive && e2->anim.state != ANIM_ATTACK) {
+        float d2p1 = 9999, d2p2 = 9999;
+        Player *targetP = NULL;
+        float finalDist = 9999;
+
+        if (ctx->player1.alive) {
+            float dcx = (ctx->player1.rect.x + ctx->player1.rect.w/2.0f) - (e2->x + e2->w/2.0f);
+            float dcy = (ctx->player1.rect.y + ctx->player1.rect.h/2.0f) - (e2->y + e2->h/2.0f);
+            d2p1 = sqrtf(dcx*dcx + dcy*dcy);
+        }
+        if (ctx->player2.alive) {
+            float dcx = (ctx->player2.rect.x + ctx->player2.rect.w/2.0f) - (e2->x + e2->w/2.0f);
+            float dcy = (ctx->player2.rect.y + ctx->player2.rect.h/2.0f) - (e2->y + e2->h/2.0f);
+            d2p2 = sqrtf(dcx*dcx + dcy*dcy);
+        }
+
+        if (d2p1 < d2p2 && ctx->player1.alive) {
+            targetP = &ctx->player1;
+            finalDist = d2p1;
+        } else if (ctx->player2.alive) {
+            targetP = &ctx->player2;
+            finalDist = d2p2;
+        }
+
+        if (targetP) {
+            switch(e2->state) {
+                case ENEMY_WAITING:
+                    if (finalDist <= e2->detectionRange && finalDist > e2->attackRange)
+                        e2->state = ENEMY_FOLLOWING;
+                    enemy_anim_update(&e2->anim, 0, 0);
+                    break;
+
+                case ENEMY_FOLLOWING:
+                    if (finalDist <= e2->attackRange) {
+                        e2->state = ENEMY_ATTACKING;
+                        e2->anim.state = ANIM_ATTACK;
+                    } else if (finalDist > e2->detectionRange) {
+                        e2->state = ENEMY_WAITING;
+                    } else {
+                        float dx2 = targetP->rect.x - e2->x;
+                        float dy2 = targetP->rect.y - e2->y;
+                        // Axis-lock for enemy2 like enemy1
+                        if (fabsf(dx2) > fabsf(dy2)) dy2 = 0.0f; else dx2 = 0.0f;
+
+                        enemy_normalize(&dx2, &dy2);
+                        float stepX2 = dx2 * e2->speed * dt;
+                        float stepY2 = dy2 * e2->speed * dt;
+                        
+                        SDL_Rect testX2 = { (int)(e2->x + stepX2), (int)e2->y, e2->w, e2->h };
+                        if (!is_blocked(testX2, obs, obs_cnt, doors, dc, door_open)) e2->x += stepX2;
+                        else dx2 = 0;
+                        
+                        SDL_Rect testY2 = { (int)e2->x, (int)(e2->y + stepY2), e2->w, e2->h };
+                        if (!is_blocked(testY2, obs, obs_cnt, doors, dc, door_open)) e2->y += stepY2;
+                        else dy2 = 0;
+
+                        e2->rect.x = (int)e2->x;
+                        e2->rect.y = (int)e2->y;
+                        enemy_anim_update(&e2->anim, dx2, dy2);
+                    }
+                    break;
+
+                case ENEMY_ATTACKING:
+                    if (finalDist > e2->attackRange) {
+                        e2->state = ENEMY_FOLLOWING;
+                    }
+                    if (targetP->rect.x > e2->x) e2->anim.flip = SDL_FLIP_NONE;
+                    else e2->anim.flip = SDL_FLIP_HORIZONTAL;
+                    break;
+            }
+        }
+    }
+
+    if (e2->knockbackTimer > 0) {
+        float kbX = e2->knockbackX * (e2->knockbackTimer / 15.0f);
+        SDL_Rect testK = { (int)(e2->x + kbX * dt), (int)e2->y, e2->w, e2->h };
+        if (!is_blocked(testK, obs, obs_cnt, doors, dc, door_open))
+            e2->x += kbX * dt;
+        e2->knockbackTimer--;
+    }
 }
 
 void enemy_render(GameContext *ctx, int camX, int camY) {
-    Enemy *e = &ctx->enemy;
-    if (!e->alive) return;
-    SDL_Rect dst = {
-        (int)((e->x - camX) * ZOOM_FACTOR),
-        (int)((e->y - camY) * ZOOM_FACTOR),
-        (int)(e->w * ZOOM_FACTOR),
-        (int)(e->h * ZOOM_FACTOR)
-    };
-    enemy_anim_render(ctx->renderer, &e->anim, e->atlas, &dst);
+    int barW   = (int)(80 * ZOOM_FACTOR);
+    int barH   = (int)(12 * ZOOM_FACTOR);
+    int barGap = (int)(3 * ZOOM_FACTOR);
+    int numBars = 3; /* 3 independent health bars stacked above head */
+    int hitsPerBar = 7;
 
-    /* Draw HP bar above head */
-    int barFrame = e->healthStatus % 7; 
-    SDL_Rect hpDst = {
-        dst.x + (dst.w - (int)(100 * ZOOM_FACTOR)) / 2,
-        dst.y - (int)(15 * ZOOM_FACTOR),
-        (int)(100 * ZOOM_FACTOR),
-        (int)(20 * ZOOM_FACTOR)
-    };
-    SDL_RenderCopy(ctx->renderer, e->atlas->hpBar[barFrame], NULL, &hpDst);
+    Enemy *e = &ctx->enemy;
+    if (e->alive) {
+        SDL_Rect dst = {
+            (int)((e->x - camX) * ZOOM_FACTOR),
+            (int)((e->y - camY) * ZOOM_FACTOR),
+            (int)(e->w * ZOOM_FACTOR),
+            (int)(e->h * ZOOM_FACTOR)
+        };
+        enemy_anim_render(ctx->renderer, &e->anim, e->atlas, &dst);
+
+        /* Top bar depletes first, then middle, then bottom */
+        for (int i = 0; i < numBars; i++) {
+            int barIndex = numBars - 1 - i; /* i=0 is bottom on screen, barIndex=2 => top depletes first */
+            int barHealth = e->healthStatus - barIndex * hitsPerBar;
+            int frame;
+            if (barHealth <= 0)              frame = 0; /* full */
+            else if (barHealth >= hitsPerBar) continue;  /* exhausted, skip */
+            else                             frame = barHealth;
+            SDL_Rect hpDst = {
+                dst.x + (dst.w - barW) / 2,
+                dst.y - (barH + barGap) * (i + 1),
+                barW, barH
+            };
+            SDL_RenderCopy(ctx->renderer, e->atlas->hpBar[frame], NULL, &hpDst);
+        }
+    }
+    
+    Enemy *e2 = &ctx->enemy2;
+    if (e2->alive) {
+        SDL_Rect dst2 = {
+            (int)((e2->x - camX) * ZOOM_FACTOR),
+            (int)((e2->y - camY) * ZOOM_FACTOR),
+            (int)(e2->w * ZOOM_FACTOR),
+            (int)(e2->h * ZOOM_FACTOR)
+        };
+        enemy_anim_render(ctx->renderer, &e2->anim, e2->atlas, &dst2);
+
+        /* Top bar depletes first, then middle, then bottom */
+        for (int i = 0; i < numBars; i++) {
+            int barIndex = numBars - 1 - i;
+            int barHealth = e2->healthStatus - barIndex * hitsPerBar;
+            int frame2;
+            if (barHealth <= 0)              frame2 = 0;
+            else if (barHealth >= hitsPerBar) continue;
+            else                             frame2 = barHealth;
+            SDL_Rect hpDst2 = {
+                dst2.x + (dst2.w - barW) / 2,
+                dst2.y - (barH + barGap) * (i + 1),
+                barW, barH
+            };
+            SDL_RenderCopy(ctx->renderer, e2->atlas->hpBar[frame2], NULL, &hpDst2);
+        }
+    }
 }
 
 
@@ -773,7 +928,7 @@ if (moved) {
                     ctx->player1.rect.w = PLAYER1_W;
                 }
 
-                if (ctx->map.level == LEVEL_2 && ctx->enemy.alive &&
+              if (ctx->map.level == LEVEL_2 && ctx->enemy.alive &&
                   hasIntersection(ctx->player1.rect, ctx->enemy.rect)) {
                   ctx->enemy.healthStatus++;
                   if (!Mix_Playing(CH_P1_GETHIT))
@@ -786,6 +941,22 @@ if (moved) {
                   if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth) {
                       ctx->enemy.alive        = 0;
                       ctx->enemy.healthStatus = ctx->enemy.maxHealth;
+                  }
+              }
+              
+              if (ctx->map.level == LEVEL_2 && ctx->enemy2.alive &&
+                  hasIntersection(ctx->player1.rect, ctx->enemy2.rect)) {
+                  ctx->enemy2.healthStatus++;
+                  if (!Mix_Playing(CH_P1_GETHIT))
+                      Mix_PlayChannel(CH_P1_GETHIT, ctx->player1.gettingHitSound, 0);
+
+                  ctx->enemy2.knockbackX     = (ctx->player1.lastHDir == SDL_SCANCODE_D) ? 120.0f : -120.0f;
+                  ctx->enemy2.knockbackY     = 0;
+                  ctx->enemy2.knockbackTimer = 12;
+                  
+                  if (ctx->enemy2.healthStatus >= ctx->enemy2.maxHealth) {
+                      ctx->enemy2.alive        = 0;
+                      ctx->enemy2.healthStatus = ctx->enemy2.maxHealth;
                   }
               }
 
@@ -1039,6 +1210,22 @@ if (moved2) {
                   if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth) {
                       ctx->enemy.alive        = 0;
                       ctx->enemy.healthStatus = ctx->enemy.maxHealth;
+                  }
+              }
+
+                if (ctx->map.level == LEVEL_2 && ctx->enemy2.alive &&
+                  hasIntersection(ctx->player2.rect, ctx->enemy2.rect)) {
+                  ctx->enemy2.healthStatus++;
+                  if (!Mix_Playing(CH_P2_GETHIT))
+                      Mix_PlayChannel(CH_P2_GETHIT, ctx->player2.gettingHitSound, 0);
+
+                  ctx->enemy2.knockbackX = (ctx->player2.lastHDir == SDL_SCANCODE_RIGHT) ? 120.0f : -120.0f;
+                  ctx->enemy2.knockbackY     = 0;
+                  ctx->enemy2.knockbackTimer = 12;
+
+                  if (ctx->enemy2.healthStatus >= ctx->enemy2.maxHealth) {
+                      ctx->enemy2.alive        = 0;
+                      ctx->enemy2.healthStatus = ctx->enemy2.maxHealth;
                   }
               }
 
@@ -1582,6 +1769,48 @@ void game_update(GameContext *ctx)
                 if (point_in_rect(mx,my,&ctx->sm.resumeBtn.rect)) {
                     ctx->paused = 0; ctx->currentState = STATE_PLAYING;
                     Mix_PlayChannel(CH_BUTTONS,ctx->sm.hoverSound,0);
+                } else if (point_in_rect(mx,my,&ctx->sm.saveBtn.rect)) {
+                    Mix_PlayChannel(CH_BUTTONS,ctx->sm.hoverSound,0);
+                    Uint32 elapsed = SDL_GetTicks() - ctx->startTime;
+                    sauvegarder_jeu(ctx->minimap, ctx->player1.score, ctx->player2.score,
+                                    ctx->player1.healthStatus, ctx->player2.healthStatus, elapsed,
+                                    ctx->player1.keyCount, ctx->player2.keyCount, "save.bin");
+                    ctx->saveFeedbackTimer = 120;
+                } else if (point_in_rect(mx,my,&ctx->sm.loadBtn.rect)) {
+                    Mix_PlayChannel(CH_BUTTONS,ctx->sm.hoverSound,0);
+                    Uint32 elapsed = 0;
+                    charger_jeu(&ctx->minimap, &ctx->player1.score, &ctx->player2.score,
+                                &ctx->player1.healthStatus, &ctx->player2.healthStatus, &elapsed,
+                                &ctx->player1.keyCount, &ctx->player2.keyCount, "save.bin");
+                    
+                    ctx->startTime = SDL_GetTicks() - elapsed;
+
+                    ctx->player1.rect.x = ctx->minimap.joueurX;
+                    ctx->player1.rect.y = ctx->minimap.joueurY;
+                    ctx->player2.rect.x = ctx->minimap.joueur2X;
+                    ctx->player2.rect.y = ctx->minimap.joueur2Y;
+                    int targetLevel = (ctx->minimap.num_level == 1) ? LEVEL_1 : LEVEL_2;
+                    
+                    if (ctx->map.level != targetLevel) {
+                        ctx->map.level = targetLevel;
+                        if (targetLevel == LEVEL_2) {
+                            setup_level2(&ctx->map);
+                            Mix_PlayMusic(ctx->musicLevel2, -1);
+                        } else {
+                            setup_level1(&ctx->map);
+                            Mix_PlayMusic(ctx->musicLevel1, -1);
+                        }
+                    } else {
+                        // Even if the level is the same, recreate the level state (collisions, etc.)
+                        if (targetLevel == LEVEL_2) {
+                            setup_level2(&ctx->map);
+                        } else {
+                            setup_level1(&ctx->map);
+                        }
+                    }
+                    ctx->paused = 0; 
+                    ctx->currentState = STATE_CUTSCENE_LOADING;
+                    ctx->loadingTimer = 0;
                 } else if (point_in_rect(mx,my,&ctx->sm.playerBtn.rect) && !ctx->sm.playerBtnSwitched) {
                     ctx->currentState = STATE_PAUSED_PLAYERS;
                     Mix_PlayChannel(CH_BUTTONS,ctx->sm.hoverSound,0);
@@ -1729,6 +1958,15 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
     }
     return;
 }
+if (ctx->currentState == STATE_CUTSCENE_LOADING) {
+    ctx->loadingTimer++;
+    if (ctx->loadingTimer >= 100) {
+        ctx->currentState = STATE_PLAYING;
+        ctx->loadingTimer = 0;
+    }
+    return;
+}
+
 if (ctx->currentState == STATE_ENIGME || ctx->currentState == STATE_PUZZLE ||
     ctx->currentState == STATE_CUTSCENE || ctx->currentState == STATE_CUTSCENE_L2_INTRO ||
     ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
@@ -1762,7 +2000,7 @@ if (ctx->currentState == STATE_ENIGME || ctx->currentState == STATE_PUZZLE ||
         enemy_update(ctx, dt);
 
             /* ── Level 2 ending cutscene trigger ── */
-            if (ctx->map.level == LEVEL_2 && !ctx->enemy.alive &&
+            if (ctx->map.level == LEVEL_2 && (!ctx->enemy.alive && !ctx->enemy2.alive) &&
                 ctx->currentState == STATE_PLAYING) {
                 ctx->currentState    = STATE_CUTSCENE_L2_ENDING;
                 ctx->cutsceneL2Timer = 0;
@@ -1884,6 +2122,24 @@ void game_render(GameContext *ctx)
 
     if (ctx->currentState == STATE_ENIGME) {
         renderEnigme(&ctx->en, ctx->renderer);
+        SDL_RenderPresent(ctx->renderer);
+        return;
+    }
+
+    if (ctx->currentState == STATE_CUTSCENE_LOADING) {
+        SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 255);
+        SDL_RenderClear(ctx->renderer);
+        const char *msg = "Loading...";
+        SDL_Surface *sf = TTF_RenderText_Blended(ctx->font, msg, (SDL_Color){255, 255, 255, 255});
+        if (sf) {
+            SDL_Texture *tex = SDL_CreateTextureFromSurface(ctx->renderer, sf);
+            int tw, th;
+            SDL_QueryTexture(tex, NULL, NULL, &tw, &th);
+            SDL_Rect tr = { (WINDOW_WIDTH - tw)/2, (WINDOW_HEIGHT - th)/2, tw, th };
+            SDL_RenderCopy(ctx->renderer, tex, NULL, &tr);
+            SDL_DestroyTexture(tex);
+            SDL_FreeSurface(sf);
+        }
         SDL_RenderPresent(ctx->renderer);
         return;
     }
@@ -2241,7 +2497,7 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
             SDL_Surface *psurf = TTF_RenderText_Blended(ctx->font, pText, gold);
             SDL_Texture *ptex = SDL_CreateTextureFromSurface(ctx->renderer, psurf);
             int pw, ph; SDL_QueryTexture(ptex, NULL, NULL, &pw, &ph);
-            SDL_Rect pr = {(halfW - pw)/2, fullH - 100, pw, ph};
+            SDL_Rect pr = {(halfW - pw)/2, fullH - 160, pw, ph};
             SDL_RenderCopy(ctx->renderer, ptex, NULL, &pr);
             SDL_FreeSurface(psurf); SDL_DestroyTexture(ptex);
         }
@@ -2344,6 +2600,20 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
         else if (ctx->currentState == STATE_PAUSED_BUTTONS) buttonLayoutFn(ctx);
     }
  
+    if (ctx->saveFeedbackTimer > 0) {
+        ctx->saveFeedbackTimer--;
+        const char *msg = "GAME SAVED";
+        SDL_Surface *sf = TTF_RenderText_Blended(ctx->font, msg, (SDL_Color){50, 255, 50, 255});
+        if (sf) {
+            SDL_Texture *tex = SDL_CreateTextureFromSurface(ctx->renderer, sf);
+            int tw, th;
+            SDL_QueryTexture(tex, NULL, NULL, &tw, &th);
+            SDL_Rect tr = { (WINDOW_WIDTH - tw)/2, WINDOW_HEIGHT/2 - 200, tw, th };
+            SDL_RenderCopy(ctx->renderer, tex, NULL, &tr);
+            SDL_DestroyTexture(tex);
+            SDL_FreeSurface(sf);
+        }
+    }
  
     SDL_RenderPresent(ctx->renderer);
 }

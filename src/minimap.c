@@ -178,24 +178,40 @@ void minimap_update_shake(MiniMap *m) {
 }
 
 /* --- Sauvegarde / Chargement --- */
-void sauvegarder_jeu(MiniMap m, int score, char *nomF) {
+void sauvegarder_jeu(MiniMap m, int p1_score, int p2_score, int p1_hp, int p2_hp, Uint32 elapsed, int p1_keys, int p2_keys, char *nomF) {
     FILE *f = fopen(nomF, "wb");
     if (f) {
         fwrite(&m.joueurX, sizeof(int), 1, f);
         fwrite(&m.joueurY, sizeof(int), 1, f);
+        fwrite(&m.joueur2X, sizeof(int), 1, f);
+        fwrite(&m.joueur2Y, sizeof(int), 1, f);
         fwrite(&m.num_level, sizeof(int), 1, f);
-        fwrite(&score, sizeof(int), 1, f);
+        fwrite(&p1_score, sizeof(int), 1, f);
+        fwrite(&p2_score, sizeof(int), 1, f);
+        fwrite(&p1_hp, sizeof(int), 1, f);
+        fwrite(&p2_hp, sizeof(int), 1, f);
+        fwrite(&elapsed, sizeof(Uint32), 1, f);
+        fwrite(&p1_keys, sizeof(int), 1, f);
+        fwrite(&p2_keys, sizeof(int), 1, f);
         fclose(f);
     }
 }
 
-void charger_jeu(MiniMap *m, int *score, char *nomF) {
+void charger_jeu(MiniMap *m, int *p1_score, int *p2_score, int *p1_hp, int *p2_hp, Uint32 *elapsed, int *p1_keys, int *p2_keys, char *nomF) {
     FILE *f = fopen(nomF, "rb");
     if (f) {
         fread(&m->joueurX, sizeof(int), 1, f);
         fread(&m->joueurY, sizeof(int), 1, f);
+        fread(&m->joueur2X, sizeof(int), 1, f);
+        fread(&m->joueur2Y, sizeof(int), 1, f);
         fread(&m->num_level, sizeof(int), 1, f);
-        fread(score, sizeof(int), 1, f);
+        fread(p1_score, sizeof(int), 1, f);
+        fread(p2_score, sizeof(int), 1, f);
+        fread(p1_hp, sizeof(int), 1, f);
+        fread(p2_hp, sizeof(int), 1, f);
+        fread(elapsed, sizeof(Uint32), 1, f);
+        fread(p1_keys, sizeof(int), 1, f);
+        fread(p2_keys, sizeof(int), 1, f);
         fclose(f);
     }
 }
