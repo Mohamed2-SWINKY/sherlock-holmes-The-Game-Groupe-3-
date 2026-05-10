@@ -176,8 +176,8 @@ void enemy_init(GameContext *ctx) {
     Enemy *e2 = &ctx->enemy2;
     e2->w      = 80;
     e2->h      = 90;
-    e2->x      = 681.0f;
-    e2->y      = 159.0f;
+    e2->x      = 1227.0f;
+    e2->y      = 195.0f;
     e2->speed  = 120.0f;
     e2->alive  = 1;
     e2->atlas  = &ctx->enemyAtlas;

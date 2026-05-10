@@ -377,8 +377,8 @@ void Enemy_Init(Game *g)
     Enemy *e2 = &g->enemy2;
     e2->w = 64;
     e2->h = 64;
-    e2->x = 700;
-    e2->y = 400;
+    e2->x = 1227;
+    e2->y = 195;
     e2->speed = 120.0f;
     e2->atlas = &g->atlas;
     e2->state = ENEMY_WAITING;
