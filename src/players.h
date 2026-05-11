@@ -224,6 +224,10 @@ typedef struct {
     EnemyAnimation anim;
     EnemyAtlas  *atlas;
     int          alive;
+    
+    int         isInvincible; 
+    float       invincibleTimer;
+    
     int healthStatus;
     int maxHealth;
     float knockbackX;
@@ -303,6 +307,11 @@ typedef struct {
     int   isEnding;           // Flag to start the sequence
     float screenFlash;        // 1.0 down to 0.0
     float shakeIntensity;     // Screen shake amount
+    int bossRageTriggered; // in GameContext
+    int bossRageTextTimer;
+    int bossRageFlashTimer;
+    float timeScale;       // 1.0 is normal speed, 0.2 is slow motion
+    int showEmprisonPrompt; // Flag to show the text
 } GameContext;
 
 SDL_Texture* loadTexture(const char* path, SDL_Renderer* renderer);

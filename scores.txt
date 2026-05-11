@@ -1,10 +1,10 @@
+ena 50 1
+gg 50 1
 ;ohq;ed 45 2
 batata 25 2
+dthfj 25 1
 g 10 1
 ena 5 1
 heheheha 5 1
 ss 5 1
 f 5 1
-\s 5 2
-raef 5 1
-5 0 2

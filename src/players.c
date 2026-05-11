@@ -320,23 +320,30 @@ void enemy_update(GameContext *ctx, float dt) {
                     } else {
                         float dx2 = targetP->rect.x - e2->x;
                         float dy2 = targetP->rect.y - e2->y;
-                        // Axis-lock for enemy2 like enemy1
-                        if (fabsf(dx2) > fabsf(dy2)) dy2 = 0.0f; else dx2 = 0.0f;
 
+                        // 1. REMOVE the axis-lock (fabsf check). 
+                        // We want the enemy to know the diagonal direction.
                         enemy_normalize(&dx2, &dy2);
+
                         float stepX2 = dx2 * e2->speed * dt;
                         float stepY2 = dy2 * e2->speed * dt;
                         
+                        // 2. Try X movement
                         SDL_Rect testX2 = { (int)(e2->x + stepX2), (int)e2->y, e2->w, e2->h };
-                        if (!is_blocked(testX2, obs, obs_cnt, doors, dc, door_open)) e2->x += stepX2;
-                        else dx2 = 0;
-                        
+                        if (!is_blocked(testX2, obs, obs_cnt, doors, dc, door_open)) {
+                            e2->x += stepX2;
+                        }
+
+                        // 3. Try Y movement independently (This is the 'Sliding' part!)
                         SDL_Rect testY2 = { (int)e2->x, (int)(e2->y + stepY2), e2->w, e2->h };
-                        if (!is_blocked(testY2, obs, obs_cnt, doors, dc, door_open)) e2->y += stepY2;
-                        else dy2 = 0;
+                        if (!is_blocked(testY2, obs, obs_cnt, doors, dc, door_open)) {
+                            e2->y += stepY2;
+                        }
 
                         e2->rect.x = (int)e2->x;
                         e2->rect.y = (int)e2->y;
+                        
+                        // Pass the normalized directions to animation
                         enemy_anim_update(&e2->anim, dx2, dy2);
                     }
                     break;
@@ -633,6 +640,10 @@ GameContext* game_init(void)
     ctx->cutscenePhase2Timer  = 0;
     ctx->cutscenePhase2Alpha  = 0;
     ctx->bossPhase2CameraPan  = 0;
+    ctx->bossRageTextTimer = 0;
+    ctx->bossRageFlashTimer = 0;
+    ctx->timeScale = 1.0f;
+    ctx->showEmprisonPrompt = 0;
 
     map_init(&ctx->map, ctx->renderer);
     init_minimap(&ctx->minimap,   ctx->renderer, WINDOW_HEIGHT);
@@ -809,7 +820,7 @@ void playerMechanics(GameContext *ctx)
     {
         /* running */
         if (ctx->keys[ctx->player1.keySprint]) {
-            ctx->player1.speed      = 5;
+            ctx->player1.speed = (int)(5 * ctx->timeScale);
             ctx->player1.frameDelay = 7;
             if (!ctx->player1.walkToRun) {
                 Mix_HaltChannel(CH_P1_WALK);
@@ -818,7 +829,7 @@ void playerMechanics(GameContext *ctx)
             if (!Mix_Playing(CH_P1_WALK))
                 Mix_PlayChannel(CH_P1_WALK, ctx->player1.runningSound, -1);
         } else {
-            ctx->player1.speed      = WALKING_SPEED;
+            ctx->player1.speed = (int)(WALKING_SPEED * ctx->timeScale);
             ctx->player1.frameDelay = WALKING_FRAME_DELAY;
             ctx->player1.walkToRun  = 0;
         }
@@ -946,10 +957,19 @@ if (moved) {
                   ctx->enemy.knockbackX     = (ctx->player1.lastHDir == SDL_SCANCODE_D) ? 120.0f : -120.0f;
                   ctx->enemy.knockbackY     = 0;
                   ctx->enemy.knockbackTimer = 12;
+
+                  if (!ctx->bossRageTriggered && ctx->enemy.healthStatus >= 10 && ctx->enemy.alive) {
+                    ctx->bossRageTriggered  = 1;
+                    ctx->enemy.speed        += 200.0f;
+                    ctx->enemy.healthStatus -= 8;
+                    ctx->bossRageFlashTimer = 36;
+                    ctx->bossRageTextTimer  = 120;
+                }
                   
                   if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth) {
                       ctx->enemy.alive        = 0;
                       ctx->enemy.healthStatus = ctx->enemy.maxHealth;
+                      ctx->bossRageTriggered = 0;
                       if (!ctx->bossPhase2Triggered) {
                           ctx->bossPhase2Triggered  = 1;
                           ctx->enemy2.x             = 1126.0f;
@@ -971,16 +991,30 @@ if (moved) {
                       }
                   }
               }
-              
+              printf("BEORGBERLGHAURG%d", ctx->bossRageTriggered);
               if (ctx->map.level == LEVEL_2 && ctx->enemy2.alive &&
                   hasIntersection(ctx->player1.rect, ctx->enemy2.rect)) {
-                  ctx->enemy2.healthStatus++;
+                  if (ctx->enemy2.isInvincible != 1) {
+                        ctx->enemy2.healthStatus++;
+                    }
                   if (!Mix_Playing(CH_P1_GETHIT))
                       Mix_PlayChannel(CH_P1_GETHIT, ctx->player1.gettingHitSound, 0);
 
                   ctx->enemy2.knockbackX     = (ctx->player1.lastHDir == SDL_SCANCODE_D) ? 120.0f : -120.0f;
                   ctx->enemy2.knockbackY     = 0;
                   ctx->enemy2.knockbackTimer = 12;
+                  
+                  if (!ctx->bossRageTriggered && ctx->enemy2.healthStatus >= 10 && ctx->enemy2.alive) {
+                    ctx->bossRageTriggered  = 1;
+                    ctx->enemy2.speed        += 100.0f;
+                    ctx->enemy2.healthStatus -= 8;
+                    ctx->enemy2.w  -= 50.0f;
+                    ctx->enemy2.h  -= 50.0f;
+                    ctx->bossRageFlashTimer = 36;
+                    ctx->bossRageTextTimer  = 120;
+                    ctx->enemy2.isInvincible = 1;
+                    ctx->enemy2.invincibleTimer = 60.0f;
+                }
                   
                   if (ctx->enemy2.healthStatus >= ctx->enemy2.maxHealth) {
                       ctx->enemy2.alive        = 0;
@@ -1032,8 +1066,8 @@ if (moved) {
                 ctx->player1.frame      = 0;
                 ctx->player1.frameTimer = 0;
             } else {
-                ctx->player1.frameTimer++;
-                if (ctx->player1.frameTimer >= ctx->player1.frameDelay) {
+                ctx->player1.frameTimer += ctx->timeScale > 0 ? 1 : 0;
+                if (ctx->player1.frameTimer >= (int)(ctx->player1.frameDelay / ctx->timeScale + 0.5f)) {
                     ctx->player1.frameTimer = 0;
                     ctx->player1.frame++;
                 }
@@ -1058,7 +1092,7 @@ if (moved) {
     {
         /* running */
         if (ctx->keys[ctx->player2.keySprint]) {
-            ctx->player2.speed      = 5;
+            ctx->player2.speed = (int)(5 * ctx->timeScale);
             ctx->player2.frameDelay = 7;
             if (!ctx->player2.walkToRun) {
                 Mix_HaltChannel(CH_P2_WALK);
@@ -1067,7 +1101,7 @@ if (moved) {
             if (!Mix_Playing(CH_P2_WALK))
                 Mix_PlayChannel(CH_P2_WALK, ctx->player2.runningSound, -1);
         } else {
-            ctx->player2.speed      = WALKING_SPEED;
+            ctx->player2.speed = (int)(WALKING_SPEED * ctx->timeScale);
             ctx->player2.frameDelay = WALKING_FRAME_DELAY;
             ctx->player2.walkToRun  = 0;
         }
@@ -1240,8 +1274,19 @@ if (moved2) {
                   ctx->enemy.knockbackY     = 0;
                   ctx->enemy.knockbackTimer = 12;
 
+                  if (!ctx->bossRageTriggered && ctx->enemy.healthStatus >= 10 && ctx->enemy.alive) {
+                    ctx->bossRageTriggered  = 1;
+                    ctx->enemy.speed        += 200.0f;
+                    ctx->enemy.healthStatus -= 8;
+                    ctx->bossRageFlashTimer = 36;
+                    ctx->bossRageTextTimer  = 120;
+                }
+
                   if (ctx->enemy.healthStatus >= ctx->enemy.maxHealth) {
                       ctx->enemy.alive        = 0;
+                      ctx->bossRageTriggered = 0;
+                      ctx->bossRageFlashTimer = 0;
+                      ctx->bossRageTextTimer  = 0;
                       ctx->enemy.healthStatus = ctx->enemy.maxHealth;
                       if (!ctx->bossPhase2Triggered) {
                           ctx->bossPhase2Triggered  = 1;
@@ -1267,13 +1312,25 @@ if (moved2) {
 
                 if (ctx->map.level == LEVEL_2 && ctx->enemy2.alive &&
                   hasIntersection(ctx->player2.rect, ctx->enemy2.rect)) {
-                  ctx->enemy2.healthStatus++;
+                  if (!ctx->enemy2.isInvincible) ctx->enemy2.healthStatus++;
                   if (!Mix_Playing(CH_P2_GETHIT))
                       Mix_PlayChannel(CH_P2_GETHIT, ctx->player2.gettingHitSound, 0);
 
                   ctx->enemy2.knockbackX = (ctx->player2.lastHDir == SDL_SCANCODE_RIGHT) ? 120.0f : -120.0f;
                   ctx->enemy2.knockbackY     = 0;
                   ctx->enemy2.knockbackTimer = 12;
+
+                  if (!ctx->bossRageTriggered && ctx->enemy2.healthStatus >= 10 && ctx->enemy2.alive) {
+                    ctx->bossRageTriggered  = 1;
+                    ctx->enemy2.speed        += 100.0f;
+                    ctx->enemy2.healthStatus -= 8;
+                    ctx->enemy2.w  -= 50.0f;
+                    ctx->enemy2.h  -= 50.0f;
+                    ctx->bossRageFlashTimer = 36;
+                    ctx->bossRageTextTimer  = 120;
+                    ctx->enemy2.isInvincible = 1;
+                    ctx->enemy2.invincibleTimer = 60.0f;
+                }
 
                   if (ctx->enemy2.healthStatus >= ctx->enemy2.maxHealth) {
                       ctx->enemy2.alive        = 0;
@@ -1283,7 +1340,6 @@ if (moved2) {
                         ctx->deathSequenceTimer = 0.0f;
                         ctx->screenFlash = 1.0f;     // Start bright
                         ctx->shakeIntensity = 20.0f; // Strong initial burst
-                        printf(">>> ISENDING SET TO 1\n");
                   }
               }
 
@@ -1759,7 +1815,10 @@ void game_update(GameContext *ctx)
     SDL_GetMouseState(&mx, &my);
 
     Uint32 now = SDL_GetTicks();
-    float dt = ctx->lastTick == 0 ? 0.016f : (now - ctx->lastTick) / 1000.0f;
+
+    float realDt = (float)(now - ctx->lastTick) / 1000.0f; // SDL_GetTicks is milliseconds
+    float dt = realDt * ctx->timeScale;                     // use this everywhere
+
     ctx->lastTick = now;
 
     while (SDL_PollEvent(&ctx->event)) {
@@ -1814,6 +1873,17 @@ void game_update(GameContext *ctx)
             puzzle_handle_event(&ctx->pz, &ctx->event);
             continue;
         }
+
+        // Inside your Input_Poll or key handling function
+if (ctx->event.type == SDL_KEYDOWN) {
+    if (ctx->event.key.keysym.sym == SDLK_b && ctx->showEmprisonPrompt) {
+        // Logic for emprisoning the enemy
+        ctx->enemy2.alive = 0;
+        ctx->timeScale = 1.0f; // Return time to normal
+        ctx->showEmprisonPrompt = 0;
+        
+    }
+}
 
         if (ctx->event.type == SDL_KEYDOWN)
             ctx->keys[ctx->event.key.keysym.scancode] = 1;
@@ -2072,11 +2142,24 @@ if (ctx->currentState == STATE_ENIGME || ctx->currentState == STATE_PUZZLE ||
 }
 
     playerMechanics(ctx);
+    // Trigger slow-mo and prompt only when enemy2 is alive and invincible
+if (ctx->map.level == LEVEL_2 && ctx->enemy2.alive && ctx->enemy2.isInvincible) {
+    if (ctx->enemy2.x < 300 && ctx->enemy2.y > 500) {
+        ctx->timeScale = 0.2f;
+        ctx->showEmprisonPrompt = 1;
+    } else {
+        ctx->timeScale = 1.0f;
+        ctx->showEmprisonPrompt = 0;
+    }
+} else if (!ctx->enemy2.alive) {
+    // Make sure timescale resets if enemy2 dies by other means
+    ctx->timeScale = 1.0f;
+    ctx->showEmprisonPrompt = 0;
+}
     if (ctx->map.level == LEVEL_2)
         enemy_update(ctx, dt);
         /* ── Death sequence (enemy2 killed) ── */
 if (ctx->isEnding) {
-    printf(">>> isEnding active, timer=%.2f flash=%.2f shake=%.2f\n", ctx->deathSequenceTimer, ctx->screenFlash, ctx->shakeIntensity);
     ctx->deathSequenceTimer += dt;
 
     /* Shake decays quickly */
@@ -2112,13 +2195,6 @@ if (ctx->isEnding) {
                 Mix_HaltChannel(CH_P1_WALK);
                 Mix_HaltChannel(CH_P2_WALK);
             }
-    if (ctx->map.level == LEVEL_2)
-    printf("enemy pos: %.1f %.1f alive:%d\n", ctx->enemy.x, ctx->enemy.y, ctx->enemy.alive);
-    printf("atlas check: %p %p %p %p\n",
-    ctx->enemyAtlas.walkRight[0],
-    ctx->enemyAtlas.walkDown[0],
-    ctx->enemyAtlas.walkUp[0],
-    ctx->enemyAtlas.attack[0]);
     
     if (ctx->isCameraPanning && !ctx->paused) {
     ctx->cameraFocusTimer--;
@@ -2285,38 +2361,7 @@ void game_render(GameContext *ctx)
         return;
     }
 
-    if (ctx->currentState == STATE_CUTSCENE) {
-    SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 255);
-    SDL_RenderClear(ctx->renderer);
-
-    // split into two lines for readability
-    const char *line1 = "Londres, 1984.";
-    const char *line2 = "Un crime odieux vient d'ebranler la ville :";
-    const char *line3 = "un meurtre dans un manoir huppe.";
-    const char *line4 = "Sherlock Holmes et son fidele compagnon";
-    const char *line5 = "n'ont qu'une mission... elucider l'affaire.";
-
-    const char *lines[] = {line1, line2, line3, line4, line5};
-    int lineCount = 5;
-    int lineH = 40;
-    int startY = WINDOW_HEIGHT / 2 - (lineCount * lineH) / 2;
-
-    for (int i = 0; i < lineCount; i++) {
-        SDL_Surface *surf = TTF_RenderText_Blended(ctx->font, lines[i],
-            (SDL_Color){255, 255, 255, (Uint8)ctx->cutsceneAlpha});
-        SDL_Texture *tex = SDL_CreateTextureFromSurface(ctx->renderer, surf);
-        SDL_FreeSurface(surf);
-        SDL_SetTextureAlphaMod(tex, (Uint8)ctx->cutsceneAlpha);
-        int tw, th;
-        SDL_QueryTexture(tex, NULL, NULL, &tw, &th);
-        SDL_Rect dst = { (WINDOW_WIDTH - tw) / 2, startY + i * lineH, tw, th };
-        SDL_RenderCopy(ctx->renderer, tex, NULL, &dst);
-        SDL_DestroyTexture(tex);
-    }
-
-    SDL_RenderPresent(ctx->renderer);
-    return;  // skip the rest of game_render
-}
+    
 
 /* ── Level 2 intro cutscene ── */
 if (ctx->currentState == STATE_CUTSCENE_L2_INTRO) {
@@ -2636,6 +2681,19 @@ if (ctx->isEnding) {
         SDL_RenderFillRect(ctx->renderer, NULL); /* fills current viewport */
     }
 }
+
+        if (ctx->bossRageTextTimer > 0) {
+    ctx->bossRageTextTimer--;
+    SDL_Color bloodRed = {180, 10, 10, 255};
+    SDL_Surface *rs = TTF_RenderText_Blended(ctx->font, "IL NE MOURRA PAS.", bloodRed);
+    SDL_Texture *rt = SDL_CreateTextureFromSurface(ctx->renderer, rs);
+    SDL_FreeSurface(rs);
+    int tw, th;
+    SDL_QueryTexture(rt, NULL, NULL, &tw, &th);
+    SDL_Rect rd = { (halfW - tw) / 2, fullH / 2 - th / 2, tw, th };
+    SDL_RenderCopy(ctx->renderer, rt, NULL, &rd);
+    SDL_DestroyTexture(rt);
+}
  
         /* ── Pickup Prompt ── */
         Key *r_keys     = (ctx->map.level == LEVEL_1) ? ctx->map.keys1     : ctx->map.keys2;
@@ -2669,6 +2727,15 @@ if (ctx->isEnding) {
             SDL_RenderFillRect(ctx->renderer, NULL);
             ctx->hitFlashTimer--;
         }
+
+        if (ctx->bossRageFlashTimer > 0) {
+    ctx->bossRageFlashTimer--;
+    if (ctx->bossRageFlashTimer % 12 < 6) {
+        SDL_SetRenderDrawBlendMode(ctx->renderer, SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawColor(ctx->renderer, 180, 0, 0, 180);
+        SDL_RenderFillRect(ctx->renderer, NULL);
+    }
+}
 
         /* ── HUD (score + keys + HP bar — fixed screen positions) ── */
         char scoreText[64];
@@ -2788,6 +2855,54 @@ if (ctx->isEnding && ctx->deathSequenceTimer > 0.8f) {
     SDL_Rect full = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
     SDL_RenderFillRect(ctx->renderer, &full);
 }
+
+    if (ctx->showEmprisonPrompt) {
+    SDL_RenderSetViewport(ctx->renderer, NULL);
+    SDL_Color white = {255, 255, 255, 255};
+    SDL_Surface *surf = TTF_RenderText_Blended(ctx->font, "PRESS [B] TO IMPRISON THE ENEMY", white);
+    if (surf) {
+        SDL_Texture *tex = SDL_CreateTextureFromSurface(ctx->renderer, surf);
+        SDL_Rect textRect = { (WINDOW_WIDTH - surf->w)/2, WINDOW_HEIGHT - 100, surf->w, surf->h };
+        SDL_SetRenderDrawBlendMode(ctx->renderer, SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 180);
+        SDL_Rect bg = { textRect.x - 10, textRect.y - 6, surf->w + 20, surf->h + 12 };
+        SDL_RenderFillRect(ctx->renderer, &bg);
+        SDL_RenderCopy(ctx->renderer, tex, NULL, &textRect);
+        SDL_FreeSurface(surf);
+        SDL_DestroyTexture(tex);
+    }
+}
+
+if (ctx->currentState == STATE_CUTSCENE) {
+    SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 255);
+    SDL_RenderClear(ctx->renderer);
+
+    // split into two lines for readability
+    const char *line1 = "Londres, 1984.";
+    const char *line2 = "Un crime odieux vient d'ebranler la ville :";
+    const char *line3 = "un meurtre dans un manoir huppe.";
+    const char *line4 = "Sherlock Holmes et son fidele compagnon";
+    const char *line5 = "n'ont qu'une mission... elucider l'affaire.";
+
+    const char *lines[] = {line1, line2, line3, line4, line5};
+    int lineCount = 5;
+    int lineH = 40;
+    int startY = WINDOW_HEIGHT / 2 - (lineCount * lineH) / 2;
+
+    for (int i = 0; i < lineCount; i++) {
+        SDL_Surface *surf = TTF_RenderText_Blended(ctx->font, lines[i],
+            (SDL_Color){255, 255, 255, (Uint8)ctx->cutsceneAlpha});
+        SDL_Texture *tex = SDL_CreateTextureFromSurface(ctx->renderer, surf);
+        SDL_FreeSurface(surf);
+        SDL_SetTextureAlphaMod(tex, (Uint8)ctx->cutsceneAlpha);
+        int tw, th;
+        SDL_QueryTexture(tex, NULL, NULL, &tw, &th);
+        SDL_Rect dst = { (WINDOW_WIDTH - tw) / 2, startY + i * lineH, tw, th };
+        SDL_RenderCopy(ctx->renderer, tex, NULL, &dst);
+        SDL_DestroyTexture(tex);
+    }
+}
+
     SDL_RenderPresent(ctx->renderer);
 }
 

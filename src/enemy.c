@@ -80,12 +80,28 @@ void Enemy_MoveTowardPlayer(Enemy *e, Player *p, float dt)
         dy /= length;
     }
 
-    e->x += dx * e->speed * dt;
-    e->y += dy * e->speed * dt;
+    // --- STEP 1: Try moving on the X axis ---
+    float nextX = e->x + (dx * e->speed * dt);
+    SDL_Rect testRectX = {(int)nextX, (int)e->y, e->w, e->h};
 
+    // Use your existing is_blocked function
+    if (!is_blocked(testRectX, ctx->map.obs, ctx->map.obs_cnt, ctx->map.doors, ctx->map.dc, ctx->map.door_open)) {
+        e->x = nextX;
+    }
+
+    // --- STEP 2: Try moving on the Y axis ---
+    float nextY = e->y + (dy * e->speed * dt);
+    SDL_Rect testRectY = {(int)e->x, (int)nextY, e->w, e->h};
+
+    if (!is_blocked(testRectY, ctx->map.obs, ctx->map.obs_cnt, ctx->map.doors, ctx->map.dc, ctx->map.door_open)) {
+        e->y = nextY;
+    }
+
+    // Finalize positions
     e->rect.x = (int)e->x;
     e->rect.y = (int)e->y;
 
+    // Keep your animation update
     Animation_Update(&e->anim, dx, dy, e->atlas);
 }
 
@@ -379,6 +395,8 @@ void Enemy_Init(Game *g)
     e2->h = 64;
     e2->x = 1227;
     e2->y = 195;
+    e2->isInvincible = 0;
+    e2->invincibleTimer = 0.0f;
     e2->speed = 120.0f;
     e2->atlas = &g->atlas;
     e2->state = ENEMY_WAITING;
