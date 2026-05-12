@@ -78,8 +78,21 @@
 #define STATE_PUZZLE            13
 #define STATE_PAUSED_BUTTONS    14
 #define STATE_CUTSCENE_BOSS_PHASE2 15
+#define STATE_SLIDESHOW            16 
+#define STATE_ENDING_CHOICE 17
 
 #define ZOOM_FACTOR 2.0f
+#define MAX_PARTICLES 256
+
+typedef struct {
+    float x, y;
+    float vx, vy;
+    float life;     // seconds remaining
+    float maxLife;
+    SDL_Color color;
+    int active;
+} Particle;
+
 typedef int GameState;
 
 typedef struct{
@@ -312,6 +325,25 @@ typedef struct {
     int bossRageFlashTimer;
     float timeScale;       // 1.0 is normal speed, 0.2 is slow motion
     int showEmprisonPrompt; // Flag to show the text
+    int jailSlideActive;
+    float jailSlideX;      // current X position of the jail image (starts at -WINDOW_WIDTH)
+    SDL_Texture *jailTexture;
+    Mix_Chunk *jailDoorSound;
+    float jailTimer;
+    float jailAlpha;
+    int jailPhase; // 0 = sliding, 1 = hold, 2 = fade
+    int rageShakeTimer;
+    float zoomLevel;   /* 1.0 = normal, >1.0 = zoomed in */
+    SDL_Rect imprisonZone;
+    float imprisonPulse;
+    Particle particles[MAX_PARTICLES];
+    SDL_Texture *slideshowPanels[4];
+    int          slideshowCount;
+    int          slideshowCurrent;
+    int          slideshowAlpha;
+    int          slideshowTimer;
+    int          slideshowFading;
+    int endingChoice; // 1 = surrender, 2 = secret
 } GameContext;
 
 SDL_Texture* loadTexture(const char* path, SDL_Renderer* renderer);
