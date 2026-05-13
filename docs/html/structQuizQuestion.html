@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: QuizQuestion Struct Reference</title>
+<title>SDL Game Project: QuizQuestion Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,22 +92,118 @@ $(function(){initNavTree('structQuizQuestion.html','',''); });
   <div class="headertitle"><div class="title">QuizQuestion Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="quiz_8h_source.html">quiz.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a93157da5a0dda82b16a220b6cd96a252" id="r_a93157da5a0dda82b16a220b6cd96a252"><td class="memItemLeft"><a id="a93157da5a0dda82b16a220b6cd96a252" name="a93157da5a0dda82b16a220b6cd96a252"></a>
-char&#160;</td><td class="memItemRight"><b>question</b> [256]</td></tr>
-<tr class="memitem:a386e8058d05b44e0f8b8fc37e9ab7438" id="r_a386e8058d05b44e0f8b8fc37e9ab7438"><td class="memItemLeft"><a id="a386e8058d05b44e0f8b8fc37e9ab7438" name="a386e8058d05b44e0f8b8fc37e9ab7438"></a>
-char&#160;</td><td class="memItemRight"><b>A</b> [100]</td></tr>
-<tr class="memitem:a4a8296407baefc198d93d32acbb957e7" id="r_a4a8296407baefc198d93d32acbb957e7"><td class="memItemLeft"><a id="a4a8296407baefc198d93d32acbb957e7" name="a4a8296407baefc198d93d32acbb957e7"></a>
-char&#160;</td><td class="memItemRight"><b>B</b> [100]</td></tr>
-<tr class="memitem:a3607e3b0adb47fc6a20d784d19b2b6e3" id="r_a3607e3b0adb47fc6a20d784d19b2b6e3"><td class="memItemLeft"><a id="a3607e3b0adb47fc6a20d784d19b2b6e3" name="a3607e3b0adb47fc6a20d784d19b2b6e3"></a>
-char&#160;</td><td class="memItemRight"><b>C</b> [100]</td></tr>
-<tr class="memitem:a3b1b3f068ab52e3c16ef5eab23e1b880" id="r_a3b1b3f068ab52e3c16ef5eab23e1b880"><td class="memItemLeft"><a id="a3b1b3f068ab52e3c16ef5eab23e1b880" name="a3b1b3f068ab52e3c16ef5eab23e1b880"></a>
-char&#160;</td><td class="memItemRight"><b>correcte</b></td></tr>
-<tr class="memitem:a996cc6eb32bc2f9400600edad98d68fe" id="r_a996cc6eb32bc2f9400600edad98d68fe"><td class="memItemLeft"><a id="a996cc6eb32bc2f9400600edad98d68fe" name="a996cc6eb32bc2f9400600edad98d68fe"></a>
-int&#160;</td><td class="memItemRight"><b>dejaVu</b></td></tr>
+<tr class="memitem:a93157da5a0dda82b16a220b6cd96a252" id="r_a93157da5a0dda82b16a220b6cd96a252"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a93157da5a0dda82b16a220b6cd96a252">question</a> [256]</td></tr>
+<tr class="memitem:a386e8058d05b44e0f8b8fc37e9ab7438" id="r_a386e8058d05b44e0f8b8fc37e9ab7438"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a386e8058d05b44e0f8b8fc37e9ab7438">A</a> [100]</td></tr>
+<tr class="memitem:a4a8296407baefc198d93d32acbb957e7" id="r_a4a8296407baefc198d93d32acbb957e7"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a4a8296407baefc198d93d32acbb957e7">B</a> [100]</td></tr>
+<tr class="memitem:a3607e3b0adb47fc6a20d784d19b2b6e3" id="r_a3607e3b0adb47fc6a20d784d19b2b6e3"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a3607e3b0adb47fc6a20d784d19b2b6e3">C</a> [100]</td></tr>
+<tr class="memitem:a3b1b3f068ab52e3c16ef5eab23e1b880" id="r_a3b1b3f068ab52e3c16ef5eab23e1b880"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a3b1b3f068ab52e3c16ef5eab23e1b880">correcte</a></td></tr>
+<tr class="memitem:a996cc6eb32bc2f9400600edad98d68fe" id="r_a996cc6eb32bc2f9400600edad98d68fe"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a996cc6eb32bc2f9400600edad98d68fe">dejaVu</a></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="quiz_8h_source.html#l00011">11</a> of file <a class="el" href="quiz_8h_source.html">quiz.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="a386e8058d05b44e0f8b8fc37e9ab7438" name="a386e8058d05b44e0f8b8fc37e9ab7438"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a386e8058d05b44e0f8b8fc37e9ab7438">&#9670;&#160;</a></span>A</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char QuizQuestion::A[100]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quiz_8h_source.html#l00013">13</a> of file <a class="el" href="quiz_8h_source.html">quiz.h</a>.</p>
+
+</div>
+</div>
+<a id="a4a8296407baefc198d93d32acbb957e7" name="a4a8296407baefc198d93d32acbb957e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a8296407baefc198d93d32acbb957e7">&#9670;&#160;</a></span>B</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char QuizQuestion::B[100]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quiz_8h_source.html#l00014">14</a> of file <a class="el" href="quiz_8h_source.html">quiz.h</a>.</p>
+
+</div>
+</div>
+<a id="a3607e3b0adb47fc6a20d784d19b2b6e3" name="a3607e3b0adb47fc6a20d784d19b2b6e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3607e3b0adb47fc6a20d784d19b2b6e3">&#9670;&#160;</a></span>C</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char QuizQuestion::C[100]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quiz_8h_source.html#l00015">15</a> of file <a class="el" href="quiz_8h_source.html">quiz.h</a>.</p>
+
+</div>
+</div>
+<a id="a3b1b3f068ab52e3c16ef5eab23e1b880" name="a3b1b3f068ab52e3c16ef5eab23e1b880"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b1b3f068ab52e3c16ef5eab23e1b880">&#9670;&#160;</a></span>correcte</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char QuizQuestion::correcte</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quiz_8h_source.html#l00016">16</a> of file <a class="el" href="quiz_8h_source.html">quiz.h</a>.</p>
+
+</div>
+</div>
+<a id="a996cc6eb32bc2f9400600edad98d68fe" name="a996cc6eb32bc2f9400600edad98d68fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a996cc6eb32bc2f9400600edad98d68fe">&#9670;&#160;</a></span>dejaVu</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int QuizQuestion::dejaVu</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quiz_8h_source.html#l00017">17</a> of file <a class="el" href="quiz_8h_source.html">quiz.h</a>.</p>
+
+</div>
+</div>
+<a id="a93157da5a0dda82b16a220b6cd96a252" name="a93157da5a0dda82b16a220b6cd96a252"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93157da5a0dda82b16a220b6cd96a252">&#9670;&#160;</a></span>question</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char QuizQuestion::question[256]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="quiz_8h_source.html#l00012">12</a> of file <a class="el" href="quiz_8h_source.html">quiz.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="quiz_8h_source.html">quiz.h</a></li>
 </ul>

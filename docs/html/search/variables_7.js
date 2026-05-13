@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['h_0',['h',['../structEnemy.html#adcb5512e63e735485cbb83f763acce75',1,'Enemy::h'],['../structPlayer.html#af109dc67097e88aac555ddaee574acc4',1,'Player::h']]],
+  ['health_1',['health',['../structGame.html#a3eda88d9922a8305d61d3d7df4df16ac',1,'Game']]],
+  ['healthrect_2',['healthRect',['../structPlayer.html#a21b4ba73121fca3b0ae7ae4e8e5a7e86',1,'Player']]],
+  ['healthstatus_3',['healthStatus',['../structPlayer.html#aa1a2b952bfcb0824e3d064e285221037',1,'Player::healthStatus'],['../structEnemy.html#a01ca935645fc093cc86c17daa86d6ab1',1,'Enemy::healthStatus']]],
+  ['hitbox_4',['hitbox',['../structAttackTrigger.html#aae06e2f7b7b35488b5d1ce5c2893c05c',1,'AttackTrigger']]],
+  ['hitflashtimer_5',['hitFlashTimer',['../structGameContext.html#ad960a15508b7a769626cd059733172d3',1,'GameContext']]],
+  ['hole_6',['hole',['../structPuzzle.html#abd89b9b7a1c553617ebe0d6f4a0197f2',1,'Puzzle']]],
+  ['hovera_7',['hoverA',['../structEnigme.html#a2475f171239f9577df9c1175aea29c01',1,'Enigme']]],
+  ['hoverb_8',['hoverB',['../structEnigme.html#ab13f5334b20142184e1351c0ae4b3a82',1,'Enigme']]],
+  ['hoverc_9',['hoverC',['../structEnigme.html#acbcb19eaa4c2aeaef4cf19e6e03b785f',1,'Enigme']]],
+  ['hovered_10',['hovered',['../structButton.html#a6e21b9c49b70e93cd7e57370acb5082f',1,'Button']]],
+  ['hoverpuzzle_11',['hoverPuzzle',['../structEnigme.html#aab381acbeac7fd551e4012db76767008',1,'Enigme']]],
+  ['hoverquiz_12',['hoverQuiz',['../structEnigme.html#a0af36c588ee246abb9af455e64d1a913',1,'Enigme']]],
+  ['hoversound_13',['hoverSound',['../structEnigme.html#abf9e00566a491c2f031697b1d0c15025',1,'Enigme::hoverSound'],['../structsubMenu.html#a833c7bdd03671cfda0dab8fce5b3f7a5',1,'subMenu::hoverSound']]],
+  ['hpbar_14',['hpBar',['../structPlayer.html#aeb6c8fdadfbf80f259d0e41f0eaa01a5',1,'Player::hpBar'],['../structEnemyAtlas.html#aeabcd9791679cd5ad2a6443c1fc8b4bc',1,'EnemyAtlas::hpBar']]],
+  ['hpbars_15',['hpBars',['../structSpriteAtlas.html#a6b421c9a1de85fed76263bac65049206',1,'SpriteAtlas']]],
+  ['hpspritesheet_16',['hpSpritesheet',['../structGameContext.html#a8bb7c1c1fbca1b1b318267eff0eb845b',1,'GameContext']]],
+  ['hscr_17',['hScr',['../structPuzzleState.html#a304d1a761e496e68de119d20f6c382f2',1,'PuzzleState']]]
+];

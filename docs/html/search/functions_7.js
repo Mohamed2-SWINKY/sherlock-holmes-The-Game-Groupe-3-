@@ -1,0 +1,9 @@
+var searchData=
+[
+  ['handleenigmeevents_0',['handleEnigmeEvents',['../assets_2enigme_2enigme_8c.html#af37d2863f5a9f3f40eb6ab86c4438cb6',1,'handleEnigmeEvents(Enigme *e, SDL_Event event):&#160;enigme.c'],['../assets_2enigme_2enigme_8h.html#af37d2863f5a9f3f40eb6ab86c4438cb6',1,'handleEnigmeEvents(Enigme *e, SDL_Event event):&#160;enigme.c'],['../src_2enigme_8c.html#af37d2863f5a9f3f40eb6ab86c4438cb6',1,'handleEnigmeEvents(Enigme *e, SDL_Event event):&#160;enigme.c'],['../src_2enigme_8h.html#af37d2863f5a9f3f40eb6ab86c4438cb6',1,'handleEnigmeEvents(Enigme *e, SDL_Event event):&#160;enigme.c']]],
+  ['hasintersection_1',['hasIntersection',['../players_8c.html#a08283ce3be4729445c4be19c39b60ac3',1,'hasIntersection(SDL_Rect r1, SDL_Rect r2):&#160;players.c'],['../players_8h.html#a08283ce3be4729445c4be19c39b60ac3',1,'hasIntersection(SDL_Rect r1, SDL_Rect r2):&#160;players.c']]],
+  ['health_5fdamage_2',['Health_Damage',['../enemy_8c.html#ac5ac4b12fa0072a62f1eda8a86e9ce7f',1,'Health_Damage(Health *h, int amount):&#160;enemy.c'],['../enemy_8h.html#ac5ac4b12fa0072a62f1eda8a86e9ce7f',1,'Health_Damage(Health *h, int amount):&#160;enemy.c']]],
+  ['health_5finit_3',['Health_Init',['../enemy_8c.html#a919901b4280f67fc164599d8681af811',1,'Health_Init(Health *h, int maxHP):&#160;enemy.c'],['../enemy_8h.html#a919901b4280f67fc164599d8681af811',1,'Health_Init(Health *h, int maxHP):&#160;enemy.c']]],
+  ['health_5fisdead_4',['Health_IsDead',['../enemy_8c.html#a4f8b1fb9402b166eae3d540f574ee5bf',1,'Health_IsDead(Health *h):&#160;enemy.c'],['../enemy_8h.html#a4f8b1fb9402b166eae3d540f574ee5bf',1,'Health_IsDead(Health *h):&#160;enemy.c']]],
+  ['health_5frender_5',['Health_Render',['../enemy_8c.html#adade62957920d3b2731dc7170d24fb35',1,'Health_Render(Game *g):&#160;enemy.c'],['../enemy_8h.html#adade62957920d3b2731dc7170d24fb35',1,'Health_Render(Game *g):&#160;enemy.c']]]
+];

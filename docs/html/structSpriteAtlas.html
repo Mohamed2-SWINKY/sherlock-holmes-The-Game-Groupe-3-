@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: SpriteAtlas Struct Reference</title>
+<title>SDL Game Project: SpriteAtlas Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,20 +92,101 @@ $(function(){initNavTree('structSpriteAtlas.html','',''); });
   <div class="headertitle"><div class="title">SpriteAtlas Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="enemy_8h_source.html">enemy.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:aff34891d129a73790f9ae33387da884f" id="r_aff34891d129a73790f9ae33387da884f"><td class="memItemLeft"><a id="aff34891d129a73790f9ae33387da884f" name="aff34891d129a73790f9ae33387da884f"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>walkRight</b> [MAX_WALK_RIGHT]</td></tr>
-<tr class="memitem:a4fefcd654a3c005297b53d135678233f" id="r_a4fefcd654a3c005297b53d135678233f"><td class="memItemLeft"><a id="a4fefcd654a3c005297b53d135678233f" name="a4fefcd654a3c005297b53d135678233f"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>walkUp</b> [MAX_WALK_UP]</td></tr>
-<tr class="memitem:a2e4266a42ca44beea318717b9405852c" id="r_a2e4266a42ca44beea318717b9405852c"><td class="memItemLeft"><a id="a2e4266a42ca44beea318717b9405852c" name="a2e4266a42ca44beea318717b9405852c"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>walkDown</b> [MAX_WALK_DOWN]</td></tr>
-<tr class="memitem:a9c745bc6583e1614f2e79b5f286aede0" id="r_a9c745bc6583e1614f2e79b5f286aede0"><td class="memItemLeft"><a id="a9c745bc6583e1614f2e79b5f286aede0" name="a9c745bc6583e1614f2e79b5f286aede0"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>attack</b> [MAX_ATTACK_FRAMES]</td></tr>
-<tr class="memitem:a6b421c9a1de85fed76263bac65049206" id="r_a6b421c9a1de85fed76263bac65049206"><td class="memItemLeft"><a id="a6b421c9a1de85fed76263bac65049206" name="a6b421c9a1de85fed76263bac65049206"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>hpBars</b> [MAX_HP_BARS]</td></tr>
+<tr class="memitem:aff34891d129a73790f9ae33387da884f" id="r_aff34891d129a73790f9ae33387da884f"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#aff34891d129a73790f9ae33387da884f">walkRight</a> [<a class="el" href="enemy_8h.html#af0dc86f8dcf5b2013414800ab08b67ba">MAX_WALK_RIGHT</a>]</td></tr>
+<tr class="memitem:a4fefcd654a3c005297b53d135678233f" id="r_a4fefcd654a3c005297b53d135678233f"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a4fefcd654a3c005297b53d135678233f">walkUp</a> [<a class="el" href="enemy_8h.html#abf9736d685f644d571958036ba1beb7e">MAX_WALK_UP</a>]</td></tr>
+<tr class="memitem:a2e4266a42ca44beea318717b9405852c" id="r_a2e4266a42ca44beea318717b9405852c"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a2e4266a42ca44beea318717b9405852c">walkDown</a> [<a class="el" href="enemy_8h.html#a75a9e064122428398282cd427af81a70">MAX_WALK_DOWN</a>]</td></tr>
+<tr class="memitem:a9c745bc6583e1614f2e79b5f286aede0" id="r_a9c745bc6583e1614f2e79b5f286aede0"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a9c745bc6583e1614f2e79b5f286aede0">attack</a> [<a class="el" href="enemy_8h.html#acd72051dc71f64d5356f47670cd5c68f">MAX_ATTACK_FRAMES</a>]</td></tr>
+<tr class="memitem:a6b421c9a1de85fed76263bac65049206" id="r_a6b421c9a1de85fed76263bac65049206"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a6b421c9a1de85fed76263bac65049206">hpBars</a> [<a class="el" href="enemy_8h.html#a5248586e6baf34326c2a8c36353141d2">MAX_HP_BARS</a>]</td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00046">46</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="a9c745bc6583e1614f2e79b5f286aede0" name="a9c745bc6583e1614f2e79b5f286aede0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c745bc6583e1614f2e79b5f286aede0">&#9670;&#160;</a></span>attack</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* SpriteAtlas::attack[<a class="el" href="enemy_8h.html#acd72051dc71f64d5356f47670cd5c68f">MAX_ATTACK_FRAMES</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00050">50</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="a6b421c9a1de85fed76263bac65049206" name="a6b421c9a1de85fed76263bac65049206"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b421c9a1de85fed76263bac65049206">&#9670;&#160;</a></span>hpBars</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* SpriteAtlas::hpBars[<a class="el" href="enemy_8h.html#a5248586e6baf34326c2a8c36353141d2">MAX_HP_BARS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00051">51</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="a2e4266a42ca44beea318717b9405852c" name="a2e4266a42ca44beea318717b9405852c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e4266a42ca44beea318717b9405852c">&#9670;&#160;</a></span>walkDown</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* SpriteAtlas::walkDown[<a class="el" href="enemy_8h.html#a75a9e064122428398282cd427af81a70">MAX_WALK_DOWN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00049">49</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="aff34891d129a73790f9ae33387da884f" name="aff34891d129a73790f9ae33387da884f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff34891d129a73790f9ae33387da884f">&#9670;&#160;</a></span>walkRight</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* SpriteAtlas::walkRight[<a class="el" href="enemy_8h.html#af0dc86f8dcf5b2013414800ab08b67ba">MAX_WALK_RIGHT</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00047">47</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="a4fefcd654a3c005297b53d135678233f" name="a4fefcd654a3c005297b53d135678233f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fefcd654a3c005297b53d135678233f">&#9670;&#160;</a></span>walkUp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* SpriteAtlas::walkUp[<a class="el" href="enemy_8h.html#abf9736d685f644d571958036ba1beb7e">MAX_WALK_UP</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00048">48</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="enemy_8h_source.html">enemy.h</a></li>
 </ul>

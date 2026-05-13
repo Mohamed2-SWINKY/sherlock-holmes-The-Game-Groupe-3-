@@ -24,20 +24,34 @@
 */
 var NAVTREE =
 [
-  [ "Sherlock Holmes: The Unseen Enemy", "index.html", [
+  [ "SDL Game Project", "index.html", [
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
-      [ "Data Structure Index", "classes.html", null ]
+      [ "Data Structure Index", "classes.html", null ],
+      [ "Data Fields", "functions.html", [
+        [ "All", "functions.html", "functions_dup" ],
+        [ "Variables", "functions_vars.html", "functions_vars" ]
+      ] ]
     ] ],
     [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ]
+      [ "File List", "files.html", "files_dup" ],
+      [ "Globals", "globals.html", [
+        [ "All", "globals.html", "globals_dup" ],
+        [ "Functions", "globals_func.html", "globals_func" ],
+        [ "Variables", "globals_vars.html", null ],
+        [ "Typedefs", "globals_type.html", null ],
+        [ "Macros", "globals_defs.html", null ]
+      ] ]
     ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"annotated.html"
+"annotated.html",
+"map_8c.html#aadbb70d7cbbd6d43f9393fc395659266",
+"quiz_8h.html#a17f9bf44b7126df990528a4e72d78f77",
+"structGameContext.html#ae46c021ca4c6e7661643165862ff2cbd"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

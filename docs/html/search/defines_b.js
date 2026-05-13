@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['ph_0',['PH',['../puzzle_8h.html#ae0fcc909f5a4166b625a6707cbdfa643',1,'puzzle.h']]],
+  ['player1_5fh_1',['PLAYER1_H',['../players_8h.html#a5d6359c86df3bd0e9145745278d68455',1,'players.h']]],
+  ['player1_5fw_2',['PLAYER1_W',['../players_8h.html#a4fd4107a556ef58dc06e9cdf8faf0c67',1,'players.h']]],
+  ['player1_5fx_3',['PLAYER1_X',['../players_8h.html#a292216a7a4773efe5e0f5a6d3ba054cf',1,'players.h']]],
+  ['player1_5fy_4',['PLAYER1_Y',['../players_8h.html#a5a01ba1bac3bf0f61bdaa0d7041ad163',1,'players.h']]],
+  ['player1hp_5fh_5',['PLAYER1HP_H',['../players_8h.html#ae2921aba9e8230e7967fb21162dc2db9',1,'players.h']]],
+  ['player1hp_5fw_6',['PLAYER1HP_W',['../players_8h.html#a8d39f0e3c8dafb6e2514cc2187a88974',1,'players.h']]],
+  ['player1hp_5fx_7',['PLAYER1HP_X',['../players_8h.html#a709aa5204495f4241ba693b4fab6bd6b',1,'players.h']]],
+  ['player1hp_5fy_8',['PLAYER1HP_Y',['../players_8h.html#aab9a713c8087e15551e8b757e11546bd',1,'players.h']]],
+  ['player2_5fh_9',['PLAYER2_H',['../players_8h.html#a2976d548a74810c29ed072b09d1567c9',1,'players.h']]],
+  ['player2_5fw_10',['PLAYER2_W',['../players_8h.html#ad1a356360ddd43769aec314224899ae9',1,'players.h']]],
+  ['player2_5fx_11',['PLAYER2_X',['../players_8h.html#a696bcb19e6df460c9252c91ba50a07db',1,'players.h']]],
+  ['player2_5fy_12',['PLAYER2_Y',['../players_8h.html#a30b4ddf98a14a207f7a20b8dbf3ae3b4',1,'players.h']]],
+  ['player2hp_5fh_13',['PLAYER2HP_H',['../players_8h.html#a6ef90a653194f0bd5eb5fd09a1e38130',1,'players.h']]],
+  ['player2hp_5fw_14',['PLAYER2HP_W',['../players_8h.html#aa869a56c6dd5b98480d990575c0f2d95',1,'players.h']]],
+  ['player2hp_5fx_15',['PLAYER2HP_X',['../players_8h.html#a4815670b0d3aedd43cda9ee914217e34',1,'players.h']]],
+  ['player2hp_5fy_16',['PLAYER2HP_Y',['../players_8h.html#a8c9a05b9ef02d1674333fcdd1ac65c2e',1,'players.h']]],
+  ['player_5fspeed_17',['PLAYER_SPEED',['../enemy_8h.html#af49bad41acef45feb40939c0cf9d5d35',1,'enemy.h']]],
+  ['pw_18',['PW',['../puzzle_8h.html#a80665c70b5c319208328ddbb0e1fba7a',1,'puzzle.h']]]
+];

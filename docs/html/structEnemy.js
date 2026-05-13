@@ -1,0 +1,28 @@
+var structEnemy =
+[
+    [ "alive", "structEnemy.html#a12aea01d31b588a7c8a514f26e62d050", null ],
+    [ "anim", "structEnemy.html#a0f976a808ad95419def41a967acfbf59", null ],
+    [ "anim", "structEnemy.html#a75a890bbfd998323a857303c4e3848fc", null ],
+    [ "atlas", "structEnemy.html#a77a55b175db1165f60a4ac8e6f01d6be", null ],
+    [ "atlas", "structEnemy.html#a46fe9259bdfdc6f1d6d182cd9e0bd9c5", null ],
+    [ "attackRange", "structEnemy.html#a2f871e8d3c88955b9388f9b9aac929d0", null ],
+    [ "detectionRange", "structEnemy.html#ac0d45488433bed02426b6bdfebc2acbe", null ],
+    [ "facing", "structEnemy.html#ab0258fd5cdab307f3adab525cf551b08", null ],
+    [ "facing", "structEnemy.html#ac8ae492b651ca96fb0f168cb6645accf", null ],
+    [ "h", "structEnemy.html#adcb5512e63e735485cbb83f763acce75", null ],
+    [ "healthStatus", "structEnemy.html#a01ca935645fc093cc86c17daa86d6ab1", null ],
+    [ "invincibleTimer", "structEnemy.html#ae482c8ec6db5459e3e103a5e3d57b593", null ],
+    [ "isInvincible", "structEnemy.html#a4828605471a11c5cf15ca24644e34772", null ],
+    [ "knockbackTimer", "structEnemy.html#af0ad0e39f67f7fd4a1006d822857fac9", null ],
+    [ "knockbackX", "structEnemy.html#a4af19bd0d24509a39ac613ab4bc701d4", null ],
+    [ "knockbackY", "structEnemy.html#a142fe6561db87bc13e0b327638fa6705", null ],
+    [ "maxHealth", "structEnemy.html#acb93f5cb58ac3adaf59d6cb1614b75fb", null ],
+    [ "rect", "structEnemy.html#a40317b1e3460d8bbc004312d58fe3a84", null ],
+    [ "speed", "structEnemy.html#a98766d083fc49e746a37d0dc69be09e0", null ],
+    [ "state", "structEnemy.html#af7c97c54ce813bd8f2c7f5108d3fef9b", null ],
+    [ "targetX", "structEnemy.html#a4d77734517a4f04446f793dd95aa7fc6", null ],
+    [ "targetY", "structEnemy.html#ad9ce5cc3f431d8e3ea62cf1c1831303a", null ],
+    [ "w", "structEnemy.html#a259bfaab0f0d06c9ec2cb15c787e0b3a", null ],
+    [ "x", "structEnemy.html#a9b45f57b3d7474400108f09587df67b0", null ],
+    [ "y", "structEnemy.html#aa7d03269f81e619c117ce49f40f53eef", null ]
+];

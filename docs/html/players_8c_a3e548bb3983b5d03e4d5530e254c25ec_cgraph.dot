@@ -1,0 +1,24 @@
+digraph "playerMechanics"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="playerMechanics",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Handles player movement and interactions."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="emit_particles",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$players_8c.html#a66c4b8b9e456d939bc0c152ce0810736",tooltip="Emits particles at a given position."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="hasIntersection",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$players_8c.html#a08283ce3be4729445c4be19c39b60ac3",tooltip=" "];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="is_blocked",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$players_8c.html#a668b707553fb3ec0732fccfed9e162f2",tooltip="Checks if a rectangle is blocked by obstacles or doors."];
+  Node4 -> Node5 [id="edge4_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="map_rects_overlap",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$map_8c.html#a9ad845e9d2b4666fea9449e39fd378c1",tooltip=" "];
+  Node1 -> Node5 [id="edge5_Node000001_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node6 [id="edge6_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="minimap_trigger_shake",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$minimap_8c.html#a557be5dcbaf6ac78e5d7864e6a93d55d",tooltip=" "];
+  Node1 -> Node7 [id="edge7_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="setup_level1",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$map_8c.html#a4185de338828ec39553abcf324e40ea1",tooltip=" "];
+  Node1 -> Node8 [id="edge8_Node000001_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="setup_level2",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$map_8c.html#af8a893ce0f7f3bd11b5db905c3e6ec1c",tooltip=" "];
+}

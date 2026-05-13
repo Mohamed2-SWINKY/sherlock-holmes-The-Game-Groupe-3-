@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: GameContext Struct Reference</title>
+<title>SDL Game Project: GameContext Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,100 +92,1415 @@ $(function(){initNavTree('structGameContext.html','',''); });
   <div class="headertitle"><div class="title">GameContext Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="players_8h_source.html">players.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for GameContext:</div>
+<div class="dyncontent">
+<div class="center"><img src="structGameContext__coll__graph.png" border="0" usemap="#aGameContext_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:ae8f783f7c3343e9b892879e2c56be653" id="r_ae8f783f7c3343e9b892879e2c56be653"><td class="memItemLeft"><a id="ae8f783f7c3343e9b892879e2c56be653" name="ae8f783f7c3343e9b892879e2c56be653"></a>
-SDL_Window *&#160;</td><td class="memItemRight"><b>window</b></td></tr>
-<tr class="memitem:a92204489aad37f46b0972512ea0d2ee5" id="r_a92204489aad37f46b0972512ea0d2ee5"><td class="memItemLeft"><a id="a92204489aad37f46b0972512ea0d2ee5" name="a92204489aad37f46b0972512ea0d2ee5"></a>
-SDL_Renderer *&#160;</td><td class="memItemRight"><b>renderer</b></td></tr>
-<tr class="memitem:a9b2b1ea892337a34b6624f56fa9b2b17" id="r_a9b2b1ea892337a34b6624f56fa9b2b17"><td class="memItemLeft"><a id="a9b2b1ea892337a34b6624f56fa9b2b17" name="a9b2b1ea892337a34b6624f56fa9b2b17"></a>
-<a class="el" href="structsubMenu.html">subMenu</a>&#160;</td><td class="memItemRight"><b>sm</b></td></tr>
-<tr class="memitem:ab49a6ccf7c0e505a8d9edfcc6836fbe8" id="r_ab49a6ccf7c0e505a8d9edfcc6836fbe8"><td class="memItemLeft"><a id="ab49a6ccf7c0e505a8d9edfcc6836fbe8" name="ab49a6ccf7c0e505a8d9edfcc6836fbe8"></a>
-int&#160;</td><td class="memItemRight"><b>running</b></td></tr>
-<tr class="memitem:a9697a01ea015aed7dae63d9b089e7853" id="r_a9697a01ea015aed7dae63d9b089e7853"><td class="memItemLeft"><a id="a9697a01ea015aed7dae63d9b089e7853" name="a9697a01ea015aed7dae63d9b089e7853"></a>
-int&#160;</td><td class="memItemRight"><b>volume</b></td></tr>
-<tr class="memitem:ae4cb07194aa8ae7d2bb2029d81d96620" id="r_ae4cb07194aa8ae7d2bb2029d81d96620"><td class="memItemLeft"><a id="ae4cb07194aa8ae7d2bb2029d81d96620" name="ae4cb07194aa8ae7d2bb2029d81d96620"></a>
-int&#160;</td><td class="memItemRight"><b>fullscreen</b></td></tr>
-<tr class="memitem:a1d21ec3e0c2f4fb392aabb8017ba88b5" id="r_a1d21ec3e0c2f4fb392aabb8017ba88b5"><td class="memItemLeft"><a id="a1d21ec3e0c2f4fb392aabb8017ba88b5" name="a1d21ec3e0c2f4fb392aabb8017ba88b5"></a>
-int&#160;</td><td class="memItemRight"><b>mousePressed</b></td></tr>
-<tr class="memitem:a0aced93bf273b6db1272fdc29b09395a" id="r_a0aced93bf273b6db1272fdc29b09395a"><td class="memItemLeft"><a id="a0aced93bf273b6db1272fdc29b09395a" name="a0aced93bf273b6db1272fdc29b09395a"></a>
-<a class="el" href="structPlayer.html">Player</a>&#160;</td><td class="memItemRight"><b>player1</b></td></tr>
-<tr class="memitem:a7b1b7f1a13088a92eeb2d859b9133906" id="r_a7b1b7f1a13088a92eeb2d859b9133906"><td class="memItemLeft"><a id="a7b1b7f1a13088a92eeb2d859b9133906" name="a7b1b7f1a13088a92eeb2d859b9133906"></a>
-<a class="el" href="structPlayer.html">Player</a>&#160;</td><td class="memItemRight"><b>player2</b></td></tr>
-<tr class="memitem:ace3d2206594bf5d6e2fb8fe7c2baa85a" id="r_ace3d2206594bf5d6e2fb8fe7c2baa85a"><td class="memItemLeft"><a id="ace3d2206594bf5d6e2fb8fe7c2baa85a" name="ace3d2206594bf5d6e2fb8fe7c2baa85a"></a>
-int&#160;</td><td class="memItemRight"><b>keys</b> [SDL_NUM_SCANCODES]</td></tr>
-<tr class="memitem:a751eb324e65facbe4648fe9328744883" id="r_a751eb324e65facbe4648fe9328744883"><td class="memItemLeft"><a id="a751eb324e65facbe4648fe9328744883" name="a751eb324e65facbe4648fe9328744883"></a>
-SDL_Event&#160;</td><td class="memItemRight"><b>event</b></td></tr>
-<tr class="memitem:a7f9cd5023c42b4152f940047b6912654" id="r_a7f9cd5023c42b4152f940047b6912654"><td class="memItemLeft"><a id="a7f9cd5023c42b4152f940047b6912654" name="a7f9cd5023c42b4152f940047b6912654"></a>
-TTF_Font *&#160;</td><td class="memItemRight"><b>font</b></td></tr>
-<tr class="memitem:a9968a1723372eab77a1b90835b27e707" id="r_a9968a1723372eab77a1b90835b27e707"><td class="memItemLeft"><a id="a9968a1723372eab77a1b90835b27e707" name="a9968a1723372eab77a1b90835b27e707"></a>
-int&#160;</td><td class="memItemRight"><b>paused</b></td></tr>
-<tr class="memitem:ad51383fead93ecaede5f889075abf79b" id="r_ad51383fead93ecaede5f889075abf79b"><td class="memItemLeft"><a id="ad51383fead93ecaede5f889075abf79b" name="ad51383fead93ecaede5f889075abf79b"></a>
-int&#160;</td><td class="memItemRight"><b>pauseSwitched</b></td></tr>
-<tr class="memitem:a7ce4ff062494ee25e38edece6db71d1c" id="r_a7ce4ff062494ee25e38edece6db71d1c"><td class="memItemLeft"><a id="a7ce4ff062494ee25e38edece6db71d1c" name="a7ce4ff062494ee25e38edece6db71d1c"></a>
-GameState&#160;</td><td class="memItemRight"><b>currentState</b></td></tr>
-<tr class="memitem:a537fad1c48b62f72190ea2404c8c7c41" id="r_a537fad1c48b62f72190ea2404c8c7c41"><td class="memItemLeft"><a id="a537fad1c48b62f72190ea2404c8c7c41" name="a537fad1c48b62f72190ea2404c8c7c41"></a>
-float&#160;</td><td class="memItemRight"><b>cam1X</b></td></tr>
-<tr class="memitem:aa33ea0a7ba1c846696fe68529fbd7fd9" id="r_aa33ea0a7ba1c846696fe68529fbd7fd9"><td class="memItemLeft"><a id="aa33ea0a7ba1c846696fe68529fbd7fd9" name="aa33ea0a7ba1c846696fe68529fbd7fd9"></a>
-float&#160;</td><td class="memItemRight"><b>cam2X</b></td></tr>
-<tr class="memitem:a0f6307bb92692a954e1764429095ce26" id="r_a0f6307bb92692a954e1764429095ce26"><td class="memItemLeft"><a id="a0f6307bb92692a954e1764429095ce26" name="a0f6307bb92692a954e1764429095ce26"></a>
-float&#160;</td><td class="memItemRight"><b>cam1Y</b></td></tr>
-<tr class="memitem:a67e986628258d4d202927cb12e0c13b7" id="r_a67e986628258d4d202927cb12e0c13b7"><td class="memItemLeft"><a id="a67e986628258d4d202927cb12e0c13b7" name="a67e986628258d4d202927cb12e0c13b7"></a>
-float&#160;</td><td class="memItemRight"><b>cam2Y</b></td></tr>
-<tr class="memitem:a5973419268d3b1acbcd407a6ab79778d" id="r_a5973419268d3b1acbcd407a6ab79778d"><td class="memItemLeft"><a id="a5973419268d3b1acbcd407a6ab79778d" name="a5973419268d3b1acbcd407a6ab79778d"></a>
-<a class="el" href="structMiniMap.html">MiniMap</a>&#160;</td><td class="memItemRight"><b>minimap</b></td></tr>
-<tr class="memitem:a5b9deeb41a5da43bd04fe2485b4aa02b" id="r_a5b9deeb41a5da43bd04fe2485b4aa02b"><td class="memItemLeft"><a id="a5b9deeb41a5da43bd04fe2485b4aa02b" name="a5b9deeb41a5da43bd04fe2485b4aa02b"></a>
-<a class="el" href="structMiniMap.html">MiniMap</a>&#160;</td><td class="memItemRight"><b>minimap2</b></td></tr>
-<tr class="memitem:a20710064b726510dcb0ff6b2a67abc82" id="r_a20710064b726510dcb0ff6b2a67abc82"><td class="memItemLeft"><a id="a20710064b726510dcb0ff6b2a67abc82" name="a20710064b726510dcb0ff6b2a67abc82"></a>
-<a class="el" href="structMapData.html">MapData</a>&#160;</td><td class="memItemRight"><b>map</b></td></tr>
-<tr class="memitem:ab9543a3ff72a2023b50a4c882c48d610" id="r_ab9543a3ff72a2023b50a4c882c48d610"><td class="memItemLeft"><a id="ab9543a3ff72a2023b50a4c882c48d610" name="ab9543a3ff72a2023b50a4c882c48d610"></a>
-int&#160;</td><td class="memItemRight"><b>cameraFocusTimer</b></td></tr>
-<tr class="memitem:a8817edfecf952f2ffdb108161042acde" id="r_a8817edfecf952f2ffdb108161042acde"><td class="memItemLeft"><a id="a8817edfecf952f2ffdb108161042acde" name="a8817edfecf952f2ffdb108161042acde"></a>
-SDL_Point&#160;</td><td class="memItemRight"><b>cameraOffset</b></td></tr>
-<tr class="memitem:aac452dfa28fe6f9ba24f874b29435b2a" id="r_aac452dfa28fe6f9ba24f874b29435b2a"><td class="memItemLeft"><a id="aac452dfa28fe6f9ba24f874b29435b2a" name="aac452dfa28fe6f9ba24f874b29435b2a"></a>
-SDL_Point&#160;</td><td class="memItemRight"><b>cameraTarget</b></td></tr>
-<tr class="memitem:ad50ca7f31fe68292a7fc2237207a3a53" id="r_ad50ca7f31fe68292a7fc2237207a3a53"><td class="memItemLeft"><a id="ad50ca7f31fe68292a7fc2237207a3a53" name="ad50ca7f31fe68292a7fc2237207a3a53"></a>
-int&#160;</td><td class="memItemRight"><b>isCameraPanning</b></td></tr>
-<tr class="memitem:ab3cfab8f1a0c543e2fe8a955a10f1a2a" id="r_ab3cfab8f1a0c543e2fe8a955a10f1a2a"><td class="memItemLeft"><a id="ab3cfab8f1a0c543e2fe8a955a10f1a2a" name="ab3cfab8f1a0c543e2fe8a955a10f1a2a"></a>
-<a class="el" href="structEnemy.html">Enemy</a>&#160;</td><td class="memItemRight"><b>enemy</b></td></tr>
-<tr class="memitem:a6412703af91c07411774caf3e7658712" id="r_a6412703af91c07411774caf3e7658712"><td class="memItemLeft"><a id="a6412703af91c07411774caf3e7658712" name="a6412703af91c07411774caf3e7658712"></a>
-<a class="el" href="structEnemyAtlas.html">EnemyAtlas</a>&#160;</td><td class="memItemRight"><b>enemyAtlas</b></td></tr>
-<tr class="memitem:a91064e6e8df42e6b352b2303f6a56ae7" id="r_a91064e6e8df42e6b352b2303f6a56ae7"><td class="memItemLeft"><a id="a91064e6e8df42e6b352b2303f6a56ae7" name="a91064e6e8df42e6b352b2303f6a56ae7"></a>
-Mix_Music *&#160;</td><td class="memItemRight"><b>musicLevel2</b></td></tr>
-<tr class="memitem:aa5d9c586aca3fecd041f0d64fee8aec8" id="r_aa5d9c586aca3fecd041f0d64fee8aec8"><td class="memItemLeft"><a id="aa5d9c586aca3fecd041f0d64fee8aec8" name="aa5d9c586aca3fecd041f0d64fee8aec8"></a>
-Mix_Music *&#160;</td><td class="memItemRight"><b>musicLevel1</b></td></tr>
-<tr class="memitem:a0e5707c0cb9da8a827e9e0f68c9ec365" id="r_a0e5707c0cb9da8a827e9e0f68c9ec365"><td class="memItemLeft"><a id="a0e5707c0cb9da8a827e9e0f68c9ec365" name="a0e5707c0cb9da8a827e9e0f68c9ec365"></a>
-int&#160;</td><td class="memItemRight"><b>cutsceneTimer</b></td></tr>
-<tr class="memitem:a73a21f2be137693dce13091dd9c0c630" id="r_a73a21f2be137693dce13091dd9c0c630"><td class="memItemLeft"><a id="a73a21f2be137693dce13091dd9c0c630" name="a73a21f2be137693dce13091dd9c0c630"></a>
-int&#160;</td><td class="memItemRight"><b>cutsceneAlpha</b></td></tr>
-<tr class="memitem:a73d4cf3598f723d0c8e77cdc5219f5bc" id="r_a73d4cf3598f723d0c8e77cdc5219f5bc"><td class="memItemLeft"><a id="a73d4cf3598f723d0c8e77cdc5219f5bc" name="a73d4cf3598f723d0c8e77cdc5219f5bc"></a>
-int&#160;</td><td class="memItemRight"><b>cutsceneL2Timer</b></td></tr>
-<tr class="memitem:ab0c2dd889c7bcc95dba1c46a16840986" id="r_ab0c2dd889c7bcc95dba1c46a16840986"><td class="memItemLeft"><a id="ab0c2dd889c7bcc95dba1c46a16840986" name="ab0c2dd889c7bcc95dba1c46a16840986"></a>
-int&#160;</td><td class="memItemRight"><b>cutsceneL2Alpha</b></td></tr>
-<tr class="memitem:a467571de9d0de2e12869ea3b02e30909" id="r_a467571de9d0de2e12869ea3b02e30909"><td class="memItemLeft"><a id="a467571de9d0de2e12869ea3b02e30909" name="a467571de9d0de2e12869ea3b02e30909"></a>
-<a class="el" href="structEnigme.html">Enigme</a>&#160;</td><td class="memItemRight"><b>en</b></td></tr>
-<tr class="memitem:adcd90760129aa096ea5f276336bc3e3d" id="r_adcd90760129aa096ea5f276336bc3e3d"><td class="memItemLeft"><a id="adcd90760129aa096ea5f276336bc3e3d" name="adcd90760129aa096ea5f276336bc3e3d"></a>
-<a class="el" href="structPuzzleState.html">PuzzleState</a>&#160;</td><td class="memItemRight"><b>pz</b></td></tr>
-<tr class="memitem:a7a1cf084d091ca610875a8b08dacbe97" id="r_a7a1cf084d091ca610875a8b08dacbe97"><td class="memItemLeft"><a id="a7a1cf084d091ca610875a8b08dacbe97" name="a7a1cf084d091ca610875a8b08dacbe97"></a>
-int&#160;</td><td class="memItemRight"><b>lastPlayerToPickupKey</b></td></tr>
-<tr class="memitem:a28abdfabea4606074444351dda3bfd15" id="r_a28abdfabea4606074444351dda3bfd15"><td class="memItemLeft"><a id="a28abdfabea4606074444351dda3bfd15" name="a28abdfabea4606074444351dda3bfd15"></a>
-<a class="el" href="structStar.html">Star</a>&#160;</td><td class="memItemRight"><b>stars</b> [MAX_STARS]</td></tr>
-<tr class="memitem:ae2558883bff07119f27f2413793f7133" id="r_ae2558883bff07119f27f2413793f7133"><td class="memItemLeft"><a id="ae2558883bff07119f27f2413793f7133" name="ae2558883bff07119f27f2413793f7133"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>starTexture</b></td></tr>
-<tr class="memitem:a02121de6504c6cc62bbe89fa3b746dab" id="r_a02121de6504c6cc62bbe89fa3b746dab"><td class="memItemLeft"><a id="a02121de6504c6cc62bbe89fa3b746dab" name="a02121de6504c6cc62bbe89fa3b746dab"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>keyTexture</b></td></tr>
-<tr class="memitem:a8bb7c1c1fbca1b1b318267eff0eb845b" id="r_a8bb7c1c1fbca1b1b318267eff0eb845b"><td class="memItemLeft"><a id="a8bb7c1c1fbca1b1b318267eff0eb845b" name="a8bb7c1c1fbca1b1b318267eff0eb845b"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>hpSpritesheet</b></td></tr>
-<tr class="memitem:ad960a15508b7a769626cd059733172d3" id="r_ad960a15508b7a769626cd059733172d3"><td class="memItemLeft"><a id="ad960a15508b7a769626cd059733172d3" name="ad960a15508b7a769626cd059733172d3"></a>
-int&#160;</td><td class="memItemRight"><b>hitFlashTimer</b></td></tr>
-<tr class="memitem:afa58044e7e6dadd525e1cc5a6d2d48c5" id="r_afa58044e7e6dadd525e1cc5a6d2d48c5"><td class="memItemLeft"><a id="afa58044e7e6dadd525e1cc5a6d2d48c5" name="afa58044e7e6dadd525e1cc5a6d2d48c5"></a>
-Uint32&#160;</td><td class="memItemRight"><b>startTime</b></td></tr>
-<tr class="memitem:ae46c021ca4c6e7661643165862ff2cbd" id="r_ae46c021ca4c6e7661643165862ff2cbd"><td class="memItemLeft"><a id="ae46c021ca4c6e7661643165862ff2cbd" name="ae46c021ca4c6e7661643165862ff2cbd"></a>
-int&#160;</td><td class="memItemRight"><b>timerRunning</b></td></tr>
-<tr class="memitem:a04b4e6c5f79320ddaf4f7f41dc749038" id="r_a04b4e6c5f79320ddaf4f7f41dc749038"><td class="memItemLeft"><a id="a04b4e6c5f79320ddaf4f7f41dc749038" name="a04b4e6c5f79320ddaf4f7f41dc749038"></a>
-int&#160;</td><td class="memItemRight"><b>rebindTarget</b></td></tr>
+<tr class="memitem:ae8f783f7c3343e9b892879e2c56be653" id="r_ae8f783f7c3343e9b892879e2c56be653"><td class="memItemLeft">SDL_Window *&#160;</td><td class="memItemRight"><a class="el" href="#ae8f783f7c3343e9b892879e2c56be653">window</a></td></tr>
+<tr class="memitem:a92204489aad37f46b0972512ea0d2ee5" id="r_a92204489aad37f46b0972512ea0d2ee5"><td class="memItemLeft">SDL_Renderer *&#160;</td><td class="memItemRight"><a class="el" href="#a92204489aad37f46b0972512ea0d2ee5">renderer</a></td></tr>
+<tr class="memitem:a9b2b1ea892337a34b6624f56fa9b2b17" id="r_a9b2b1ea892337a34b6624f56fa9b2b17"><td class="memItemLeft"><a class="el" href="structsubMenu.html">subMenu</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9b2b1ea892337a34b6624f56fa9b2b17">sm</a></td></tr>
+<tr class="memitem:ab49a6ccf7c0e505a8d9edfcc6836fbe8" id="r_ab49a6ccf7c0e505a8d9edfcc6836fbe8"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab49a6ccf7c0e505a8d9edfcc6836fbe8">running</a></td></tr>
+<tr class="memitem:a9697a01ea015aed7dae63d9b089e7853" id="r_a9697a01ea015aed7dae63d9b089e7853"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a9697a01ea015aed7dae63d9b089e7853">volume</a></td></tr>
+<tr class="memitem:ae4cb07194aa8ae7d2bb2029d81d96620" id="r_ae4cb07194aa8ae7d2bb2029d81d96620"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae4cb07194aa8ae7d2bb2029d81d96620">fullscreen</a></td></tr>
+<tr class="memitem:a1d21ec3e0c2f4fb392aabb8017ba88b5" id="r_a1d21ec3e0c2f4fb392aabb8017ba88b5"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a1d21ec3e0c2f4fb392aabb8017ba88b5">mousePressed</a></td></tr>
+<tr class="memitem:a0aced93bf273b6db1272fdc29b09395a" id="r_a0aced93bf273b6db1272fdc29b09395a"><td class="memItemLeft"><a class="el" href="structPlayer.html">Player</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0aced93bf273b6db1272fdc29b09395a">player1</a></td></tr>
+<tr class="memitem:a7b1b7f1a13088a92eeb2d859b9133906" id="r_a7b1b7f1a13088a92eeb2d859b9133906"><td class="memItemLeft"><a class="el" href="structPlayer.html">Player</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7b1b7f1a13088a92eeb2d859b9133906">player2</a></td></tr>
+<tr class="memitem:ace3d2206594bf5d6e2fb8fe7c2baa85a" id="r_ace3d2206594bf5d6e2fb8fe7c2baa85a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ace3d2206594bf5d6e2fb8fe7c2baa85a">keys</a> [SDL_NUM_SCANCODES]</td></tr>
+<tr class="memitem:a751eb324e65facbe4648fe9328744883" id="r_a751eb324e65facbe4648fe9328744883"><td class="memItemLeft">SDL_Event&#160;</td><td class="memItemRight"><a class="el" href="#a751eb324e65facbe4648fe9328744883">event</a></td></tr>
+<tr class="memitem:a7f9cd5023c42b4152f940047b6912654" id="r_a7f9cd5023c42b4152f940047b6912654"><td class="memItemLeft">TTF_Font *&#160;</td><td class="memItemRight"><a class="el" href="#a7f9cd5023c42b4152f940047b6912654">font</a></td></tr>
+<tr class="memitem:a9968a1723372eab77a1b90835b27e707" id="r_a9968a1723372eab77a1b90835b27e707"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a9968a1723372eab77a1b90835b27e707">paused</a></td></tr>
+<tr class="memitem:ad51383fead93ecaede5f889075abf79b" id="r_ad51383fead93ecaede5f889075abf79b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad51383fead93ecaede5f889075abf79b">pauseSwitched</a></td></tr>
+<tr class="memitem:a7ce4ff062494ee25e38edece6db71d1c" id="r_a7ce4ff062494ee25e38edece6db71d1c"><td class="memItemLeft"><a class="el" href="players_8h.html#a3d664df3311749579c342a9ad4509e1c">GameState</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7ce4ff062494ee25e38edece6db71d1c">currentState</a></td></tr>
+<tr class="memitem:a537fad1c48b62f72190ea2404c8c7c41" id="r_a537fad1c48b62f72190ea2404c8c7c41"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a537fad1c48b62f72190ea2404c8c7c41">cam1X</a></td></tr>
+<tr class="memitem:aa33ea0a7ba1c846696fe68529fbd7fd9" id="r_aa33ea0a7ba1c846696fe68529fbd7fd9"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#aa33ea0a7ba1c846696fe68529fbd7fd9">cam2X</a></td></tr>
+<tr class="memitem:a0f6307bb92692a954e1764429095ce26" id="r_a0f6307bb92692a954e1764429095ce26"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a0f6307bb92692a954e1764429095ce26">cam1Y</a></td></tr>
+<tr class="memitem:a67e986628258d4d202927cb12e0c13b7" id="r_a67e986628258d4d202927cb12e0c13b7"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a67e986628258d4d202927cb12e0c13b7">cam2Y</a></td></tr>
+<tr class="memitem:a5973419268d3b1acbcd407a6ab79778d" id="r_a5973419268d3b1acbcd407a6ab79778d"><td class="memItemLeft"><a class="el" href="structMiniMap.html">MiniMap</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5973419268d3b1acbcd407a6ab79778d">minimap</a></td></tr>
+<tr class="memitem:a5b9deeb41a5da43bd04fe2485b4aa02b" id="r_a5b9deeb41a5da43bd04fe2485b4aa02b"><td class="memItemLeft"><a class="el" href="structMiniMap.html">MiniMap</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5b9deeb41a5da43bd04fe2485b4aa02b">minimap2</a></td></tr>
+<tr class="memitem:a20710064b726510dcb0ff6b2a67abc82" id="r_a20710064b726510dcb0ff6b2a67abc82"><td class="memItemLeft"><a class="el" href="structMapData.html">MapData</a>&#160;</td><td class="memItemRight"><a class="el" href="#a20710064b726510dcb0ff6b2a67abc82">map</a></td></tr>
+<tr class="memitem:ab9543a3ff72a2023b50a4c882c48d610" id="r_ab9543a3ff72a2023b50a4c882c48d610"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab9543a3ff72a2023b50a4c882c48d610">cameraFocusTimer</a></td></tr>
+<tr class="memitem:a8817edfecf952f2ffdb108161042acde" id="r_a8817edfecf952f2ffdb108161042acde"><td class="memItemLeft">SDL_Point&#160;</td><td class="memItemRight"><a class="el" href="#a8817edfecf952f2ffdb108161042acde">cameraOffset</a></td></tr>
+<tr class="memitem:aac452dfa28fe6f9ba24f874b29435b2a" id="r_aac452dfa28fe6f9ba24f874b29435b2a"><td class="memItemLeft">SDL_Point&#160;</td><td class="memItemRight"><a class="el" href="#aac452dfa28fe6f9ba24f874b29435b2a">cameraTarget</a></td></tr>
+<tr class="memitem:ad50ca7f31fe68292a7fc2237207a3a53" id="r_ad50ca7f31fe68292a7fc2237207a3a53"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad50ca7f31fe68292a7fc2237207a3a53">isCameraPanning</a></td></tr>
+<tr class="memitem:ab3cfab8f1a0c543e2fe8a955a10f1a2a" id="r_ab3cfab8f1a0c543e2fe8a955a10f1a2a"><td class="memItemLeft"><a class="el" href="structEnemy.html">Enemy</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab3cfab8f1a0c543e2fe8a955a10f1a2a">enemy</a></td></tr>
+<tr class="memitem:a379fcdee58035352d0f82a1d1204e5fd" id="r_a379fcdee58035352d0f82a1d1204e5fd"><td class="memItemLeft"><a class="el" href="structEnemy.html">Enemy</a>&#160;</td><td class="memItemRight"><a class="el" href="#a379fcdee58035352d0f82a1d1204e5fd">enemy2</a></td></tr>
+<tr class="memitem:a6412703af91c07411774caf3e7658712" id="r_a6412703af91c07411774caf3e7658712"><td class="memItemLeft"><a class="el" href="structEnemyAtlas.html">EnemyAtlas</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6412703af91c07411774caf3e7658712">enemyAtlas</a></td></tr>
+<tr class="memitem:a91064e6e8df42e6b352b2303f6a56ae7" id="r_a91064e6e8df42e6b352b2303f6a56ae7"><td class="memItemLeft">Mix_Music *&#160;</td><td class="memItemRight"><a class="el" href="#a91064e6e8df42e6b352b2303f6a56ae7">musicLevel2</a></td></tr>
+<tr class="memitem:a316f17a29618a54207109a5a585c7bac" id="r_a316f17a29618a54207109a5a585c7bac"><td class="memItemLeft">Mix_Music *&#160;</td><td class="memItemRight"><a class="el" href="#a316f17a29618a54207109a5a585c7bac">musicLevel2Phase2</a></td></tr>
+<tr class="memitem:a5e5a1bbf05a191261ffac4b4440bab8a" id="r_a5e5a1bbf05a191261ffac4b4440bab8a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a5e5a1bbf05a191261ffac4b4440bab8a">bossPhase2Triggered</a></td></tr>
+<tr class="memitem:a4212406483dc6e6b52c522f49dd8c04d" id="r_a4212406483dc6e6b52c522f49dd8c04d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4212406483dc6e6b52c522f49dd8c04d">cutscenePhase2Timer</a></td></tr>
+<tr class="memitem:a2ee15de62c0afc08130638e59e12fe83" id="r_a2ee15de62c0afc08130638e59e12fe83"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a2ee15de62c0afc08130638e59e12fe83">cutscenePhase2Alpha</a></td></tr>
+<tr class="memitem:aa5d9c586aca3fecd041f0d64fee8aec8" id="r_aa5d9c586aca3fecd041f0d64fee8aec8"><td class="memItemLeft">Mix_Music *&#160;</td><td class="memItemRight"><a class="el" href="#aa5d9c586aca3fecd041f0d64fee8aec8">musicLevel1</a></td></tr>
+<tr class="memitem:a0e5707c0cb9da8a827e9e0f68c9ec365" id="r_a0e5707c0cb9da8a827e9e0f68c9ec365"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a0e5707c0cb9da8a827e9e0f68c9ec365">cutsceneTimer</a></td></tr>
+<tr class="memitem:a73a21f2be137693dce13091dd9c0c630" id="r_a73a21f2be137693dce13091dd9c0c630"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a73a21f2be137693dce13091dd9c0c630">cutsceneAlpha</a></td></tr>
+<tr class="memitem:a73d4cf3598f723d0c8e77cdc5219f5bc" id="r_a73d4cf3598f723d0c8e77cdc5219f5bc"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a73d4cf3598f723d0c8e77cdc5219f5bc">cutsceneL2Timer</a></td></tr>
+<tr class="memitem:ab0c2dd889c7bcc95dba1c46a16840986" id="r_ab0c2dd889c7bcc95dba1c46a16840986"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab0c2dd889c7bcc95dba1c46a16840986">cutsceneL2Alpha</a></td></tr>
+<tr class="memitem:ac1a216bcc4b8ba3fe508295a833c328b" id="r_ac1a216bcc4b8ba3fe508295a833c328b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac1a216bcc4b8ba3fe508295a833c328b">bossPhase2CameraPan</a></td></tr>
+<tr class="memitem:a467571de9d0de2e12869ea3b02e30909" id="r_a467571de9d0de2e12869ea3b02e30909"><td class="memItemLeft"><a class="el" href="structEnigme.html">Enigme</a>&#160;</td><td class="memItemRight"><a class="el" href="#a467571de9d0de2e12869ea3b02e30909">en</a></td></tr>
+<tr class="memitem:adcd90760129aa096ea5f276336bc3e3d" id="r_adcd90760129aa096ea5f276336bc3e3d"><td class="memItemLeft"><a class="el" href="structPuzzleState.html">PuzzleState</a>&#160;</td><td class="memItemRight"><a class="el" href="#adcd90760129aa096ea5f276336bc3e3d">pz</a></td></tr>
+<tr class="memitem:a7a1cf084d091ca610875a8b08dacbe97" id="r_a7a1cf084d091ca610875a8b08dacbe97"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7a1cf084d091ca610875a8b08dacbe97">lastPlayerToPickupKey</a></td></tr>
+<tr class="memitem:a28abdfabea4606074444351dda3bfd15" id="r_a28abdfabea4606074444351dda3bfd15"><td class="memItemLeft"><a class="el" href="structStar.html">Star</a>&#160;</td><td class="memItemRight"><a class="el" href="#a28abdfabea4606074444351dda3bfd15">stars</a> [<a class="el" href="players_8h.html#a22c5ac06af59845a3106014096fdffed">MAX_STARS</a>]</td></tr>
+<tr class="memitem:ae2558883bff07119f27f2413793f7133" id="r_ae2558883bff07119f27f2413793f7133"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#ae2558883bff07119f27f2413793f7133">starTexture</a></td></tr>
+<tr class="memitem:a02121de6504c6cc62bbe89fa3b746dab" id="r_a02121de6504c6cc62bbe89fa3b746dab"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a02121de6504c6cc62bbe89fa3b746dab">keyTexture</a></td></tr>
+<tr class="memitem:a8bb7c1c1fbca1b1b318267eff0eb845b" id="r_a8bb7c1c1fbca1b1b318267eff0eb845b"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a8bb7c1c1fbca1b1b318267eff0eb845b">hpSpritesheet</a></td></tr>
+<tr class="memitem:ad960a15508b7a769626cd059733172d3" id="r_ad960a15508b7a769626cd059733172d3"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad960a15508b7a769626cd059733172d3">hitFlashTimer</a></td></tr>
+<tr class="memitem:afa58044e7e6dadd525e1cc5a6d2d48c5" id="r_afa58044e7e6dadd525e1cc5a6d2d48c5"><td class="memItemLeft">Uint32&#160;</td><td class="memItemRight"><a class="el" href="#afa58044e7e6dadd525e1cc5a6d2d48c5">startTime</a></td></tr>
+<tr class="memitem:ae46c021ca4c6e7661643165862ff2cbd" id="r_ae46c021ca4c6e7661643165862ff2cbd"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae46c021ca4c6e7661643165862ff2cbd">timerRunning</a></td></tr>
+<tr class="memitem:a04b4e6c5f79320ddaf4f7f41dc749038" id="r_a04b4e6c5f79320ddaf4f7f41dc749038"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a04b4e6c5f79320ddaf4f7f41dc749038">rebindTarget</a></td></tr>
+<tr class="memitem:a021566e24193b1f7988e5d26660e4632" id="r_a021566e24193b1f7988e5d26660e4632"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a021566e24193b1f7988e5d26660e4632">saveFeedbackTimer</a></td></tr>
+<tr class="memitem:a9ad618d18f850a859a4229899b86c6b4" id="r_a9ad618d18f850a859a4229899b86c6b4"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a9ad618d18f850a859a4229899b86c6b4">loadingTimer</a></td></tr>
+<tr class="memitem:a589b4f5a2b1b26849191c1f3f4314927" id="r_a589b4f5a2b1b26849191c1f3f4314927"><td class="memItemLeft">Uint32&#160;</td><td class="memItemRight"><a class="el" href="#a589b4f5a2b1b26849191c1f3f4314927">lastTick</a></td></tr>
+<tr class="memitem:a729b12ebe5a9c23ab9c99091417615d4" id="r_a729b12ebe5a9c23ab9c99091417615d4"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a729b12ebe5a9c23ab9c99091417615d4">deathSequenceTimer</a></td></tr>
+<tr class="memitem:adc7d23886d93a6e97d1e0893349cafff" id="r_adc7d23886d93a6e97d1e0893349cafff"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#adc7d23886d93a6e97d1e0893349cafff">isEnding</a></td></tr>
+<tr class="memitem:a88fa8a70d36587c7ca9e86f064de2c55" id="r_a88fa8a70d36587c7ca9e86f064de2c55"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a88fa8a70d36587c7ca9e86f064de2c55">screenFlash</a></td></tr>
+<tr class="memitem:a2d802bdb9158ed8678f8a221ef56631f" id="r_a2d802bdb9158ed8678f8a221ef56631f"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a2d802bdb9158ed8678f8a221ef56631f">shakeIntensity</a></td></tr>
+<tr class="memitem:a9fa6e0432809133990336183f86a2795" id="r_a9fa6e0432809133990336183f86a2795"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a9fa6e0432809133990336183f86a2795">bossRageTriggered</a></td></tr>
+<tr class="memitem:aa978acb9ae44fbcc0a4ada8fc5d5e4c5" id="r_aa978acb9ae44fbcc0a4ada8fc5d5e4c5"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aa978acb9ae44fbcc0a4ada8fc5d5e4c5">bossRageTextTimer</a></td></tr>
+<tr class="memitem:ac4565b107802468e4838d4ffd727ddbc" id="r_ac4565b107802468e4838d4ffd727ddbc"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac4565b107802468e4838d4ffd727ddbc">bossRageFlashTimer</a></td></tr>
+<tr class="memitem:a39ac700f84b5deff6007d7df525ce078" id="r_a39ac700f84b5deff6007d7df525ce078"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a39ac700f84b5deff6007d7df525ce078">timeScale</a></td></tr>
+<tr class="memitem:a1be1bf211301eaaf25347198afbe48f5" id="r_a1be1bf211301eaaf25347198afbe48f5"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a1be1bf211301eaaf25347198afbe48f5">showEmprisonPrompt</a></td></tr>
+<tr class="memitem:a4b16fb187c8652b1f9fda3078a6ece0a" id="r_a4b16fb187c8652b1f9fda3078a6ece0a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4b16fb187c8652b1f9fda3078a6ece0a">jailSlideActive</a></td></tr>
+<tr class="memitem:a239620ed2a0799538429ca08c13970ab" id="r_a239620ed2a0799538429ca08c13970ab"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a239620ed2a0799538429ca08c13970ab">jailSlideX</a></td></tr>
+<tr class="memitem:a776038cfa1645cf0b92ed6d10c8aac89" id="r_a776038cfa1645cf0b92ed6d10c8aac89"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a776038cfa1645cf0b92ed6d10c8aac89">jailTexture</a></td></tr>
+<tr class="memitem:adc475127b638a7cfd941c2068a3dd659" id="r_adc475127b638a7cfd941c2068a3dd659"><td class="memItemLeft">Mix_Chunk *&#160;</td><td class="memItemRight"><a class="el" href="#adc475127b638a7cfd941c2068a3dd659">jailDoorSound</a></td></tr>
+<tr class="memitem:ab71300f95ac9d4b0f6c731917bb19bc5" id="r_ab71300f95ac9d4b0f6c731917bb19bc5"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#ab71300f95ac9d4b0f6c731917bb19bc5">jailTimer</a></td></tr>
+<tr class="memitem:ac886c94b43bcbb15bf6f4f220313cabf" id="r_ac886c94b43bcbb15bf6f4f220313cabf"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#ac886c94b43bcbb15bf6f4f220313cabf">jailAlpha</a></td></tr>
+<tr class="memitem:ab368f4e6706fe02fe21b4632a8a06c15" id="r_ab368f4e6706fe02fe21b4632a8a06c15"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab368f4e6706fe02fe21b4632a8a06c15">jailPhase</a></td></tr>
+<tr class="memitem:a0075e392562b82a11998ac13b0a2cf7f" id="r_a0075e392562b82a11998ac13b0a2cf7f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a0075e392562b82a11998ac13b0a2cf7f">rageShakeTimer</a></td></tr>
+<tr class="memitem:af6199fff5b03bcf34caaed71634f7b63" id="r_af6199fff5b03bcf34caaed71634f7b63"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#af6199fff5b03bcf34caaed71634f7b63">zoomLevel</a></td></tr>
+<tr class="memitem:aa4feeaf4228df227e03b185d1d267adb" id="r_aa4feeaf4228df227e03b185d1d267adb"><td class="memItemLeft">SDL_Rect&#160;</td><td class="memItemRight"><a class="el" href="#aa4feeaf4228df227e03b185d1d267adb">imprisonZone</a></td></tr>
+<tr class="memitem:afc8527958956ac8b8ce70e58affb30d5" id="r_afc8527958956ac8b8ce70e58affb30d5"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#afc8527958956ac8b8ce70e58affb30d5">imprisonPulse</a></td></tr>
+<tr class="memitem:a6782b203226a5c53d3760defa5fb8617" id="r_a6782b203226a5c53d3760defa5fb8617"><td class="memItemLeft"><a class="el" href="structParticle.html">Particle</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6782b203226a5c53d3760defa5fb8617">particles</a> [<a class="el" href="players_8h.html#a43b318e80d2457f5ce3e00a6cf1543c8">MAX_PARTICLES</a>]</td></tr>
+<tr class="memitem:a4db6febde83e2aa2777445d9c53d315c" id="r_a4db6febde83e2aa2777445d9c53d315c"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a4db6febde83e2aa2777445d9c53d315c">slideshowPanels</a> [4]</td></tr>
+<tr class="memitem:a42e5abe9d76f0b5179195e612344da7a" id="r_a42e5abe9d76f0b5179195e612344da7a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a42e5abe9d76f0b5179195e612344da7a">slideshowCount</a></td></tr>
+<tr class="memitem:a18f2edf9d1a36d8cb187cd89819b5209" id="r_a18f2edf9d1a36d8cb187cd89819b5209"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a18f2edf9d1a36d8cb187cd89819b5209">slideshowCurrent</a></td></tr>
+<tr class="memitem:a5a4d4d86446eef69afc9854d9510f001" id="r_a5a4d4d86446eef69afc9854d9510f001"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a5a4d4d86446eef69afc9854d9510f001">slideshowAlpha</a></td></tr>
+<tr class="memitem:af00b215507ddd418d51a3748357d268a" id="r_af00b215507ddd418d51a3748357d268a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af00b215507ddd418d51a3748357d268a">slideshowTimer</a></td></tr>
+<tr class="memitem:a90e0f7a802b8713af82525feb79bdd0a" id="r_a90e0f7a802b8713af82525feb79bdd0a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a90e0f7a802b8713af82525feb79bdd0a">slideshowFading</a></td></tr>
+<tr class="memitem:a57b8093c2dbdafa9337ff79238e82bd7" id="r_a57b8093c2dbdafa9337ff79238e82bd7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a57b8093c2dbdafa9337ff79238e82bd7">endingChoice</a></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00262">262</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="ac1a216bcc4b8ba3fe508295a833c328b" name="ac1a216bcc4b8ba3fe508295a833c328b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1a216bcc4b8ba3fe508295a833c328b">&#9670;&#160;</a></span>bossPhase2CameraPan</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::bossPhase2CameraPan</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00302">302</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a5e5a1bbf05a191261ffac4b4440bab8a" name="a5e5a1bbf05a191261ffac4b4440bab8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e5a1bbf05a191261ffac4b4440bab8a">&#9670;&#160;</a></span>bossPhase2Triggered</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::bossPhase2Triggered</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00294">294</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ac4565b107802468e4838d4ffd727ddbc" name="ac4565b107802468e4838d4ffd727ddbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4565b107802468e4838d4ffd727ddbc">&#9670;&#160;</a></span>bossRageFlashTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::bossRageFlashTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00325">325</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="aa978acb9ae44fbcc0a4ada8fc5d5e4c5" name="aa978acb9ae44fbcc0a4ada8fc5d5e4c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa978acb9ae44fbcc0a4ada8fc5d5e4c5">&#9670;&#160;</a></span>bossRageTextTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::bossRageTextTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00324">324</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a9fa6e0432809133990336183f86a2795" name="a9fa6e0432809133990336183f86a2795"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fa6e0432809133990336183f86a2795">&#9670;&#160;</a></span>bossRageTriggered</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::bossRageTriggered</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00323">323</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a537fad1c48b62f72190ea2404c8c7c41" name="a537fad1c48b62f72190ea2404c8c7c41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a537fad1c48b62f72190ea2404c8c7c41">&#9670;&#160;</a></span>cam1X</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameContext::cam1X</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00278">278</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a0f6307bb92692a954e1764429095ce26" name="a0f6307bb92692a954e1764429095ce26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f6307bb92692a954e1764429095ce26">&#9670;&#160;</a></span>cam1Y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameContext::cam1Y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00280">280</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="aa33ea0a7ba1c846696fe68529fbd7fd9" name="aa33ea0a7ba1c846696fe68529fbd7fd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa33ea0a7ba1c846696fe68529fbd7fd9">&#9670;&#160;</a></span>cam2X</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameContext::cam2X</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00279">279</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a67e986628258d4d202927cb12e0c13b7" name="a67e986628258d4d202927cb12e0c13b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67e986628258d4d202927cb12e0c13b7">&#9670;&#160;</a></span>cam2Y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameContext::cam2Y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00281">281</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ab9543a3ff72a2023b50a4c882c48d610" name="ab9543a3ff72a2023b50a4c882c48d610"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9543a3ff72a2023b50a4c882c48d610">&#9670;&#160;</a></span>cameraFocusTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::cameraFocusTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00285">285</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a8817edfecf952f2ffdb108161042acde" name="a8817edfecf952f2ffdb108161042acde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8817edfecf952f2ffdb108161042acde">&#9670;&#160;</a></span>cameraOffset</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Point GameContext::cameraOffset</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00286">286</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="aac452dfa28fe6f9ba24f874b29435b2a" name="aac452dfa28fe6f9ba24f874b29435b2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac452dfa28fe6f9ba24f874b29435b2a">&#9670;&#160;</a></span>cameraTarget</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Point GameContext::cameraTarget</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00287">287</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a7ce4ff062494ee25e38edece6db71d1c" name="a7ce4ff062494ee25e38edece6db71d1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ce4ff062494ee25e38edece6db71d1c">&#9670;&#160;</a></span>currentState</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="players_8h.html#a3d664df3311749579c342a9ad4509e1c">GameState</a> GameContext::currentState</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00277">277</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a73a21f2be137693dce13091dd9c0c630" name="a73a21f2be137693dce13091dd9c0c630"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73a21f2be137693dce13091dd9c0c630">&#9670;&#160;</a></span>cutsceneAlpha</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::cutsceneAlpha</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00299">299</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ab0c2dd889c7bcc95dba1c46a16840986" name="ab0c2dd889c7bcc95dba1c46a16840986"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0c2dd889c7bcc95dba1c46a16840986">&#9670;&#160;</a></span>cutsceneL2Alpha</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::cutsceneL2Alpha</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00301">301</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a73d4cf3598f723d0c8e77cdc5219f5bc" name="a73d4cf3598f723d0c8e77cdc5219f5bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73d4cf3598f723d0c8e77cdc5219f5bc">&#9670;&#160;</a></span>cutsceneL2Timer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::cutsceneL2Timer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00300">300</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a2ee15de62c0afc08130638e59e12fe83" name="a2ee15de62c0afc08130638e59e12fe83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ee15de62c0afc08130638e59e12fe83">&#9670;&#160;</a></span>cutscenePhase2Alpha</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::cutscenePhase2Alpha</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00296">296</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a4212406483dc6e6b52c522f49dd8c04d" name="a4212406483dc6e6b52c522f49dd8c04d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4212406483dc6e6b52c522f49dd8c04d">&#9670;&#160;</a></span>cutscenePhase2Timer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::cutscenePhase2Timer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00295">295</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a0e5707c0cb9da8a827e9e0f68c9ec365" name="a0e5707c0cb9da8a827e9e0f68c9ec365"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e5707c0cb9da8a827e9e0f68c9ec365">&#9670;&#160;</a></span>cutsceneTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::cutsceneTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00298">298</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a729b12ebe5a9c23ab9c99091417615d4" name="a729b12ebe5a9c23ab9c99091417615d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a729b12ebe5a9c23ab9c99091417615d4">&#9670;&#160;</a></span>deathSequenceTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameContext::deathSequenceTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00319">319</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a467571de9d0de2e12869ea3b02e30909" name="a467571de9d0de2e12869ea3b02e30909"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a467571de9d0de2e12869ea3b02e30909">&#9670;&#160;</a></span>en</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structEnigme.html">Enigme</a> GameContext::en</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00303">303</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a57b8093c2dbdafa9337ff79238e82bd7" name="a57b8093c2dbdafa9337ff79238e82bd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57b8093c2dbdafa9337ff79238e82bd7">&#9670;&#160;</a></span>endingChoice</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::endingChoice</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00346">346</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ab3cfab8f1a0c543e2fe8a955a10f1a2a" name="ab3cfab8f1a0c543e2fe8a955a10f1a2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3cfab8f1a0c543e2fe8a955a10f1a2a">&#9670;&#160;</a></span>enemy</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structEnemy.html">Enemy</a> GameContext::enemy</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00289">289</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a379fcdee58035352d0f82a1d1204e5fd" name="a379fcdee58035352d0f82a1d1204e5fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a379fcdee58035352d0f82a1d1204e5fd">&#9670;&#160;</a></span>enemy2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structEnemy.html">Enemy</a> GameContext::enemy2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00290">290</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a6412703af91c07411774caf3e7658712" name="a6412703af91c07411774caf3e7658712"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6412703af91c07411774caf3e7658712">&#9670;&#160;</a></span>enemyAtlas</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structEnemyAtlas.html">EnemyAtlas</a> GameContext::enemyAtlas</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00291">291</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a751eb324e65facbe4648fe9328744883" name="a751eb324e65facbe4648fe9328744883"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a751eb324e65facbe4648fe9328744883">&#9670;&#160;</a></span>event</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Event GameContext::event</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00273">273</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a7f9cd5023c42b4152f940047b6912654" name="a7f9cd5023c42b4152f940047b6912654"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f9cd5023c42b4152f940047b6912654">&#9670;&#160;</a></span>font</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TTF_Font* GameContext::font</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00274">274</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ae4cb07194aa8ae7d2bb2029d81d96620" name="ae4cb07194aa8ae7d2bb2029d81d96620"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4cb07194aa8ae7d2bb2029d81d96620">&#9670;&#160;</a></span>fullscreen</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::fullscreen</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00268">268</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ad960a15508b7a769626cd059733172d3" name="ad960a15508b7a769626cd059733172d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad960a15508b7a769626cd059733172d3">&#9670;&#160;</a></span>hitFlashTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::hitFlashTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00312">312</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a8bb7c1c1fbca1b1b318267eff0eb845b" name="a8bb7c1c1fbca1b1b318267eff0eb845b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bb7c1c1fbca1b1b318267eff0eb845b">&#9670;&#160;</a></span>hpSpritesheet</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* GameContext::hpSpritesheet</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00311">311</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="afc8527958956ac8b8ce70e58affb30d5" name="afc8527958956ac8b8ce70e58affb30d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc8527958956ac8b8ce70e58affb30d5">&#9670;&#160;</a></span>imprisonPulse</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameContext::imprisonPulse</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00338">338</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="aa4feeaf4228df227e03b185d1d267adb" name="aa4feeaf4228df227e03b185d1d267adb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4feeaf4228df227e03b185d1d267adb">&#9670;&#160;</a></span>imprisonZone</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Rect GameContext::imprisonZone</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00337">337</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ad50ca7f31fe68292a7fc2237207a3a53" name="ad50ca7f31fe68292a7fc2237207a3a53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad50ca7f31fe68292a7fc2237207a3a53">&#9670;&#160;</a></span>isCameraPanning</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::isCameraPanning</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00288">288</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="adc7d23886d93a6e97d1e0893349cafff" name="adc7d23886d93a6e97d1e0893349cafff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc7d23886d93a6e97d1e0893349cafff">&#9670;&#160;</a></span>isEnding</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::isEnding</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00320">320</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ac886c94b43bcbb15bf6f4f220313cabf" name="ac886c94b43bcbb15bf6f4f220313cabf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac886c94b43bcbb15bf6f4f220313cabf">&#9670;&#160;</a></span>jailAlpha</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameContext::jailAlpha</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00333">333</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="adc475127b638a7cfd941c2068a3dd659" name="adc475127b638a7cfd941c2068a3dd659"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc475127b638a7cfd941c2068a3dd659">&#9670;&#160;</a></span>jailDoorSound</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mix_Chunk* GameContext::jailDoorSound</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00331">331</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ab368f4e6706fe02fe21b4632a8a06c15" name="ab368f4e6706fe02fe21b4632a8a06c15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab368f4e6706fe02fe21b4632a8a06c15">&#9670;&#160;</a></span>jailPhase</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::jailPhase</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00334">334</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a4b16fb187c8652b1f9fda3078a6ece0a" name="a4b16fb187c8652b1f9fda3078a6ece0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b16fb187c8652b1f9fda3078a6ece0a">&#9670;&#160;</a></span>jailSlideActive</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::jailSlideActive</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00328">328</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a239620ed2a0799538429ca08c13970ab" name="a239620ed2a0799538429ca08c13970ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a239620ed2a0799538429ca08c13970ab">&#9670;&#160;</a></span>jailSlideX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameContext::jailSlideX</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00329">329</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a776038cfa1645cf0b92ed6d10c8aac89" name="a776038cfa1645cf0b92ed6d10c8aac89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a776038cfa1645cf0b92ed6d10c8aac89">&#9670;&#160;</a></span>jailTexture</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* GameContext::jailTexture</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00330">330</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ab71300f95ac9d4b0f6c731917bb19bc5" name="ab71300f95ac9d4b0f6c731917bb19bc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab71300f95ac9d4b0f6c731917bb19bc5">&#9670;&#160;</a></span>jailTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameContext::jailTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00332">332</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ace3d2206594bf5d6e2fb8fe7c2baa85a" name="ace3d2206594bf5d6e2fb8fe7c2baa85a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace3d2206594bf5d6e2fb8fe7c2baa85a">&#9670;&#160;</a></span>keys</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::keys[SDL_NUM_SCANCODES]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00272">272</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a02121de6504c6cc62bbe89fa3b746dab" name="a02121de6504c6cc62bbe89fa3b746dab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02121de6504c6cc62bbe89fa3b746dab">&#9670;&#160;</a></span>keyTexture</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* GameContext::keyTexture</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00310">310</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a7a1cf084d091ca610875a8b08dacbe97" name="a7a1cf084d091ca610875a8b08dacbe97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a1cf084d091ca610875a8b08dacbe97">&#9670;&#160;</a></span>lastPlayerToPickupKey</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::lastPlayerToPickupKey</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00305">305</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a589b4f5a2b1b26849191c1f3f4314927" name="a589b4f5a2b1b26849191c1f3f4314927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a589b4f5a2b1b26849191c1f3f4314927">&#9670;&#160;</a></span>lastTick</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Uint32 GameContext::lastTick</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00318">318</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a9ad618d18f850a859a4229899b86c6b4" name="a9ad618d18f850a859a4229899b86c6b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ad618d18f850a859a4229899b86c6b4">&#9670;&#160;</a></span>loadingTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::loadingTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00317">317</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a20710064b726510dcb0ff6b2a67abc82" name="a20710064b726510dcb0ff6b2a67abc82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20710064b726510dcb0ff6b2a67abc82">&#9670;&#160;</a></span>map</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structMapData.html">MapData</a> GameContext::map</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00284">284</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a5973419268d3b1acbcd407a6ab79778d" name="a5973419268d3b1acbcd407a6ab79778d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5973419268d3b1acbcd407a6ab79778d">&#9670;&#160;</a></span>minimap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structMiniMap.html">MiniMap</a> GameContext::minimap</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00282">282</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a5b9deeb41a5da43bd04fe2485b4aa02b" name="a5b9deeb41a5da43bd04fe2485b4aa02b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b9deeb41a5da43bd04fe2485b4aa02b">&#9670;&#160;</a></span>minimap2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structMiniMap.html">MiniMap</a> GameContext::minimap2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00283">283</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a1d21ec3e0c2f4fb392aabb8017ba88b5" name="a1d21ec3e0c2f4fb392aabb8017ba88b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d21ec3e0c2f4fb392aabb8017ba88b5">&#9670;&#160;</a></span>mousePressed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::mousePressed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00269">269</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="aa5d9c586aca3fecd041f0d64fee8aec8" name="aa5d9c586aca3fecd041f0d64fee8aec8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5d9c586aca3fecd041f0d64fee8aec8">&#9670;&#160;</a></span>musicLevel1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mix_Music* GameContext::musicLevel1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00297">297</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a91064e6e8df42e6b352b2303f6a56ae7" name="a91064e6e8df42e6b352b2303f6a56ae7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91064e6e8df42e6b352b2303f6a56ae7">&#9670;&#160;</a></span>musicLevel2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mix_Music* GameContext::musicLevel2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00292">292</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a316f17a29618a54207109a5a585c7bac" name="a316f17a29618a54207109a5a585c7bac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a316f17a29618a54207109a5a585c7bac">&#9670;&#160;</a></span>musicLevel2Phase2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mix_Music* GameContext::musicLevel2Phase2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00293">293</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a6782b203226a5c53d3760defa5fb8617" name="a6782b203226a5c53d3760defa5fb8617"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6782b203226a5c53d3760defa5fb8617">&#9670;&#160;</a></span>particles</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structParticle.html">Particle</a> GameContext::particles[<a class="el" href="players_8h.html#a43b318e80d2457f5ce3e00a6cf1543c8">MAX_PARTICLES</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00339">339</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a9968a1723372eab77a1b90835b27e707" name="a9968a1723372eab77a1b90835b27e707"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9968a1723372eab77a1b90835b27e707">&#9670;&#160;</a></span>paused</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::paused</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00275">275</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ad51383fead93ecaede5f889075abf79b" name="ad51383fead93ecaede5f889075abf79b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad51383fead93ecaede5f889075abf79b">&#9670;&#160;</a></span>pauseSwitched</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::pauseSwitched</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00276">276</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a0aced93bf273b6db1272fdc29b09395a" name="a0aced93bf273b6db1272fdc29b09395a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aced93bf273b6db1272fdc29b09395a">&#9670;&#160;</a></span>player1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPlayer.html">Player</a> GameContext::player1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00270">270</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a7b1b7f1a13088a92eeb2d859b9133906" name="a7b1b7f1a13088a92eeb2d859b9133906"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b1b7f1a13088a92eeb2d859b9133906">&#9670;&#160;</a></span>player2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPlayer.html">Player</a> GameContext::player2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00271">271</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="adcd90760129aa096ea5f276336bc3e3d" name="adcd90760129aa096ea5f276336bc3e3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcd90760129aa096ea5f276336bc3e3d">&#9670;&#160;</a></span>pz</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPuzzleState.html">PuzzleState</a> GameContext::pz</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00304">304</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a0075e392562b82a11998ac13b0a2cf7f" name="a0075e392562b82a11998ac13b0a2cf7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0075e392562b82a11998ac13b0a2cf7f">&#9670;&#160;</a></span>rageShakeTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::rageShakeTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00335">335</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a04b4e6c5f79320ddaf4f7f41dc749038" name="a04b4e6c5f79320ddaf4f7f41dc749038"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04b4e6c5f79320ddaf4f7f41dc749038">&#9670;&#160;</a></span>rebindTarget</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::rebindTarget</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00315">315</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a92204489aad37f46b0972512ea0d2ee5" name="a92204489aad37f46b0972512ea0d2ee5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92204489aad37f46b0972512ea0d2ee5">&#9670;&#160;</a></span>renderer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Renderer* GameContext::renderer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00264">264</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ab49a6ccf7c0e505a8d9edfcc6836fbe8" name="ab49a6ccf7c0e505a8d9edfcc6836fbe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab49a6ccf7c0e505a8d9edfcc6836fbe8">&#9670;&#160;</a></span>running</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::running</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00266">266</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a021566e24193b1f7988e5d26660e4632" name="a021566e24193b1f7988e5d26660e4632"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a021566e24193b1f7988e5d26660e4632">&#9670;&#160;</a></span>saveFeedbackTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::saveFeedbackTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00316">316</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a88fa8a70d36587c7ca9e86f064de2c55" name="a88fa8a70d36587c7ca9e86f064de2c55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88fa8a70d36587c7ca9e86f064de2c55">&#9670;&#160;</a></span>screenFlash</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameContext::screenFlash</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00321">321</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a2d802bdb9158ed8678f8a221ef56631f" name="a2d802bdb9158ed8678f8a221ef56631f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d802bdb9158ed8678f8a221ef56631f">&#9670;&#160;</a></span>shakeIntensity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameContext::shakeIntensity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00322">322</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a1be1bf211301eaaf25347198afbe48f5" name="a1be1bf211301eaaf25347198afbe48f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1be1bf211301eaaf25347198afbe48f5">&#9670;&#160;</a></span>showEmprisonPrompt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::showEmprisonPrompt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00327">327</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a5a4d4d86446eef69afc9854d9510f001" name="a5a4d4d86446eef69afc9854d9510f001"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a4d4d86446eef69afc9854d9510f001">&#9670;&#160;</a></span>slideshowAlpha</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::slideshowAlpha</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00343">343</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a42e5abe9d76f0b5179195e612344da7a" name="a42e5abe9d76f0b5179195e612344da7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42e5abe9d76f0b5179195e612344da7a">&#9670;&#160;</a></span>slideshowCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::slideshowCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00341">341</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a18f2edf9d1a36d8cb187cd89819b5209" name="a18f2edf9d1a36d8cb187cd89819b5209"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18f2edf9d1a36d8cb187cd89819b5209">&#9670;&#160;</a></span>slideshowCurrent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::slideshowCurrent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00342">342</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a90e0f7a802b8713af82525feb79bdd0a" name="a90e0f7a802b8713af82525feb79bdd0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90e0f7a802b8713af82525feb79bdd0a">&#9670;&#160;</a></span>slideshowFading</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::slideshowFading</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00345">345</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a4db6febde83e2aa2777445d9c53d315c" name="a4db6febde83e2aa2777445d9c53d315c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4db6febde83e2aa2777445d9c53d315c">&#9670;&#160;</a></span>slideshowPanels</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* GameContext::slideshowPanels[4]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00340">340</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="af00b215507ddd418d51a3748357d268a" name="af00b215507ddd418d51a3748357d268a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af00b215507ddd418d51a3748357d268a">&#9670;&#160;</a></span>slideshowTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::slideshowTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00344">344</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a9b2b1ea892337a34b6624f56fa9b2b17" name="a9b2b1ea892337a34b6624f56fa9b2b17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b2b1ea892337a34b6624f56fa9b2b17">&#9670;&#160;</a></span>sm</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structsubMenu.html">subMenu</a> GameContext::sm</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00265">265</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a28abdfabea4606074444351dda3bfd15" name="a28abdfabea4606074444351dda3bfd15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28abdfabea4606074444351dda3bfd15">&#9670;&#160;</a></span>stars</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structStar.html">Star</a> GameContext::stars[<a class="el" href="players_8h.html#a22c5ac06af59845a3106014096fdffed">MAX_STARS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00308">308</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ae2558883bff07119f27f2413793f7133" name="ae2558883bff07119f27f2413793f7133"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2558883bff07119f27f2413793f7133">&#9670;&#160;</a></span>starTexture</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* GameContext::starTexture</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00309">309</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="afa58044e7e6dadd525e1cc5a6d2d48c5" name="afa58044e7e6dadd525e1cc5a6d2d48c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa58044e7e6dadd525e1cc5a6d2d48c5">&#9670;&#160;</a></span>startTime</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Uint32 GameContext::startTime</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00313">313</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ae46c021ca4c6e7661643165862ff2cbd" name="ae46c021ca4c6e7661643165862ff2cbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae46c021ca4c6e7661643165862ff2cbd">&#9670;&#160;</a></span>timerRunning</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::timerRunning</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00314">314</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a39ac700f84b5deff6007d7df525ce078" name="a39ac700f84b5deff6007d7df525ce078"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39ac700f84b5deff6007d7df525ce078">&#9670;&#160;</a></span>timeScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameContext::timeScale</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00326">326</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a9697a01ea015aed7dae63d9b089e7853" name="a9697a01ea015aed7dae63d9b089e7853"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9697a01ea015aed7dae63d9b089e7853">&#9670;&#160;</a></span>volume</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GameContext::volume</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00267">267</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ae8f783f7c3343e9b892879e2c56be653" name="ae8f783f7c3343e9b892879e2c56be653"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8f783f7c3343e9b892879e2c56be653">&#9670;&#160;</a></span>window</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Window* GameContext::window</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00263">263</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="af6199fff5b03bcf34caaed71634f7b63" name="af6199fff5b03bcf34caaed71634f7b63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6199fff5b03bcf34caaed71634f7b63">&#9670;&#160;</a></span>zoomLevel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float GameContext::zoomLevel</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00336">336</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="players_8h_source.html">players.h</a></li>
 </ul>

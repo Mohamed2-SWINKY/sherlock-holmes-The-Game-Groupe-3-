@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: src/serial_controller.c File Reference</title>
+<title>SDL Game Project: src/serial_controller.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,22 +92,211 @@ $(function(){initNavTree('serial__controller_8c.html','',''); });
   <div class="headertitle"><div class="title">serial_controller.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;serial_controller.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="serial__controller_8h_source.html">serial_controller.h</a>&quot;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;fcntl.h&gt;</code><br />
 <code>#include &lt;termios.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
-</div><table class="memberdecls">
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for serial_controller.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="serial__controller_8c__incl.png" border="0" usemap="#asrc_2serial__controller_8c" loading="lazy" alt=""/></div>
+</div>
+</div>
+<p><a href="serial__controller_8c_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a32987d5f41813dab50950a04f1092dd2" id="r_a32987d5f41813dab50950a04f1092dd2"><td class="memItemLeft"><a id="a32987d5f41813dab50950a04f1092dd2" name="a32987d5f41813dab50950a04f1092dd2"></a>
-int&#160;</td><td class="memItemRight"><b>controller_open</b> (const char *port)</td></tr>
-<tr class="memitem:a59274d42bfb8a59925cc914e46c82d70" id="r_a59274d42bfb8a59925cc914e46c82d70"><td class="memItemLeft"><a id="a59274d42bfb8a59925cc914e46c82d70" name="a59274d42bfb8a59925cc914e46c82d70"></a>
-void&#160;</td><td class="memItemRight"><b>controller_poll</b> (<a class="el" href="structControllerState.html">ControllerState</a> *state)</td></tr>
-<tr class="memitem:a249d57415ad7a72347bb0e1fbb783ad7" id="r_a249d57415ad7a72347bb0e1fbb783ad7"><td class="memItemLeft"><a id="a249d57415ad7a72347bb0e1fbb783ad7" name="a249d57415ad7a72347bb0e1fbb783ad7"></a>
-void&#160;</td><td class="memItemRight"><b>controller_close</b> ()</td></tr>
+<tr class="memitem:a32987d5f41813dab50950a04f1092dd2" id="r_a32987d5f41813dab50950a04f1092dd2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a32987d5f41813dab50950a04f1092dd2">controller_open</a> (const char *port)</td></tr>
+<tr class="memitem:a59274d42bfb8a59925cc914e46c82d70" id="r_a59274d42bfb8a59925cc914e46c82d70"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a59274d42bfb8a59925cc914e46c82d70">controller_poll</a> (<a class="el" href="structControllerState.html">ControllerState</a> *state)</td></tr>
+<tr class="memitem:a249d57415ad7a72347bb0e1fbb783ad7" id="r_a249d57415ad7a72347bb0e1fbb783ad7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a249d57415ad7a72347bb0e1fbb783ad7">controller_close</a> ()</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a6f8059414f0228f0256115e024eeed4b" id="r_a6f8059414f0228f0256115e024eeed4b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a6f8059414f0228f0256115e024eeed4b">fd</a> = -1</td></tr>
+<tr class="memitem:ab4a03da084e15d3319078d4f4a6bf3ff" id="r_ab4a03da084e15d3319078d4f4a6bf3ff"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a> [64]</td></tr>
+<tr class="memitem:a7666bbf00997cc13da27d55cb05d27c4" id="r_a7666bbf00997cc13da27d55cb05d27c4"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7666bbf00997cc13da27d55cb05d27c4">buf_len</a> = 0</td></tr>
 </table>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a249d57415ad7a72347bb0e1fbb783ad7" name="a249d57415ad7a72347bb0e1fbb783ad7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a249d57415ad7a72347bb0e1fbb783ad7">&#9670;&#160;</a></span>controller_close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void controller_close </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="serial__controller_8c_source.html#l00059">59</a> of file <a class="el" href="serial__controller_8c_source.html">serial_controller.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   59</span>                        {</div>
+<div class="line"><span class="lineno">   60</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a6f8059414f0228f0256115e024eeed4b">fd</a> &gt;= 0) {</div>
+<div class="line"><span class="lineno">   61</span>        close(<a class="code hl_variable" href="#a6f8059414f0228f0256115e024eeed4b">fd</a>);</div>
+<div class="line"><span class="lineno">   62</span>        <a class="code hl_variable" href="#a6f8059414f0228f0256115e024eeed4b">fd</a> = -1;</div>
+<div class="line"><span class="lineno">   63</span>    }</div>
+<div class="line"><span class="lineno">   64</span>}</div>
+<div class="ttc" id="aserial__controller_8c_html_a6f8059414f0228f0256115e024eeed4b"><div class="ttname"><a href="#a6f8059414f0228f0256115e024eeed4b">fd</a></div><div class="ttdeci">int fd</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8c_source.html#l00013">serial_controller.c:13</a></div></div>
+</div><!-- fragment --><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="serial__controller_8c_a249d57415ad7a72347bb0e1fbb783ad7_icgraph.png" border="0" usemap="#aserial__controller_8c_a249d57415ad7a72347bb0e1fbb783ad7_icgraph" loading="lazy" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a32987d5f41813dab50950a04f1092dd2" name="a32987d5f41813dab50950a04f1092dd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32987d5f41813dab50950a04f1092dd2">&#9670;&#160;</a></span>controller_open()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int controller_open </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>port</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="serial__controller_8c_source.html#l00017">17</a> of file <a class="el" href="serial__controller_8c_source.html">serial_controller.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   17</span>                                      {</div>
+<div class="line"><span class="lineno">   18</span>    <a class="code hl_variable" href="#a6f8059414f0228f0256115e024eeed4b">fd</a> = open(port, O_RDONLY | O_NOCTTY | O_NONBLOCK);</div>
+<div class="line"><span class="lineno">   19</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a6f8059414f0228f0256115e024eeed4b">fd</a> &lt; 0) <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   20</span> </div>
+<div class="line"><span class="lineno">   21</span>    <span class="keyword">struct </span>termios tty;</div>
+<div class="line"><span class="lineno">   22</span>    tcgetattr(<a class="code hl_variable" href="#a6f8059414f0228f0256115e024eeed4b">fd</a>, &amp;tty);</div>
+<div class="line"><span class="lineno">   23</span>    cfsetispeed(&amp;tty, B9600);</div>
+<div class="line"><span class="lineno">   24</span>    tty.c_cflag = CS8 | CREAD | CLOCAL;</div>
+<div class="line"><span class="lineno">   25</span>    tty.c_iflag = IGNPAR;</div>
+<div class="line"><span class="lineno">   26</span>    tty.c_oflag = 0;</div>
+<div class="line"><span class="lineno">   27</span>    tty.c_lflag = 0;</div>
+<div class="line"><span class="lineno">   28</span>    tcsetattr(<a class="code hl_variable" href="#a6f8059414f0228f0256115e024eeed4b">fd</a>, TCSANOW, &amp;tty);</div>
+<div class="line"><span class="lineno">   29</span> </div>
+<div class="line"><span class="lineno">   30</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   31</span>}</div>
+</div><!-- fragment --><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="serial__controller_8c_a32987d5f41813dab50950a04f1092dd2_icgraph.png" border="0" usemap="#aserial__controller_8c_a32987d5f41813dab50950a04f1092dd2_icgraph" loading="lazy" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a id="a59274d42bfb8a59925cc914e46c82d70" name="a59274d42bfb8a59925cc914e46c82d70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59274d42bfb8a59925cc914e46c82d70">&#9670;&#160;</a></span>controller_poll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void controller_poll </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structControllerState.html">ControllerState</a> *</td>          <td class="paramname"><span class="paramname"><em>state</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="serial__controller_8c_source.html#l00033">33</a> of file <a class="el" href="serial__controller_8c_source.html">serial_controller.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   33</span>                                             {</div>
+<div class="line"><span class="lineno">   34</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a6f8059414f0228f0256115e024eeed4b">fd</a> &lt; 0) <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">   35</span> </div>
+<div class="line"><span class="lineno">   36</span>    <span class="keywordtype">char</span> c;</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keywordflow">while</span> (read(<a class="code hl_variable" href="#a6f8059414f0228f0256115e024eeed4b">fd</a>, &amp;c, 1) == 1) {</div>
+<div class="line"><span class="lineno">   38</span>        <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;\n&#39;</span>) {</div>
+<div class="line"><span class="lineno">   39</span>            <a class="code hl_variable" href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a>[<a class="code hl_variable" href="#a7666bbf00997cc13da27d55cb05d27c4">buf_len</a>] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">   40</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a7666bbf00997cc13da27d55cb05d27c4">buf_len</a> &gt; 0 &amp;&amp; <a class="code hl_variable" href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a>[<a class="code hl_variable" href="#a7666bbf00997cc13da27d55cb05d27c4">buf_len</a>-1] == <span class="charliteral">&#39;\r&#39;</span>)</div>
+<div class="line"><span class="lineno">   41</span>                <a class="code hl_variable" href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a>[--<a class="code hl_variable" href="#a7666bbf00997cc13da27d55cb05d27c4">buf_len</a>] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">   42</span> </div>
+<div class="line"><span class="lineno">   43</span>            <span class="keywordflow">if</span>      (strcmp(<a class="code hl_variable" href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a>, <span class="stringliteral">&quot;UP&quot;</span>)      == 0) state-&gt;<a class="code hl_variable" href="structControllerState.html#a2522ce5af121e4bb0a8d5737c889924b">up</a>      = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   44</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(<a class="code hl_variable" href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a>, <span class="stringliteral">&quot;DOWN&quot;</span>)    == 0) state-&gt;<a class="code hl_variable" href="structControllerState.html#a85cbcb3e21fe589e6e7d683678b0e10c">down</a>    = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   45</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(<a class="code hl_variable" href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a>, <span class="stringliteral">&quot;LEFT&quot;</span>)    == 0) state-&gt;<a class="code hl_variable" href="structControllerState.html#a1c654b7f90cd9f3535eae8491a0af20b">left</a>    = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   46</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(<a class="code hl_variable" href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a>, <span class="stringliteral">&quot;RIGHT&quot;</span>)   == 0) state-&gt;<a class="code hl_variable" href="structControllerState.html#a7dbe53cf8afc343cca9dd11fb4e7ac67">right</a>   = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   47</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(<a class="code hl_variable" href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a>, <span class="stringliteral">&quot;ACTION1&quot;</span>) == 0) state-&gt;<a class="code hl_variable" href="structControllerState.html#a2d4005ff9b6db8a2a193f34e1f61128a">action1</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   48</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(<a class="code hl_variable" href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a>, <span class="stringliteral">&quot;ACTION2&quot;</span>) == 0) state-&gt;<a class="code hl_variable" href="structControllerState.html#ae47ad12e418e3a9e51e03594e66f3140">action2</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   49</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(<a class="code hl_variable" href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a>, <span class="stringliteral">&quot;ACTION3&quot;</span>) == 0) state-&gt;<a class="code hl_variable" href="structControllerState.html#af82ef4cc25bb3951ff9954c83dec09ed">action3</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   50</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(<a class="code hl_variable" href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a>, <span class="stringliteral">&quot;ACTION4&quot;</span>) == 0) state-&gt;<a class="code hl_variable" href="structControllerState.html#a3c1a08da444b0111354236b1af7d98ae">action4</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   51</span> </div>
+<div class="line"><span class="lineno">   52</span>            <a class="code hl_variable" href="#a7666bbf00997cc13da27d55cb05d27c4">buf_len</a> = 0;</div>
+<div class="line"><span class="lineno">   53</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   54</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a7666bbf00997cc13da27d55cb05d27c4">buf_len</a> &lt; 63) <a class="code hl_variable" href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a>[<a class="code hl_variable" href="#a7666bbf00997cc13da27d55cb05d27c4">buf_len</a>++] = c;</div>
+<div class="line"><span class="lineno">   55</span>        }</div>
+<div class="line"><span class="lineno">   56</span>    }</div>
+<div class="line"><span class="lineno">   57</span>}</div>
+<div class="ttc" id="aserial__controller_8c_html_a7666bbf00997cc13da27d55cb05d27c4"><div class="ttname"><a href="#a7666bbf00997cc13da27d55cb05d27c4">buf_len</a></div><div class="ttdeci">int buf_len</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8c_source.html#l00015">serial_controller.c:15</a></div></div>
+<div class="ttc" id="aserial__controller_8c_html_ab4a03da084e15d3319078d4f4a6bf3ff"><div class="ttname"><a href="#ab4a03da084e15d3319078d4f4a6bf3ff">buffer</a></div><div class="ttdeci">char buffer[64]</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8c_source.html#l00014">serial_controller.c:14</a></div></div>
+<div class="ttc" id="astructControllerState_html_a1c654b7f90cd9f3535eae8491a0af20b"><div class="ttname"><a href="structControllerState.html#a1c654b7f90cd9f3535eae8491a0af20b">ControllerState::left</a></div><div class="ttdeci">bool left</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8h_source.html#l00007">serial_controller.h:7</a></div></div>
+<div class="ttc" id="astructControllerState_html_a2522ce5af121e4bb0a8d5737c889924b"><div class="ttname"><a href="structControllerState.html#a2522ce5af121e4bb0a8d5737c889924b">ControllerState::up</a></div><div class="ttdeci">bool up</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8h_source.html#l00007">serial_controller.h:7</a></div></div>
+<div class="ttc" id="astructControllerState_html_a2d4005ff9b6db8a2a193f34e1f61128a"><div class="ttname"><a href="structControllerState.html#a2d4005ff9b6db8a2a193f34e1f61128a">ControllerState::action1</a></div><div class="ttdeci">bool action1</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8h_source.html#l00008">serial_controller.h:8</a></div></div>
+<div class="ttc" id="astructControllerState_html_a3c1a08da444b0111354236b1af7d98ae"><div class="ttname"><a href="structControllerState.html#a3c1a08da444b0111354236b1af7d98ae">ControllerState::action4</a></div><div class="ttdeci">bool action4</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8h_source.html#l00008">serial_controller.h:8</a></div></div>
+<div class="ttc" id="astructControllerState_html_a7dbe53cf8afc343cca9dd11fb4e7ac67"><div class="ttname"><a href="structControllerState.html#a7dbe53cf8afc343cca9dd11fb4e7ac67">ControllerState::right</a></div><div class="ttdeci">bool right</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8h_source.html#l00007">serial_controller.h:7</a></div></div>
+<div class="ttc" id="astructControllerState_html_a85cbcb3e21fe589e6e7d683678b0e10c"><div class="ttname"><a href="structControllerState.html#a85cbcb3e21fe589e6e7d683678b0e10c">ControllerState::down</a></div><div class="ttdeci">bool down</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8h_source.html#l00007">serial_controller.h:7</a></div></div>
+<div class="ttc" id="astructControllerState_html_ae47ad12e418e3a9e51e03594e66f3140"><div class="ttname"><a href="structControllerState.html#ae47ad12e418e3a9e51e03594e66f3140">ControllerState::action2</a></div><div class="ttdeci">bool action2</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8h_source.html#l00008">serial_controller.h:8</a></div></div>
+<div class="ttc" id="astructControllerState_html_af82ef4cc25bb3951ff9954c83dec09ed"><div class="ttname"><a href="structControllerState.html#af82ef4cc25bb3951ff9954c83dec09ed">ControllerState::action3</a></div><div class="ttdeci">bool action3</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8h_source.html#l00008">serial_controller.h:8</a></div></div>
+</div><!-- fragment --><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="serial__controller_8c_a59274d42bfb8a59925cc914e46c82d70_icgraph.png" border="0" usemap="#aserial__controller_8c_a59274d42bfb8a59925cc914e46c82d70_icgraph" loading="lazy" alt=""/></div>
+</div>
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a7666bbf00997cc13da27d55cb05d27c4" name="a7666bbf00997cc13da27d55cb05d27c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7666bbf00997cc13da27d55cb05d27c4">&#9670;&#160;</a></span>buf_len</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int buf_len = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="serial__controller_8c_source.html#l00015">15</a> of file <a class="el" href="serial__controller_8c_source.html">serial_controller.c</a>.</p>
+
+</div>
+</div>
+<a id="ab4a03da084e15d3319078d4f4a6bf3ff" name="ab4a03da084e15d3319078d4f4a6bf3ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4a03da084e15d3319078d4f4a6bf3ff">&#9670;&#160;</a></span>buffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char buffer[64]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="serial__controller_8c_source.html#l00014">14</a> of file <a class="el" href="serial__controller_8c_source.html">serial_controller.c</a>.</p>
+
+</div>
+</div>
+<a id="a6f8059414f0228f0256115e024eeed4b" name="a6f8059414f0228f0256115e024eeed4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f8059414f0228f0256115e024eeed4b">&#9670;&#160;</a></span>fd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fd = -1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="serial__controller_8c_source.html#l00013">13</a> of file <a class="el" href="serial__controller_8c_source.html">serial_controller.c</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
@@ -121,7 +310,7 @@ void&#160;</td><td class="memItemRight"><b>controller_close</b> ()</td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>src</b></li><li class="navelem"><a href="serial__controller_8c.html">serial_controller.c</a></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="serial__controller_8c.html">serial_controller.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

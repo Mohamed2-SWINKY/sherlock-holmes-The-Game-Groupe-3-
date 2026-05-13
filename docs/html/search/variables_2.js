@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['c_0',['C',['../structEnigme.html#a5b7781b9dc8a1de27fc9f62ec279cd0e',1,'Enigme::C'],['../structQuizQuestion.html#a3607e3b0adb47fc6a20d784d19b2b6e3',1,'QuizQuestion::C']]],
+  ['cam1x_1',['cam1X',['../structGameContext.html#a537fad1c48b62f72190ea2404c8c7c41',1,'GameContext']]],
+  ['cam1y_2',['cam1Y',['../structGameContext.html#a0f6307bb92692a954e1764429095ce26',1,'GameContext']]],
+  ['cam2x_3',['cam2X',['../structGameContext.html#aa33ea0a7ba1c846696fe68529fbd7fd9',1,'GameContext']]],
+  ['cam2y_4',['cam2Y',['../structGameContext.html#a67e986628258d4d202927cb12e0c13b7',1,'GameContext']]],
+  ['camerafocustimer_5',['cameraFocusTimer',['../structGameContext.html#ab9543a3ff72a2023b50a4c882c48d610',1,'GameContext']]],
+  ['cameraoffset_6',['cameraOffset',['../structGameContext.html#a8817edfecf952f2ffdb108161042acde',1,'GameContext']]],
+  ['cameratarget_7',['cameraTarget',['../structGameContext.html#aac452dfa28fe6f9ba24f874b29435b2a',1,'GameContext']]],
+  ['charselectbg_8',['charSelectBg',['../structsubMenu.html#a40c4f504b305e308ff5623f2da9f90e0',1,'subMenu']]],
+  ['charselectbtn_9',['charSelectBtn',['../structsubMenu.html#acadba1d5855f00b38a9916a4407d7d85',1,'subMenu']]],
+  ['collected_10',['collected',['../structKey.html#a925277eb80002aae0872fa8fd3aa51c9',1,'Key::collected'],['../structStar.html#a13bfc752c25df60cc8383838b2644037',1,'Star::collected']]],
+  ['color_11',['color',['../structPlayer.html#ad2ac07f900cc99b0248c36ef083f778f',1,'Player::color'],['../structParticle.html#a4b7081d6fd98421026b3d0e86d2af61c',1,'Particle::color']]],
+  ['correct_12',['correct',['../structPuzzle.html#ad79b0970aa1920b173006d4beacd541d',1,'Puzzle::correct'],['../structPiece.html#ab8f8696e6d9d7d6a5b68368c2a16f70c',1,'Piece::correct']]],
+  ['correcte_13',['correcte',['../structQuizQuestion.html#a3b1b3f068ab52e3c16ef5eab23e1b880',1,'QuizQuestion']]],
+  ['current_14',['current',['../structHealth.html#a6dad09bae8cc730f90fed6bffc6f2e95',1,'Health']]],
+  ['currentframe_15',['currentFrame',['../structAnimation.html#adc7df29e613689f29ddac3316b2a509d',1,'Animation::currentFrame'],['../structEnemyAnimation.html#adaaab42374eb561481363b26744ef6c3',1,'EnemyAnimation::currentFrame']]],
+  ['currentquestionidx_16',['currentQuestionIdx',['../structEnigme.html#aeceb32d71483dd9088ec0be4c52e6101',1,'Enigme']]],
+  ['currentstate_17',['currentState',['../structPlayer.html#aef674165c8ec216fa44250dc91fc8427',1,'Player::currentState'],['../structGameContext.html#a7ce4ff062494ee25e38edece6db71d1c',1,'GameContext::currentState']]],
+  ['cutscenealpha_18',['cutsceneAlpha',['../structGameContext.html#a73a21f2be137693dce13091dd9c0c630',1,'GameContext']]],
+  ['cutscenel2alpha_19',['cutsceneL2Alpha',['../structGameContext.html#ab0c2dd889c7bcc95dba1c46a16840986',1,'GameContext']]],
+  ['cutscenel2timer_20',['cutsceneL2Timer',['../structGameContext.html#a73d4cf3598f723d0c8e77cdc5219f5bc',1,'GameContext']]],
+  ['cutscenephase2alpha_21',['cutscenePhase2Alpha',['../structGameContext.html#a2ee15de62c0afc08130638e59e12fe83',1,'GameContext']]],
+  ['cutscenephase2timer_22',['cutscenePhase2Timer',['../structGameContext.html#a4212406483dc6e6b52c522f49dd8c04d',1,'GameContext']]],
+  ['cutscenetimer_23',['cutsceneTimer',['../structGameContext.html#a0e5707c0cb9da8a827e9e0f68c9ec365',1,'GameContext']]]
+];

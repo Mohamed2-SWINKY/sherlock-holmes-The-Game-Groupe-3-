@@ -1,9 +1,23 @@
 var searchData=
 [
-  ['piece_0',['Piece',['../structPiece.html',1,'']]],
-  ['player_1',['Player',['../structPlayer.html',1,'']]],
-  ['players_2ec_2',['players.c',['../players_8c.html',1,'']]],
-  ['puzzle_3',['Puzzle',['../structPuzzle.html',1,'']]],
-  ['puzzle_2ec_4',['puzzle.c',['../puzzle_8c.html',1,'']]],
-  ['puzzlestate_5',['PuzzleState',['../structPuzzleState.html',1,'']]]
+  ['key_0',['Key',['../structKey.html',1,'']]],
+  ['key_5fid_1',['key_id',['../structMapDoor.html#a6f0b5a109d081dbe5cb1c9a9a21bd11e',1,'MapDoor']]],
+  ['keyattack_2',['keyAttack',['../structPlayer.html#ae4e0b4165c1a5e539f1bb18ee43eb972',1,'Player']]],
+  ['keycount_3',['keyCount',['../structPlayer.html#a54856d5e3401072370e2cda06ef88ffb',1,'Player']]],
+  ['keydown_4',['keyDown',['../structPlayer.html#ad41286ebca0a63dcf859a60ff5e271f2',1,'Player']]],
+  ['keyjump_5',['keyJump',['../structPlayer.html#ae348e3b45a23e7044905deb17edd967c',1,'Player']]],
+  ['keyleft_6',['keyLeft',['../structPlayer.html#a4542dcfe539173f0a97ca561660fee3f',1,'Player']]],
+  ['keyright_7',['keyRight',['../structPlayer.html#a2f8f5604355f0e5e453da62012259f04',1,'Player']]],
+  ['keys_8',['keys',['../structGameContext.html#ace3d2206594bf5d6e2fb8fe7c2baa85a',1,'GameContext']]],
+  ['keys1_9',['keys1',['../structMapData.html#a5fe14014e5fd93fb456bd975642f528c',1,'MapData']]],
+  ['keys1_5fcnt_10',['keys1_cnt',['../structMapData.html#aa6a7937c60d9ae25d6277dc3b3b625db',1,'MapData']]],
+  ['keys2_11',['keys2',['../structMapData.html#a01cb1b68a81fc335e5fcbbfad9ff6234',1,'MapData']]],
+  ['keys2_5fcnt_12',['keys2_cnt',['../structMapData.html#a59513e85b76f7fe1055834ccd3f49fc3',1,'MapData']]],
+  ['keysprint_13',['keySprint',['../structPlayer.html#a8fb3579089e21c7a15c80f3b2ad3d8ba',1,'Player']]],
+  ['keytexture_14',['keyTexture',['../structGameContext.html#a02121de6504c6cc62bbe89fa3b746dab',1,'GameContext']]],
+  ['keyup_15',['keyUp',['../structPlayer.html#a57e04f121c97c7b536c724b0fba9ccbf',1,'Player']]],
+  ['knockbacktimer_16',['knockbackTimer',['../structEnemy.html#af0ad0e39f67f7fd4a1006d822857fac9',1,'Enemy']]],
+  ['knockbackx_17',['knockbackX',['../structPlayer.html#aa72d4c68f4ba62df253eaccf97a8970d',1,'Player::knockbackX'],['../structEnemy.html#a4af19bd0d24509a39ac613ab4bc701d4',1,'Enemy::knockbackX']]],
+  ['knockbackxtimer_18',['knockbackXTimer',['../structPlayer.html#afb5610ca757ae2b2ec7f1df040dbb47a',1,'Player']]],
+  ['knockbacky_19',['knockbackY',['../structEnemy.html#a142fe6561db87bc13e0b327638fa6705',1,'Enemy']]]
 ];

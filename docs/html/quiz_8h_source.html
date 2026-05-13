@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: src/quiz.h Source File</title>
+<title>SDL Game Project: src/quiz.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,7 +92,7 @@ $(function(){initNavTree('quiz_8h_source.html','',''); });
   <div class="headertitle"><div class="title">quiz.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef QUIZ_H</span></div>
+<a href="quiz_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef QUIZ_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define QUIZ_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
@@ -100,35 +100,45 @@ $(function(){initNavTree('quiz_8h_source.html','',''); });
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;SDL2/SDL_mixer.h&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;SDL2/SDL_image.h&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define MAX 50</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="quiz_8h.html#a392fb874e547e582e9c66a08a1f23326">    9</a></span><span class="preprocessor">#define MAX 50</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="foldopen" id="foldopen00011" data-start="{" data-end="};">
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="structQuizQuestion.html">   11</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">char</span> question[256];</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordtype">char</span> A[100];</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">char</span> B[100];</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">char</span> C[100];</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">char</span> correcte;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">int</span> dejaVu;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="structQuizQuestion.html#a93157da5a0dda82b16a220b6cd96a252">   12</a></span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="structQuizQuestion.html#a93157da5a0dda82b16a220b6cd96a252">question</a>[256];</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="structQuizQuestion.html#a386e8058d05b44e0f8b8fc37e9ab7438">   13</a></span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="structQuizQuestion.html#a386e8058d05b44e0f8b8fc37e9ab7438">A</a>[100];</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="structQuizQuestion.html#a4a8296407baefc198d93d32acbb957e7">   14</a></span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="structQuizQuestion.html#a4a8296407baefc198d93d32acbb957e7">B</a>[100];</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structQuizQuestion.html#a3607e3b0adb47fc6a20d784d19b2b6e3">   15</a></span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="structQuizQuestion.html#a3607e3b0adb47fc6a20d784d19b2b6e3">C</a>[100];</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structQuizQuestion.html#a3b1b3f068ab52e3c16ef5eab23e1b880">   16</a></span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="structQuizQuestion.html#a3b1b3f068ab52e3c16ef5eab23e1b880">correcte</a>;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="structQuizQuestion.html#a996cc6eb32bc2f9400600edad98d68fe">   17</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structQuizQuestion.html#a996cc6eb32bc2f9400600edad98d68fe">dejaVu</a>;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>} <a class="code hl_struct" href="structQuizQuestion.html">QuizQuestion</a>;</div>
 </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">int</span> charger(<a class="code hl_struct" href="structQuizQuestion.html">QuizQuestion</a> t[], <span class="keywordtype">int</span> *n);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">int</span> generer(<a class="code hl_struct" href="structQuizQuestion.html">QuizQuestion</a> t[], <span class="keywordtype">int</span> n);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">int</span> <a class="code hl_function" href="quiz_8h.html#a52277f87518c88503d48f696de545d4a">charger</a>(<a class="code hl_struct" href="structQuizQuestion.html">QuizQuestion</a> t[], <span class="keywordtype">int</span> *n);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">int</span> <a class="code hl_function" href="quiz_8h.html#a277f345a6a7a8900739e3e48ae287e93">generer</a>(<a class="code hl_struct" href="structQuizQuestion.html">QuizQuestion</a> t[], <span class="keywordtype">int</span> n);</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>SDL_Texture* renderText(<span class="keywordtype">char</span> *msg, TTF_Font *font, SDL_Color color, SDL_Renderer *renderer, Uint32 wrapLength);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">void</span> drawText(SDL_Texture *tex, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, SDL_Renderer *renderer);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>SDL_Texture* <a class="code hl_function" href="quiz_8h.html#a2adc244426ce6160f171ca72f09b3b0b">renderText</a>(<span class="keywordtype">char</span> *msg, TTF_Font *font, SDL_Color color, SDL_Renderer *renderer, Uint32 wrapLength);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">void</span> <a class="code hl_function" href="quiz_8h.html#a17f9bf44b7126df990528a4e72d78f77">drawText</a>(SDL_Texture *tex, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, SDL_Renderer *renderer);</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="ttc" id="astructQuizQuestion_html"><div class="ttname"><a href="structQuizQuestion.html">QuizQuestion</a></div><div class="ttdef"><b>Definition</b> quiz.h:11</div></div>
+<div class="ttc" id="aquiz_8h_html_a17f9bf44b7126df990528a4e72d78f77"><div class="ttname"><a href="quiz_8h.html#a17f9bf44b7126df990528a4e72d78f77">drawText</a></div><div class="ttdeci">void drawText(SDL_Texture *tex, int x, int y, SDL_Renderer *renderer)</div><div class="ttdef"><b>Definition</b> <a href="quiz_8c_source.html#l00057">quiz.c:57</a></div></div>
+<div class="ttc" id="aquiz_8h_html_a277f345a6a7a8900739e3e48ae287e93"><div class="ttname"><a href="quiz_8h.html#a277f345a6a7a8900739e3e48ae287e93">generer</a></div><div class="ttdeci">int generer(QuizQuestion t[], int n)</div><div class="ttdef"><b>Definition</b> <a href="quiz_8c_source.html#l00030">quiz.c:30</a></div></div>
+<div class="ttc" id="aquiz_8h_html_a2adc244426ce6160f171ca72f09b3b0b"><div class="ttname"><a href="quiz_8h.html#a2adc244426ce6160f171ca72f09b3b0b">renderText</a></div><div class="ttdeci">SDL_Texture * renderText(char *msg, TTF_Font *font, SDL_Color color, SDL_Renderer *renderer, Uint32 wrapLength)</div><div class="ttdef"><b>Definition</b> <a href="quiz_8c_source.html#l00043">quiz.c:43</a></div></div>
+<div class="ttc" id="aquiz_8h_html_a52277f87518c88503d48f696de545d4a"><div class="ttname"><a href="quiz_8h.html#a52277f87518c88503d48f696de545d4a">charger</a></div><div class="ttdeci">int charger(QuizQuestion t[], int *n)</div><div class="ttdef"><b>Definition</b> <a href="quiz_8c_source.html#l00008">quiz.c:8</a></div></div>
+<div class="ttc" id="astructQuizQuestion_html"><div class="ttname"><a href="structQuizQuestion.html">QuizQuestion</a></div><div class="ttdef"><b>Definition</b> <a href="#l00011">quiz.h:11</a></div></div>
+<div class="ttc" id="astructQuizQuestion_html_a3607e3b0adb47fc6a20d784d19b2b6e3"><div class="ttname"><a href="structQuizQuestion.html#a3607e3b0adb47fc6a20d784d19b2b6e3">QuizQuestion::C</a></div><div class="ttdeci">char C[100]</div><div class="ttdef"><b>Definition</b> <a href="#l00015">quiz.h:15</a></div></div>
+<div class="ttc" id="astructQuizQuestion_html_a386e8058d05b44e0f8b8fc37e9ab7438"><div class="ttname"><a href="structQuizQuestion.html#a386e8058d05b44e0f8b8fc37e9ab7438">QuizQuestion::A</a></div><div class="ttdeci">char A[100]</div><div class="ttdef"><b>Definition</b> <a href="#l00013">quiz.h:13</a></div></div>
+<div class="ttc" id="astructQuizQuestion_html_a3b1b3f068ab52e3c16ef5eab23e1b880"><div class="ttname"><a href="structQuizQuestion.html#a3b1b3f068ab52e3c16ef5eab23e1b880">QuizQuestion::correcte</a></div><div class="ttdeci">char correcte</div><div class="ttdef"><b>Definition</b> <a href="#l00016">quiz.h:16</a></div></div>
+<div class="ttc" id="astructQuizQuestion_html_a4a8296407baefc198d93d32acbb957e7"><div class="ttname"><a href="structQuizQuestion.html#a4a8296407baefc198d93d32acbb957e7">QuizQuestion::B</a></div><div class="ttdeci">char B[100]</div><div class="ttdef"><b>Definition</b> <a href="#l00014">quiz.h:14</a></div></div>
+<div class="ttc" id="astructQuizQuestion_html_a93157da5a0dda82b16a220b6cd96a252"><div class="ttname"><a href="structQuizQuestion.html#a93157da5a0dda82b16a220b6cd96a252">QuizQuestion::question</a></div><div class="ttdeci">char question[256]</div><div class="ttdef"><b>Definition</b> <a href="#l00012">quiz.h:12</a></div></div>
+<div class="ttc" id="astructQuizQuestion_html_a996cc6eb32bc2f9400600edad98d68fe"><div class="ttname"><a href="structQuizQuestion.html#a996cc6eb32bc2f9400600edad98d68fe">QuizQuestion::dejaVu</a></div><div class="ttdeci">int dejaVu</div><div class="ttdef"><b>Definition</b> <a href="#l00017">quiz.h:17</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>src</b></li><li class="navelem"><b>quiz.h</b></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="quiz_8h.html">quiz.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

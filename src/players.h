@@ -80,6 +80,17 @@
 #define STATE_CUTSCENE_BOSS_PHASE2 15
 #define STATE_SLIDESHOW            16 
 #define STATE_ENDING_CHOICE 17
+#define STATE_DIALOGUE 18
+#define STATE_POSTER_VIEW  19
+
+
+typedef struct {
+    const char *text;
+    int speaker; // 0 = Player1, 1 = Player2
+} DialogueLine;
+
+#define MAX_DIALOGUE_LINES 20
+
 
 #define ZOOM_FACTOR 2.0f
 #define MAX_PARTICLES 256
@@ -259,6 +270,14 @@ typedef struct {
     int      visible;
 } Star;
 
+
+typedef struct {
+    SDL_Rect rect;
+    int visible;
+    int taken; // prevents multiple triggers
+} Poster;
+
+
 typedef struct {
     SDL_Window *window;
     SDL_Renderer *renderer;
@@ -344,6 +363,28 @@ typedef struct {
     int          slideshowTimer;
     int          slideshowFading;
     int endingChoice; // 1 = surrender, 2 = secret
+    DialogueLine dialogue[MAX_DIALOGUE_LINES];
+    int dialogueCount;
+    int currentLine;
+    int dialogueActive;
+    float dialogueZoomTimer;
+    Poster poster;
+    SDL_Texture *posterTexture;
+    int posterTriggered;
+    int lastKeyPickedIndex;   // <-- add this line
+    Mix_Chunk *dialogueSound;
+    Mix_Chunk *heartBeatSound;
+    int fadeAlpha;      // 0 → 255
+    int isFading;       // 0 = no, 1 = active
+    int fadeDirection;  // 1 = fade in, -1 = fade out
+    Mix_Music *endingMusic;
+    const char *endingDialogue[10];
+    int endingDialogueCount;
+    int endingDialogueIndex;
+    int endingInDialogue; // 1 = showing dialogue, 0 = showing choices
+    int endingVisibleChars;
+    int endingTextTimer;
+    SDL_Texture *endingBackground;
 } GameContext;
 
 SDL_Texture* loadTexture(const char* path, SDL_Renderer* renderer);

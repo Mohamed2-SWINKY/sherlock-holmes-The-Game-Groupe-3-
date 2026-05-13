@@ -1,0 +1,13 @@
+var searchData=
+[
+  ['sauvegarder_5fjeu_0',['sauvegarder_jeu',['../minimap_8c.html#aa212a17caf3c5cc8f16a19b693028ce8',1,'sauvegarder_jeu(MiniMap m, int p1_score, int p2_score, int p1_hp, int p2_hp, Uint32 elapsed, int p1_keys, int p2_keys, char *nomF):&#160;minimap.c'],['../minimap_8h.html#aa212a17caf3c5cc8f16a19b693028ce8',1,'sauvegarder_jeu(MiniMap m, int p1_score, int p2_score, int p1_hp, int p2_hp, Uint32 elapsed, int p1_keys, int p2_keys, char *nomF):&#160;minimap.c']]],
+  ['scale_5frect_1',['scale_rect',['../players_8c.html#aeb3403246e964443c8196aa57d85bdd5',1,'scale_rect(SDL_Rect rect, float scale):&#160;players.c'],['../players_8h.html#aeb3403246e964443c8196aa57d85bdd5',1,'scale_rect(SDL_Rect rect, float scale):&#160;players.c']]],
+  ['scalerect_2',['scaleRect',['../assets_2enigme_2enigme_8c.html#a2fc4114aa557dab329b36b4c989f99cb',1,'scaleRect(SDL_Rect r, float scale):&#160;enigme.c'],['../src_2enigme_8c.html#a627a0fdbf3490c9f4ac8eef0e0aa4820',1,'scaleRect(SDL_Rect r, float scale):&#160;enigme.c']]],
+  ['setup_5flevel1_3',['setup_level1',['../map_8c.html#a4185de338828ec39553abcf324e40ea1',1,'setup_level1(MapData *m):&#160;map.c'],['../map_8h.html#a4185de338828ec39553abcf324e40ea1',1,'setup_level1(MapData *m):&#160;map.c']]],
+  ['setup_5flevel2_4',['setup_level2',['../map_8c.html#af8a893ce0f7f3bd11b5db905c3e6ec1c',1,'setup_level2(MapData *m):&#160;map.c'],['../map_8h.html#af8a893ce0f7f3bd11b5db905c3e6ec1c',1,'setup_level2(MapData *m):&#160;map.c']]],
+  ['star_5finit_5',['Star_Init',['../enemy_8c.html#a4956d96ef2a108d6d07dc1a968de3ee5',1,'Star_Init(Game *g):&#160;enemy.c'],['../enemy_8h.html#a4956d96ef2a108d6d07dc1a968de3ee5',1,'Star_Init(Game *g):&#160;enemy.c']]],
+  ['star_5frender_6',['Star_Render',['../enemy_8c.html#a5dd773620b0dbed56373c3af9818256f',1,'Star_Render(Game *g):&#160;enemy.c'],['../enemy_8h.html#a5dd773620b0dbed56373c3af9818256f',1,'Star_Render(Game *g):&#160;enemy.c']]],
+  ['star_5frespawn_7',['Star_Respawn',['../enemy_8c.html#aa1ad3cec9ed2bf727d971054bc880687',1,'Star_Respawn(Game *g):&#160;enemy.c'],['../enemy_8h.html#aa1ad3cec9ed2bf727d971054bc880687',1,'Star_Respawn(Game *g):&#160;enemy.c']]],
+  ['star_5fupdate_8',['Star_Update',['../enemy_8c.html#afe805fc069ca59547c8ca284f0862d49',1,'Star_Update(Game *g):&#160;enemy.c'],['../enemy_8h.html#afe805fc069ca59547c8ca284f0862d49',1,'Star_Update(Game *g):&#160;enemy.c']]],
+  ['submenufn_9',['subMenuFn',['../players_8c.html#a1589b0b06de5574f15e7e5f88c3815d3',1,'subMenuFn(GameContext *ctx):&#160;players.c'],['../players_8h.html#a1589b0b06de5574f15e7e5f88c3815d3',1,'subMenuFn(GameContext *ctx):&#160;players.c']]]
+];

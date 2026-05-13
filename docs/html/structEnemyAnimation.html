@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: EnemyAnimation Struct Reference</title>
+<title>SDL Game Project: EnemyAnimation Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,26 +92,152 @@ $(function(){initNavTree('structEnemyAnimation.html','',''); });
   <div class="headertitle"><div class="title">EnemyAnimation Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="players_8h_source.html">players.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a5dfd41dbe2a03094d29c73b083553254" id="r_a5dfd41dbe2a03094d29c73b083553254"><td class="memItemLeft"><a id="a5dfd41dbe2a03094d29c73b083553254" name="a5dfd41dbe2a03094d29c73b083553254"></a>
-EnemyAnim&#160;</td><td class="memItemRight"><b>state</b></td></tr>
-<tr class="memitem:a2b13d723f0b5943f3cc3feb81ce666c4" id="r_a2b13d723f0b5943f3cc3feb81ce666c4"><td class="memItemLeft"><a id="a2b13d723f0b5943f3cc3feb81ce666c4" name="a2b13d723f0b5943f3cc3feb81ce666c4"></a>
-EnemyDir&#160;</td><td class="memItemRight"><b>dir</b></td></tr>
-<tr class="memitem:adaaab42374eb561481363b26744ef6c3" id="r_adaaab42374eb561481363b26744ef6c3"><td class="memItemLeft"><a id="adaaab42374eb561481363b26744ef6c3" name="adaaab42374eb561481363b26744ef6c3"></a>
-int&#160;</td><td class="memItemRight"><b>currentFrame</b></td></tr>
-<tr class="memitem:acd772cb4738c3a74b4672442be35cab6" id="r_acd772cb4738c3a74b4672442be35cab6"><td class="memItemLeft"><a id="acd772cb4738c3a74b4672442be35cab6" name="acd772cb4738c3a74b4672442be35cab6"></a>
-int&#160;</td><td class="memItemRight"><b>frameCounter</b></td></tr>
-<tr class="memitem:a55823005aa9cd8ae7fb89f73e90d80fc" id="r_a55823005aa9cd8ae7fb89f73e90d80fc"><td class="memItemLeft"><a id="a55823005aa9cd8ae7fb89f73e90d80fc" name="a55823005aa9cd8ae7fb89f73e90d80fc"></a>
-int&#160;</td><td class="memItemRight"><b>maxFrames</b></td></tr>
-<tr class="memitem:af5a8a1d1757bbb54109650522936d156" id="r_af5a8a1d1757bbb54109650522936d156"><td class="memItemLeft"><a id="af5a8a1d1757bbb54109650522936d156" name="af5a8a1d1757bbb54109650522936d156"></a>
-SDL_RendererFlip&#160;</td><td class="memItemRight"><b>flip</b></td></tr>
-<tr class="memitem:af3ca6a687223ffcea8f3818abc23dcbe" id="r_af3ca6a687223ffcea8f3818abc23dcbe"><td class="memItemLeft"><a id="af3ca6a687223ffcea8f3818abc23dcbe" name="af3ca6a687223ffcea8f3818abc23dcbe"></a>
-int&#160;</td><td class="memItemRight"><b>attackFrame</b></td></tr>
-<tr class="memitem:ad4e4fb11285582ea335c2b4b22e92b8f" id="r_ad4e4fb11285582ea335c2b4b22e92b8f"><td class="memItemLeft"><a id="ad4e4fb11285582ea335c2b4b22e92b8f" name="ad4e4fb11285582ea335c2b4b22e92b8f"></a>
-int&#160;</td><td class="memItemRight"><b>attackCounter</b></td></tr>
+<tr class="memitem:a5dfd41dbe2a03094d29c73b083553254" id="r_a5dfd41dbe2a03094d29c73b083553254"><td class="memItemLeft"><a class="el" href="players_8h.html#a44ee2f94b0bd68262e0f8b1ad3960e6c">EnemyAnim</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5dfd41dbe2a03094d29c73b083553254">state</a></td></tr>
+<tr class="memitem:a2b13d723f0b5943f3cc3feb81ce666c4" id="r_a2b13d723f0b5943f3cc3feb81ce666c4"><td class="memItemLeft"><a class="el" href="players_8h.html#a2e52c0f763c867c0a2ca04ac14975b15">EnemyDir</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2b13d723f0b5943f3cc3feb81ce666c4">dir</a></td></tr>
+<tr class="memitem:adaaab42374eb561481363b26744ef6c3" id="r_adaaab42374eb561481363b26744ef6c3"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#adaaab42374eb561481363b26744ef6c3">currentFrame</a></td></tr>
+<tr class="memitem:acd772cb4738c3a74b4672442be35cab6" id="r_acd772cb4738c3a74b4672442be35cab6"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acd772cb4738c3a74b4672442be35cab6">frameCounter</a></td></tr>
+<tr class="memitem:a55823005aa9cd8ae7fb89f73e90d80fc" id="r_a55823005aa9cd8ae7fb89f73e90d80fc"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a55823005aa9cd8ae7fb89f73e90d80fc">maxFrames</a></td></tr>
+<tr class="memitem:af5a8a1d1757bbb54109650522936d156" id="r_af5a8a1d1757bbb54109650522936d156"><td class="memItemLeft">SDL_RendererFlip&#160;</td><td class="memItemRight"><a class="el" href="#af5a8a1d1757bbb54109650522936d156">flip</a></td></tr>
+<tr class="memitem:af3ca6a687223ffcea8f3818abc23dcbe" id="r_af3ca6a687223ffcea8f3818abc23dcbe"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af3ca6a687223ffcea8f3818abc23dcbe">attackFrame</a></td></tr>
+<tr class="memitem:ad4e4fb11285582ea335c2b4b22e92b8f" id="r_ad4e4fb11285582ea335c2b4b22e92b8f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad4e4fb11285582ea335c2b4b22e92b8f">attackCounter</a></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00219">219</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="ad4e4fb11285582ea335c2b4b22e92b8f" name="ad4e4fb11285582ea335c2b4b22e92b8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4e4fb11285582ea335c2b4b22e92b8f">&#9670;&#160;</a></span>attackCounter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int EnemyAnimation::attackCounter</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00227">227</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="af3ca6a687223ffcea8f3818abc23dcbe" name="af3ca6a687223ffcea8f3818abc23dcbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3ca6a687223ffcea8f3818abc23dcbe">&#9670;&#160;</a></span>attackFrame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int EnemyAnimation::attackFrame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00226">226</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="adaaab42374eb561481363b26744ef6c3" name="adaaab42374eb561481363b26744ef6c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adaaab42374eb561481363b26744ef6c3">&#9670;&#160;</a></span>currentFrame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int EnemyAnimation::currentFrame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00222">222</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a2b13d723f0b5943f3cc3feb81ce666c4" name="a2b13d723f0b5943f3cc3feb81ce666c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b13d723f0b5943f3cc3feb81ce666c4">&#9670;&#160;</a></span>dir</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="players_8h.html#a2e52c0f763c867c0a2ca04ac14975b15">EnemyDir</a> EnemyAnimation::dir</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00221">221</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="af5a8a1d1757bbb54109650522936d156" name="af5a8a1d1757bbb54109650522936d156"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5a8a1d1757bbb54109650522936d156">&#9670;&#160;</a></span>flip</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_RendererFlip EnemyAnimation::flip</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00225">225</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="acd772cb4738c3a74b4672442be35cab6" name="acd772cb4738c3a74b4672442be35cab6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd772cb4738c3a74b4672442be35cab6">&#9670;&#160;</a></span>frameCounter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int EnemyAnimation::frameCounter</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00223">223</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a55823005aa9cd8ae7fb89f73e90d80fc" name="a55823005aa9cd8ae7fb89f73e90d80fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55823005aa9cd8ae7fb89f73e90d80fc">&#9670;&#160;</a></span>maxFrames</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int EnemyAnimation::maxFrames</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00224">224</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a5dfd41dbe2a03094d29c73b083553254" name="a5dfd41dbe2a03094d29c73b083553254"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dfd41dbe2a03094d29c73b083553254">&#9670;&#160;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="players_8h.html#a44ee2f94b0bd68262e0f8b1ad3960e6c">EnemyAnim</a> EnemyAnimation::state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00220">220</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="players_8h_source.html">players.h</a></li>
 </ul>

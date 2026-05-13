@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: MiniMap Struct Reference</title>
+<title>SDL Game Project: MiniMap Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,48 +92,339 @@ $(function(){initNavTree('structMiniMap.html','',''); });
   <div class="headertitle"><div class="title">MiniMap Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="minimap_8h_source.html">minimap.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a5ad9f11a5bb93a579df757eaa7baeba2" id="r_a5ad9f11a5bb93a579df757eaa7baeba2"><td class="memItemLeft"><a id="a5ad9f11a5bb93a579df757eaa7baeba2" name="a5ad9f11a5bb93a579df757eaa7baeba2"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>img_map1</b></td></tr>
-<tr class="memitem:ac0acadd4e78e7260a5c9d86e8be5729e" id="r_ac0acadd4e78e7260a5c9d86e8be5729e"><td class="memItemLeft"><a id="ac0acadd4e78e7260a5c9d86e8be5729e" name="ac0acadd4e78e7260a5c9d86e8be5729e"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>img_map2</b></td></tr>
-<tr class="memitem:a92cf35c686732e38f9dedbf0254f3aff" id="r_a92cf35c686732e38f9dedbf0254f3aff"><td class="memItemLeft"><a id="a92cf35c686732e38f9dedbf0254f3aff" name="a92cf35c686732e38f9dedbf0254f3aff"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>img_point</b></td></tr>
-<tr class="memitem:ae2db619d088dd8c703d8ed311630a403" id="r_ae2db619d088dd8c703d8ed311630a403"><td class="memItemLeft"><a id="ae2db619d088dd8c703d8ed311630a403" name="ae2db619d088dd8c703d8ed311630a403"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>img_point2</b></td></tr>
-<tr class="memitem:a22e10097cebdbe4628eb77f186eb5b45" id="r_a22e10097cebdbe4628eb77f186eb5b45"><td class="memItemLeft"><a id="a22e10097cebdbe4628eb77f186eb5b45" name="a22e10097cebdbe4628eb77f186eb5b45"></a>
-SDL_Surface *&#160;</td><td class="memItemRight"><b>img_mask1</b></td></tr>
-<tr class="memitem:ab71228f1301f6af416b06fd698277450" id="r_ab71228f1301f6af416b06fd698277450"><td class="memItemLeft"><a id="ab71228f1301f6af416b06fd698277450" name="ab71228f1301f6af416b06fd698277450"></a>
-SDL_Surface *&#160;</td><td class="memItemRight"><b>img_mask2</b></td></tr>
-<tr class="memitem:a0f42b6fc8a550d9f3d576bbc1fe3758e" id="r_a0f42b6fc8a550d9f3d576bbc1fe3758e"><td class="memItemLeft"><a id="a0f42b6fc8a550d9f3d576bbc1fe3758e" name="a0f42b6fc8a550d9f3d576bbc1fe3758e"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>img_cadre</b></td></tr>
-<tr class="memitem:acc3b782fbfb2511dc1c08bf56fd1cca0" id="r_acc3b782fbfb2511dc1c08bf56fd1cca0"><td class="memItemLeft"><a id="acc3b782fbfb2511dc1c08bf56fd1cca0" name="acc3b782fbfb2511dc1c08bf56fd1cca0"></a>
-SDL_Rect&#160;</td><td class="memItemRight"><b>pos_map</b></td></tr>
-<tr class="memitem:a1475a41dc6e67489c947c0adbf0baa74" id="r_a1475a41dc6e67489c947c0adbf0baa74"><td class="memItemLeft"><a id="a1475a41dc6e67489c947c0adbf0baa74" name="a1475a41dc6e67489c947c0adbf0baa74"></a>
-SDL_Rect&#160;</td><td class="memItemRight"><b>pos_point</b></td></tr>
-<tr class="memitem:a9fea6822374de6a89adbe1e19490b158" id="r_a9fea6822374de6a89adbe1e19490b158"><td class="memItemLeft"><a id="a9fea6822374de6a89adbe1e19490b158" name="a9fea6822374de6a89adbe1e19490b158"></a>
-SDL_Rect&#160;</td><td class="memItemRight"><b>pos_point2</b></td></tr>
-<tr class="memitem:a9229a26b8f07b14efe316ce270446b33" id="r_a9229a26b8f07b14efe316ce270446b33"><td class="memItemLeft"><a id="a9229a26b8f07b14efe316ce270446b33" name="a9229a26b8f07b14efe316ce270446b33"></a>
-int&#160;</td><td class="memItemRight"><b>joueurX</b></td></tr>
-<tr class="memitem:a9b79e8aee1af33c35e2bc300b0d39900" id="r_a9b79e8aee1af33c35e2bc300b0d39900"><td class="memItemLeft"><a id="a9b79e8aee1af33c35e2bc300b0d39900" name="a9b79e8aee1af33c35e2bc300b0d39900"></a>
-int&#160;</td><td class="memItemRight"><b>joueurY</b></td></tr>
-<tr class="memitem:a7dcc6b379c65c83371a05f8dfa20c5ef" id="r_a7dcc6b379c65c83371a05f8dfa20c5ef"><td class="memItemLeft"><a id="a7dcc6b379c65c83371a05f8dfa20c5ef" name="a7dcc6b379c65c83371a05f8dfa20c5ef"></a>
-int&#160;</td><td class="memItemRight"><b>joueur2X</b></td></tr>
-<tr class="memitem:ac3b725c8aa65757eb715d01d49ce9d42" id="r_ac3b725c8aa65757eb715d01d49ce9d42"><td class="memItemLeft"><a id="ac3b725c8aa65757eb715d01d49ce9d42" name="ac3b725c8aa65757eb715d01d49ce9d42"></a>
-int&#160;</td><td class="memItemRight"><b>joueur2Y</b></td></tr>
-<tr class="memitem:ae307bbbad9909833b252e881cf7ab29c" id="r_ae307bbbad9909833b252e881cf7ab29c"><td class="memItemLeft"><a id="ae307bbbad9909833b252e881cf7ab29c" name="ae307bbbad9909833b252e881cf7ab29c"></a>
-int&#160;</td><td class="memItemRight"><b>num_level</b></td></tr>
-<tr class="memitem:a8cff090ca30eb73ceaff27397d8feada" id="r_a8cff090ca30eb73ceaff27397d8feada"><td class="memItemLeft"><a id="a8cff090ca30eb73ceaff27397d8feada" name="a8cff090ca30eb73ceaff27397d8feada"></a>
-int&#160;</td><td class="memItemRight"><b>shakeTimer</b></td></tr>
-<tr class="memitem:a4209d8ca11ffb96bd725609d89987eb9" id="r_a4209d8ca11ffb96bd725609d89987eb9"><td class="memItemLeft"><a id="a4209d8ca11ffb96bd725609d89987eb9" name="a4209d8ca11ffb96bd725609d89987eb9"></a>
-int&#160;</td><td class="memItemRight"><b>shakeIntensity</b></td></tr>
-<tr class="memitem:a38eb772d147f3db6fdd4a158174535c6" id="r_a38eb772d147f3db6fdd4a158174535c6"><td class="memItemLeft"><a id="a38eb772d147f3db6fdd4a158174535c6" name="a38eb772d147f3db6fdd4a158174535c6"></a>
-int&#160;</td><td class="memItemRight"><b>shakeOffsetX</b></td></tr>
-<tr class="memitem:a0e8462c4ea87f3d092177a99aef4ba97" id="r_a0e8462c4ea87f3d092177a99aef4ba97"><td class="memItemLeft"><a id="a0e8462c4ea87f3d092177a99aef4ba97" name="a0e8462c4ea87f3d092177a99aef4ba97"></a>
-int&#160;</td><td class="memItemRight"><b>shakeOffsetY</b></td></tr>
+<tr class="memitem:a5ad9f11a5bb93a579df757eaa7baeba2" id="r_a5ad9f11a5bb93a579df757eaa7baeba2"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a5ad9f11a5bb93a579df757eaa7baeba2">img_map1</a></td></tr>
+<tr class="memitem:ac0acadd4e78e7260a5c9d86e8be5729e" id="r_ac0acadd4e78e7260a5c9d86e8be5729e"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#ac0acadd4e78e7260a5c9d86e8be5729e">img_map2</a></td></tr>
+<tr class="memitem:a92cf35c686732e38f9dedbf0254f3aff" id="r_a92cf35c686732e38f9dedbf0254f3aff"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a92cf35c686732e38f9dedbf0254f3aff">img_point</a></td></tr>
+<tr class="memitem:ae2db619d088dd8c703d8ed311630a403" id="r_ae2db619d088dd8c703d8ed311630a403"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#ae2db619d088dd8c703d8ed311630a403">img_point2</a></td></tr>
+<tr class="memitem:a22e10097cebdbe4628eb77f186eb5b45" id="r_a22e10097cebdbe4628eb77f186eb5b45"><td class="memItemLeft">SDL_Surface *&#160;</td><td class="memItemRight"><a class="el" href="#a22e10097cebdbe4628eb77f186eb5b45">img_mask1</a></td></tr>
+<tr class="memitem:ab71228f1301f6af416b06fd698277450" id="r_ab71228f1301f6af416b06fd698277450"><td class="memItemLeft">SDL_Surface *&#160;</td><td class="memItemRight"><a class="el" href="#ab71228f1301f6af416b06fd698277450">img_mask2</a></td></tr>
+<tr class="memitem:a0f42b6fc8a550d9f3d576bbc1fe3758e" id="r_a0f42b6fc8a550d9f3d576bbc1fe3758e"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a0f42b6fc8a550d9f3d576bbc1fe3758e">img_cadre</a></td></tr>
+<tr class="memitem:acc3b782fbfb2511dc1c08bf56fd1cca0" id="r_acc3b782fbfb2511dc1c08bf56fd1cca0"><td class="memItemLeft">SDL_Rect&#160;</td><td class="memItemRight"><a class="el" href="#acc3b782fbfb2511dc1c08bf56fd1cca0">pos_map</a></td></tr>
+<tr class="memitem:a1475a41dc6e67489c947c0adbf0baa74" id="r_a1475a41dc6e67489c947c0adbf0baa74"><td class="memItemLeft">SDL_Rect&#160;</td><td class="memItemRight"><a class="el" href="#a1475a41dc6e67489c947c0adbf0baa74">pos_point</a></td></tr>
+<tr class="memitem:a9fea6822374de6a89adbe1e19490b158" id="r_a9fea6822374de6a89adbe1e19490b158"><td class="memItemLeft">SDL_Rect&#160;</td><td class="memItemRight"><a class="el" href="#a9fea6822374de6a89adbe1e19490b158">pos_point2</a></td></tr>
+<tr class="memitem:a9229a26b8f07b14efe316ce270446b33" id="r_a9229a26b8f07b14efe316ce270446b33"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a9229a26b8f07b14efe316ce270446b33">joueurX</a></td></tr>
+<tr class="memitem:a9b79e8aee1af33c35e2bc300b0d39900" id="r_a9b79e8aee1af33c35e2bc300b0d39900"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a9b79e8aee1af33c35e2bc300b0d39900">joueurY</a></td></tr>
+<tr class="memitem:a7dcc6b379c65c83371a05f8dfa20c5ef" id="r_a7dcc6b379c65c83371a05f8dfa20c5ef"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7dcc6b379c65c83371a05f8dfa20c5ef">joueur2X</a></td></tr>
+<tr class="memitem:ac3b725c8aa65757eb715d01d49ce9d42" id="r_ac3b725c8aa65757eb715d01d49ce9d42"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac3b725c8aa65757eb715d01d49ce9d42">joueur2Y</a></td></tr>
+<tr class="memitem:ae307bbbad9909833b252e881cf7ab29c" id="r_ae307bbbad9909833b252e881cf7ab29c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae307bbbad9909833b252e881cf7ab29c">num_level</a></td></tr>
+<tr class="memitem:a8cff090ca30eb73ceaff27397d8feada" id="r_a8cff090ca30eb73ceaff27397d8feada"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a8cff090ca30eb73ceaff27397d8feada">shakeTimer</a></td></tr>
+<tr class="memitem:a4209d8ca11ffb96bd725609d89987eb9" id="r_a4209d8ca11ffb96bd725609d89987eb9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4209d8ca11ffb96bd725609d89987eb9">shakeIntensity</a></td></tr>
+<tr class="memitem:a38eb772d147f3db6fdd4a158174535c6" id="r_a38eb772d147f3db6fdd4a158174535c6"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a38eb772d147f3db6fdd4a158174535c6">shakeOffsetX</a></td></tr>
+<tr class="memitem:a0e8462c4ea87f3d092177a99aef4ba97" id="r_a0e8462c4ea87f3d092177a99aef4ba97"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a0e8462c4ea87f3d092177a99aef4ba97">shakeOffsetY</a></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00008">8</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="a0f42b6fc8a550d9f3d576bbc1fe3758e" name="a0f42b6fc8a550d9f3d576bbc1fe3758e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f42b6fc8a550d9f3d576bbc1fe3758e">&#9670;&#160;</a></span>img_cadre</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* MiniMap::img_cadre</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00015">15</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="a5ad9f11a5bb93a579df757eaa7baeba2" name="a5ad9f11a5bb93a579df757eaa7baeba2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ad9f11a5bb93a579df757eaa7baeba2">&#9670;&#160;</a></span>img_map1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* MiniMap::img_map1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00009">9</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="ac0acadd4e78e7260a5c9d86e8be5729e" name="ac0acadd4e78e7260a5c9d86e8be5729e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0acadd4e78e7260a5c9d86e8be5729e">&#9670;&#160;</a></span>img_map2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* MiniMap::img_map2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00010">10</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="a22e10097cebdbe4628eb77f186eb5b45" name="a22e10097cebdbe4628eb77f186eb5b45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22e10097cebdbe4628eb77f186eb5b45">&#9670;&#160;</a></span>img_mask1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Surface* MiniMap::img_mask1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00013">13</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="ab71228f1301f6af416b06fd698277450" name="ab71228f1301f6af416b06fd698277450"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab71228f1301f6af416b06fd698277450">&#9670;&#160;</a></span>img_mask2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Surface* MiniMap::img_mask2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00014">14</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="a92cf35c686732e38f9dedbf0254f3aff" name="a92cf35c686732e38f9dedbf0254f3aff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92cf35c686732e38f9dedbf0254f3aff">&#9670;&#160;</a></span>img_point</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* MiniMap::img_point</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00011">11</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="ae2db619d088dd8c703d8ed311630a403" name="ae2db619d088dd8c703d8ed311630a403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2db619d088dd8c703d8ed311630a403">&#9670;&#160;</a></span>img_point2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* MiniMap::img_point2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00012">12</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="a7dcc6b379c65c83371a05f8dfa20c5ef" name="a7dcc6b379c65c83371a05f8dfa20c5ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dcc6b379c65c83371a05f8dfa20c5ef">&#9670;&#160;</a></span>joueur2X</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MiniMap::joueur2X</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00020">20</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="ac3b725c8aa65757eb715d01d49ce9d42" name="ac3b725c8aa65757eb715d01d49ce9d42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3b725c8aa65757eb715d01d49ce9d42">&#9670;&#160;</a></span>joueur2Y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MiniMap::joueur2Y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00020">20</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="a9229a26b8f07b14efe316ce270446b33" name="a9229a26b8f07b14efe316ce270446b33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9229a26b8f07b14efe316ce270446b33">&#9670;&#160;</a></span>joueurX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MiniMap::joueurX</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00019">19</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="a9b79e8aee1af33c35e2bc300b0d39900" name="a9b79e8aee1af33c35e2bc300b0d39900"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b79e8aee1af33c35e2bc300b0d39900">&#9670;&#160;</a></span>joueurY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MiniMap::joueurY</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00019">19</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="ae307bbbad9909833b252e881cf7ab29c" name="ae307bbbad9909833b252e881cf7ab29c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae307bbbad9909833b252e881cf7ab29c">&#9670;&#160;</a></span>num_level</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MiniMap::num_level</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00021">21</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="acc3b782fbfb2511dc1c08bf56fd1cca0" name="acc3b782fbfb2511dc1c08bf56fd1cca0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc3b782fbfb2511dc1c08bf56fd1cca0">&#9670;&#160;</a></span>pos_map</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Rect MiniMap::pos_map</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00016">16</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="a1475a41dc6e67489c947c0adbf0baa74" name="a1475a41dc6e67489c947c0adbf0baa74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1475a41dc6e67489c947c0adbf0baa74">&#9670;&#160;</a></span>pos_point</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Rect MiniMap::pos_point</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00017">17</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="a9fea6822374de6a89adbe1e19490b158" name="a9fea6822374de6a89adbe1e19490b158"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fea6822374de6a89adbe1e19490b158">&#9670;&#160;</a></span>pos_point2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Rect MiniMap::pos_point2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00018">18</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="a4209d8ca11ffb96bd725609d89987eb9" name="a4209d8ca11ffb96bd725609d89987eb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4209d8ca11ffb96bd725609d89987eb9">&#9670;&#160;</a></span>shakeIntensity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MiniMap::shakeIntensity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00023">23</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="a38eb772d147f3db6fdd4a158174535c6" name="a38eb772d147f3db6fdd4a158174535c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38eb772d147f3db6fdd4a158174535c6">&#9670;&#160;</a></span>shakeOffsetX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MiniMap::shakeOffsetX</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00024">24</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="a0e8462c4ea87f3d092177a99aef4ba97" name="a0e8462c4ea87f3d092177a99aef4ba97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e8462c4ea87f3d092177a99aef4ba97">&#9670;&#160;</a></span>shakeOffsetY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MiniMap::shakeOffsetY</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00025">25</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
+<a id="a8cff090ca30eb73ceaff27397d8feada" name="a8cff090ca30eb73ceaff27397d8feada"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cff090ca30eb73ceaff27397d8feada">&#9670;&#160;</a></span>shakeTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MiniMap::shakeTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="minimap_8h_source.html#l00022">22</a> of file <a class="el" href="minimap_8h_source.html">minimap.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="minimap_8h_source.html">minimap.h</a></li>
 </ul>

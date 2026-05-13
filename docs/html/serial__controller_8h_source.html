@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: src/serial_controller.h Source File</title>
+<title>SDL Game Project: src/serial_controller.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,31 +92,42 @@ $(function(){initNavTree('serial__controller_8h_source.html','',''); });
   <div class="headertitle"><div class="title">serial_controller.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SERIAL_CONTROLLER_H</span></div>
+<a href="serial__controller_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef SERIAL_CONTROLLER_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define SERIAL_CONTROLLER_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="foldopen" id="foldopen00006" data-start="{" data-end="};">
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="structControllerState.html">    6</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <span class="keywordtype">bool</span> up, down, left, right;</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keywordtype">bool</span> action1, action2, action3, action4;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="structControllerState.html#a85cbcb3e21fe589e6e7d683678b0e10c">    7</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structControllerState.html#a2522ce5af121e4bb0a8d5737c889924b">up</a>, <a class="code hl_variable" href="structControllerState.html#a85cbcb3e21fe589e6e7d683678b0e10c">down</a>, <a class="code hl_variable" href="structControllerState.html#a1c654b7f90cd9f3535eae8491a0af20b">left</a>, <a class="code hl_variable" href="structControllerState.html#a7dbe53cf8afc343cca9dd11fb4e7ac67">right</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="structControllerState.html#a2d4005ff9b6db8a2a193f34e1f61128a">    8</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structControllerState.html#a2d4005ff9b6db8a2a193f34e1f61128a">action1</a>, <a class="code hl_variable" href="structControllerState.html#ae47ad12e418e3a9e51e03594e66f3140">action2</a>, <a class="code hl_variable" href="structControllerState.html#af82ef4cc25bb3951ff9954c83dec09ed">action3</a>, <a class="code hl_variable" href="structControllerState.html#a3c1a08da444b0111354236b1af7d98ae">action4</a>;</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>} <a class="code hl_struct" href="structControllerState.html">ControllerState</a>;</div>
 </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keywordtype">int</span>  controller_open(<span class="keyword">const</span> <span class="keywordtype">char</span>* port);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keywordtype">void</span> controller_poll(<a class="code hl_struct" href="structControllerState.html">ControllerState</a>* state);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keywordtype">void</span> controller_close();</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keywordtype">int</span>  <a class="code hl_function" href="serial__controller_8h.html#a32987d5f41813dab50950a04f1092dd2">controller_open</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* port);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keywordtype">void</span> <a class="code hl_function" href="serial__controller_8h.html#a59274d42bfb8a59925cc914e46c82d70">controller_poll</a>(<a class="code hl_struct" href="structControllerState.html">ControllerState</a>* state);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keywordtype">void</span> <a class="code hl_function" href="serial__controller_8h.html#a249d57415ad7a72347bb0e1fbb783ad7">controller_close</a>();</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="astructControllerState_html"><div class="ttname"><a href="structControllerState.html">ControllerState</a></div><div class="ttdef"><b>Definition</b> serial_controller.h:6</div></div>
+<div class="ttc" id="aserial__controller_8h_html_a249d57415ad7a72347bb0e1fbb783ad7"><div class="ttname"><a href="serial__controller_8h.html#a249d57415ad7a72347bb0e1fbb783ad7">controller_close</a></div><div class="ttdeci">void controller_close()</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8c_source.html#l00059">serial_controller.c:59</a></div></div>
+<div class="ttc" id="aserial__controller_8h_html_a32987d5f41813dab50950a04f1092dd2"><div class="ttname"><a href="serial__controller_8h.html#a32987d5f41813dab50950a04f1092dd2">controller_open</a></div><div class="ttdeci">int controller_open(const char *port)</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8c_source.html#l00017">serial_controller.c:17</a></div></div>
+<div class="ttc" id="aserial__controller_8h_html_a59274d42bfb8a59925cc914e46c82d70"><div class="ttname"><a href="serial__controller_8h.html#a59274d42bfb8a59925cc914e46c82d70">controller_poll</a></div><div class="ttdeci">void controller_poll(ControllerState *state)</div><div class="ttdef"><b>Definition</b> <a href="serial__controller_8c_source.html#l00033">serial_controller.c:33</a></div></div>
+<div class="ttc" id="astructControllerState_html"><div class="ttname"><a href="structControllerState.html">ControllerState</a></div><div class="ttdef"><b>Definition</b> <a href="#l00006">serial_controller.h:6</a></div></div>
+<div class="ttc" id="astructControllerState_html_a1c654b7f90cd9f3535eae8491a0af20b"><div class="ttname"><a href="structControllerState.html#a1c654b7f90cd9f3535eae8491a0af20b">ControllerState::left</a></div><div class="ttdeci">bool left</div><div class="ttdef"><b>Definition</b> <a href="#l00007">serial_controller.h:7</a></div></div>
+<div class="ttc" id="astructControllerState_html_a2522ce5af121e4bb0a8d5737c889924b"><div class="ttname"><a href="structControllerState.html#a2522ce5af121e4bb0a8d5737c889924b">ControllerState::up</a></div><div class="ttdeci">bool up</div><div class="ttdef"><b>Definition</b> <a href="#l00007">serial_controller.h:7</a></div></div>
+<div class="ttc" id="astructControllerState_html_a2d4005ff9b6db8a2a193f34e1f61128a"><div class="ttname"><a href="structControllerState.html#a2d4005ff9b6db8a2a193f34e1f61128a">ControllerState::action1</a></div><div class="ttdeci">bool action1</div><div class="ttdef"><b>Definition</b> <a href="#l00008">serial_controller.h:8</a></div></div>
+<div class="ttc" id="astructControllerState_html_a3c1a08da444b0111354236b1af7d98ae"><div class="ttname"><a href="structControllerState.html#a3c1a08da444b0111354236b1af7d98ae">ControllerState::action4</a></div><div class="ttdeci">bool action4</div><div class="ttdef"><b>Definition</b> <a href="#l00008">serial_controller.h:8</a></div></div>
+<div class="ttc" id="astructControllerState_html_a7dbe53cf8afc343cca9dd11fb4e7ac67"><div class="ttname"><a href="structControllerState.html#a7dbe53cf8afc343cca9dd11fb4e7ac67">ControllerState::right</a></div><div class="ttdeci">bool right</div><div class="ttdef"><b>Definition</b> <a href="#l00007">serial_controller.h:7</a></div></div>
+<div class="ttc" id="astructControllerState_html_a85cbcb3e21fe589e6e7d683678b0e10c"><div class="ttname"><a href="structControllerState.html#a85cbcb3e21fe589e6e7d683678b0e10c">ControllerState::down</a></div><div class="ttdeci">bool down</div><div class="ttdef"><b>Definition</b> <a href="#l00007">serial_controller.h:7</a></div></div>
+<div class="ttc" id="astructControllerState_html_ae47ad12e418e3a9e51e03594e66f3140"><div class="ttname"><a href="structControllerState.html#ae47ad12e418e3a9e51e03594e66f3140">ControllerState::action2</a></div><div class="ttdeci">bool action2</div><div class="ttdef"><b>Definition</b> <a href="#l00008">serial_controller.h:8</a></div></div>
+<div class="ttc" id="astructControllerState_html_af82ef4cc25bb3951ff9954c83dec09ed"><div class="ttname"><a href="structControllerState.html#af82ef4cc25bb3951ff9954c83dec09ed">ControllerState::action3</a></div><div class="ttdeci">bool action3</div><div class="ttdef"><b>Definition</b> <a href="#l00008">serial_controller.h:8</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>src</b></li><li class="navelem"><b>serial_controller.h</b></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="serial__controller_8h.html">serial_controller.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

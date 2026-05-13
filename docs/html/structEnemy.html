@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: Enemy Struct Reference</title>
+<title>SDL Game Project: Enemy Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,50 +92,446 @@ $(function(){initNavTree('structEnemy.html','',''); });
   <div class="headertitle"><div class="title">Enemy Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="enemy_8h_source.html">enemy.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Enemy:</div>
+<div class="dyncontent">
+<div class="center"><img src="structEnemy__coll__graph.png" border="0" usemap="#aEnemy_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a9b45f57b3d7474400108f09587df67b0" id="r_a9b45f57b3d7474400108f09587df67b0"><td class="memItemLeft"><a id="a9b45f57b3d7474400108f09587df67b0" name="a9b45f57b3d7474400108f09587df67b0"></a>
-float&#160;</td><td class="memItemRight"><b>x</b></td></tr>
-<tr class="memitem:aa7d03269f81e619c117ce49f40f53eef" id="r_aa7d03269f81e619c117ce49f40f53eef"><td class="memItemLeft"><a id="aa7d03269f81e619c117ce49f40f53eef" name="aa7d03269f81e619c117ce49f40f53eef"></a>
-float&#160;</td><td class="memItemRight"><b>y</b></td></tr>
-<tr class="memitem:a4d77734517a4f04446f793dd95aa7fc6" id="r_a4d77734517a4f04446f793dd95aa7fc6"><td class="memItemLeft"><a id="a4d77734517a4f04446f793dd95aa7fc6" name="a4d77734517a4f04446f793dd95aa7fc6"></a>
-float&#160;</td><td class="memItemRight"><b>targetX</b></td></tr>
-<tr class="memitem:ad9ce5cc3f431d8e3ea62cf1c1831303a" id="r_ad9ce5cc3f431d8e3ea62cf1c1831303a"><td class="memItemLeft"><a id="ad9ce5cc3f431d8e3ea62cf1c1831303a" name="ad9ce5cc3f431d8e3ea62cf1c1831303a"></a>
-float&#160;</td><td class="memItemRight"><b>targetY</b></td></tr>
-<tr class="memitem:a98766d083fc49e746a37d0dc69be09e0" id="r_a98766d083fc49e746a37d0dc69be09e0"><td class="memItemLeft"><a id="a98766d083fc49e746a37d0dc69be09e0" name="a98766d083fc49e746a37d0dc69be09e0"></a>
-float&#160;</td><td class="memItemRight"><b>speed</b></td></tr>
-<tr class="memitem:a259bfaab0f0d06c9ec2cb15c787e0b3a" id="r_a259bfaab0f0d06c9ec2cb15c787e0b3a"><td class="memItemLeft"><a id="a259bfaab0f0d06c9ec2cb15c787e0b3a" name="a259bfaab0f0d06c9ec2cb15c787e0b3a"></a>
-int&#160;</td><td class="memItemRight"><b>w</b></td></tr>
-<tr class="memitem:adcb5512e63e735485cbb83f763acce75" id="r_adcb5512e63e735485cbb83f763acce75"><td class="memItemLeft"><a id="adcb5512e63e735485cbb83f763acce75" name="adcb5512e63e735485cbb83f763acce75"></a>
-int&#160;</td><td class="memItemRight"><b>h</b></td></tr>
-<tr class="memitem:a40317b1e3460d8bbc004312d58fe3a84" id="r_a40317b1e3460d8bbc004312d58fe3a84"><td class="memItemLeft"><a id="a40317b1e3460d8bbc004312d58fe3a84" name="a40317b1e3460d8bbc004312d58fe3a84"></a>
-SDL_Rect&#160;</td><td class="memItemRight"><b>rect</b></td></tr>
-<tr class="memitem:ab0258fd5cdab307f3adab525cf551b08" id="r_ab0258fd5cdab307f3adab525cf551b08"><td class="memItemLeft"><a id="ab0258fd5cdab307f3adab525cf551b08" name="ab0258fd5cdab307f3adab525cf551b08"></a>
-Direction&#160;</td><td class="memItemRight"><b>facing</b></td></tr>
-<tr class="memitem:a0f976a808ad95419def41a967acfbf59" id="r_a0f976a808ad95419def41a967acfbf59"><td class="memItemLeft"><a id="a0f976a808ad95419def41a967acfbf59" name="a0f976a808ad95419def41a967acfbf59"></a>
-<a class="el" href="structAnimation.html">Animation</a>&#160;</td><td class="memItemRight"><b>anim</b></td></tr>
-<tr class="memitem:a77a55b175db1165f60a4ac8e6f01d6be" id="r_a77a55b175db1165f60a4ac8e6f01d6be"><td class="memItemLeft"><a id="a77a55b175db1165f60a4ac8e6f01d6be" name="a77a55b175db1165f60a4ac8e6f01d6be"></a>
-<a class="el" href="structSpriteAtlas.html">SpriteAtlas</a> *&#160;</td><td class="memItemRight"><b>atlas</b></td></tr>
-<tr class="memitem:ac8ae492b651ca96fb0f168cb6645accf" id="r_ac8ae492b651ca96fb0f168cb6645accf"><td class="memItemLeft"><a id="ac8ae492b651ca96fb0f168cb6645accf" name="ac8ae492b651ca96fb0f168cb6645accf"></a>
-EnemyDir&#160;</td><td class="memItemRight"><b>facing</b></td></tr>
-<tr class="memitem:a75a890bbfd998323a857303c4e3848fc" id="r_a75a890bbfd998323a857303c4e3848fc"><td class="memItemLeft"><a id="a75a890bbfd998323a857303c4e3848fc" name="a75a890bbfd998323a857303c4e3848fc"></a>
-<a class="el" href="structEnemyAnimation.html">EnemyAnimation</a>&#160;</td><td class="memItemRight"><b>anim</b></td></tr>
-<tr class="memitem:a46fe9259bdfdc6f1d6d182cd9e0bd9c5" id="r_a46fe9259bdfdc6f1d6d182cd9e0bd9c5"><td class="memItemLeft"><a id="a46fe9259bdfdc6f1d6d182cd9e0bd9c5" name="a46fe9259bdfdc6f1d6d182cd9e0bd9c5"></a>
-<a class="el" href="structEnemyAtlas.html">EnemyAtlas</a> *&#160;</td><td class="memItemRight"><b>atlas</b></td></tr>
-<tr class="memitem:a12aea01d31b588a7c8a514f26e62d050" id="r_a12aea01d31b588a7c8a514f26e62d050"><td class="memItemLeft"><a id="a12aea01d31b588a7c8a514f26e62d050" name="a12aea01d31b588a7c8a514f26e62d050"></a>
-int&#160;</td><td class="memItemRight"><b>alive</b></td></tr>
-<tr class="memitem:a01ca935645fc093cc86c17daa86d6ab1" id="r_a01ca935645fc093cc86c17daa86d6ab1"><td class="memItemLeft"><a id="a01ca935645fc093cc86c17daa86d6ab1" name="a01ca935645fc093cc86c17daa86d6ab1"></a>
-int&#160;</td><td class="memItemRight"><b>healthStatus</b></td></tr>
-<tr class="memitem:acb93f5cb58ac3adaf59d6cb1614b75fb" id="r_acb93f5cb58ac3adaf59d6cb1614b75fb"><td class="memItemLeft"><a id="acb93f5cb58ac3adaf59d6cb1614b75fb" name="acb93f5cb58ac3adaf59d6cb1614b75fb"></a>
-int&#160;</td><td class="memItemRight"><b>maxHealth</b></td></tr>
-<tr class="memitem:a4af19bd0d24509a39ac613ab4bc701d4" id="r_a4af19bd0d24509a39ac613ab4bc701d4"><td class="memItemLeft"><a id="a4af19bd0d24509a39ac613ab4bc701d4" name="a4af19bd0d24509a39ac613ab4bc701d4"></a>
-float&#160;</td><td class="memItemRight"><b>knockbackX</b></td></tr>
-<tr class="memitem:a142fe6561db87bc13e0b327638fa6705" id="r_a142fe6561db87bc13e0b327638fa6705"><td class="memItemLeft"><a id="a142fe6561db87bc13e0b327638fa6705" name="a142fe6561db87bc13e0b327638fa6705"></a>
-float&#160;</td><td class="memItemRight"><b>knockbackY</b></td></tr>
-<tr class="memitem:af0ad0e39f67f7fd4a1006d822857fac9" id="r_af0ad0e39f67f7fd4a1006d822857fac9"><td class="memItemLeft"><a id="af0ad0e39f67f7fd4a1006d822857fac9" name="af0ad0e39f67f7fd4a1006d822857fac9"></a>
-int&#160;</td><td class="memItemRight"><b>knockbackTimer</b></td></tr>
+<tr class="memitem:a9b45f57b3d7474400108f09587df67b0" id="r_a9b45f57b3d7474400108f09587df67b0"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a9b45f57b3d7474400108f09587df67b0">x</a></td></tr>
+<tr class="memitem:aa7d03269f81e619c117ce49f40f53eef" id="r_aa7d03269f81e619c117ce49f40f53eef"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#aa7d03269f81e619c117ce49f40f53eef">y</a></td></tr>
+<tr class="memitem:a4d77734517a4f04446f793dd95aa7fc6" id="r_a4d77734517a4f04446f793dd95aa7fc6"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a4d77734517a4f04446f793dd95aa7fc6">targetX</a></td></tr>
+<tr class="memitem:ad9ce5cc3f431d8e3ea62cf1c1831303a" id="r_ad9ce5cc3f431d8e3ea62cf1c1831303a"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#ad9ce5cc3f431d8e3ea62cf1c1831303a">targetY</a></td></tr>
+<tr class="memitem:a98766d083fc49e746a37d0dc69be09e0" id="r_a98766d083fc49e746a37d0dc69be09e0"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a98766d083fc49e746a37d0dc69be09e0">speed</a></td></tr>
+<tr class="memitem:a259bfaab0f0d06c9ec2cb15c787e0b3a" id="r_a259bfaab0f0d06c9ec2cb15c787e0b3a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a259bfaab0f0d06c9ec2cb15c787e0b3a">w</a></td></tr>
+<tr class="memitem:adcb5512e63e735485cbb83f763acce75" id="r_adcb5512e63e735485cbb83f763acce75"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#adcb5512e63e735485cbb83f763acce75">h</a></td></tr>
+<tr class="memitem:a40317b1e3460d8bbc004312d58fe3a84" id="r_a40317b1e3460d8bbc004312d58fe3a84"><td class="memItemLeft">SDL_Rect&#160;</td><td class="memItemRight"><a class="el" href="#a40317b1e3460d8bbc004312d58fe3a84">rect</a></td></tr>
+<tr class="memitem:ab0258fd5cdab307f3adab525cf551b08" id="r_ab0258fd5cdab307f3adab525cf551b08"><td class="memItemLeft"><a class="el" href="enemy_8h.html#a1d3a15afba67ded3d3aa8a663551d265">Direction</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab0258fd5cdab307f3adab525cf551b08">facing</a></td></tr>
+<tr class="memitem:a0f976a808ad95419def41a967acfbf59" id="r_a0f976a808ad95419def41a967acfbf59"><td class="memItemLeft"><a class="el" href="structAnimation.html">Animation</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0f976a808ad95419def41a967acfbf59">anim</a></td></tr>
+<tr class="memitem:a77a55b175db1165f60a4ac8e6f01d6be" id="r_a77a55b175db1165f60a4ac8e6f01d6be"><td class="memItemLeft"><a class="el" href="structSpriteAtlas.html">SpriteAtlas</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a77a55b175db1165f60a4ac8e6f01d6be">atlas</a></td></tr>
+<tr class="memitem:ac8ae492b651ca96fb0f168cb6645accf" id="r_ac8ae492b651ca96fb0f168cb6645accf"><td class="memItemLeft"><a class="el" href="players_8h.html#a2e52c0f763c867c0a2ca04ac14975b15">EnemyDir</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac8ae492b651ca96fb0f168cb6645accf">facing</a></td></tr>
+<tr class="memitem:a75a890bbfd998323a857303c4e3848fc" id="r_a75a890bbfd998323a857303c4e3848fc"><td class="memItemLeft"><a class="el" href="structEnemyAnimation.html">EnemyAnimation</a>&#160;</td><td class="memItemRight"><a class="el" href="#a75a890bbfd998323a857303c4e3848fc">anim</a></td></tr>
+<tr class="memitem:a46fe9259bdfdc6f1d6d182cd9e0bd9c5" id="r_a46fe9259bdfdc6f1d6d182cd9e0bd9c5"><td class="memItemLeft"><a class="el" href="structEnemyAtlas.html">EnemyAtlas</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a46fe9259bdfdc6f1d6d182cd9e0bd9c5">atlas</a></td></tr>
+<tr class="memitem:a12aea01d31b588a7c8a514f26e62d050" id="r_a12aea01d31b588a7c8a514f26e62d050"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a12aea01d31b588a7c8a514f26e62d050">alive</a></td></tr>
+<tr class="memitem:a4828605471a11c5cf15ca24644e34772" id="r_a4828605471a11c5cf15ca24644e34772"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4828605471a11c5cf15ca24644e34772">isInvincible</a></td></tr>
+<tr class="memitem:ae482c8ec6db5459e3e103a5e3d57b593" id="r_ae482c8ec6db5459e3e103a5e3d57b593"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#ae482c8ec6db5459e3e103a5e3d57b593">invincibleTimer</a></td></tr>
+<tr class="memitem:a01ca935645fc093cc86c17daa86d6ab1" id="r_a01ca935645fc093cc86c17daa86d6ab1"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a01ca935645fc093cc86c17daa86d6ab1">healthStatus</a></td></tr>
+<tr class="memitem:acb93f5cb58ac3adaf59d6cb1614b75fb" id="r_acb93f5cb58ac3adaf59d6cb1614b75fb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acb93f5cb58ac3adaf59d6cb1614b75fb">maxHealth</a></td></tr>
+<tr class="memitem:a4af19bd0d24509a39ac613ab4bc701d4" id="r_a4af19bd0d24509a39ac613ab4bc701d4"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a4af19bd0d24509a39ac613ab4bc701d4">knockbackX</a></td></tr>
+<tr class="memitem:a142fe6561db87bc13e0b327638fa6705" id="r_a142fe6561db87bc13e0b327638fa6705"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a142fe6561db87bc13e0b327638fa6705">knockbackY</a></td></tr>
+<tr class="memitem:af0ad0e39f67f7fd4a1006d822857fac9" id="r_af0ad0e39f67f7fd4a1006d822857fac9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af0ad0e39f67f7fd4a1006d822857fac9">knockbackTimer</a></td></tr>
+<tr class="memitem:ac0d45488433bed02426b6bdfebc2acbe" id="r_ac0d45488433bed02426b6bdfebc2acbe"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#ac0d45488433bed02426b6bdfebc2acbe">detectionRange</a></td></tr>
+<tr class="memitem:a2f871e8d3c88955b9388f9b9aac929d0" id="r_a2f871e8d3c88955b9388f9b9aac929d0"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a2f871e8d3c88955b9388f9b9aac929d0">attackRange</a></td></tr>
+<tr class="memitem:af7c97c54ce813bd8f2c7f5108d3fef9b" id="r_af7c97c54ce813bd8f2c7f5108d3fef9b"><td class="memItemLeft"><a class="el" href="players_8h.html#a0da2c9c7b0f80f70f8e3240abc032aba">EnemyState</a>&#160;</td><td class="memItemRight"><a class="el" href="#af7c97c54ce813bd8f2c7f5108d3fef9b">state</a></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00069">69</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="a12aea01d31b588a7c8a514f26e62d050" name="a12aea01d31b588a7c8a514f26e62d050"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12aea01d31b588a7c8a514f26e62d050">&#9670;&#160;</a></span>alive</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Enemy::alive</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00239">239</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a0f976a808ad95419def41a967acfbf59" name="a0f976a808ad95419def41a967acfbf59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f976a808ad95419def41a967acfbf59">&#9670;&#160;</a></span>anim <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structAnimation.html">Animation</a> Enemy::anim</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00078">78</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="a75a890bbfd998323a857303c4e3848fc" name="a75a890bbfd998323a857303c4e3848fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75a890bbfd998323a857303c4e3848fc">&#9670;&#160;</a></span>anim <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structEnemyAnimation.html">EnemyAnimation</a> Enemy::anim</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00237">237</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a77a55b175db1165f60a4ac8e6f01d6be" name="a77a55b175db1165f60a4ac8e6f01d6be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77a55b175db1165f60a4ac8e6f01d6be">&#9670;&#160;</a></span>atlas <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structSpriteAtlas.html">SpriteAtlas</a>* Enemy::atlas</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00079">79</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="a46fe9259bdfdc6f1d6d182cd9e0bd9c5" name="a46fe9259bdfdc6f1d6d182cd9e0bd9c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46fe9259bdfdc6f1d6d182cd9e0bd9c5">&#9670;&#160;</a></span>atlas <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structEnemyAtlas.html">EnemyAtlas</a>* Enemy::atlas</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00238">238</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a2f871e8d3c88955b9388f9b9aac929d0" name="a2f871e8d3c88955b9388f9b9aac929d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f871e8d3c88955b9388f9b9aac929d0">&#9670;&#160;</a></span>attackRange</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Enemy::attackRange</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00250">250</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ac0d45488433bed02426b6bdfebc2acbe" name="ac0d45488433bed02426b6bdfebc2acbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0d45488433bed02426b6bdfebc2acbe">&#9670;&#160;</a></span>detectionRange</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Enemy::detectionRange</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00249">249</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ab0258fd5cdab307f3adab525cf551b08" name="ab0258fd5cdab307f3adab525cf551b08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0258fd5cdab307f3adab525cf551b08">&#9670;&#160;</a></span>facing <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="enemy_8h.html#a1d3a15afba67ded3d3aa8a663551d265">Direction</a> Enemy::facing</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00075">75</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="ac8ae492b651ca96fb0f168cb6645accf" name="ac8ae492b651ca96fb0f168cb6645accf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8ae492b651ca96fb0f168cb6645accf">&#9670;&#160;</a></span>facing <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="players_8h.html#a2e52c0f763c867c0a2ca04ac14975b15">EnemyDir</a> Enemy::facing</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00236">236</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="adcb5512e63e735485cbb83f763acce75" name="adcb5512e63e735485cbb83f763acce75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcb5512e63e735485cbb83f763acce75">&#9670;&#160;</a></span>h</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Enemy::h</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00073">73</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="a01ca935645fc093cc86c17daa86d6ab1" name="a01ca935645fc093cc86c17daa86d6ab1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01ca935645fc093cc86c17daa86d6ab1">&#9670;&#160;</a></span>healthStatus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Enemy::healthStatus</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00244">244</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="ae482c8ec6db5459e3e103a5e3d57b593" name="ae482c8ec6db5459e3e103a5e3d57b593"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae482c8ec6db5459e3e103a5e3d57b593">&#9670;&#160;</a></span>invincibleTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Enemy::invincibleTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00242">242</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a4828605471a11c5cf15ca24644e34772" name="a4828605471a11c5cf15ca24644e34772"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4828605471a11c5cf15ca24644e34772">&#9670;&#160;</a></span>isInvincible</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Enemy::isInvincible</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00241">241</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="af0ad0e39f67f7fd4a1006d822857fac9" name="af0ad0e39f67f7fd4a1006d822857fac9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0ad0e39f67f7fd4a1006d822857fac9">&#9670;&#160;</a></span>knockbackTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Enemy::knockbackTimer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00248">248</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a4af19bd0d24509a39ac613ab4bc701d4" name="a4af19bd0d24509a39ac613ab4bc701d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4af19bd0d24509a39ac613ab4bc701d4">&#9670;&#160;</a></span>knockbackX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Enemy::knockbackX</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00246">246</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a142fe6561db87bc13e0b327638fa6705" name="a142fe6561db87bc13e0b327638fa6705"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a142fe6561db87bc13e0b327638fa6705">&#9670;&#160;</a></span>knockbackY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Enemy::knockbackY</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00247">247</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="acb93f5cb58ac3adaf59d6cb1614b75fb" name="acb93f5cb58ac3adaf59d6cb1614b75fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb93f5cb58ac3adaf59d6cb1614b75fb">&#9670;&#160;</a></span>maxHealth</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Enemy::maxHealth</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00245">245</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a40317b1e3460d8bbc004312d58fe3a84" name="a40317b1e3460d8bbc004312d58fe3a84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40317b1e3460d8bbc004312d58fe3a84">&#9670;&#160;</a></span>rect</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Rect Enemy::rect</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00074">74</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="a98766d083fc49e746a37d0dc69be09e0" name="a98766d083fc49e746a37d0dc69be09e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98766d083fc49e746a37d0dc69be09e0">&#9670;&#160;</a></span>speed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Enemy::speed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00072">72</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="af7c97c54ce813bd8f2c7f5108d3fef9b" name="af7c97c54ce813bd8f2c7f5108d3fef9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7c97c54ce813bd8f2c7f5108d3fef9b">&#9670;&#160;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="players_8h.html#a0da2c9c7b0f80f70f8e3240abc032aba">EnemyState</a> Enemy::state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="players_8h_source.html#l00251">251</a> of file <a class="el" href="players_8h_source.html">players.h</a>.</p>
+
+</div>
+</div>
+<a id="a4d77734517a4f04446f793dd95aa7fc6" name="a4d77734517a4f04446f793dd95aa7fc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d77734517a4f04446f793dd95aa7fc6">&#9670;&#160;</a></span>targetX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Enemy::targetX</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00071">71</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="ad9ce5cc3f431d8e3ea62cf1c1831303a" name="ad9ce5cc3f431d8e3ea62cf1c1831303a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9ce5cc3f431d8e3ea62cf1c1831303a">&#9670;&#160;</a></span>targetY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Enemy::targetY</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00071">71</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="a259bfaab0f0d06c9ec2cb15c787e0b3a" name="a259bfaab0f0d06c9ec2cb15c787e0b3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a259bfaab0f0d06c9ec2cb15c787e0b3a">&#9670;&#160;</a></span>w</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Enemy::w</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00073">73</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="a9b45f57b3d7474400108f09587df67b0" name="a9b45f57b3d7474400108f09587df67b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b45f57b3d7474400108f09587df67b0">&#9670;&#160;</a></span>x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Enemy::x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00070">70</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="aa7d03269f81e619c117ce49f40f53eef" name="aa7d03269f81e619c117ce49f40f53eef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7d03269f81e619c117ce49f40f53eef">&#9670;&#160;</a></span>y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Enemy::y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00070">70</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
 <li>src/<a class="el" href="enemy_8h_source.html">enemy.h</a></li>
 <li>src/<a class="el" href="players_8h_source.html">players.h</a></li>

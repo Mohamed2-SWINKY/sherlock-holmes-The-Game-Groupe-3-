@@ -1,0 +1,13 @@
+digraph "enemy_render"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="enemy_render",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Renders the enemy."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="enemy_anim_render",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$players_8c.html#a367242f83cdc97178a5d55707c676b21",tooltip="Renders enemy animation."];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="map_rects_overlap",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$map_8c.html#a9ad845e9d2b4666fea9449e39fd378c1",tooltip=" "];
+}

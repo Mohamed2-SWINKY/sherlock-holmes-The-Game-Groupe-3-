@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: src/map.h Source File</title>
+<title>SDL Game Project: src/map.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,7 +92,7 @@ $(function(){initNavTree('map_8h_source.html','',''); });
   <div class="headertitle"><div class="title">map.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MAPP_H</span></div>
+<a href="map_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MAPP_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MAPP_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
@@ -101,96 +101,145 @@ $(function(){initNavTree('map_8h_source.html','',''); });
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;math.h&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">/* ── Dimensions ─────────────────────────────────────────────────────── */</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define MAP_W        1400</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#define MAP_H        742</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#define ZOOM_FACTOR  2.0f</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define MAX_OBS      90</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#define MAX_DOORS    4</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define MAX_KEYS 4</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="map_8h.html#a4c736195492abc5f49af63a57f487cdb">   10</a></span><span class="preprocessor">#define MAP_W        1400</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="map_8h.html#a07ffd6e3f128f941b2f400c352896a74">   11</a></span><span class="preprocessor">#define MAP_H        742</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="map_8h.html#a2a3b4f0d88b092d0f370a8ac7db93521">   12</a></span><span class="preprocessor">#define ZOOM_FACTOR  2.0f</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="map_8h.html#a30f45f4b783ff7ce8c680a0897a992b9">   13</a></span><span class="preprocessor">#define MAX_OBS      90</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">   14</a></span><span class="preprocessor">#define MAX_DOORS    4</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="map_8h.html#a3077ecca3770bdee50e6a17dfb55d002">   15</a></span><span class="preprocessor">#define MAX_KEYS 4</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="structKey.html">   17</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    SDL_Rect rect;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">int</span>      id;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">int</span>      visible;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">int</span>      collected;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structKey.html#ab7a3f0124d77fa13f27dd3f2aa9a5016">   18</a></span>    SDL_Rect <a class="code hl_variable" href="structKey.html#ab7a3f0124d77fa13f27dd3f2aa9a5016">rect</a>;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structKey.html#a555acaa9a5d297c1f893aa9b2e4c0751">   19</a></span>    <span class="keywordtype">int</span>      <a class="code hl_variable" href="structKey.html#a555acaa9a5d297c1f893aa9b2e4c0751">id</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="structKey.html#a63fdf54361c59cb7fcceb55f44d68629">   20</a></span>    <span class="keywordtype">int</span>      <a class="code hl_variable" href="structKey.html#a63fdf54361c59cb7fcceb55f44d68629">visible</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="structKey.html#a925277eb80002aae0872fa8fd3aa51c9">   21</a></span>    <span class="keywordtype">int</span>      <a class="code hl_variable" href="structKey.html#a925277eb80002aae0872fa8fd3aa51c9">collected</a>;</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>} <a class="code hl_struct" href="structKey.html">Key</a>;</div>
 </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">/* ── Structs ─────────────────────────────────────────────────────────── */</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">typedef</span> <span class="keyword">enum</span> { LEVEL_1, LEVEL_2 } LevelID;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="structMapDoor.html">   27</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    SDL_Rect rect;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">int</span>      locked;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">int</span>      key_id;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">int</span>      to_level;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>} <a class="code hl_struct" href="structMapDoor.html">MapDoor</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="map_8h.html#a5c5613df9f8349ae401b152a9f5e8d30">   25</a></span><span class="preprocessor">#define LEVEL_1 0</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="map_8h.html#a857f98f02129dae8f80c221bdf1e9f76">   26</a></span><span class="preprocessor">#define LEVEL_2 1</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="map_8h.html#af9510b6edfff65e3e5cbc2ca8e32b42a">   27</a></span><span class="keyword">typedef</span> <span class="keywordtype">int</span> <a class="code hl_typedef" href="map_8h.html#af9510b6edfff65e3e5cbc2ca8e32b42a">LevelID</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="structMapDoor.html">   29</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="structMapDoor.html#a662bacef9f2b74ea21e8a50fb681ef23">   30</a></span>    SDL_Rect <a class="code hl_variable" href="structMapDoor.html#a662bacef9f2b74ea21e8a50fb681ef23">rect</a>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structMapDoor.html#a01517db0cde4b19fd54915a8ed21a0c4">   31</a></span>    <span class="keywordtype">int</span>      <a class="code hl_variable" href="structMapDoor.html#a01517db0cde4b19fd54915a8ed21a0c4">locked</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structMapDoor.html#a6f0b5a109d081dbe5cb1c9a9a21bd11e">   32</a></span>    <span class="keywordtype">int</span>      <a class="code hl_variable" href="structMapDoor.html#a6f0b5a109d081dbe5cb1c9a9a21bd11e">key_id</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structMapDoor.html#a5854d530f14723e5da65d06cee8bf6e2">   33</a></span>    <span class="keywordtype">int</span>      <a class="code hl_variable" href="structMapDoor.html#a5854d530f14723e5da65d06cee8bf6e2">to_level</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>} <a class="code hl_struct" href="structMapDoor.html">MapDoor</a>;</div>
 </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">typedef</span> <span class="keyword">enum</span> { BOX_IDLE, BOX_FALLING, BOX_BROKEN } BoxState;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="foldopen" id="foldopen00036" data-start="{" data-end="};">
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structFallingBox.html">   36</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    SDL_Rect rect;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">float</span>    fy;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">float</span>    vel;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    BoxState state;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>} <a class="code hl_struct" href="structFallingBox.html">FallingBox</a>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="map_8h.html#a961c0c234c79508e96c8b2e5716032d7">   36</a></span><span class="preprocessor">#define BOX_IDLE    0</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="map_8h.html#a045a2b6d9868bd5daa55d8d891fa7b11">   37</a></span><span class="preprocessor">#define BOX_FALLING 1</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="map_8h.html#a35497da1dfcb29135f6e4a29bd800c1a">   38</a></span><span class="preprocessor">#define BOX_BROKEN  2</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="map_8h.html#af3c725f56749949dcf107d613f5cdbb5">   39</a></span><span class="keyword">typedef</span> <span class="keywordtype">int</span> <a class="code hl_typedef" href="map_8h.html#af3c725f56749949dcf107d613f5cdbb5">BoxState</a>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="};">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structFallingBox.html">   41</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structFallingBox.html#aeca378d7153426369653c56ad455756b">   42</a></span>    SDL_Rect <a class="code hl_variable" href="structFallingBox.html#aeca378d7153426369653c56ad455756b">rect</a>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structFallingBox.html#a64a339d1019b7e2beda7071b8e3030a2">   43</a></span>    <span class="keywordtype">float</span>    <a class="code hl_variable" href="structFallingBox.html#a64a339d1019b7e2beda7071b8e3030a2">fy</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structFallingBox.html#aeacfe064e39852dcbf03ad1d1afdbac7">   44</a></span>    <span class="keywordtype">float</span>    <a class="code hl_variable" href="structFallingBox.html#aeacfe064e39852dcbf03ad1d1afdbac7">vel</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="structFallingBox.html#a9d7b5a0ef9718e5b347c6350eeeb0f21">   45</a></span>    <a class="code hl_typedef" href="map_8h.html#af3c725f56749949dcf107d613f5cdbb5">BoxState</a> <a class="code hl_variable" href="structFallingBox.html#a9d7b5a0ef9718e5b347c6350eeeb0f21">state</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>} <a class="code hl_struct" href="structFallingBox.html">FallingBox</a>;</div>
 </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">/* ── Map data container ──────────────────────────────────────────────── */</span></div>
-<div class="foldopen" id="foldopen00044" data-start="{" data-end="};">
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structMapData.html">   44</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    SDL_Texture *tex_map1;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    SDL_Texture *tex_map2;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    SDL_Texture *tex_box;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    SDL_Texture *tex_broken_box;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    LevelID      level;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    SDL_Rect     obs1[MAX_OBS];</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">int</span>          obs1_cnt;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_struct" href="structMapDoor.html">MapDoor</a>      doors1[MAX_DOORS];</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">int</span>          doors1_cnt;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">int</span>          door1_open[MAX_DOORS];</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_struct" href="structFallingBox.html">FallingBox</a>   fbox;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    SDL_Rect     obs2[MAX_OBS];</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">int</span>          obs2_cnt;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_struct" href="structMapDoor.html">MapDoor</a>      doors2[MAX_DOORS];</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">int</span>          doors2_cnt;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">int</span>          door2_open[MAX_DOORS];</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_struct" href="structKey.html">Key</a>      keys1[MAX_KEYS];</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">int</span>      keys1_cnt;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <a class="code hl_struct" href="structKey.html">Key</a>      keys2[MAX_KEYS];</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">int</span>      keys2_cnt;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    Mix_Chunk *boxFallSound;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>} <a class="code hl_struct" href="structMapData.html">MapData</a>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">/* ── Map data container ──────────────────────────────────────────────── */</span></div>
+<div class="foldopen" id="foldopen00049" data-start="{" data-end="};">
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structMapData.html">   49</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structMapData.html#ac644c7efc5156c33b48cd54c09bc99e8">   50</a></span>    SDL_Texture *<a class="code hl_variable" href="structMapData.html#ac644c7efc5156c33b48cd54c09bc99e8">tex_map1</a>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structMapData.html#adc9789846585e4e07c96d7aa42e52a19">   51</a></span>    SDL_Texture *<a class="code hl_variable" href="structMapData.html#adc9789846585e4e07c96d7aa42e52a19">tex_map2</a>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structMapData.html#a943d5a50514cf4f5a43df17bba27466a">   52</a></span>    SDL_Texture *<a class="code hl_variable" href="structMapData.html#a943d5a50514cf4f5a43df17bba27466a">tex_box</a>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structMapData.html#a51b045fb48e01e294d5db54e90ca139c">   53</a></span>    SDL_Texture *<a class="code hl_variable" href="structMapData.html#a51b045fb48e01e294d5db54e90ca139c">tex_broken_box</a>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="structMapData.html#a453e34561483c30cd5831f73c7d5e30b">   55</a></span>    <a class="code hl_typedef" href="map_8h.html#af9510b6edfff65e3e5cbc2ca8e32b42a">LevelID</a>      <a class="code hl_variable" href="structMapData.html#a453e34561483c30cd5831f73c7d5e30b">level</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="structMapData.html#ace77c18846b5ceadd013e90ff883fdc7">   57</a></span>    SDL_Rect     <a class="code hl_variable" href="structMapData.html#ace77c18846b5ceadd013e90ff883fdc7">obs1</a>[<a class="code hl_define" href="map_8h.html#a30f45f4b783ff7ce8c680a0897a992b9">MAX_OBS</a>];</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="structMapData.html#aac0d561bd70c78a31d6f7f610c38002a">   58</a></span>    <span class="keywordtype">int</span>          <a class="code hl_variable" href="structMapData.html#aac0d561bd70c78a31d6f7f610c38002a">obs1_cnt</a>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="structMapData.html#a1f5a3003a61312fb7bafa176e5f0a0a4">   59</a></span>    <a class="code hl_struct" href="structMapDoor.html">MapDoor</a>      <a class="code hl_variable" href="structMapData.html#a1f5a3003a61312fb7bafa176e5f0a0a4">doors1</a>[<a class="code hl_define" href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">MAX_DOORS</a>];</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="structMapData.html#a74d76f8b4f8bb3b4e4ea525b33a34e00">   60</a></span>    <span class="keywordtype">int</span>          <a class="code hl_variable" href="structMapData.html#a74d76f8b4f8bb3b4e4ea525b33a34e00">doors1_cnt</a>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="structMapData.html#a748a5c138ce3f843e09354b5f108b53f">   61</a></span>    <span class="keywordtype">int</span>          <a class="code hl_variable" href="structMapData.html#a748a5c138ce3f843e09354b5f108b53f">door1_open</a>[<a class="code hl_define" href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">MAX_DOORS</a>];</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="structMapData.html#a9aae4802d67db1d6f3a2f60bacaf8117">   62</a></span>    <a class="code hl_struct" href="structFallingBox.html">FallingBox</a>   <a class="code hl_variable" href="structMapData.html#a9aae4802d67db1d6f3a2f60bacaf8117">fbox</a>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="structMapData.html#af0d8bc48b94856db7dd2e862c2bded50">   64</a></span>    SDL_Rect     <a class="code hl_variable" href="structMapData.html#af0d8bc48b94856db7dd2e862c2bded50">obs2</a>[<a class="code hl_define" href="map_8h.html#a30f45f4b783ff7ce8c680a0897a992b9">MAX_OBS</a>];</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="structMapData.html#a985988ebe983e12cbf308a92424bd199">   65</a></span>    <span class="keywordtype">int</span>          <a class="code hl_variable" href="structMapData.html#a985988ebe983e12cbf308a92424bd199">obs2_cnt</a>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="structMapData.html#a19dc9904f210067d53f74a09dca0b0d2">   66</a></span>    <a class="code hl_struct" href="structMapDoor.html">MapDoor</a>      <a class="code hl_variable" href="structMapData.html#a19dc9904f210067d53f74a09dca0b0d2">doors2</a>[<a class="code hl_define" href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">MAX_DOORS</a>];</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="structMapData.html#abcc03f8572dc74fb65bba68943c69926">   67</a></span>    <span class="keywordtype">int</span>          <a class="code hl_variable" href="structMapData.html#abcc03f8572dc74fb65bba68943c69926">doors2_cnt</a>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="structMapData.html#a1f69ced6843796125343cb2af02b419a">   68</a></span>    <span class="keywordtype">int</span>          <a class="code hl_variable" href="structMapData.html#a1f69ced6843796125343cb2af02b419a">door2_open</a>[<a class="code hl_define" href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">MAX_DOORS</a>];</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="structMapData.html#a5fe14014e5fd93fb456bd975642f528c">   70</a></span>    <a class="code hl_struct" href="structKey.html">Key</a>      <a class="code hl_variable" href="structMapData.html#a5fe14014e5fd93fb456bd975642f528c">keys1</a>[<a class="code hl_define" href="map_8h.html#a3077ecca3770bdee50e6a17dfb55d002">MAX_KEYS</a>];</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="structMapData.html#aa6a7937c60d9ae25d6277dc3b3b625db">   71</a></span>    <span class="keywordtype">int</span>      <a class="code hl_variable" href="structMapData.html#aa6a7937c60d9ae25d6277dc3b3b625db">keys1_cnt</a>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="structMapData.html#a01cb1b68a81fc335e5fcbbfad9ff6234">   72</a></span>    <a class="code hl_struct" href="structKey.html">Key</a>      <a class="code hl_variable" href="structMapData.html#a01cb1b68a81fc335e5fcbbfad9ff6234">keys2</a>[<a class="code hl_define" href="map_8h.html#a3077ecca3770bdee50e6a17dfb55d002">MAX_KEYS</a>];</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="structMapData.html#a59513e85b76f7fe1055834ccd3f49fc3">   73</a></span>    <span class="keywordtype">int</span>      <a class="code hl_variable" href="structMapData.html#a59513e85b76f7fe1055834ccd3f49fc3">keys2_cnt</a>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="structMapData.html#aa6563e1f120fa68b367cf6e7868521be">   74</a></span>    Mix_Chunk *<a class="code hl_variable" href="structMapData.html#aa6563e1f120fa68b367cf6e7868521be">boxFallSound</a>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>} <a class="code hl_struct" href="structMapData.html">MapData</a>;</div>
 </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">/* ── Function declarations ───────────────────────────────────────────── */</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keywordtype">void</span> map_init(<a class="code hl_struct" href="structMapData.html">MapData</a> *m, SDL_Renderer *renderer);</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keywordtype">void</span> map_cleanup(<a class="code hl_struct" href="structMapData.html">MapData</a> *m);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keywordtype">void</span> setup_level1(<a class="code hl_struct" href="structMapData.html">MapData</a> *m);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keywordtype">void</span> setup_level2(<a class="code hl_struct" href="structMapData.html">MapData</a> *m);</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keywordtype">void</span> update_falling_box(<a class="code hl_struct" href="structMapData.html">MapData</a> *m, <span class="keywordtype">int</span> p1x, <span class="keywordtype">int</span> p1y, <span class="keywordtype">int</span> p2x, <span class="keywordtype">int</span> p2y);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keywordtype">int</span>  map_rects_overlap(SDL_Rect a, SDL_Rect b);</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">#endif </span><span class="comment">/* MAPP_H */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="astructFallingBox_html"><div class="ttname"><a href="structFallingBox.html">FallingBox</a></div><div class="ttdef"><b>Definition</b> map.h:36</div></div>
-<div class="ttc" id="astructKey_html"><div class="ttname"><a href="structKey.html">Key</a></div><div class="ttdef"><b>Definition</b> map.h:17</div></div>
-<div class="ttc" id="astructMapData_html"><div class="ttname"><a href="structMapData.html">MapData</a></div><div class="ttdef"><b>Definition</b> map.h:44</div></div>
-<div class="ttc" id="astructMapDoor_html"><div class="ttname"><a href="structMapDoor.html">MapDoor</a></div><div class="ttdef"><b>Definition</b> map.h:27</div></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">/* ── Function declarations ───────────────────────────────────────────── */</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keywordtype">void</span> <a class="code hl_function" href="map_8h.html#ae45f30b3c11bb2756fab1adb911904c2">map_init</a>(<a class="code hl_struct" href="structMapData.html">MapData</a> *m, SDL_Renderer *renderer);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keywordtype">void</span> <a class="code hl_function" href="map_8h.html#a1296c1cf93ac225166872001a6291226">map_cleanup</a>(<a class="code hl_struct" href="structMapData.html">MapData</a> *m);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keywordtype">void</span> <a class="code hl_function" href="map_8h.html#a4185de338828ec39553abcf324e40ea1">setup_level1</a>(<a class="code hl_struct" href="structMapData.html">MapData</a> *m);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keywordtype">void</span> <a class="code hl_function" href="map_8h.html#af8a893ce0f7f3bd11b5db905c3e6ec1c">setup_level2</a>(<a class="code hl_struct" href="structMapData.html">MapData</a> *m);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="keywordtype">void</span> <a class="code hl_function" href="map_8h.html#abf9d98d2825364bc281d336001dd3b6f">update_falling_box</a>(<a class="code hl_struct" href="structMapData.html">MapData</a> *m, <span class="keywordtype">int</span> p1x, <span class="keywordtype">int</span> p1y, <span class="keywordtype">int</span> p2x, <span class="keywordtype">int</span> p2y);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keywordtype">int</span>  <a class="code hl_function" href="map_8h.html#a9ad845e9d2b4666fea9449e39fd378c1">map_rects_overlap</a>(SDL_Rect a, SDL_Rect b);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#endif </span><span class="comment">/* MAPP_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="amap_8h_html_a1296c1cf93ac225166872001a6291226"><div class="ttname"><a href="map_8h.html#a1296c1cf93ac225166872001a6291226">map_cleanup</a></div><div class="ttdeci">void map_cleanup(MapData *m)</div><div class="ttdef"><b>Definition</b> <a href="map_8c_source.html#l00036">map.c:36</a></div></div>
+<div class="ttc" id="amap_8h_html_a2ca8a6ecda1fc43a400b80dc26a35184"><div class="ttname"><a href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">MAX_DOORS</a></div><div class="ttdeci">#define MAX_DOORS</div><div class="ttdef"><b>Definition</b> <a href="#l00014">map.h:14</a></div></div>
+<div class="ttc" id="amap_8h_html_a3077ecca3770bdee50e6a17dfb55d002"><div class="ttname"><a href="map_8h.html#a3077ecca3770bdee50e6a17dfb55d002">MAX_KEYS</a></div><div class="ttdeci">#define MAX_KEYS</div><div class="ttdef"><b>Definition</b> <a href="#l00015">map.h:15</a></div></div>
+<div class="ttc" id="amap_8h_html_a30f45f4b783ff7ce8c680a0897a992b9"><div class="ttname"><a href="map_8h.html#a30f45f4b783ff7ce8c680a0897a992b9">MAX_OBS</a></div><div class="ttdeci">#define MAX_OBS</div><div class="ttdef"><b>Definition</b> <a href="#l00013">map.h:13</a></div></div>
+<div class="ttc" id="amap_8h_html_a4185de338828ec39553abcf324e40ea1"><div class="ttname"><a href="map_8h.html#a4185de338828ec39553abcf324e40ea1">setup_level1</a></div><div class="ttdeci">void setup_level1(MapData *m)</div><div class="ttdef"><b>Definition</b> <a href="map_8c_source.html#l00048">map.c:48</a></div></div>
+<div class="ttc" id="amap_8h_html_a9ad845e9d2b4666fea9449e39fd378c1"><div class="ttname"><a href="map_8h.html#a9ad845e9d2b4666fea9449e39fd378c1">map_rects_overlap</a></div><div class="ttdeci">int map_rects_overlap(SDL_Rect a, SDL_Rect b)</div><div class="ttdef"><b>Definition</b> <a href="map_8c_source.html#l00008">map.c:8</a></div></div>
+<div class="ttc" id="amap_8h_html_abf9d98d2825364bc281d336001dd3b6f"><div class="ttname"><a href="map_8h.html#abf9d98d2825364bc281d336001dd3b6f">update_falling_box</a></div><div class="ttdeci">void update_falling_box(MapData *m, int p1x, int p1y, int p2x, int p2y)</div><div class="ttdef"><b>Definition</b> <a href="map_8c_source.html#l00215">map.c:215</a></div></div>
+<div class="ttc" id="amap_8h_html_ae45f30b3c11bb2756fab1adb911904c2"><div class="ttname"><a href="map_8h.html#ae45f30b3c11bb2756fab1adb911904c2">map_init</a></div><div class="ttdeci">void map_init(MapData *m, SDL_Renderer *renderer)</div><div class="ttdef"><b>Definition</b> <a href="map_8c_source.html#l00014">map.c:14</a></div></div>
+<div class="ttc" id="amap_8h_html_af3c725f56749949dcf107d613f5cdbb5"><div class="ttname"><a href="map_8h.html#af3c725f56749949dcf107d613f5cdbb5">BoxState</a></div><div class="ttdeci">int BoxState</div><div class="ttdef"><b>Definition</b> <a href="#l00039">map.h:39</a></div></div>
+<div class="ttc" id="amap_8h_html_af8a893ce0f7f3bd11b5db905c3e6ec1c"><div class="ttname"><a href="map_8h.html#af8a893ce0f7f3bd11b5db905c3e6ec1c">setup_level2</a></div><div class="ttdeci">void setup_level2(MapData *m)</div><div class="ttdef"><b>Definition</b> <a href="map_8c_source.html#l00145">map.c:145</a></div></div>
+<div class="ttc" id="amap_8h_html_af9510b6edfff65e3e5cbc2ca8e32b42a"><div class="ttname"><a href="map_8h.html#af9510b6edfff65e3e5cbc2ca8e32b42a">LevelID</a></div><div class="ttdeci">int LevelID</div><div class="ttdef"><b>Definition</b> <a href="#l00027">map.h:27</a></div></div>
+<div class="ttc" id="astructFallingBox_html"><div class="ttname"><a href="structFallingBox.html">FallingBox</a></div><div class="ttdef"><b>Definition</b> <a href="#l00041">map.h:41</a></div></div>
+<div class="ttc" id="astructFallingBox_html_a64a339d1019b7e2beda7071b8e3030a2"><div class="ttname"><a href="structFallingBox.html#a64a339d1019b7e2beda7071b8e3030a2">FallingBox::fy</a></div><div class="ttdeci">float fy</div><div class="ttdef"><b>Definition</b> <a href="#l00043">map.h:43</a></div></div>
+<div class="ttc" id="astructFallingBox_html_a9d7b5a0ef9718e5b347c6350eeeb0f21"><div class="ttname"><a href="structFallingBox.html#a9d7b5a0ef9718e5b347c6350eeeb0f21">FallingBox::state</a></div><div class="ttdeci">BoxState state</div><div class="ttdef"><b>Definition</b> <a href="#l00045">map.h:45</a></div></div>
+<div class="ttc" id="astructFallingBox_html_aeacfe064e39852dcbf03ad1d1afdbac7"><div class="ttname"><a href="structFallingBox.html#aeacfe064e39852dcbf03ad1d1afdbac7">FallingBox::vel</a></div><div class="ttdeci">float vel</div><div class="ttdef"><b>Definition</b> <a href="#l00044">map.h:44</a></div></div>
+<div class="ttc" id="astructFallingBox_html_aeca378d7153426369653c56ad455756b"><div class="ttname"><a href="structFallingBox.html#aeca378d7153426369653c56ad455756b">FallingBox::rect</a></div><div class="ttdeci">SDL_Rect rect</div><div class="ttdef"><b>Definition</b> <a href="#l00042">map.h:42</a></div></div>
+<div class="ttc" id="astructKey_html"><div class="ttname"><a href="structKey.html">Key</a></div><div class="ttdef"><b>Definition</b> <a href="#l00017">map.h:17</a></div></div>
+<div class="ttc" id="astructKey_html_a555acaa9a5d297c1f893aa9b2e4c0751"><div class="ttname"><a href="structKey.html#a555acaa9a5d297c1f893aa9b2e4c0751">Key::id</a></div><div class="ttdeci">int id</div><div class="ttdef"><b>Definition</b> <a href="#l00019">map.h:19</a></div></div>
+<div class="ttc" id="astructKey_html_a63fdf54361c59cb7fcceb55f44d68629"><div class="ttname"><a href="structKey.html#a63fdf54361c59cb7fcceb55f44d68629">Key::visible</a></div><div class="ttdeci">int visible</div><div class="ttdef"><b>Definition</b> <a href="#l00020">map.h:20</a></div></div>
+<div class="ttc" id="astructKey_html_a925277eb80002aae0872fa8fd3aa51c9"><div class="ttname"><a href="structKey.html#a925277eb80002aae0872fa8fd3aa51c9">Key::collected</a></div><div class="ttdeci">int collected</div><div class="ttdef"><b>Definition</b> <a href="#l00021">map.h:21</a></div></div>
+<div class="ttc" id="astructKey_html_ab7a3f0124d77fa13f27dd3f2aa9a5016"><div class="ttname"><a href="structKey.html#ab7a3f0124d77fa13f27dd3f2aa9a5016">Key::rect</a></div><div class="ttdeci">SDL_Rect rect</div><div class="ttdef"><b>Definition</b> <a href="#l00018">map.h:18</a></div></div>
+<div class="ttc" id="astructMapData_html"><div class="ttname"><a href="structMapData.html">MapData</a></div><div class="ttdef"><b>Definition</b> <a href="#l00049">map.h:49</a></div></div>
+<div class="ttc" id="astructMapData_html_a01cb1b68a81fc335e5fcbbfad9ff6234"><div class="ttname"><a href="structMapData.html#a01cb1b68a81fc335e5fcbbfad9ff6234">MapData::keys2</a></div><div class="ttdeci">Key keys2[MAX_KEYS]</div><div class="ttdef"><b>Definition</b> <a href="#l00072">map.h:72</a></div></div>
+<div class="ttc" id="astructMapData_html_a19dc9904f210067d53f74a09dca0b0d2"><div class="ttname"><a href="structMapData.html#a19dc9904f210067d53f74a09dca0b0d2">MapData::doors2</a></div><div class="ttdeci">MapDoor doors2[MAX_DOORS]</div><div class="ttdef"><b>Definition</b> <a href="#l00066">map.h:66</a></div></div>
+<div class="ttc" id="astructMapData_html_a1f5a3003a61312fb7bafa176e5f0a0a4"><div class="ttname"><a href="structMapData.html#a1f5a3003a61312fb7bafa176e5f0a0a4">MapData::doors1</a></div><div class="ttdeci">MapDoor doors1[MAX_DOORS]</div><div class="ttdef"><b>Definition</b> <a href="#l00059">map.h:59</a></div></div>
+<div class="ttc" id="astructMapData_html_a1f69ced6843796125343cb2af02b419a"><div class="ttname"><a href="structMapData.html#a1f69ced6843796125343cb2af02b419a">MapData::door2_open</a></div><div class="ttdeci">int door2_open[MAX_DOORS]</div><div class="ttdef"><b>Definition</b> <a href="#l00068">map.h:68</a></div></div>
+<div class="ttc" id="astructMapData_html_a453e34561483c30cd5831f73c7d5e30b"><div class="ttname"><a href="structMapData.html#a453e34561483c30cd5831f73c7d5e30b">MapData::level</a></div><div class="ttdeci">LevelID level</div><div class="ttdef"><b>Definition</b> <a href="#l00055">map.h:55</a></div></div>
+<div class="ttc" id="astructMapData_html_a51b045fb48e01e294d5db54e90ca139c"><div class="ttname"><a href="structMapData.html#a51b045fb48e01e294d5db54e90ca139c">MapData::tex_broken_box</a></div><div class="ttdeci">SDL_Texture * tex_broken_box</div><div class="ttdef"><b>Definition</b> <a href="#l00053">map.h:53</a></div></div>
+<div class="ttc" id="astructMapData_html_a59513e85b76f7fe1055834ccd3f49fc3"><div class="ttname"><a href="structMapData.html#a59513e85b76f7fe1055834ccd3f49fc3">MapData::keys2_cnt</a></div><div class="ttdeci">int keys2_cnt</div><div class="ttdef"><b>Definition</b> <a href="#l00073">map.h:73</a></div></div>
+<div class="ttc" id="astructMapData_html_a5fe14014e5fd93fb456bd975642f528c"><div class="ttname"><a href="structMapData.html#a5fe14014e5fd93fb456bd975642f528c">MapData::keys1</a></div><div class="ttdeci">Key keys1[MAX_KEYS]</div><div class="ttdef"><b>Definition</b> <a href="#l00070">map.h:70</a></div></div>
+<div class="ttc" id="astructMapData_html_a748a5c138ce3f843e09354b5f108b53f"><div class="ttname"><a href="structMapData.html#a748a5c138ce3f843e09354b5f108b53f">MapData::door1_open</a></div><div class="ttdeci">int door1_open[MAX_DOORS]</div><div class="ttdef"><b>Definition</b> <a href="#l00061">map.h:61</a></div></div>
+<div class="ttc" id="astructMapData_html_a74d76f8b4f8bb3b4e4ea525b33a34e00"><div class="ttname"><a href="structMapData.html#a74d76f8b4f8bb3b4e4ea525b33a34e00">MapData::doors1_cnt</a></div><div class="ttdeci">int doors1_cnt</div><div class="ttdef"><b>Definition</b> <a href="#l00060">map.h:60</a></div></div>
+<div class="ttc" id="astructMapData_html_a943d5a50514cf4f5a43df17bba27466a"><div class="ttname"><a href="structMapData.html#a943d5a50514cf4f5a43df17bba27466a">MapData::tex_box</a></div><div class="ttdeci">SDL_Texture * tex_box</div><div class="ttdef"><b>Definition</b> <a href="#l00052">map.h:52</a></div></div>
+<div class="ttc" id="astructMapData_html_a985988ebe983e12cbf308a92424bd199"><div class="ttname"><a href="structMapData.html#a985988ebe983e12cbf308a92424bd199">MapData::obs2_cnt</a></div><div class="ttdeci">int obs2_cnt</div><div class="ttdef"><b>Definition</b> <a href="#l00065">map.h:65</a></div></div>
+<div class="ttc" id="astructMapData_html_a9aae4802d67db1d6f3a2f60bacaf8117"><div class="ttname"><a href="structMapData.html#a9aae4802d67db1d6f3a2f60bacaf8117">MapData::fbox</a></div><div class="ttdeci">FallingBox fbox</div><div class="ttdef"><b>Definition</b> <a href="#l00062">map.h:62</a></div></div>
+<div class="ttc" id="astructMapData_html_aa6563e1f120fa68b367cf6e7868521be"><div class="ttname"><a href="structMapData.html#aa6563e1f120fa68b367cf6e7868521be">MapData::boxFallSound</a></div><div class="ttdeci">Mix_Chunk * boxFallSound</div><div class="ttdef"><b>Definition</b> <a href="#l00074">map.h:74</a></div></div>
+<div class="ttc" id="astructMapData_html_aa6a7937c60d9ae25d6277dc3b3b625db"><div class="ttname"><a href="structMapData.html#aa6a7937c60d9ae25d6277dc3b3b625db">MapData::keys1_cnt</a></div><div class="ttdeci">int keys1_cnt</div><div class="ttdef"><b>Definition</b> <a href="#l00071">map.h:71</a></div></div>
+<div class="ttc" id="astructMapData_html_aac0d561bd70c78a31d6f7f610c38002a"><div class="ttname"><a href="structMapData.html#aac0d561bd70c78a31d6f7f610c38002a">MapData::obs1_cnt</a></div><div class="ttdeci">int obs1_cnt</div><div class="ttdef"><b>Definition</b> <a href="#l00058">map.h:58</a></div></div>
+<div class="ttc" id="astructMapData_html_abcc03f8572dc74fb65bba68943c69926"><div class="ttname"><a href="structMapData.html#abcc03f8572dc74fb65bba68943c69926">MapData::doors2_cnt</a></div><div class="ttdeci">int doors2_cnt</div><div class="ttdef"><b>Definition</b> <a href="#l00067">map.h:67</a></div></div>
+<div class="ttc" id="astructMapData_html_ac644c7efc5156c33b48cd54c09bc99e8"><div class="ttname"><a href="structMapData.html#ac644c7efc5156c33b48cd54c09bc99e8">MapData::tex_map1</a></div><div class="ttdeci">SDL_Texture * tex_map1</div><div class="ttdef"><b>Definition</b> <a href="#l00050">map.h:50</a></div></div>
+<div class="ttc" id="astructMapData_html_ace77c18846b5ceadd013e90ff883fdc7"><div class="ttname"><a href="structMapData.html#ace77c18846b5ceadd013e90ff883fdc7">MapData::obs1</a></div><div class="ttdeci">SDL_Rect obs1[MAX_OBS]</div><div class="ttdef"><b>Definition</b> <a href="#l00057">map.h:57</a></div></div>
+<div class="ttc" id="astructMapData_html_adc9789846585e4e07c96d7aa42e52a19"><div class="ttname"><a href="structMapData.html#adc9789846585e4e07c96d7aa42e52a19">MapData::tex_map2</a></div><div class="ttdeci">SDL_Texture * tex_map2</div><div class="ttdef"><b>Definition</b> <a href="#l00051">map.h:51</a></div></div>
+<div class="ttc" id="astructMapData_html_af0d8bc48b94856db7dd2e862c2bded50"><div class="ttname"><a href="structMapData.html#af0d8bc48b94856db7dd2e862c2bded50">MapData::obs2</a></div><div class="ttdeci">SDL_Rect obs2[MAX_OBS]</div><div class="ttdef"><b>Definition</b> <a href="#l00064">map.h:64</a></div></div>
+<div class="ttc" id="astructMapDoor_html"><div class="ttname"><a href="structMapDoor.html">MapDoor</a></div><div class="ttdef"><b>Definition</b> <a href="#l00029">map.h:29</a></div></div>
+<div class="ttc" id="astructMapDoor_html_a01517db0cde4b19fd54915a8ed21a0c4"><div class="ttname"><a href="structMapDoor.html#a01517db0cde4b19fd54915a8ed21a0c4">MapDoor::locked</a></div><div class="ttdeci">int locked</div><div class="ttdef"><b>Definition</b> <a href="#l00031">map.h:31</a></div></div>
+<div class="ttc" id="astructMapDoor_html_a5854d530f14723e5da65d06cee8bf6e2"><div class="ttname"><a href="structMapDoor.html#a5854d530f14723e5da65d06cee8bf6e2">MapDoor::to_level</a></div><div class="ttdeci">int to_level</div><div class="ttdef"><b>Definition</b> <a href="#l00033">map.h:33</a></div></div>
+<div class="ttc" id="astructMapDoor_html_a662bacef9f2b74ea21e8a50fb681ef23"><div class="ttname"><a href="structMapDoor.html#a662bacef9f2b74ea21e8a50fb681ef23">MapDoor::rect</a></div><div class="ttdeci">SDL_Rect rect</div><div class="ttdef"><b>Definition</b> <a href="#l00030">map.h:30</a></div></div>
+<div class="ttc" id="astructMapDoor_html_a6f0b5a109d081dbe5cb1c9a9a21bd11e"><div class="ttname"><a href="structMapDoor.html#a6f0b5a109d081dbe5cb1c9a9a21bd11e">MapDoor::key_id</a></div><div class="ttdeci">int key_id</div><div class="ttdef"><b>Definition</b> <a href="#l00032">map.h:32</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>src</b></li><li class="navelem"><b>map.h</b></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="map_8h.html">map.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: MapData Struct Reference</title>
+<title>SDL Game Project: MapData Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,52 +92,378 @@ $(function(){initNavTree('structMapData.html','',''); });
   <div class="headertitle"><div class="title">MapData Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="map_8h_source.html">map.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for MapData:</div>
+<div class="dyncontent">
+<div class="center"><img src="structMapData__coll__graph.png" border="0" usemap="#aMapData_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:ac644c7efc5156c33b48cd54c09bc99e8" id="r_ac644c7efc5156c33b48cd54c09bc99e8"><td class="memItemLeft"><a id="ac644c7efc5156c33b48cd54c09bc99e8" name="ac644c7efc5156c33b48cd54c09bc99e8"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>tex_map1</b></td></tr>
-<tr class="memitem:adc9789846585e4e07c96d7aa42e52a19" id="r_adc9789846585e4e07c96d7aa42e52a19"><td class="memItemLeft"><a id="adc9789846585e4e07c96d7aa42e52a19" name="adc9789846585e4e07c96d7aa42e52a19"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>tex_map2</b></td></tr>
-<tr class="memitem:a943d5a50514cf4f5a43df17bba27466a" id="r_a943d5a50514cf4f5a43df17bba27466a"><td class="memItemLeft"><a id="a943d5a50514cf4f5a43df17bba27466a" name="a943d5a50514cf4f5a43df17bba27466a"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>tex_box</b></td></tr>
-<tr class="memitem:a51b045fb48e01e294d5db54e90ca139c" id="r_a51b045fb48e01e294d5db54e90ca139c"><td class="memItemLeft"><a id="a51b045fb48e01e294d5db54e90ca139c" name="a51b045fb48e01e294d5db54e90ca139c"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>tex_broken_box</b></td></tr>
-<tr class="memitem:a453e34561483c30cd5831f73c7d5e30b" id="r_a453e34561483c30cd5831f73c7d5e30b"><td class="memItemLeft"><a id="a453e34561483c30cd5831f73c7d5e30b" name="a453e34561483c30cd5831f73c7d5e30b"></a>
-LevelID&#160;</td><td class="memItemRight"><b>level</b></td></tr>
-<tr class="memitem:ace77c18846b5ceadd013e90ff883fdc7" id="r_ace77c18846b5ceadd013e90ff883fdc7"><td class="memItemLeft"><a id="ace77c18846b5ceadd013e90ff883fdc7" name="ace77c18846b5ceadd013e90ff883fdc7"></a>
-SDL_Rect&#160;</td><td class="memItemRight"><b>obs1</b> [MAX_OBS]</td></tr>
-<tr class="memitem:aac0d561bd70c78a31d6f7f610c38002a" id="r_aac0d561bd70c78a31d6f7f610c38002a"><td class="memItemLeft"><a id="aac0d561bd70c78a31d6f7f610c38002a" name="aac0d561bd70c78a31d6f7f610c38002a"></a>
-int&#160;</td><td class="memItemRight"><b>obs1_cnt</b></td></tr>
-<tr class="memitem:a1f5a3003a61312fb7bafa176e5f0a0a4" id="r_a1f5a3003a61312fb7bafa176e5f0a0a4"><td class="memItemLeft"><a id="a1f5a3003a61312fb7bafa176e5f0a0a4" name="a1f5a3003a61312fb7bafa176e5f0a0a4"></a>
-<a class="el" href="structMapDoor.html">MapDoor</a>&#160;</td><td class="memItemRight"><b>doors1</b> [MAX_DOORS]</td></tr>
-<tr class="memitem:a74d76f8b4f8bb3b4e4ea525b33a34e00" id="r_a74d76f8b4f8bb3b4e4ea525b33a34e00"><td class="memItemLeft"><a id="a74d76f8b4f8bb3b4e4ea525b33a34e00" name="a74d76f8b4f8bb3b4e4ea525b33a34e00"></a>
-int&#160;</td><td class="memItemRight"><b>doors1_cnt</b></td></tr>
-<tr class="memitem:a748a5c138ce3f843e09354b5f108b53f" id="r_a748a5c138ce3f843e09354b5f108b53f"><td class="memItemLeft"><a id="a748a5c138ce3f843e09354b5f108b53f" name="a748a5c138ce3f843e09354b5f108b53f"></a>
-int&#160;</td><td class="memItemRight"><b>door1_open</b> [MAX_DOORS]</td></tr>
-<tr class="memitem:a9aae4802d67db1d6f3a2f60bacaf8117" id="r_a9aae4802d67db1d6f3a2f60bacaf8117"><td class="memItemLeft"><a id="a9aae4802d67db1d6f3a2f60bacaf8117" name="a9aae4802d67db1d6f3a2f60bacaf8117"></a>
-<a class="el" href="structFallingBox.html">FallingBox</a>&#160;</td><td class="memItemRight"><b>fbox</b></td></tr>
-<tr class="memitem:af0d8bc48b94856db7dd2e862c2bded50" id="r_af0d8bc48b94856db7dd2e862c2bded50"><td class="memItemLeft"><a id="af0d8bc48b94856db7dd2e862c2bded50" name="af0d8bc48b94856db7dd2e862c2bded50"></a>
-SDL_Rect&#160;</td><td class="memItemRight"><b>obs2</b> [MAX_OBS]</td></tr>
-<tr class="memitem:a985988ebe983e12cbf308a92424bd199" id="r_a985988ebe983e12cbf308a92424bd199"><td class="memItemLeft"><a id="a985988ebe983e12cbf308a92424bd199" name="a985988ebe983e12cbf308a92424bd199"></a>
-int&#160;</td><td class="memItemRight"><b>obs2_cnt</b></td></tr>
-<tr class="memitem:a19dc9904f210067d53f74a09dca0b0d2" id="r_a19dc9904f210067d53f74a09dca0b0d2"><td class="memItemLeft"><a id="a19dc9904f210067d53f74a09dca0b0d2" name="a19dc9904f210067d53f74a09dca0b0d2"></a>
-<a class="el" href="structMapDoor.html">MapDoor</a>&#160;</td><td class="memItemRight"><b>doors2</b> [MAX_DOORS]</td></tr>
-<tr class="memitem:abcc03f8572dc74fb65bba68943c69926" id="r_abcc03f8572dc74fb65bba68943c69926"><td class="memItemLeft"><a id="abcc03f8572dc74fb65bba68943c69926" name="abcc03f8572dc74fb65bba68943c69926"></a>
-int&#160;</td><td class="memItemRight"><b>doors2_cnt</b></td></tr>
-<tr class="memitem:a1f69ced6843796125343cb2af02b419a" id="r_a1f69ced6843796125343cb2af02b419a"><td class="memItemLeft"><a id="a1f69ced6843796125343cb2af02b419a" name="a1f69ced6843796125343cb2af02b419a"></a>
-int&#160;</td><td class="memItemRight"><b>door2_open</b> [MAX_DOORS]</td></tr>
-<tr class="memitem:a5fe14014e5fd93fb456bd975642f528c" id="r_a5fe14014e5fd93fb456bd975642f528c"><td class="memItemLeft"><a id="a5fe14014e5fd93fb456bd975642f528c" name="a5fe14014e5fd93fb456bd975642f528c"></a>
-<a class="el" href="structKey.html">Key</a>&#160;</td><td class="memItemRight"><b>keys1</b> [MAX_KEYS]</td></tr>
-<tr class="memitem:aa6a7937c60d9ae25d6277dc3b3b625db" id="r_aa6a7937c60d9ae25d6277dc3b3b625db"><td class="memItemLeft"><a id="aa6a7937c60d9ae25d6277dc3b3b625db" name="aa6a7937c60d9ae25d6277dc3b3b625db"></a>
-int&#160;</td><td class="memItemRight"><b>keys1_cnt</b></td></tr>
-<tr class="memitem:a01cb1b68a81fc335e5fcbbfad9ff6234" id="r_a01cb1b68a81fc335e5fcbbfad9ff6234"><td class="memItemLeft"><a id="a01cb1b68a81fc335e5fcbbfad9ff6234" name="a01cb1b68a81fc335e5fcbbfad9ff6234"></a>
-<a class="el" href="structKey.html">Key</a>&#160;</td><td class="memItemRight"><b>keys2</b> [MAX_KEYS]</td></tr>
-<tr class="memitem:a59513e85b76f7fe1055834ccd3f49fc3" id="r_a59513e85b76f7fe1055834ccd3f49fc3"><td class="memItemLeft"><a id="a59513e85b76f7fe1055834ccd3f49fc3" name="a59513e85b76f7fe1055834ccd3f49fc3"></a>
-int&#160;</td><td class="memItemRight"><b>keys2_cnt</b></td></tr>
-<tr class="memitem:aa6563e1f120fa68b367cf6e7868521be" id="r_aa6563e1f120fa68b367cf6e7868521be"><td class="memItemLeft"><a id="aa6563e1f120fa68b367cf6e7868521be" name="aa6563e1f120fa68b367cf6e7868521be"></a>
-Mix_Chunk *&#160;</td><td class="memItemRight"><b>boxFallSound</b></td></tr>
+<tr class="memitem:ac644c7efc5156c33b48cd54c09bc99e8" id="r_ac644c7efc5156c33b48cd54c09bc99e8"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#ac644c7efc5156c33b48cd54c09bc99e8">tex_map1</a></td></tr>
+<tr class="memitem:adc9789846585e4e07c96d7aa42e52a19" id="r_adc9789846585e4e07c96d7aa42e52a19"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#adc9789846585e4e07c96d7aa42e52a19">tex_map2</a></td></tr>
+<tr class="memitem:a943d5a50514cf4f5a43df17bba27466a" id="r_a943d5a50514cf4f5a43df17bba27466a"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a943d5a50514cf4f5a43df17bba27466a">tex_box</a></td></tr>
+<tr class="memitem:a51b045fb48e01e294d5db54e90ca139c" id="r_a51b045fb48e01e294d5db54e90ca139c"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a51b045fb48e01e294d5db54e90ca139c">tex_broken_box</a></td></tr>
+<tr class="memitem:a453e34561483c30cd5831f73c7d5e30b" id="r_a453e34561483c30cd5831f73c7d5e30b"><td class="memItemLeft"><a class="el" href="map_8h.html#af9510b6edfff65e3e5cbc2ca8e32b42a">LevelID</a>&#160;</td><td class="memItemRight"><a class="el" href="#a453e34561483c30cd5831f73c7d5e30b">level</a></td></tr>
+<tr class="memitem:ace77c18846b5ceadd013e90ff883fdc7" id="r_ace77c18846b5ceadd013e90ff883fdc7"><td class="memItemLeft">SDL_Rect&#160;</td><td class="memItemRight"><a class="el" href="#ace77c18846b5ceadd013e90ff883fdc7">obs1</a> [<a class="el" href="map_8h.html#a30f45f4b783ff7ce8c680a0897a992b9">MAX_OBS</a>]</td></tr>
+<tr class="memitem:aac0d561bd70c78a31d6f7f610c38002a" id="r_aac0d561bd70c78a31d6f7f610c38002a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aac0d561bd70c78a31d6f7f610c38002a">obs1_cnt</a></td></tr>
+<tr class="memitem:a1f5a3003a61312fb7bafa176e5f0a0a4" id="r_a1f5a3003a61312fb7bafa176e5f0a0a4"><td class="memItemLeft"><a class="el" href="structMapDoor.html">MapDoor</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1f5a3003a61312fb7bafa176e5f0a0a4">doors1</a> [<a class="el" href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">MAX_DOORS</a>]</td></tr>
+<tr class="memitem:a74d76f8b4f8bb3b4e4ea525b33a34e00" id="r_a74d76f8b4f8bb3b4e4ea525b33a34e00"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a74d76f8b4f8bb3b4e4ea525b33a34e00">doors1_cnt</a></td></tr>
+<tr class="memitem:a748a5c138ce3f843e09354b5f108b53f" id="r_a748a5c138ce3f843e09354b5f108b53f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a748a5c138ce3f843e09354b5f108b53f">door1_open</a> [<a class="el" href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">MAX_DOORS</a>]</td></tr>
+<tr class="memitem:a9aae4802d67db1d6f3a2f60bacaf8117" id="r_a9aae4802d67db1d6f3a2f60bacaf8117"><td class="memItemLeft"><a class="el" href="structFallingBox.html">FallingBox</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9aae4802d67db1d6f3a2f60bacaf8117">fbox</a></td></tr>
+<tr class="memitem:af0d8bc48b94856db7dd2e862c2bded50" id="r_af0d8bc48b94856db7dd2e862c2bded50"><td class="memItemLeft">SDL_Rect&#160;</td><td class="memItemRight"><a class="el" href="#af0d8bc48b94856db7dd2e862c2bded50">obs2</a> [<a class="el" href="map_8h.html#a30f45f4b783ff7ce8c680a0897a992b9">MAX_OBS</a>]</td></tr>
+<tr class="memitem:a985988ebe983e12cbf308a92424bd199" id="r_a985988ebe983e12cbf308a92424bd199"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a985988ebe983e12cbf308a92424bd199">obs2_cnt</a></td></tr>
+<tr class="memitem:a19dc9904f210067d53f74a09dca0b0d2" id="r_a19dc9904f210067d53f74a09dca0b0d2"><td class="memItemLeft"><a class="el" href="structMapDoor.html">MapDoor</a>&#160;</td><td class="memItemRight"><a class="el" href="#a19dc9904f210067d53f74a09dca0b0d2">doors2</a> [<a class="el" href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">MAX_DOORS</a>]</td></tr>
+<tr class="memitem:abcc03f8572dc74fb65bba68943c69926" id="r_abcc03f8572dc74fb65bba68943c69926"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#abcc03f8572dc74fb65bba68943c69926">doors2_cnt</a></td></tr>
+<tr class="memitem:a1f69ced6843796125343cb2af02b419a" id="r_a1f69ced6843796125343cb2af02b419a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a1f69ced6843796125343cb2af02b419a">door2_open</a> [<a class="el" href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">MAX_DOORS</a>]</td></tr>
+<tr class="memitem:a5fe14014e5fd93fb456bd975642f528c" id="r_a5fe14014e5fd93fb456bd975642f528c"><td class="memItemLeft"><a class="el" href="structKey.html">Key</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5fe14014e5fd93fb456bd975642f528c">keys1</a> [<a class="el" href="map_8h.html#a3077ecca3770bdee50e6a17dfb55d002">MAX_KEYS</a>]</td></tr>
+<tr class="memitem:aa6a7937c60d9ae25d6277dc3b3b625db" id="r_aa6a7937c60d9ae25d6277dc3b3b625db"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aa6a7937c60d9ae25d6277dc3b3b625db">keys1_cnt</a></td></tr>
+<tr class="memitem:a01cb1b68a81fc335e5fcbbfad9ff6234" id="r_a01cb1b68a81fc335e5fcbbfad9ff6234"><td class="memItemLeft"><a class="el" href="structKey.html">Key</a>&#160;</td><td class="memItemRight"><a class="el" href="#a01cb1b68a81fc335e5fcbbfad9ff6234">keys2</a> [<a class="el" href="map_8h.html#a3077ecca3770bdee50e6a17dfb55d002">MAX_KEYS</a>]</td></tr>
+<tr class="memitem:a59513e85b76f7fe1055834ccd3f49fc3" id="r_a59513e85b76f7fe1055834ccd3f49fc3"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a59513e85b76f7fe1055834ccd3f49fc3">keys2_cnt</a></td></tr>
+<tr class="memitem:aa6563e1f120fa68b367cf6e7868521be" id="r_aa6563e1f120fa68b367cf6e7868521be"><td class="memItemLeft">Mix_Chunk *&#160;</td><td class="memItemRight"><a class="el" href="#aa6563e1f120fa68b367cf6e7868521be">boxFallSound</a></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00049">49</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="aa6563e1f120fa68b367cf6e7868521be" name="aa6563e1f120fa68b367cf6e7868521be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6563e1f120fa68b367cf6e7868521be">&#9670;&#160;</a></span>boxFallSound</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mix_Chunk* MapData::boxFallSound</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00074">74</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="a748a5c138ce3f843e09354b5f108b53f" name="a748a5c138ce3f843e09354b5f108b53f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a748a5c138ce3f843e09354b5f108b53f">&#9670;&#160;</a></span>door1_open</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MapData::door1_open[<a class="el" href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">MAX_DOORS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00061">61</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="a1f69ced6843796125343cb2af02b419a" name="a1f69ced6843796125343cb2af02b419a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f69ced6843796125343cb2af02b419a">&#9670;&#160;</a></span>door2_open</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MapData::door2_open[<a class="el" href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">MAX_DOORS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00068">68</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="a1f5a3003a61312fb7bafa176e5f0a0a4" name="a1f5a3003a61312fb7bafa176e5f0a0a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f5a3003a61312fb7bafa176e5f0a0a4">&#9670;&#160;</a></span>doors1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structMapDoor.html">MapDoor</a> MapData::doors1[<a class="el" href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">MAX_DOORS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00059">59</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="a74d76f8b4f8bb3b4e4ea525b33a34e00" name="a74d76f8b4f8bb3b4e4ea525b33a34e00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74d76f8b4f8bb3b4e4ea525b33a34e00">&#9670;&#160;</a></span>doors1_cnt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MapData::doors1_cnt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00060">60</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="a19dc9904f210067d53f74a09dca0b0d2" name="a19dc9904f210067d53f74a09dca0b0d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19dc9904f210067d53f74a09dca0b0d2">&#9670;&#160;</a></span>doors2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structMapDoor.html">MapDoor</a> MapData::doors2[<a class="el" href="map_8h.html#a2ca8a6ecda1fc43a400b80dc26a35184">MAX_DOORS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00066">66</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="abcc03f8572dc74fb65bba68943c69926" name="abcc03f8572dc74fb65bba68943c69926"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcc03f8572dc74fb65bba68943c69926">&#9670;&#160;</a></span>doors2_cnt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MapData::doors2_cnt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00067">67</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="a9aae4802d67db1d6f3a2f60bacaf8117" name="a9aae4802d67db1d6f3a2f60bacaf8117"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9aae4802d67db1d6f3a2f60bacaf8117">&#9670;&#160;</a></span>fbox</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structFallingBox.html">FallingBox</a> MapData::fbox</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00062">62</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="a5fe14014e5fd93fb456bd975642f528c" name="a5fe14014e5fd93fb456bd975642f528c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fe14014e5fd93fb456bd975642f528c">&#9670;&#160;</a></span>keys1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structKey.html">Key</a> MapData::keys1[<a class="el" href="map_8h.html#a3077ecca3770bdee50e6a17dfb55d002">MAX_KEYS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00070">70</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="aa6a7937c60d9ae25d6277dc3b3b625db" name="aa6a7937c60d9ae25d6277dc3b3b625db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6a7937c60d9ae25d6277dc3b3b625db">&#9670;&#160;</a></span>keys1_cnt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MapData::keys1_cnt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00071">71</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="a01cb1b68a81fc335e5fcbbfad9ff6234" name="a01cb1b68a81fc335e5fcbbfad9ff6234"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01cb1b68a81fc335e5fcbbfad9ff6234">&#9670;&#160;</a></span>keys2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structKey.html">Key</a> MapData::keys2[<a class="el" href="map_8h.html#a3077ecca3770bdee50e6a17dfb55d002">MAX_KEYS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00072">72</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="a59513e85b76f7fe1055834ccd3f49fc3" name="a59513e85b76f7fe1055834ccd3f49fc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59513e85b76f7fe1055834ccd3f49fc3">&#9670;&#160;</a></span>keys2_cnt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MapData::keys2_cnt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00073">73</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="a453e34561483c30cd5831f73c7d5e30b" name="a453e34561483c30cd5831f73c7d5e30b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a453e34561483c30cd5831f73c7d5e30b">&#9670;&#160;</a></span>level</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="map_8h.html#af9510b6edfff65e3e5cbc2ca8e32b42a">LevelID</a> MapData::level</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00055">55</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="ace77c18846b5ceadd013e90ff883fdc7" name="ace77c18846b5ceadd013e90ff883fdc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace77c18846b5ceadd013e90ff883fdc7">&#9670;&#160;</a></span>obs1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Rect MapData::obs1[<a class="el" href="map_8h.html#a30f45f4b783ff7ce8c680a0897a992b9">MAX_OBS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00057">57</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="aac0d561bd70c78a31d6f7f610c38002a" name="aac0d561bd70c78a31d6f7f610c38002a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac0d561bd70c78a31d6f7f610c38002a">&#9670;&#160;</a></span>obs1_cnt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MapData::obs1_cnt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00058">58</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="af0d8bc48b94856db7dd2e862c2bded50" name="af0d8bc48b94856db7dd2e862c2bded50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0d8bc48b94856db7dd2e862c2bded50">&#9670;&#160;</a></span>obs2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Rect MapData::obs2[<a class="el" href="map_8h.html#a30f45f4b783ff7ce8c680a0897a992b9">MAX_OBS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00064">64</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="a985988ebe983e12cbf308a92424bd199" name="a985988ebe983e12cbf308a92424bd199"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a985988ebe983e12cbf308a92424bd199">&#9670;&#160;</a></span>obs2_cnt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MapData::obs2_cnt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00065">65</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="a943d5a50514cf4f5a43df17bba27466a" name="a943d5a50514cf4f5a43df17bba27466a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a943d5a50514cf4f5a43df17bba27466a">&#9670;&#160;</a></span>tex_box</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* MapData::tex_box</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00052">52</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="a51b045fb48e01e294d5db54e90ca139c" name="a51b045fb48e01e294d5db54e90ca139c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51b045fb48e01e294d5db54e90ca139c">&#9670;&#160;</a></span>tex_broken_box</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* MapData::tex_broken_box</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00053">53</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="ac644c7efc5156c33b48cd54c09bc99e8" name="ac644c7efc5156c33b48cd54c09bc99e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac644c7efc5156c33b48cd54c09bc99e8">&#9670;&#160;</a></span>tex_map1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* MapData::tex_map1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00050">50</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
+<a id="adc9789846585e4e07c96d7aa42e52a19" name="adc9789846585e4e07c96d7aa42e52a19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc9789846585e4e07c96d7aa42e52a19">&#9670;&#160;</a></span>tex_map2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* MapData::tex_map2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="map_8h_source.html#l00051">51</a> of file <a class="el" href="map_8h_source.html">map.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="map_8h_source.html">map.h</a></li>
 </ul>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: src/puzzle.h Source File</title>
+<title>SDL Game Project: src/puzzle.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,7 +92,7 @@ $(function(){initNavTree('puzzle_8h_source.html','',''); });
   <div class="headertitle"><div class="title">puzzle.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<a href="puzzle_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;SDL2/SDL.h&gt;</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;SDL2/SDL_image.h&gt;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;SDL2/SDL_mixer.h&gt;</span></div>
@@ -102,78 +102,112 @@ $(function(){initNavTree('puzzle_8h_source.html','',''); });
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;math.h&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;time.h&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#define W    800</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#define H    500</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define BG_X 10</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#define BG_Y 10</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define BG_W 560</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#define BG_H 480</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#define PW   120</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#define PH   110</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#define NB   5</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#define TMAX 10000</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#define SNAP 60</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="puzzle_8h.html#a649b8f01fd6c0f47ff3cbddaeba63bfb">   11</a></span><span class="preprocessor">#define W    800</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="puzzle_8h.html#abec92cc72a096640b821b8cd56a02495">   12</a></span><span class="preprocessor">#define H    500</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="puzzle_8h.html#a3206fe231afb183d5d0aa3c9b188d881">   13</a></span><span class="preprocessor">#define BG_X 10</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="puzzle_8h.html#ae517468382caa06ef6c4cfb7ef2296b7">   14</a></span><span class="preprocessor">#define BG_Y 10</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="puzzle_8h.html#ada8fc72d5a6335b685c280c9ae0e17d5">   15</a></span><span class="preprocessor">#define BG_W 560</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="puzzle_8h.html#abe6d916ecd5fe37b0be49f5a0cfa1e59">   16</a></span><span class="preprocessor">#define BG_H 480</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="puzzle_8h.html#a80665c70b5c319208328ddbb0e1fba7a">   17</a></span><span class="preprocessor">#define PW   120</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="puzzle_8h.html#ae0fcc909f5a4166b625a6707cbdfa643">   18</a></span><span class="preprocessor">#define PH   110</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="puzzle_8h.html#a58e95dc1eb9d6ce16f515e77beeadd58">   19</a></span><span class="preprocessor">#define NB   5</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="puzzle_8h.html#af7a16e2716eaac90fb331c55876cf511">   20</a></span><span class="preprocessor">#define TMAX 10000</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="puzzle_8h.html#a412d86d178eb9541a56456526d26caff">   21</a></span><span class="preprocessor">#define SNAP 60</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structPuzzle.html">   23</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    SDL_Rect hole;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    SDL_Rect src[3];</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">int</span> correct;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="structPuzzle.html#abd89b9b7a1c553617ebe0d6f4a0197f2">   24</a></span>    SDL_Rect <a class="code hl_variable" href="structPuzzle.html#abd89b9b7a1c553617ebe0d6f4a0197f2">hole</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structPuzzle.html#a26f6ad1f1d5281fb1678c50ce66ab998">   25</a></span>    SDL_Rect <a class="code hl_variable" href="structPuzzle.html#a26f6ad1f1d5281fb1678c50ce66ab998">src</a>[3];</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structPuzzle.html#ad79b0970aa1920b173006d4beacd541d">   26</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structPuzzle.html#ad79b0970aa1920b173006d4beacd541d">correct</a>;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>} <a class="code hl_struct" href="structPuzzle.html">Puzzle</a>;</div>
 </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="structPiece.html">   29</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    SDL_Rect src;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    SDL_Rect pos;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    SDL_Rect orig;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">int</span> drag;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">int</span> placed;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">int</span> correct;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="structPiece.html#a8f10a56d85efbc9c4b87c8b545e9d916">   30</a></span>    SDL_Rect <a class="code hl_variable" href="structPiece.html#a8f10a56d85efbc9c4b87c8b545e9d916">src</a>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structPiece.html#a1dd9bcd678c9bab581c8f35af51cc098">   31</a></span>    SDL_Rect <a class="code hl_variable" href="structPiece.html#a1dd9bcd678c9bab581c8f35af51cc098">pos</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structPiece.html#a194cb078989bf0432cec9789cb0de891">   32</a></span>    SDL_Rect <a class="code hl_variable" href="structPiece.html#a194cb078989bf0432cec9789cb0de891">orig</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structPiece.html#aeeb13893a4d62a92e46cdb7581a4879e">   33</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structPiece.html#aeeb13893a4d62a92e46cdb7581a4879e">drag</a>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structPiece.html#a572233724cef3023be12e227662a1a87">   34</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structPiece.html#a572233724cef3023be12e227662a1a87">placed</a>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="structPiece.html#ab8f8696e6d9d7d6a5b68368c2a16f70c">   35</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="structPiece.html#ab8f8696e6d9d7d6a5b68368c2a16f70c">correct</a>;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>} <a class="code hl_struct" href="structPiece.html">Piece</a>;</div>
 </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="foldopen" id="foldopen00038" data-start="{" data-end="};">
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structPuzzleState.html">   38</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    SDL_Texture *bg;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    SDL_Texture *wTex;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    SDL_Texture *lTex;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    Mix_Chunk   *snd;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    TTF_Font    *fnt;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_struct" href="structPiece.html">Piece</a>       pc[3];</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    SDL_Rect    slots[3];</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    SDL_Rect    hScr;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    SDL_Rect    target;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    Uint32      startTime;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">int</span>         dIdx;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">int</span>         ox, oy;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">int</span>         run;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">int</span>         result; <span class="comment">// -1: playing, 1: win, 0: loss</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">int</span>         over;   <span class="comment">// Flag to signal main game loop</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">int</span>         fate;   <span class="comment">// Which puzzle image to use</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">double</span>      angle;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">float</span>       scale;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structPuzzleState.html#a42da2712c5276579b16b23bcbdcfdffe">   39</a></span>    SDL_Texture *<a class="code hl_variable" href="structPuzzleState.html#a42da2712c5276579b16b23bcbdcfdffe">bg</a>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="structPuzzleState.html#a7de302012c735a833ab72371794efcbf">   40</a></span>    SDL_Texture *<a class="code hl_variable" href="structPuzzleState.html#a7de302012c735a833ab72371794efcbf">wTex</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structPuzzleState.html#a143bb4d0141c7c9ee6a5411d2734d077">   41</a></span>    SDL_Texture *<a class="code hl_variable" href="structPuzzleState.html#a143bb4d0141c7c9ee6a5411d2734d077">lTex</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structPuzzleState.html#a4a52ff66d55c6156b695d4f580fcb2b3">   42</a></span>    Mix_Chunk   *<a class="code hl_variable" href="structPuzzleState.html#a4a52ff66d55c6156b695d4f580fcb2b3">snd</a>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structPuzzleState.html#aa97cf13910342387e0d20a73f520ffb6">   43</a></span>    TTF_Font    *<a class="code hl_variable" href="structPuzzleState.html#aa97cf13910342387e0d20a73f520ffb6">fnt</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structPuzzleState.html#a66e1aa38b963a233da2ed7d8199cf6c8">   44</a></span>    <a class="code hl_struct" href="structPiece.html">Piece</a>       <a class="code hl_variable" href="structPuzzleState.html#a66e1aa38b963a233da2ed7d8199cf6c8">pc</a>[3];</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="structPuzzleState.html#a374a462a1bf6711d1508caa87cf7d90f">   45</a></span>    SDL_Rect    <a class="code hl_variable" href="structPuzzleState.html#a374a462a1bf6711d1508caa87cf7d90f">slots</a>[3];</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structPuzzleState.html#a304d1a761e496e68de119d20f6c382f2">   46</a></span>    SDL_Rect    <a class="code hl_variable" href="structPuzzleState.html#a304d1a761e496e68de119d20f6c382f2">hScr</a>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structPuzzleState.html#a6af81703ffc1d752334617dcb0c1e1e7">   47</a></span>    SDL_Rect    <a class="code hl_variable" href="structPuzzleState.html#a6af81703ffc1d752334617dcb0c1e1e7">target</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="structPuzzleState.html#ab3071c6128822955288a904cc2dfed7c">   48</a></span>    Uint32      <a class="code hl_variable" href="structPuzzleState.html#ab3071c6128822955288a904cc2dfed7c">startTime</a>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structPuzzleState.html#ab4db37bbc5f8591e20fc3e4c11011f40">   49</a></span>    <span class="keywordtype">int</span>         <a class="code hl_variable" href="structPuzzleState.html#ab4db37bbc5f8591e20fc3e4c11011f40">dIdx</a>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structPuzzleState.html#a04f41d7057b1933b470d36eecb083c7d">   50</a></span>    <span class="keywordtype">int</span>         <a class="code hl_variable" href="structPuzzleState.html#a04f41d7057b1933b470d36eecb083c7d">ox</a>, <a class="code hl_variable" href="structPuzzleState.html#a5e44aa768202c3cfb620909ea21fe9d3">oy</a>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structPuzzleState.html#a05f727fc498c537d73c9432644b04396">   51</a></span>    <span class="keywordtype">int</span>         <a class="code hl_variable" href="structPuzzleState.html#a05f727fc498c537d73c9432644b04396">run</a>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structPuzzleState.html#ab8da8d6e7732f1c7a769407f1f43dca7">   52</a></span>    <span class="keywordtype">int</span>         <a class="code hl_variable" href="structPuzzleState.html#ab8da8d6e7732f1c7a769407f1f43dca7">result</a>; <span class="comment">// -1: playing, 1: win, 0: loss</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structPuzzleState.html#a61532f3f72a64408c25ea34802a20505">   53</a></span>    <span class="keywordtype">int</span>         <a class="code hl_variable" href="structPuzzleState.html#a61532f3f72a64408c25ea34802a20505">over</a>;   <span class="comment">// Flag to signal main game loop</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structPuzzleState.html#af24b178dec46fa95b4e9008c42a35ac6">   54</a></span>    <span class="keywordtype">int</span>         <a class="code hl_variable" href="structPuzzleState.html#af24b178dec46fa95b4e9008c42a35ac6">fate</a>;   <span class="comment">// Which puzzle image to use</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="structPuzzleState.html#af20a2d7131a20b11e89cce7fffe23016">   55</a></span>    <span class="keywordtype">double</span>      <a class="code hl_variable" href="structPuzzleState.html#af20a2d7131a20b11e89cce7fffe23016">angle</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="structPuzzleState.html#a39aa077d4a207ca4beb52fd4ee540862">   56</a></span>    <span class="keywordtype">float</span>       <a class="code hl_variable" href="structPuzzleState.html#a39aa077d4a207ca4beb52fd4ee540862">scale</a>;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>} <a class="code hl_struct" href="structPuzzleState.html">PuzzleState</a>;</div>
 </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keywordtype">void</span> puzzle_init_state (<a class="code hl_struct" href="structPuzzleState.html">PuzzleState</a> *ps, SDL_Renderer *rend);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keywordtype">void</span> puzzle_handle_event(<a class="code hl_struct" href="structPuzzleState.html">PuzzleState</a> *ps, SDL_Event *ev);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keywordtype">void</span> puzzle_update      (<a class="code hl_struct" href="structPuzzleState.html">PuzzleState</a> *ps);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keywordtype">void</span> puzzle_render      (<a class="code hl_struct" href="structPuzzleState.html">PuzzleState</a> *ps, SDL_Renderer *rend);</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keywordtype">void</span> puzzle_free_state  (<a class="code hl_struct" href="structPuzzleState.html">PuzzleState</a> *ps);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keywordtype">void</span> <a class="code hl_function" href="puzzle_8h.html#aa3ad296f9a7b99d9c6c05fe19bc86c7f">puzzle_init_state</a> (<a class="code hl_struct" href="structPuzzleState.html">PuzzleState</a> *ps, SDL_Renderer *rend);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keywordtype">void</span> <a class="code hl_function" href="puzzle_8h.html#af132889301fae5ba311cba2985f542d5">puzzle_handle_event</a>(<a class="code hl_struct" href="structPuzzleState.html">PuzzleState</a> *ps, SDL_Event *ev);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keywordtype">void</span> <a class="code hl_function" href="puzzle_8h.html#a5cfd16972a98c45f03c93a6daa85fe5d">puzzle_update</a>      (<a class="code hl_struct" href="structPuzzleState.html">PuzzleState</a> *ps);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keywordtype">void</span> <a class="code hl_function" href="puzzle_8h.html#a76c901b11fc7e6fe5288906087d72857">puzzle_render</a>      (<a class="code hl_struct" href="structPuzzleState.html">PuzzleState</a> *ps, SDL_Renderer *rend);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keywordtype">void</span> <a class="code hl_function" href="puzzle_8h.html#a7e3045770b925deb8e1ef6fcb24370e4">puzzle_free_state</a>  (<a class="code hl_struct" href="structPuzzleState.html">PuzzleState</a> *ps);</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">// Keep some original logic if needed, but we&#39;ll mostly use the new functions</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keywordtype">int</span>  enigme2(SDL_Renderer *rend, <span class="keywordtype">int</span> fate, <span class="keywordtype">int</span> *solved);</div>
-<div class="ttc" id="astructPiece_html"><div class="ttname"><a href="structPiece.html">Piece</a></div><div class="ttdef"><b>Definition</b> puzzle.h:29</div></div>
-<div class="ttc" id="astructPuzzleState_html"><div class="ttname"><a href="structPuzzleState.html">PuzzleState</a></div><div class="ttdef"><b>Definition</b> puzzle.h:38</div></div>
-<div class="ttc" id="astructPuzzle_html"><div class="ttname"><a href="structPuzzle.html">Puzzle</a></div><div class="ttdef"><b>Definition</b> puzzle.h:23</div></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keywordtype">int</span>  <a class="code hl_function" href="puzzle_8h.html#af1a0bd61f51f264fa1400e97866d2ca4">enigme2</a>(SDL_Renderer *rend, <span class="keywordtype">int</span> fate, <span class="keywordtype">int</span> *solved);</div>
+<div class="ttc" id="apuzzle_8h_html_a5cfd16972a98c45f03c93a6daa85fe5d"><div class="ttname"><a href="puzzle_8h.html#a5cfd16972a98c45f03c93a6daa85fe5d">puzzle_update</a></div><div class="ttdeci">void puzzle_update(PuzzleState *ps)</div><div class="ttdef"><b>Definition</b> <a href="puzzle_8c_source.html#l00130">puzzle.c:130</a></div></div>
+<div class="ttc" id="apuzzle_8h_html_a76c901b11fc7e6fe5288906087d72857"><div class="ttname"><a href="puzzle_8h.html#a76c901b11fc7e6fe5288906087d72857">puzzle_render</a></div><div class="ttdeci">void puzzle_render(PuzzleState *ps, SDL_Renderer *rend)</div><div class="ttdef"><b>Definition</b> <a href="puzzle_8c_source.html#l00156">puzzle.c:156</a></div></div>
+<div class="ttc" id="apuzzle_8h_html_a7e3045770b925deb8e1ef6fcb24370e4"><div class="ttname"><a href="puzzle_8h.html#a7e3045770b925deb8e1ef6fcb24370e4">puzzle_free_state</a></div><div class="ttdeci">void puzzle_free_state(PuzzleState *ps)</div><div class="ttdef"><b>Definition</b> <a href="puzzle_8c_source.html#l00200">puzzle.c:200</a></div></div>
+<div class="ttc" id="apuzzle_8h_html_aa3ad296f9a7b99d9c6c05fe19bc86c7f"><div class="ttname"><a href="puzzle_8h.html#aa3ad296f9a7b99d9c6c05fe19bc86c7f">puzzle_init_state</a></div><div class="ttdeci">void puzzle_init_state(PuzzleState *ps, SDL_Renderer *rend)</div><div class="ttdef"><b>Definition</b> <a href="puzzle_8c_source.html#l00015">puzzle.c:15</a></div></div>
+<div class="ttc" id="apuzzle_8h_html_af132889301fae5ba311cba2985f542d5"><div class="ttname"><a href="puzzle_8h.html#af132889301fae5ba311cba2985f542d5">puzzle_handle_event</a></div><div class="ttdeci">void puzzle_handle_event(PuzzleState *ps, SDL_Event *ev)</div><div class="ttdef"><b>Definition</b> <a href="puzzle_8c_source.html#l00086">puzzle.c:86</a></div></div>
+<div class="ttc" id="apuzzle_8h_html_af1a0bd61f51f264fa1400e97866d2ca4"><div class="ttname"><a href="puzzle_8h.html#af1a0bd61f51f264fa1400e97866d2ca4">enigme2</a></div><div class="ttdeci">int enigme2(SDL_Renderer *rend, int fate, int *solved)</div><div class="ttdef"><b>Definition</b> <a href="puzzle_8c_source.html#l00209">puzzle.c:209</a></div></div>
+<div class="ttc" id="astructPiece_html"><div class="ttname"><a href="structPiece.html">Piece</a></div><div class="ttdef"><b>Definition</b> <a href="#l00029">puzzle.h:29</a></div></div>
+<div class="ttc" id="astructPiece_html_a194cb078989bf0432cec9789cb0de891"><div class="ttname"><a href="structPiece.html#a194cb078989bf0432cec9789cb0de891">Piece::orig</a></div><div class="ttdeci">SDL_Rect orig</div><div class="ttdef"><b>Definition</b> <a href="#l00032">puzzle.h:32</a></div></div>
+<div class="ttc" id="astructPiece_html_a1dd9bcd678c9bab581c8f35af51cc098"><div class="ttname"><a href="structPiece.html#a1dd9bcd678c9bab581c8f35af51cc098">Piece::pos</a></div><div class="ttdeci">SDL_Rect pos</div><div class="ttdef"><b>Definition</b> <a href="#l00031">puzzle.h:31</a></div></div>
+<div class="ttc" id="astructPiece_html_a572233724cef3023be12e227662a1a87"><div class="ttname"><a href="structPiece.html#a572233724cef3023be12e227662a1a87">Piece::placed</a></div><div class="ttdeci">int placed</div><div class="ttdef"><b>Definition</b> <a href="#l00034">puzzle.h:34</a></div></div>
+<div class="ttc" id="astructPiece_html_a8f10a56d85efbc9c4b87c8b545e9d916"><div class="ttname"><a href="structPiece.html#a8f10a56d85efbc9c4b87c8b545e9d916">Piece::src</a></div><div class="ttdeci">SDL_Rect src</div><div class="ttdef"><b>Definition</b> <a href="#l00030">puzzle.h:30</a></div></div>
+<div class="ttc" id="astructPiece_html_ab8f8696e6d9d7d6a5b68368c2a16f70c"><div class="ttname"><a href="structPiece.html#ab8f8696e6d9d7d6a5b68368c2a16f70c">Piece::correct</a></div><div class="ttdeci">int correct</div><div class="ttdef"><b>Definition</b> <a href="#l00035">puzzle.h:35</a></div></div>
+<div class="ttc" id="astructPiece_html_aeeb13893a4d62a92e46cdb7581a4879e"><div class="ttname"><a href="structPiece.html#aeeb13893a4d62a92e46cdb7581a4879e">Piece::drag</a></div><div class="ttdeci">int drag</div><div class="ttdef"><b>Definition</b> <a href="#l00033">puzzle.h:33</a></div></div>
+<div class="ttc" id="astructPuzzleState_html"><div class="ttname"><a href="structPuzzleState.html">PuzzleState</a></div><div class="ttdef"><b>Definition</b> <a href="#l00038">puzzle.h:38</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_a04f41d7057b1933b470d36eecb083c7d"><div class="ttname"><a href="structPuzzleState.html#a04f41d7057b1933b470d36eecb083c7d">PuzzleState::ox</a></div><div class="ttdeci">int ox</div><div class="ttdef"><b>Definition</b> <a href="#l00050">puzzle.h:50</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_a05f727fc498c537d73c9432644b04396"><div class="ttname"><a href="structPuzzleState.html#a05f727fc498c537d73c9432644b04396">PuzzleState::run</a></div><div class="ttdeci">int run</div><div class="ttdef"><b>Definition</b> <a href="#l00051">puzzle.h:51</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_a143bb4d0141c7c9ee6a5411d2734d077"><div class="ttname"><a href="structPuzzleState.html#a143bb4d0141c7c9ee6a5411d2734d077">PuzzleState::lTex</a></div><div class="ttdeci">SDL_Texture * lTex</div><div class="ttdef"><b>Definition</b> <a href="#l00041">puzzle.h:41</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_a304d1a761e496e68de119d20f6c382f2"><div class="ttname"><a href="structPuzzleState.html#a304d1a761e496e68de119d20f6c382f2">PuzzleState::hScr</a></div><div class="ttdeci">SDL_Rect hScr</div><div class="ttdef"><b>Definition</b> <a href="#l00046">puzzle.h:46</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_a374a462a1bf6711d1508caa87cf7d90f"><div class="ttname"><a href="structPuzzleState.html#a374a462a1bf6711d1508caa87cf7d90f">PuzzleState::slots</a></div><div class="ttdeci">SDL_Rect slots[3]</div><div class="ttdef"><b>Definition</b> <a href="#l00045">puzzle.h:45</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_a39aa077d4a207ca4beb52fd4ee540862"><div class="ttname"><a href="structPuzzleState.html#a39aa077d4a207ca4beb52fd4ee540862">PuzzleState::scale</a></div><div class="ttdeci">float scale</div><div class="ttdef"><b>Definition</b> <a href="#l00056">puzzle.h:56</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_a42da2712c5276579b16b23bcbdcfdffe"><div class="ttname"><a href="structPuzzleState.html#a42da2712c5276579b16b23bcbdcfdffe">PuzzleState::bg</a></div><div class="ttdeci">SDL_Texture * bg</div><div class="ttdef"><b>Definition</b> <a href="#l00039">puzzle.h:39</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_a4a52ff66d55c6156b695d4f580fcb2b3"><div class="ttname"><a href="structPuzzleState.html#a4a52ff66d55c6156b695d4f580fcb2b3">PuzzleState::snd</a></div><div class="ttdeci">Mix_Chunk * snd</div><div class="ttdef"><b>Definition</b> <a href="#l00042">puzzle.h:42</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_a5e44aa768202c3cfb620909ea21fe9d3"><div class="ttname"><a href="structPuzzleState.html#a5e44aa768202c3cfb620909ea21fe9d3">PuzzleState::oy</a></div><div class="ttdeci">int oy</div><div class="ttdef"><b>Definition</b> <a href="#l00050">puzzle.h:50</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_a61532f3f72a64408c25ea34802a20505"><div class="ttname"><a href="structPuzzleState.html#a61532f3f72a64408c25ea34802a20505">PuzzleState::over</a></div><div class="ttdeci">int over</div><div class="ttdef"><b>Definition</b> <a href="#l00053">puzzle.h:53</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_a66e1aa38b963a233da2ed7d8199cf6c8"><div class="ttname"><a href="structPuzzleState.html#a66e1aa38b963a233da2ed7d8199cf6c8">PuzzleState::pc</a></div><div class="ttdeci">Piece pc[3]</div><div class="ttdef"><b>Definition</b> <a href="#l00044">puzzle.h:44</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_a6af81703ffc1d752334617dcb0c1e1e7"><div class="ttname"><a href="structPuzzleState.html#a6af81703ffc1d752334617dcb0c1e1e7">PuzzleState::target</a></div><div class="ttdeci">SDL_Rect target</div><div class="ttdef"><b>Definition</b> <a href="#l00047">puzzle.h:47</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_a7de302012c735a833ab72371794efcbf"><div class="ttname"><a href="structPuzzleState.html#a7de302012c735a833ab72371794efcbf">PuzzleState::wTex</a></div><div class="ttdeci">SDL_Texture * wTex</div><div class="ttdef"><b>Definition</b> <a href="#l00040">puzzle.h:40</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_aa97cf13910342387e0d20a73f520ffb6"><div class="ttname"><a href="structPuzzleState.html#aa97cf13910342387e0d20a73f520ffb6">PuzzleState::fnt</a></div><div class="ttdeci">TTF_Font * fnt</div><div class="ttdef"><b>Definition</b> <a href="#l00043">puzzle.h:43</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_ab3071c6128822955288a904cc2dfed7c"><div class="ttname"><a href="structPuzzleState.html#ab3071c6128822955288a904cc2dfed7c">PuzzleState::startTime</a></div><div class="ttdeci">Uint32 startTime</div><div class="ttdef"><b>Definition</b> <a href="#l00048">puzzle.h:48</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_ab4db37bbc5f8591e20fc3e4c11011f40"><div class="ttname"><a href="structPuzzleState.html#ab4db37bbc5f8591e20fc3e4c11011f40">PuzzleState::dIdx</a></div><div class="ttdeci">int dIdx</div><div class="ttdef"><b>Definition</b> <a href="#l00049">puzzle.h:49</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_ab8da8d6e7732f1c7a769407f1f43dca7"><div class="ttname"><a href="structPuzzleState.html#ab8da8d6e7732f1c7a769407f1f43dca7">PuzzleState::result</a></div><div class="ttdeci">int result</div><div class="ttdef"><b>Definition</b> <a href="#l00052">puzzle.h:52</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_af20a2d7131a20b11e89cce7fffe23016"><div class="ttname"><a href="structPuzzleState.html#af20a2d7131a20b11e89cce7fffe23016">PuzzleState::angle</a></div><div class="ttdeci">double angle</div><div class="ttdef"><b>Definition</b> <a href="#l00055">puzzle.h:55</a></div></div>
+<div class="ttc" id="astructPuzzleState_html_af24b178dec46fa95b4e9008c42a35ac6"><div class="ttname"><a href="structPuzzleState.html#af24b178dec46fa95b4e9008c42a35ac6">PuzzleState::fate</a></div><div class="ttdeci">int fate</div><div class="ttdef"><b>Definition</b> <a href="#l00054">puzzle.h:54</a></div></div>
+<div class="ttc" id="astructPuzzle_html"><div class="ttname"><a href="structPuzzle.html">Puzzle</a></div><div class="ttdef"><b>Definition</b> <a href="#l00023">puzzle.h:23</a></div></div>
+<div class="ttc" id="astructPuzzle_html_a26f6ad1f1d5281fb1678c50ce66ab998"><div class="ttname"><a href="structPuzzle.html#a26f6ad1f1d5281fb1678c50ce66ab998">Puzzle::src</a></div><div class="ttdeci">SDL_Rect src[3]</div><div class="ttdef"><b>Definition</b> <a href="#l00025">puzzle.h:25</a></div></div>
+<div class="ttc" id="astructPuzzle_html_abd89b9b7a1c553617ebe0d6f4a0197f2"><div class="ttname"><a href="structPuzzle.html#abd89b9b7a1c553617ebe0d6f4a0197f2">Puzzle::hole</a></div><div class="ttdeci">SDL_Rect hole</div><div class="ttdef"><b>Definition</b> <a href="#l00024">puzzle.h:24</a></div></div>
+<div class="ttc" id="astructPuzzle_html_ad79b0970aa1920b173006d4beacd541d"><div class="ttname"><a href="structPuzzle.html#ad79b0970aa1920b173006d4beacd541d">Puzzle::correct</a></div><div class="ttdeci">int correct</div><div class="ttdef"><b>Definition</b> <a href="#l00026">puzzle.h:26</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>src</b></li><li class="navelem"><b>puzzle.h</b></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="puzzle_8h.html">puzzle.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
   </ul>
 </div>

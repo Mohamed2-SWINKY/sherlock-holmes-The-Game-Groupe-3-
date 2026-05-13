@@ -1,4 +1,29 @@
 var searchData=
 [
-  ['input_0',['Input',['../structInput.html',1,'']]]
+  ['h_0',['H',['../puzzle_8h.html#abec92cc72a096640b821b8cd56a02495',1,'puzzle.h']]],
+  ['h_1',['h',['../structEnemy.html#adcb5512e63e735485cbb83f763acce75',1,'Enemy::h'],['../structPlayer.html#af109dc67097e88aac555ddaee574acc4',1,'Player::h']]],
+  ['handleenigmeevents_2',['handleEnigmeEvents',['../assets_2enigme_2enigme_8c.html#af37d2863f5a9f3f40eb6ab86c4438cb6',1,'handleEnigmeEvents(Enigme *e, SDL_Event event):&#160;enigme.c'],['../assets_2enigme_2enigme_8h.html#af37d2863f5a9f3f40eb6ab86c4438cb6',1,'handleEnigmeEvents(Enigme *e, SDL_Event event):&#160;enigme.c'],['../src_2enigme_8c.html#af37d2863f5a9f3f40eb6ab86c4438cb6',1,'handleEnigmeEvents(Enigme *e, SDL_Event event):&#160;enigme.c'],['../src_2enigme_8h.html#af37d2863f5a9f3f40eb6ab86c4438cb6',1,'handleEnigmeEvents(Enigme *e, SDL_Event event):&#160;enigme.c']]],
+  ['hasintersection_3',['hasIntersection',['../players_8c.html#a08283ce3be4729445c4be19c39b60ac3',1,'hasIntersection(SDL_Rect r1, SDL_Rect r2):&#160;players.c'],['../players_8h.html#a08283ce3be4729445c4be19c39b60ac3',1,'hasIntersection(SDL_Rect r1, SDL_Rect r2):&#160;players.c']]],
+  ['health_4',['Health',['../structHealth.html',1,'']]],
+  ['health_5',['health',['../structGame.html#a3eda88d9922a8305d61d3d7df4df16ac',1,'Game']]],
+  ['health_5fdamage_6',['Health_Damage',['../enemy_8c.html#ac5ac4b12fa0072a62f1eda8a86e9ce7f',1,'Health_Damage(Health *h, int amount):&#160;enemy.c'],['../enemy_8h.html#ac5ac4b12fa0072a62f1eda8a86e9ce7f',1,'Health_Damage(Health *h, int amount):&#160;enemy.c']]],
+  ['health_5finit_7',['Health_Init',['../enemy_8c.html#a919901b4280f67fc164599d8681af811',1,'Health_Init(Health *h, int maxHP):&#160;enemy.c'],['../enemy_8h.html#a919901b4280f67fc164599d8681af811',1,'Health_Init(Health *h, int maxHP):&#160;enemy.c']]],
+  ['health_5fisdead_8',['Health_IsDead',['../enemy_8c.html#a4f8b1fb9402b166eae3d540f574ee5bf',1,'Health_IsDead(Health *h):&#160;enemy.c'],['../enemy_8h.html#a4f8b1fb9402b166eae3d540f574ee5bf',1,'Health_IsDead(Health *h):&#160;enemy.c']]],
+  ['health_5frender_9',['Health_Render',['../enemy_8c.html#adade62957920d3b2731dc7170d24fb35',1,'Health_Render(Game *g):&#160;enemy.c'],['../enemy_8h.html#adade62957920d3b2731dc7170d24fb35',1,'Health_Render(Game *g):&#160;enemy.c']]],
+  ['healthrect_10',['healthRect',['../structPlayer.html#a21b4ba73121fca3b0ae7ae4e8e5a7e86',1,'Player']]],
+  ['healthstatus_11',['healthStatus',['../structPlayer.html#aa1a2b952bfcb0824e3d064e285221037',1,'Player::healthStatus'],['../structEnemy.html#a01ca935645fc093cc86c17daa86d6ab1',1,'Enemy::healthStatus']]],
+  ['hitbox_12',['hitbox',['../structAttackTrigger.html#aae06e2f7b7b35488b5d1ce5c2893c05c',1,'AttackTrigger']]],
+  ['hitflashtimer_13',['hitFlashTimer',['../structGameContext.html#ad960a15508b7a769626cd059733172d3',1,'GameContext']]],
+  ['hole_14',['hole',['../structPuzzle.html#abd89b9b7a1c553617ebe0d6f4a0197f2',1,'Puzzle']]],
+  ['hovera_15',['hoverA',['../structEnigme.html#a2475f171239f9577df9c1175aea29c01',1,'Enigme']]],
+  ['hoverb_16',['hoverB',['../structEnigme.html#ab13f5334b20142184e1351c0ae4b3a82',1,'Enigme']]],
+  ['hoverc_17',['hoverC',['../structEnigme.html#acbcb19eaa4c2aeaef4cf19e6e03b785f',1,'Enigme']]],
+  ['hovered_18',['hovered',['../structButton.html#a6e21b9c49b70e93cd7e57370acb5082f',1,'Button']]],
+  ['hoverpuzzle_19',['hoverPuzzle',['../structEnigme.html#aab381acbeac7fd551e4012db76767008',1,'Enigme']]],
+  ['hoverquiz_20',['hoverQuiz',['../structEnigme.html#a0af36c588ee246abb9af455e64d1a913',1,'Enigme']]],
+  ['hoversound_21',['hoverSound',['../structEnigme.html#abf9e00566a491c2f031697b1d0c15025',1,'Enigme::hoverSound'],['../structsubMenu.html#a833c7bdd03671cfda0dab8fce5b3f7a5',1,'subMenu::hoverSound']]],
+  ['hpbar_22',['hpBar',['../structPlayer.html#aeb6c8fdadfbf80f259d0e41f0eaa01a5',1,'Player::hpBar'],['../structEnemyAtlas.html#aeabcd9791679cd5ad2a6443c1fc8b4bc',1,'EnemyAtlas::hpBar']]],
+  ['hpbars_23',['hpBars',['../structSpriteAtlas.html#a6b421c9a1de85fed76263bac65049206',1,'SpriteAtlas']]],
+  ['hpspritesheet_24',['hpSpritesheet',['../structGameContext.html#a8bb7c1c1fbca1b1b318267eff0eb845b',1,'GameContext']]],
+  ['hscr_25',['hScr',['../structPuzzleState.html#a304d1a761e496e68de119d20f6c382f2',1,'PuzzleState']]]
 ];

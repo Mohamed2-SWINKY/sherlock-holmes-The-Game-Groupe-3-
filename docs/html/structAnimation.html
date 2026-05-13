@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: Animation Struct Reference</title>
+<title>SDL Game Project: Animation Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,26 +92,152 @@ $(function(){initNavTree('structAnimation.html','',''); });
   <div class="headertitle"><div class="title">Animation Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="enemy_8h_source.html">enemy.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a4938a7a82c7e5d3adf2feb5daccb8a1b" id="r_a4938a7a82c7e5d3adf2feb5daccb8a1b"><td class="memItemLeft"><a id="a4938a7a82c7e5d3adf2feb5daccb8a1b" name="a4938a7a82c7e5d3adf2feb5daccb8a1b"></a>
-AnimState&#160;</td><td class="memItemRight"><b>state</b></td></tr>
-<tr class="memitem:aaa18f6a7e1df5dcb78438431c3bffc16" id="r_aaa18f6a7e1df5dcb78438431c3bffc16"><td class="memItemLeft"><a id="aaa18f6a7e1df5dcb78438431c3bffc16" name="aaa18f6a7e1df5dcb78438431c3bffc16"></a>
-Direction&#160;</td><td class="memItemRight"><b>dir</b></td></tr>
-<tr class="memitem:adc7df29e613689f29ddac3316b2a509d" id="r_adc7df29e613689f29ddac3316b2a509d"><td class="memItemLeft"><a id="adc7df29e613689f29ddac3316b2a509d" name="adc7df29e613689f29ddac3316b2a509d"></a>
-int&#160;</td><td class="memItemRight"><b>currentFrame</b></td></tr>
-<tr class="memitem:a5a49d4eedd5de33efd6b955b04d344fd" id="r_a5a49d4eedd5de33efd6b955b04d344fd"><td class="memItemLeft"><a id="a5a49d4eedd5de33efd6b955b04d344fd" name="a5a49d4eedd5de33efd6b955b04d344fd"></a>
-int&#160;</td><td class="memItemRight"><b>frameCounter</b></td></tr>
-<tr class="memitem:a020e1ed5d95279ffd20c823a903a8936" id="r_a020e1ed5d95279ffd20c823a903a8936"><td class="memItemLeft"><a id="a020e1ed5d95279ffd20c823a903a8936" name="a020e1ed5d95279ffd20c823a903a8936"></a>
-int&#160;</td><td class="memItemRight"><b>maxFrames</b></td></tr>
-<tr class="memitem:ac78944379870dded6d29b54a1c8433da" id="r_ac78944379870dded6d29b54a1c8433da"><td class="memItemLeft"><a id="ac78944379870dded6d29b54a1c8433da" name="ac78944379870dded6d29b54a1c8433da"></a>
-SDL_RendererFlip&#160;</td><td class="memItemRight"><b>flip</b></td></tr>
-<tr class="memitem:ae41daae0971b9dd70c169ca79ff4921e" id="r_ae41daae0971b9dd70c169ca79ff4921e"><td class="memItemLeft"><a id="ae41daae0971b9dd70c169ca79ff4921e" name="ae41daae0971b9dd70c169ca79ff4921e"></a>
-int&#160;</td><td class="memItemRight"><b>attackFrame</b></td></tr>
-<tr class="memitem:a8fffd2e31e7f2758bc783150d7e93925" id="r_a8fffd2e31e7f2758bc783150d7e93925"><td class="memItemLeft"><a id="a8fffd2e31e7f2758bc783150d7e93925" name="a8fffd2e31e7f2758bc783150d7e93925"></a>
-int&#160;</td><td class="memItemRight"><b>attackCounter</b></td></tr>
+<tr class="memitem:a4938a7a82c7e5d3adf2feb5daccb8a1b" id="r_a4938a7a82c7e5d3adf2feb5daccb8a1b"><td class="memItemLeft"><a class="el" href="enemy_8h.html#ab1371ccfb5968c8c8a26fdc35cd37d1a">AnimState</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4938a7a82c7e5d3adf2feb5daccb8a1b">state</a></td></tr>
+<tr class="memitem:aaa18f6a7e1df5dcb78438431c3bffc16" id="r_aaa18f6a7e1df5dcb78438431c3bffc16"><td class="memItemLeft"><a class="el" href="enemy_8h.html#a1d3a15afba67ded3d3aa8a663551d265">Direction</a>&#160;</td><td class="memItemRight"><a class="el" href="#aaa18f6a7e1df5dcb78438431c3bffc16">dir</a></td></tr>
+<tr class="memitem:adc7df29e613689f29ddac3316b2a509d" id="r_adc7df29e613689f29ddac3316b2a509d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#adc7df29e613689f29ddac3316b2a509d">currentFrame</a></td></tr>
+<tr class="memitem:a5a49d4eedd5de33efd6b955b04d344fd" id="r_a5a49d4eedd5de33efd6b955b04d344fd"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a5a49d4eedd5de33efd6b955b04d344fd">frameCounter</a></td></tr>
+<tr class="memitem:a020e1ed5d95279ffd20c823a903a8936" id="r_a020e1ed5d95279ffd20c823a903a8936"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a020e1ed5d95279ffd20c823a903a8936">maxFrames</a></td></tr>
+<tr class="memitem:ac78944379870dded6d29b54a1c8433da" id="r_ac78944379870dded6d29b54a1c8433da"><td class="memItemLeft">SDL_RendererFlip&#160;</td><td class="memItemRight"><a class="el" href="#ac78944379870dded6d29b54a1c8433da">flip</a></td></tr>
+<tr class="memitem:ae41daae0971b9dd70c169ca79ff4921e" id="r_ae41daae0971b9dd70c169ca79ff4921e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae41daae0971b9dd70c169ca79ff4921e">attackFrame</a></td></tr>
+<tr class="memitem:a8fffd2e31e7f2758bc783150d7e93925" id="r_a8fffd2e31e7f2758bc783150d7e93925"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a8fffd2e31e7f2758bc783150d7e93925">attackCounter</a></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00055">55</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="a8fffd2e31e7f2758bc783150d7e93925" name="a8fffd2e31e7f2758bc783150d7e93925"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fffd2e31e7f2758bc783150d7e93925">&#9670;&#160;</a></span>attackCounter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Animation::attackCounter</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00065">65</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="ae41daae0971b9dd70c169ca79ff4921e" name="ae41daae0971b9dd70c169ca79ff4921e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae41daae0971b9dd70c169ca79ff4921e">&#9670;&#160;</a></span>attackFrame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Animation::attackFrame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00064">64</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="adc7df29e613689f29ddac3316b2a509d" name="adc7df29e613689f29ddac3316b2a509d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc7df29e613689f29ddac3316b2a509d">&#9670;&#160;</a></span>currentFrame</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Animation::currentFrame</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00058">58</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="aaa18f6a7e1df5dcb78438431c3bffc16" name="aaa18f6a7e1df5dcb78438431c3bffc16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa18f6a7e1df5dcb78438431c3bffc16">&#9670;&#160;</a></span>dir</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="enemy_8h.html#a1d3a15afba67ded3d3aa8a663551d265">Direction</a> Animation::dir</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00057">57</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="ac78944379870dded6d29b54a1c8433da" name="ac78944379870dded6d29b54a1c8433da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac78944379870dded6d29b54a1c8433da">&#9670;&#160;</a></span>flip</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_RendererFlip Animation::flip</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00061">61</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="a5a49d4eedd5de33efd6b955b04d344fd" name="a5a49d4eedd5de33efd6b955b04d344fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a49d4eedd5de33efd6b955b04d344fd">&#9670;&#160;</a></span>frameCounter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Animation::frameCounter</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00059">59</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="a020e1ed5d95279ffd20c823a903a8936" name="a020e1ed5d95279ffd20c823a903a8936"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a020e1ed5d95279ffd20c823a903a8936">&#9670;&#160;</a></span>maxFrames</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Animation::maxFrames</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00060">60</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
+<a id="a4938a7a82c7e5d3adf2feb5daccb8a1b" name="a4938a7a82c7e5d3adf2feb5daccb8a1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4938a7a82c7e5d3adf2feb5daccb8a1b">&#9670;&#160;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="enemy_8h.html#ab1371ccfb5968c8c8a26fdc35cd37d1a">AnimState</a> Animation::state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="enemy_8h_source.html#l00056">56</a> of file <a class="el" href="enemy_8h_source.html">enemy.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="enemy_8h_source.html">enemy.h</a></li>
 </ul>

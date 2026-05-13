@@ -8,6 +8,17 @@
 /* Forward declarations */
 int* getRebindKeyRef(GameContext *ctx, int target);
 
+/**
+ * @brief Checks if a rectangle is blocked by obstacles or doors.
+ * @param r Rectangle to test
+ * @param obs Array of obstacles
+ * @param obs_cnt Number of obstacles
+ * @param doors Array of doors
+ * @param dc Number of doors
+ * @param door_open Door states
+ * @return 1 if blocked, 0 otherwise
+ */
+
 int is_blocked(SDL_Rect r,
                       SDL_Rect *obs,  int obs_cnt,
                       MapDoor  *doors, int dc, int *door_open)
@@ -19,6 +30,14 @@ int is_blocked(SDL_Rect r,
     return 0;
 }
 
+/**
+ * @brief Emits particles at a given position.
+ * @param ctx Game context
+ * @param x X position
+ * @param y Y position
+ * @param color Particle color
+ * @param count Number of particles
+ */
 void emit_particles(GameContext *ctx,
                     float x, float y,
                     SDL_Color color,
@@ -43,6 +62,10 @@ void emit_particles(GameContext *ctx,
     }
 }
 
+/**
+ * @brief Renders the slideshow screen.
+ * @param ctx Game context
+ */
 void render_slideshow(GameContext *ctx)
 {
     SDL_RenderSetViewport(ctx->renderer, NULL);
@@ -103,69 +126,148 @@ void render_slideshow(GameContext *ctx)
 
 }
 
+/**
+ * @brief Renders the ending choice overlay.
+ * @param ctx Game context
+ */
 void render_ending_choice(GameContext *ctx)
 {
     SDL_RenderSetViewport(ctx->renderer, NULL);
-    SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 240);
-    SDL_RenderFillRect(ctx->renderer, NULL);
+    
+    // ✅ Background image
+    SDL_Rect full = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
+    SDL_RenderCopy(ctx->renderer, ctx->endingBackground, NULL, &full);
 
-    SDL_Color white = {220, 220, 220, 255};
-    SDL_Color gold  = {200, 170, 60, 255};
+    // ✅ DARK PANEL behind everything (for readability 🔥)
+    SDL_Rect panel = {
+        WINDOW_WIDTH / 4,
+        120,
+        WINDOW_WIDTH / 2,
+        320
+    };
 
-    const char *title = "THE TRUTH IS YOURS TO DECIDE";
-    const char *opt1  = "Surrender yourself";
-    const char *opt2  = "Keep it a secret";
+    SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 180);
+    SDL_RenderFillRect(ctx->renderer, &panel);
+
+    // ✅ COLORS (fixed)
+    SDL_Color textColor = {240, 240, 240, 255}; // light grey/white
+    SDL_Color highlight = {120, 200, 255, 255}; // blue highlight
 
     SDL_Surface *s;
     SDL_Texture *t;
     SDL_Rect r;
 
-    // Title
-    s = TTF_RenderText_Blended(ctx->font, title, gold);
+    // ✅ DIALOGUE FIRST
+    if (ctx->endingInDialogue)
+    {
+        const char *text = ctx->endingDialogue[ctx->endingDialogueIndex];
+
+        SDL_Rect box = {
+            WINDOW_WIDTH / 4,
+            WINDOW_HEIGHT - 160,
+            WINDOW_WIDTH / 2,
+            110
+        };
+
+        SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 220);
+        SDL_RenderFillRect(ctx->renderer, &box);
+
+        SDL_SetRenderDrawColor(ctx->renderer, 255, 255, 255, 255);
+        SDL_RenderDrawRect(ctx->renderer, &box);
+
+        s = TTF_RenderText_Blended_Wrapped(ctx->font, text, textColor, box.w - 20);
+        t = SDL_CreateTextureFromSurface(ctx->renderer, s);
+
+        r.x = box.x + 10;
+        r.y = box.y + 10;
+        r.w = s->w;
+        r.h = s->h;
+
+        SDL_RenderCopy(ctx->renderer, t, NULL, &r);
+
+        SDL_FreeSurface(s);
+        SDL_DestroyTexture(t);
+
+        return;
+    }
+
+    // ✅ TITLE
+    const char *title = "THE TRUTH IS YOURS TO DECIDE";
+
+    s = TTF_RenderText_Blended(ctx->font, title, highlight);
     t = SDL_CreateTextureFromSurface(ctx->renderer, s);
     SDL_FreeSurface(s);
     SDL_QueryTexture(t, NULL, NULL, &r.w, &r.h);
+
     r.x = (WINDOW_WIDTH - r.w) / 2;
-    r.y = 180;
+    r.y = 150;
+
     SDL_RenderCopy(ctx->renderer, t, NULL, &r);
     SDL_DestroyTexture(t);
 
+    // ✅ OPTIONS
+    const char *opt1 = "Surrender yourself";
+    const char *opt2 = "Keep it a secret";
+
     // Option 1
     s = TTF_RenderText_Blended(
-        ctx->font, opt1,
-        ctx->endingChoice == 1 ? gold : white
+        ctx->font,
+        opt1,
+        ctx->endingChoice == 1 ? highlight : textColor
     );
     t = SDL_CreateTextureFromSurface(ctx->renderer, s);
     SDL_FreeSurface(s);
     SDL_QueryTexture(t, NULL, NULL, &r.w, &r.h);
+
     r.x = (WINDOW_WIDTH - r.w) / 2;
-    r.y = 300;
+    r.y = 280;
+
     SDL_RenderCopy(ctx->renderer, t, NULL, &r);
     SDL_DestroyTexture(t);
 
     // Option 2
     s = TTF_RenderText_Blended(
-        ctx->font, opt2,
-        ctx->endingChoice == 2 ? gold : white
+        ctx->font,
+        opt2,
+        ctx->endingChoice == 2 ? highlight : textColor
     );
     t = SDL_CreateTextureFromSurface(ctx->renderer, s);
     SDL_FreeSurface(s);
     SDL_QueryTexture(t, NULL, NULL, &r.w, &r.h);
+
     r.x = (WINDOW_WIDTH - r.w) / 2;
-    r.y = 360;
+    r.y = 340;
+
     SDL_RenderCopy(ctx->renderer, t, NULL, &r);
     SDL_DestroyTexture(t);
 }
 
-/* ── Enemy helpers ── */
+
+/**
+ * @brief Calculates vector length.
+ * @param dx X component
+ * @param dy Y component
+ * @return Length of the vector
+ */
 float enemy_vec2len(float dx, float dy) {
     return sqrtf(dx*dx + dy*dy);
 }
+/**
+ * @brief Normalizes a vector.
+ * @param dx Pointer to X component
+ * @param dy Pointer to Y component
+ */
+
 void enemy_normalize(float *dx, float *dy) {
     float len = enemy_vec2len(*dx, *dy);
     if (len > 0.0f) { *dx /= len; *dy /= len; }
 }
 
+/**
+ * @brief Loads enemy textures.
+ * @param a Enemy atlas
+ * @param renderer SDL renderer
+ */
 void enemyAtlas_load(EnemyAtlas *a, SDL_Renderer *renderer) {
     /* adjust paths to match YOUR assets folder */
     const char *rightFiles[MAX_WALK_RIGHT] = {
@@ -196,6 +298,13 @@ void enemyAtlas_load(EnemyAtlas *a, SDL_Renderer *renderer) {
     }
 }
 
+/**
+ * @brief Updates enemy animation.
+ * @param a Animation data
+ * @param dx Movement in X
+ * @param dy Movement in Y
+ */
+
 void enemy_anim_update(EnemyAnimation *a, float dx, float dy) {
     if (a->state == ANIM_ATTACK) return;
     if      (dy < 0) { a->dir=DIR_UP;    a->maxFrames=MAX_WALK_UP;    a->flip=SDL_FLIP_NONE; }
@@ -214,6 +323,13 @@ void enemy_anim_update(EnemyAnimation *a, float dx, float dy) {
     }
 }
 
+/**
+ * @brief Renders enemy animation.
+ * @param r Renderer
+ * @param a Animation data
+ * @param atlas Texture atlas
+ * @param dst Destination rectangle
+ */
 void enemy_anim_render(SDL_Renderer *r, EnemyAnimation *a, EnemyAtlas *atlas, SDL_Rect *dst) {
     SDL_Texture *frame = NULL;
     if (a->state == ANIM_ATTACK) {
@@ -277,6 +393,10 @@ void enemy_anim_render(SDL_Renderer *r, EnemyAnimation *a, EnemyAtlas *atlas, SD
     if (frame) SDL_RenderCopyEx(r, frame, NULL, dst, 0, NULL, a->flip);
 }
 
+/**
+ * @brief Chooses a random target for the enemy.
+ * @param e Enemy pointer
+ */
 void enemy_choose_target(Enemy *e) {
     /* random wandering inside map bounds */
     if (rand() % 2)
@@ -285,6 +405,10 @@ void enemy_choose_target(Enemy *e) {
         e->targetY = (float)(rand() % (MAP_H - e->h)), e->targetX = e->x;
 }
 
+/**
+ * @brief Initializes enemy data.
+ * @param ctx Game context
+ */
 void enemy_init(GameContext *ctx) {
     Enemy *e  = &ctx->enemy;
     e->w      = 80;
@@ -341,6 +465,11 @@ void enemy_init(GameContext *ctx) {
     e2->attackRange    = 80.0f;
 }
 
+/**
+ * @brief Updates enemy behavior.
+ * @param ctx Game context
+ * @param dt Delta time
+ */
 void enemy_update(GameContext *ctx, float dt) {
     Enemy *e = &ctx->enemy;
 
@@ -517,6 +646,12 @@ void enemy_update(GameContext *ctx, float dt) {
     }
 }
 
+/**
+ * @brief Renders the enemy.
+ * @param ctx Game context
+ * @param camX Camera X
+ * @param camY Camera Y
+ */
 void enemy_render(GameContext *ctx, int camX, int camY) {
     int barW   = (int)(80 * ZOOM_FACTOR);
     int barH   = (int)(12 * ZOOM_FACTOR);
@@ -579,7 +714,12 @@ void enemy_render(GameContext *ctx, int camX, int camY) {
     }
 }
 
-
+/**
+ * @brief Loads a texture from file.
+ * @param path File path
+ * @param renderer SDL renderer
+ * @return Loaded texture or NULL
+ */
 SDL_Texture *loadTexture(const char *path, SDL_Renderer *renderer)
 {
     SDL_Texture *texture = IMG_LoadTexture(renderer, path);
@@ -588,6 +728,13 @@ SDL_Texture *loadTexture(const char *path, SDL_Renderer *renderer)
     return texture;
 }
 
+/**
+ * @brief Initializes player outfit.
+ * @param ctx Game context
+ * @param playerNum Player number
+ * @param outfitNum Outfit index
+ * @param charNum Character index
+ */
 void initOutfit(GameContext *ctx, int playerNum, int outfitNum, int charNum)
 {
     char fullPath[64];
@@ -616,6 +763,11 @@ void initOutfit(GameContext *ctx, int playerNum, int outfitNum, int charNum)
         p->attackLeft[i] = loadTexture(fullPath, ctx->renderer);
     }
 }
+
+/**
+ * @brief Initializes player 1.
+ * @param ctx Game context
+ */
 
 void initPlayer1(GameContext *ctx)
 {
@@ -678,6 +830,10 @@ void initPlayer1(GameContext *ctx)
     ctx->player1.layoutNum  = 1;
 }
 
+/**
+ * @brief Initializes player 2.
+ * @param ctx Game context
+ */
 void initPlayer2(GameContext *ctx)
 {
     ctx->player2.outfitNum      = 1;
@@ -739,10 +895,20 @@ void initPlayer2(GameContext *ctx)
     ctx->player2.layoutNum  = 1;
 }
 
+/**
+ * @brief Checks if the enemy is in the imprison zone.
+ * @param ctx Game context
+ * @return 1 if in zone, 0 otherwise
+ */
 int enemy_in_imprison_zone(GameContext *ctx) {
     return SDL_HasIntersection(&ctx->enemy2.rect, &ctx->imprisonZone);
 }
 
+/**
+ * @brief Updates particle effects.
+ * @param ctx Game context
+ * @param dt Delta time
+ */
 void update_particles(GameContext *ctx, float dt)
 {
     for (int i = 0; i < MAX_PARTICLES; i++) {
@@ -763,6 +929,10 @@ void update_particles(GameContext *ctx, float dt)
     }
 }
 
+/**
+ * @brief Initializes the game.
+ * @return Game context or NULL on failure
+ */
 GameContext* game_init(void)
 {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
@@ -827,17 +997,24 @@ GameContext* game_init(void)
     ctx->imprisonPulse = 0.0f;
     for (int i = 0; i < MAX_PARTICLES; i++)
         ctx->particles[i].active = 0;
-
-    ctx->slideshowPanels[0] = loadTexture("assets/ending/panel1.png", ctx->renderer);
-    ctx->slideshowPanels[1] = loadTexture("assets/ending/panel2.png", ctx->renderer);
-    ctx->slideshowPanels[2] = loadTexture("assets/ending/panel3.png", ctx->renderer);
-    ctx->slideshowPanels[3] = loadTexture("assets/ending/panel4.png", ctx->renderer);
     ctx->slideshowCount     = 4;
     ctx->slideshowCurrent   = 0;
     ctx->slideshowAlpha     = 0;
     ctx->slideshowTimer     = 0;
     ctx->slideshowFading    = 0;
     ctx->endingChoice = 1;
+    ctx->posterTexture = loadTexture("assets/collectibles/poster.png", ctx->renderer);
+    ctx->poster.rect = (SDL_Rect){590, 65, 40, 50}; // adjust position
+    ctx->poster.visible = 1;
+    ctx->poster.taken = 0;
+    ctx->posterTriggered = 0;
+    ctx->dialogueSound = Mix_LoadWAV("assets/sounds/dialogue.wav");
+    ctx->heartBeatSound = Mix_LoadWAV("assets/sounds/heartbeat.mp3");
+    ctx->endingMusic = Mix_LoadMUS("assets/sounds/end.mp3");
+    ctx->fadeAlpha = 0;
+    ctx->isFading = 0;
+    ctx->fadeDirection = 1;
+    ctx->endingBackground = loadTexture("assets/ending/ending_bg.png", ctx->renderer);
 
 
     map_init(&ctx->map, ctx->renderer);
@@ -986,6 +1163,9 @@ GameContext* game_init(void)
     return ctx;
 }
 
+/**
+*  check if rectangle has intersection 
+*/
 int hasIntersection(SDL_Rect r1, SDL_Rect r2)
 {
     return (r1.x + r1.w >= r2.x &&
@@ -994,8 +1174,60 @@ int hasIntersection(SDL_Rect r1, SDL_Rect r2)
             r1.y        <= r2.y + r2.h);
 }
 
+void renderDialogue(GameContext *ctx)
+{
+    SDL_RenderSetViewport(ctx->renderer, NULL);
+
+    // black box
+    SDL_Rect box = { 50, WINDOW_HEIGHT - 150, WINDOW_WIDTH - 100, 100 };
+    SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 220);
+    SDL_RenderFillRect(ctx->renderer, &box);
+
+    // white border
+    SDL_SetRenderDrawColor(ctx->renderer, 255, 255, 255, 255);
+    SDL_RenderDrawRect(ctx->renderer, &box);
+
+    DialogueLine *line = &ctx->dialogue[ctx->currentLine];
+
+    SDL_Color color = {255,255,255,255};
+    if (line->speaker == 0)
+        color = (SDL_Color){255, 200, 200, 255}; // P1 color
+    else
+        color = (SDL_Color){200, 200, 255, 255}; // P2 color
+
+    SDL_Surface *s = TTF_RenderText_Blended_Wrapped(
+        ctx->font,
+        line->text,
+        color,
+        box.w - 20
+    );
+
+    SDL_Texture *t = SDL_CreateTextureFromSurface(ctx->renderer, s);
+
+    SDL_Rect textRect = {
+        box.x + 10,
+        box.y + 10,
+        s->w,
+        s->h
+    };
+
+    SDL_RenderCopy(ctx->renderer, t, NULL, &textRect);
+
+    SDL_FreeSurface(s);
+    SDL_DestroyTexture(t);
+}
+
+/**
+ * @brief Handles player movement and interactions.
+ * @param ctx Game context
+ */
 void playerMechanics(GameContext *ctx)
 {
+    if (ctx->currentState == STATE_DIALOGUE)
+{
+    return;
+}
+
     printf("x: %d, y= %d\n", ctx->player1.rect.x, ctx->player1.rect.y);
 
     SDL_Rect *obs       = (ctx->map.level == LEVEL_1) ? ctx->map.obs1       : ctx->map.obs2;
@@ -1610,6 +1842,8 @@ if (moved2) {
         ctx->currentState    = STATE_PLAYING; 
         ctx->paused          = 0;
         ctx->keys[SDL_SCANCODE_O] = 0;
+        ctx->isFading = 0;
+        ctx->fadeAlpha = 0;
         return;
     }
 
@@ -1640,6 +1874,7 @@ for (int i = 0; i < keys_cnt; i++) {
         if (eligible) {
             keys[i].collected = 1;
             keys[i].visible   = 0;
+            ctx->lastKeyPickedIndex = i;
             ctx->currentState = STATE_ENIGME;
             ctx->en.over = 0;
             ctx->en.showQuiz = 0; // Start at the "Quiz/Puzzle" selection screen
@@ -1654,6 +1889,7 @@ for (int i = 0; i < keys_cnt; i++) {
             ctx->player2.moving = 0;
             Mix_HaltChannel(CH_P1_WALK);
             Mix_HaltChannel(CH_P2_WALK);
+
 
             if (ctx->map.level == LEVEL_1 && i == 0) {
     ctx->isCameraPanning  = 1;
@@ -1737,6 +1973,9 @@ for (int i = 0; i < dc; i++) {
 
 }
 
+/**
+*  scale rectangle 
+*/
 SDL_Rect scale_rect(SDL_Rect rect, float scale)
 {
     float w = rect.w, h = rect.h;
@@ -1748,12 +1987,18 @@ SDL_Rect scale_rect(SDL_Rect rect, float scale)
     };
 }
 
+/**
+*  check if point is in rectangle 
+*/
 int point_in_rect(int x, int y, SDL_Rect *rect)
 {
     return x >= rect->x && x <= rect->x + rect->w &&
            y >= rect->y && y <= rect->y + rect->h;
 }
 
+/**
+*  sub menu function 
+*/
 void subMenuFn(GameContext *ctx)
 {
     int mx, my;
@@ -1775,6 +2020,9 @@ void subMenuFn(GameContext *ctx)
     }
 }
 
+/**
+*  players menu function 
+*/
 void playersMenuFn(GameContext *ctx)
 {
     int mx, my;
@@ -1800,6 +2048,9 @@ void playersMenuFn(GameContext *ctx)
     else if (!overBack) ctx->sm.backBtn.hovered = 0;
 }
 
+/**
+*  change outfits function 
+*/
 void changeOutfitsFn(GameContext *ctx)
 {
     int mx, my;
@@ -1878,6 +2129,9 @@ void changeOutfitsFn(GameContext *ctx)
     SDL_RenderCopy(ctx->renderer,t,NULL,&d); SDL_DestroyTexture(t);
 }
 
+/**
+*  character select function 
+*/
 void charSelectFn(GameContext *ctx)
 {
     int mx, my;
@@ -1921,6 +2175,9 @@ void charSelectFn(GameContext *ctx)
     SDL_RenderCopy(ctx->renderer, ctx->sm.okBtn.tex, NULL, &draw);
 }
 
+/**
+*  toggle layout function 
+*/
 void toggleLayout(Player *p) {
     if (p->layoutNum == 1) {
         p->layoutNum = 2;
@@ -1951,6 +2208,9 @@ void toggleLayout(Player *p) {
     }
 }
 
+/**
+*  button layout function 
+*/
 void buttonLayoutFn(GameContext *ctx) {
     int mx, my;
     SDL_GetMouseState(&mx, &my);
@@ -2031,6 +2291,9 @@ void buttonLayoutFn(GameContext *ctx) {
     }
 }
 
+/**
+*  get rebind key reference 
+*/
 int* getRebindKeyRef(GameContext *ctx, int target) {
     if (target >= 1 && target <= 7) {
         Player *p = &ctx->player1;
@@ -2058,10 +2321,113 @@ int* getRebindKeyRef(GameContext *ctx, int target) {
     return NULL;
 }
 
+void startSherlockDialogue(GameContext *ctx)
+{
+    Mix_HaltMusic();
+    ctx->dialogueCount = 4;
+
+    ctx->dialogue[0] = (DialogueLine){ "Sherlock: ...", 1 };
+    ctx->dialogue[1] = (DialogueLine){ "Sherlock: This face...", 1 };
+    ctx->dialogue[2] = (DialogueLine){ "Sherlock: It looks...", 1 };
+    ctx->dialogue[3] = (DialogueLine){ "Sherlock: Familiar...", 1 };
+
+    ctx->currentLine = 0;
+    ctx->dialogueActive = 1;
+    ctx->dialogueZoomTimer = 0;
+
+    ctx->currentState = STATE_DIALOGUE;
+}
+
+/**
+ * @brief Updates game logic.
+ * @param ctx Game context
+ */
 void game_update(GameContext *ctx)
 {
     int mx, my;
     SDL_GetMouseState(&mx, &my);
+
+    if (ctx->isFading)
+{
+    ctx->fadeAlpha += ctx->fadeDirection * 1; // speed
+
+    if (ctx->fadeAlpha >= 255)
+    {
+        ctx->fadeAlpha = 255;
+        ctx->isFading = 0;
+
+
+ctx->currentState = STATE_CUTSCENE_L2_INTRO;
+
+// reset timer so cutscene starts properly
+ctx->cutsceneL2Timer = 0;
+ctx->cutsceneL2Alpha = 0;
+
+// ✅ optional: change music
+Mix_HaltMusic();
+Mix_PlayMusic(ctx->musicLevel2, -1);
+
+
+        // ✅ NOW fully black → do transition here
+        // e.g. switch level, start boss, etc.
+    }
+    else if (ctx->fadeAlpha <= 0)
+    {
+        ctx->fadeAlpha = 0;
+        ctx->isFading = 0;
+    }
+}
+
+    if (ctx->currentState == STATE_DIALOGUE)
+{
+    while (SDL_PollEvent(&ctx->event))
+    {
+        if (ctx->event.type == SDL_QUIT)
+            ctx->running = 0;
+
+        if (ctx->event.type == SDL_KEYDOWN)
+        {
+            ctx->currentLine++;
+            Mix_HaltChannel(0);
+            if (ctx->currentLine < ctx->dialogueCount) Mix_PlayChannel(-1, ctx->dialogueSound, 0);
+
+            if (ctx->currentLine >= ctx->dialogueCount)
+            {
+                ctx->currentState = STATE_PLAYING;
+                Mix_PlayChannel(-1, ctx->heartBeatSound, 0);
+                ctx->fadeAlpha = 0;
+                ctx->fadeDirection = 1; // fade to black
+                ctx->isFading = 1;
+
+                // reset zoom after dialogue
+                ctx->zoomLevel = 1.0f;
+            }
+        }
+    }
+
+
+    return;
+}
+
+// ── ADD THIS: Handle STATE_ENDING_CHOICE dialogue phase separately ──
+if (ctx->currentState == STATE_ENDING_CHOICE && ctx->endingInDialogue) 
+{ 
+    while (SDL_PollEvent(&ctx->event)) 
+    {
+         if (ctx->event.type == SDL_QUIT) 
+            ctx->running = 0; 
+        if (ctx->event.type == SDL_KEYDOWN) 
+        {
+            ctx->endingDialogueIndex++; 
+            if (ctx->endingDialogueIndex >= ctx->endingDialogueCount) 
+            { 
+                ctx->endingInDialogue = 0; 
+                ctx->endingChoice = 1; 
+            } 
+        } 
+    } 
+    return; 
+}
 
     Uint32 now = SDL_GetTicks();
 
@@ -2120,30 +2486,60 @@ void game_update(GameContext *ctx)
             continue;
         }
 
+        if (ctx->currentState == STATE_PLAYING)
+{
+    if (ctx->event.type == SDL_KEYDOWN &&
+        ctx->event.key.keysym.sym == SDLK_e)
+    {
+        startSherlockDialogue(ctx);
+    }
+}
+
+
         if (ctx->currentState == STATE_ENIGME) {
             handleEnigmeEvents(&ctx->en, ctx->event);
             if (ctx->en.over) {
                 if (ctx->en.puzzleSelected) {
                     ctx->currentState = STATE_PUZZLE;
                     puzzle_init_state(&ctx->pz, ctx->renderer);
-                } else {
-                    ctx->currentState = STATE_PLAYING;
+                } 
+else 
+    {
+        int triggerDialogue = (ctx->lastKeyPickedIndex == 1);
 
-                    // Quiz Consequences
-                    Player *p = (ctx->lastPlayerToPickupKey == 1) ? &ctx->player1 : &ctx->player2;
-                    if (ctx->en.result == 1) { // Win
-                        p->score += 10;
-                    } else if (ctx->en.result == 0) { // Loss
-                        p->score -= 10;
-                        p->healthStatus += 1;
-                        ctx->hitFlashTimer = 30;
-                        if (p->healthStatus >= 8) {
-                            p->alive = 0;
-                            p->healthStatus = 7;
-                        }
-                    }
-                    ctx->lastPlayerToPickupKey = 0; // Reset
-                }
+        Player *p = (ctx->lastPlayerToPickupKey == 1)
+            ? &ctx->player1
+            : &ctx->player2;
+
+        if (ctx->en.result == 1) {
+            p->score += 10;
+        } else {
+            p->score -= 10;
+            p->healthStatus += 1;
+            ctx->hitFlashTimer = 30;
+
+            if (p->healthStatus >= 8) {
+                p->alive = 0;
+                p->healthStatus = 7;
+            }
+        }
+
+        ctx->lastPlayerToPickupKey = 0;
+
+        // ✅ HERE is your final behavior
+        if (triggerDialogue)
+        {
+            startSherlockDialogue(ctx);
+
+            // 🎥 Optional: zoom punch immediately
+            ctx->zoomLevel = 1.3f;
+        }
+        else
+        {
+            ctx->currentState = STATE_PLAYING;
+        }
+    }
+
             }
             continue; 
         }
@@ -2201,6 +2597,8 @@ if (ctx->event.type == SDL_KEYDOWN) {
 
     if (ctx->event.key.keysym.sym == SDLK_i) {
         ctx->currentState = STATE_ENDING_CHOICE;
+        Mix_HaltMusic();
+        Mix_PlayMusic(ctx->endingMusic, -1);
 
         // optional reset (recommended)
         ctx->endingChoice = 1;
@@ -2408,6 +2806,17 @@ if (ctx->currentState == STATE_CUTSCENE_L2_INTRO) {
     else if (ctx->cutsceneL2Timer <= 400) ctx->cutsceneL2Alpha = (int)((400 - ctx->cutsceneL2Timer) * 255.0f / 60.0f);
     else {
         ctx->currentState    = STATE_PLAYING;
+        ctx->map.level = LEVEL_2;
+        setup_level2(&ctx->map);
+        ctx->minimap.num_level  = 2;  
+        ctx->minimap2.num_level = 2;   
+        ctx->player1.rect.x = 200; ctx->player1.rect.y = 550;
+        ctx->player2.rect.x = 230; ctx->player2.rect.y = 550;
+        ctx->currentState    = STATE_PLAYING; 
+        ctx->paused          = 0;
+        ctx->keys[SDL_SCANCODE_O] = 0;
+        ctx->isFading = 0;
+        ctx->fadeAlpha = 0;
         ctx->cutsceneL2Timer = 0;
     }
     return;
@@ -2420,6 +2829,8 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
     else if (ctx->cutsceneL2Timer <= 460) ctx->cutsceneL2Alpha = (int)((460 - ctx->cutsceneL2Timer) * 255.0f / 60.0f);
     else {
     ctx->currentState = STATE_ENDING_CHOICE;
+    Mix_HaltMusic();
+    Mix_PlayMusic(ctx->endingMusic, -1);
     ctx->endingChoice = 1;
     return;
 }
@@ -2540,13 +2951,25 @@ else if (ctx->jailPhase == 2) {
 
     if (ctx->jailAlpha <= 0.0f) {
         ctx->jailAlpha = 0.0f;
+        Mix_FadeOutMusic(1000);
+        Mix_FadeInMusic(ctx->endingMusic, -1, 1000);
 
         // NOW trigger ending cutscene
-        ctx->currentState = STATE_CUTSCENE_L2_ENDING;
+        ctx->currentState = STATE_ENDING_CHOICE;
+        ctx->endingDialogue[0] = "Watson: Sherlock...?";
+        ctx->endingDialogue[1] = "Watson: Wake up!";
+        ctx->endingDialogue[2] = "Watson: Can you hear me?";
+        ctx->endingDialogue[3] = "Watson: ...Are you alright?";
+
+        ctx->endingDialogueIndex = 0;
+        ctx->endingInDialogue = 1;
         ctx->cutsceneL2Timer = 0;
         ctx->cutsceneL2Alpha = 0;
 
         ctx->jailPhase = -1; // finished
+        ctx->endingDialogueCount = 4;
+
+    
     }
 }
     
@@ -2589,7 +3012,11 @@ else if (ctx->jailPhase == 2) {
         // Optional: Play a game over sound if available
     }
 }
-
+    
+/**
+ * @brief Cleans up game resources.
+ * @param ctx Game context
+ */
 void game_cleanup(GameContext *ctx)
 {
     if (!ctx) return;
@@ -2657,6 +3084,9 @@ void game_cleanup(GameContext *ctx)
     free(ctx);
 }
 
+/**
+*  render imprison arrow 
+*/
 void render_imprison_arrow(GameContext *ctx) {
     float pulse = (sinf(ctx->imprisonPulse) + 1.0f) * 0.5f; // 0..1
 
@@ -2699,6 +3129,10 @@ void render_imprison_arrow(GameContext *ctx) {
                        arrowY - (int)(dy * size - dx * wing));
 }
 
+/**
+ * @brief Renders the game.
+ * @param ctx Game context
+ */
 void game_render(GameContext *ctx)
 {
     const int halfW = WINDOW_WIDTH  / 2;   /* 500 */
@@ -2713,6 +3147,7 @@ void game_render(GameContext *ctx)
     SDL_RenderPresent(ctx->renderer);
     return;
 }
+
 
 if (ctx->currentState == STATE_SLIDESHOW) {
     render_slideshow(ctx);
@@ -3044,6 +3479,17 @@ if (ctx->currentState == STATE_CUTSCENE_L2_ENDING) {
                 }
             }
         }
+
+        if (ctx->poster.visible && ctx->posterTexture)
+{
+    SDL_Rect dst = {
+        (int)((ctx->poster.rect.x - camX) * ZOOM_FACTOR),
+        (int)((ctx->poster.rect.y - camY) * ZOOM_FACTOR),
+        (int)(ctx->poster.rect.w * ZOOM_FACTOR),
+        (int)(ctx->poster.rect.h * ZOOM_FACTOR)
+    };
+    SDL_RenderCopy(ctx->renderer, ctx->posterTexture, NULL, &dst);
+}
 
         
 
@@ -3415,9 +3861,47 @@ if (ctx->enemy2.alive &&
     SDL_RenderSetViewport(ctx->renderer, NULL);
 }
 
+if (ctx->currentState == STATE_DIALOGUE) {
+
+    if (ctx->posterTexture) {
+        // Draw poster centered and large
+        int pw = WINDOW_WIDTH  - 410;
+        int ph = WINDOW_HEIGHT - 100;
+        SDL_Rect dst = {
+            (WINDOW_WIDTH  - pw) / 2,
+            (WINDOW_HEIGHT - ph) / 2,
+            pw, ph
+        };
+        SDL_RenderCopy(ctx->renderer, ctx->posterTexture, NULL, &dst);
+    }
+
+    if (ctx->currentState == STATE_DIALOGUE)
+    {
+        // render world first (optional, keeps background visible)
+
+        renderDialogue(ctx);
+
+        SDL_RenderPresent(ctx->renderer);
+        return;
+    }
+
     SDL_RenderPresent(ctx->renderer);
+    return;
 }
 
+if (ctx->fadeAlpha > 0)
+{
+    SDL_SetRenderDrawBlendMode(ctx->renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, ctx->fadeAlpha);
+    SDL_RenderFillRect(ctx->renderer, NULL);
+}
+
+    SDL_RenderPresent(ctx->renderer);
+}
+/**
+ * @brief Runs the game loop.
+ * @param ctx Game context
+ */
 void game_run(GameContext *ctx)
 {
     while (ctx->running) {

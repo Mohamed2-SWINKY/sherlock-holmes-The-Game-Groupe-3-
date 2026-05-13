@@ -1,0 +1,40 @@
+digraph "game_init"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="game_init",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Initializes the game."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="controller_open",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$serial__controller_8c.html#a32987d5f41813dab50950a04f1092dd2",tooltip=" "];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="enemy_init",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$players_8c.html#a214607c8ae0d42e9dc38395e63aa6fbe",tooltip="Initializes enemy data."];
+  Node3 -> Node4 [id="edge3_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="enemy_choose_target",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$players_8c.html#ac7872e1a1015653a8cb0114781f07103",tooltip="Chooses a random target for the enemy."];
+  Node1 -> Node5 [id="edge4_Node000001_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="enemyAtlas_load",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$players_8c.html#a34224dd43b4b4b7e3776b511ff01a56a",tooltip="Loads enemy textures."];
+  Node5 -> Node6 [id="edge5_Node000005_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="loadTexture",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$players_8c.html#a3deb97d23eb0af3bc78efed83fc829ac",tooltip="Loads a texture from file."];
+  Node1 -> Node7 [id="edge6_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="init_minimap",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$minimap_8c.html#abfbfe083462195cea7e50db3e9456e81",tooltip=" "];
+  Node1 -> Node8 [id="edge7_Node000001_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="init_minimap2",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$minimap_8c.html#a48b13e24f39bd878f529b9c4c5036718",tooltip=" "];
+  Node1 -> Node9 [id="edge8_Node000001_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="initEnigme",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$assets_2enigme_2enigme_8c.html#ae76dcfad9bc25ffba1f4af71ddba2785",tooltip=" "];
+  Node1 -> Node10 [id="edge9_Node000001_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="initPlayer1",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$players_8c.html#a110361f8374fb07dcdf8b6e7b7cc07e3",tooltip="Initializes player 1."];
+  Node10 -> Node11 [id="edge10_Node000010_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="initOutfit",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$players_8c.html#acf8d7af8c24e83d5e65cdb2892d2e4cf",tooltip="Initializes player outfit."];
+  Node11 -> Node6 [id="edge11_Node000011_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node10 -> Node6 [id="edge12_Node000010_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node12 [id="edge13_Node000001_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="initPlayer2",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$players_8c.html#a51ad0a430cd68f50f8086885366c90fe",tooltip="Initializes player 2."];
+  Node12 -> Node11 [id="edge14_Node000012_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node12 -> Node6 [id="edge15_Node000012_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node6 [id="edge16_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node13 [id="edge17_Node000001_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="map_init",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$map_8c.html#ae45f30b3c11bb2756fab1adb911904c2",tooltip=" "];
+  Node13 -> Node14 [id="edge18_Node000013_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="setup_level1",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$map_8c.html#a4185de338828ec39553abcf324e40ea1",tooltip=" "];
+}

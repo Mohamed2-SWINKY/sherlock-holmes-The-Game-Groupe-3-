@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sherlock Holmes: The Unseen Enemy: PuzzleState Struct Reference</title>
+<title>SDL Game Project: PuzzleState Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Sherlock Holmes: The Unseen Enemy<span id="projectnumber">&#160;Version 1</span>
+   <div id="projectname">SDL Game Project<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">An SDL2, C game about sherlock holmes, with a little twist in the story.</div>
+   <div id="projectbrief">Game using SDL with players, enemies, and mechanics</div>
   </td>
  </tr>
  </tbody>
@@ -92,48 +92,344 @@ $(function(){initNavTree('structPuzzleState.html','',''); });
   <div class="headertitle"><div class="title">PuzzleState Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="puzzle_8h_source.html">puzzle.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for PuzzleState:</div>
+<div class="dyncontent">
+<div class="center"><img src="structPuzzleState__coll__graph.png" border="0" usemap="#aPuzzleState_coll__map" loading="lazy" alt="Collaboration graph"/></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a42da2712c5276579b16b23bcbdcfdffe" id="r_a42da2712c5276579b16b23bcbdcfdffe"><td class="memItemLeft"><a id="a42da2712c5276579b16b23bcbdcfdffe" name="a42da2712c5276579b16b23bcbdcfdffe"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>bg</b></td></tr>
-<tr class="memitem:a7de302012c735a833ab72371794efcbf" id="r_a7de302012c735a833ab72371794efcbf"><td class="memItemLeft"><a id="a7de302012c735a833ab72371794efcbf" name="a7de302012c735a833ab72371794efcbf"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>wTex</b></td></tr>
-<tr class="memitem:a143bb4d0141c7c9ee6a5411d2734d077" id="r_a143bb4d0141c7c9ee6a5411d2734d077"><td class="memItemLeft"><a id="a143bb4d0141c7c9ee6a5411d2734d077" name="a143bb4d0141c7c9ee6a5411d2734d077"></a>
-SDL_Texture *&#160;</td><td class="memItemRight"><b>lTex</b></td></tr>
-<tr class="memitem:a4a52ff66d55c6156b695d4f580fcb2b3" id="r_a4a52ff66d55c6156b695d4f580fcb2b3"><td class="memItemLeft"><a id="a4a52ff66d55c6156b695d4f580fcb2b3" name="a4a52ff66d55c6156b695d4f580fcb2b3"></a>
-Mix_Chunk *&#160;</td><td class="memItemRight"><b>snd</b></td></tr>
-<tr class="memitem:aa97cf13910342387e0d20a73f520ffb6" id="r_aa97cf13910342387e0d20a73f520ffb6"><td class="memItemLeft"><a id="aa97cf13910342387e0d20a73f520ffb6" name="aa97cf13910342387e0d20a73f520ffb6"></a>
-TTF_Font *&#160;</td><td class="memItemRight"><b>fnt</b></td></tr>
-<tr class="memitem:a66e1aa38b963a233da2ed7d8199cf6c8" id="r_a66e1aa38b963a233da2ed7d8199cf6c8"><td class="memItemLeft"><a id="a66e1aa38b963a233da2ed7d8199cf6c8" name="a66e1aa38b963a233da2ed7d8199cf6c8"></a>
-<a class="el" href="structPiece.html">Piece</a>&#160;</td><td class="memItemRight"><b>pc</b> [3]</td></tr>
-<tr class="memitem:a374a462a1bf6711d1508caa87cf7d90f" id="r_a374a462a1bf6711d1508caa87cf7d90f"><td class="memItemLeft"><a id="a374a462a1bf6711d1508caa87cf7d90f" name="a374a462a1bf6711d1508caa87cf7d90f"></a>
-SDL_Rect&#160;</td><td class="memItemRight"><b>slots</b> [3]</td></tr>
-<tr class="memitem:a304d1a761e496e68de119d20f6c382f2" id="r_a304d1a761e496e68de119d20f6c382f2"><td class="memItemLeft"><a id="a304d1a761e496e68de119d20f6c382f2" name="a304d1a761e496e68de119d20f6c382f2"></a>
-SDL_Rect&#160;</td><td class="memItemRight"><b>hScr</b></td></tr>
-<tr class="memitem:a6af81703ffc1d752334617dcb0c1e1e7" id="r_a6af81703ffc1d752334617dcb0c1e1e7"><td class="memItemLeft"><a id="a6af81703ffc1d752334617dcb0c1e1e7" name="a6af81703ffc1d752334617dcb0c1e1e7"></a>
-SDL_Rect&#160;</td><td class="memItemRight"><b>target</b></td></tr>
-<tr class="memitem:ab3071c6128822955288a904cc2dfed7c" id="r_ab3071c6128822955288a904cc2dfed7c"><td class="memItemLeft"><a id="ab3071c6128822955288a904cc2dfed7c" name="ab3071c6128822955288a904cc2dfed7c"></a>
-Uint32&#160;</td><td class="memItemRight"><b>startTime</b></td></tr>
-<tr class="memitem:ab4db37bbc5f8591e20fc3e4c11011f40" id="r_ab4db37bbc5f8591e20fc3e4c11011f40"><td class="memItemLeft"><a id="ab4db37bbc5f8591e20fc3e4c11011f40" name="ab4db37bbc5f8591e20fc3e4c11011f40"></a>
-int&#160;</td><td class="memItemRight"><b>dIdx</b></td></tr>
-<tr class="memitem:a04f41d7057b1933b470d36eecb083c7d" id="r_a04f41d7057b1933b470d36eecb083c7d"><td class="memItemLeft"><a id="a04f41d7057b1933b470d36eecb083c7d" name="a04f41d7057b1933b470d36eecb083c7d"></a>
-int&#160;</td><td class="memItemRight"><b>ox</b></td></tr>
-<tr class="memitem:a5e44aa768202c3cfb620909ea21fe9d3" id="r_a5e44aa768202c3cfb620909ea21fe9d3"><td class="memItemLeft"><a id="a5e44aa768202c3cfb620909ea21fe9d3" name="a5e44aa768202c3cfb620909ea21fe9d3"></a>
-int&#160;</td><td class="memItemRight"><b>oy</b></td></tr>
-<tr class="memitem:a05f727fc498c537d73c9432644b04396" id="r_a05f727fc498c537d73c9432644b04396"><td class="memItemLeft"><a id="a05f727fc498c537d73c9432644b04396" name="a05f727fc498c537d73c9432644b04396"></a>
-int&#160;</td><td class="memItemRight"><b>run</b></td></tr>
-<tr class="memitem:ab8da8d6e7732f1c7a769407f1f43dca7" id="r_ab8da8d6e7732f1c7a769407f1f43dca7"><td class="memItemLeft"><a id="ab8da8d6e7732f1c7a769407f1f43dca7" name="ab8da8d6e7732f1c7a769407f1f43dca7"></a>
-int&#160;</td><td class="memItemRight"><b>result</b></td></tr>
-<tr class="memitem:a61532f3f72a64408c25ea34802a20505" id="r_a61532f3f72a64408c25ea34802a20505"><td class="memItemLeft"><a id="a61532f3f72a64408c25ea34802a20505" name="a61532f3f72a64408c25ea34802a20505"></a>
-int&#160;</td><td class="memItemRight"><b>over</b></td></tr>
-<tr class="memitem:af24b178dec46fa95b4e9008c42a35ac6" id="r_af24b178dec46fa95b4e9008c42a35ac6"><td class="memItemLeft"><a id="af24b178dec46fa95b4e9008c42a35ac6" name="af24b178dec46fa95b4e9008c42a35ac6"></a>
-int&#160;</td><td class="memItemRight"><b>fate</b></td></tr>
-<tr class="memitem:af20a2d7131a20b11e89cce7fffe23016" id="r_af20a2d7131a20b11e89cce7fffe23016"><td class="memItemLeft"><a id="af20a2d7131a20b11e89cce7fffe23016" name="af20a2d7131a20b11e89cce7fffe23016"></a>
-double&#160;</td><td class="memItemRight"><b>angle</b></td></tr>
-<tr class="memitem:a39aa077d4a207ca4beb52fd4ee540862" id="r_a39aa077d4a207ca4beb52fd4ee540862"><td class="memItemLeft"><a id="a39aa077d4a207ca4beb52fd4ee540862" name="a39aa077d4a207ca4beb52fd4ee540862"></a>
-float&#160;</td><td class="memItemRight"><b>scale</b></td></tr>
+<tr class="memitem:a42da2712c5276579b16b23bcbdcfdffe" id="r_a42da2712c5276579b16b23bcbdcfdffe"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a42da2712c5276579b16b23bcbdcfdffe">bg</a></td></tr>
+<tr class="memitem:a7de302012c735a833ab72371794efcbf" id="r_a7de302012c735a833ab72371794efcbf"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a7de302012c735a833ab72371794efcbf">wTex</a></td></tr>
+<tr class="memitem:a143bb4d0141c7c9ee6a5411d2734d077" id="r_a143bb4d0141c7c9ee6a5411d2734d077"><td class="memItemLeft">SDL_Texture *&#160;</td><td class="memItemRight"><a class="el" href="#a143bb4d0141c7c9ee6a5411d2734d077">lTex</a></td></tr>
+<tr class="memitem:a4a52ff66d55c6156b695d4f580fcb2b3" id="r_a4a52ff66d55c6156b695d4f580fcb2b3"><td class="memItemLeft">Mix_Chunk *&#160;</td><td class="memItemRight"><a class="el" href="#a4a52ff66d55c6156b695d4f580fcb2b3">snd</a></td></tr>
+<tr class="memitem:aa97cf13910342387e0d20a73f520ffb6" id="r_aa97cf13910342387e0d20a73f520ffb6"><td class="memItemLeft">TTF_Font *&#160;</td><td class="memItemRight"><a class="el" href="#aa97cf13910342387e0d20a73f520ffb6">fnt</a></td></tr>
+<tr class="memitem:a66e1aa38b963a233da2ed7d8199cf6c8" id="r_a66e1aa38b963a233da2ed7d8199cf6c8"><td class="memItemLeft"><a class="el" href="structPiece.html">Piece</a>&#160;</td><td class="memItemRight"><a class="el" href="#a66e1aa38b963a233da2ed7d8199cf6c8">pc</a> [3]</td></tr>
+<tr class="memitem:a374a462a1bf6711d1508caa87cf7d90f" id="r_a374a462a1bf6711d1508caa87cf7d90f"><td class="memItemLeft">SDL_Rect&#160;</td><td class="memItemRight"><a class="el" href="#a374a462a1bf6711d1508caa87cf7d90f">slots</a> [3]</td></tr>
+<tr class="memitem:a304d1a761e496e68de119d20f6c382f2" id="r_a304d1a761e496e68de119d20f6c382f2"><td class="memItemLeft">SDL_Rect&#160;</td><td class="memItemRight"><a class="el" href="#a304d1a761e496e68de119d20f6c382f2">hScr</a></td></tr>
+<tr class="memitem:a6af81703ffc1d752334617dcb0c1e1e7" id="r_a6af81703ffc1d752334617dcb0c1e1e7"><td class="memItemLeft">SDL_Rect&#160;</td><td class="memItemRight"><a class="el" href="#a6af81703ffc1d752334617dcb0c1e1e7">target</a></td></tr>
+<tr class="memitem:ab3071c6128822955288a904cc2dfed7c" id="r_ab3071c6128822955288a904cc2dfed7c"><td class="memItemLeft">Uint32&#160;</td><td class="memItemRight"><a class="el" href="#ab3071c6128822955288a904cc2dfed7c">startTime</a></td></tr>
+<tr class="memitem:ab4db37bbc5f8591e20fc3e4c11011f40" id="r_ab4db37bbc5f8591e20fc3e4c11011f40"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab4db37bbc5f8591e20fc3e4c11011f40">dIdx</a></td></tr>
+<tr class="memitem:a04f41d7057b1933b470d36eecb083c7d" id="r_a04f41d7057b1933b470d36eecb083c7d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a04f41d7057b1933b470d36eecb083c7d">ox</a></td></tr>
+<tr class="memitem:a5e44aa768202c3cfb620909ea21fe9d3" id="r_a5e44aa768202c3cfb620909ea21fe9d3"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a5e44aa768202c3cfb620909ea21fe9d3">oy</a></td></tr>
+<tr class="memitem:a05f727fc498c537d73c9432644b04396" id="r_a05f727fc498c537d73c9432644b04396"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a05f727fc498c537d73c9432644b04396">run</a></td></tr>
+<tr class="memitem:ab8da8d6e7732f1c7a769407f1f43dca7" id="r_ab8da8d6e7732f1c7a769407f1f43dca7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab8da8d6e7732f1c7a769407f1f43dca7">result</a></td></tr>
+<tr class="memitem:a61532f3f72a64408c25ea34802a20505" id="r_a61532f3f72a64408c25ea34802a20505"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a61532f3f72a64408c25ea34802a20505">over</a></td></tr>
+<tr class="memitem:af24b178dec46fa95b4e9008c42a35ac6" id="r_af24b178dec46fa95b4e9008c42a35ac6"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af24b178dec46fa95b4e9008c42a35ac6">fate</a></td></tr>
+<tr class="memitem:af20a2d7131a20b11e89cce7fffe23016" id="r_af20a2d7131a20b11e89cce7fffe23016"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#af20a2d7131a20b11e89cce7fffe23016">angle</a></td></tr>
+<tr class="memitem:a39aa077d4a207ca4beb52fd4ee540862" id="r_a39aa077d4a207ca4beb52fd4ee540862"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a39aa077d4a207ca4beb52fd4ee540862">scale</a></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00038">38</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="af20a2d7131a20b11e89cce7fffe23016" name="af20a2d7131a20b11e89cce7fffe23016"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af20a2d7131a20b11e89cce7fffe23016">&#9670;&#160;</a></span>angle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double PuzzleState::angle</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00055">55</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="a42da2712c5276579b16b23bcbdcfdffe" name="a42da2712c5276579b16b23bcbdcfdffe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42da2712c5276579b16b23bcbdcfdffe">&#9670;&#160;</a></span>bg</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* PuzzleState::bg</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00039">39</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="ab4db37bbc5f8591e20fc3e4c11011f40" name="ab4db37bbc5f8591e20fc3e4c11011f40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4db37bbc5f8591e20fc3e4c11011f40">&#9670;&#160;</a></span>dIdx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PuzzleState::dIdx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00049">49</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="af24b178dec46fa95b4e9008c42a35ac6" name="af24b178dec46fa95b4e9008c42a35ac6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af24b178dec46fa95b4e9008c42a35ac6">&#9670;&#160;</a></span>fate</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PuzzleState::fate</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00054">54</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="aa97cf13910342387e0d20a73f520ffb6" name="aa97cf13910342387e0d20a73f520ffb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa97cf13910342387e0d20a73f520ffb6">&#9670;&#160;</a></span>fnt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TTF_Font* PuzzleState::fnt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00043">43</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="a304d1a761e496e68de119d20f6c382f2" name="a304d1a761e496e68de119d20f6c382f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a304d1a761e496e68de119d20f6c382f2">&#9670;&#160;</a></span>hScr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Rect PuzzleState::hScr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00046">46</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="a143bb4d0141c7c9ee6a5411d2734d077" name="a143bb4d0141c7c9ee6a5411d2734d077"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a143bb4d0141c7c9ee6a5411d2734d077">&#9670;&#160;</a></span>lTex</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* PuzzleState::lTex</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00041">41</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="a61532f3f72a64408c25ea34802a20505" name="a61532f3f72a64408c25ea34802a20505"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61532f3f72a64408c25ea34802a20505">&#9670;&#160;</a></span>over</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PuzzleState::over</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00053">53</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="a04f41d7057b1933b470d36eecb083c7d" name="a04f41d7057b1933b470d36eecb083c7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04f41d7057b1933b470d36eecb083c7d">&#9670;&#160;</a></span>ox</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PuzzleState::ox</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00050">50</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="a5e44aa768202c3cfb620909ea21fe9d3" name="a5e44aa768202c3cfb620909ea21fe9d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e44aa768202c3cfb620909ea21fe9d3">&#9670;&#160;</a></span>oy</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PuzzleState::oy</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00050">50</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="a66e1aa38b963a233da2ed7d8199cf6c8" name="a66e1aa38b963a233da2ed7d8199cf6c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66e1aa38b963a233da2ed7d8199cf6c8">&#9670;&#160;</a></span>pc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPiece.html">Piece</a> PuzzleState::pc[3]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00044">44</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="ab8da8d6e7732f1c7a769407f1f43dca7" name="ab8da8d6e7732f1c7a769407f1f43dca7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8da8d6e7732f1c7a769407f1f43dca7">&#9670;&#160;</a></span>result</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PuzzleState::result</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00052">52</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="a05f727fc498c537d73c9432644b04396" name="a05f727fc498c537d73c9432644b04396"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05f727fc498c537d73c9432644b04396">&#9670;&#160;</a></span>run</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int PuzzleState::run</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00051">51</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="a39aa077d4a207ca4beb52fd4ee540862" name="a39aa077d4a207ca4beb52fd4ee540862"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39aa077d4a207ca4beb52fd4ee540862">&#9670;&#160;</a></span>scale</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float PuzzleState::scale</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00056">56</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="a374a462a1bf6711d1508caa87cf7d90f" name="a374a462a1bf6711d1508caa87cf7d90f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a374a462a1bf6711d1508caa87cf7d90f">&#9670;&#160;</a></span>slots</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Rect PuzzleState::slots[3]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00045">45</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="a4a52ff66d55c6156b695d4f580fcb2b3" name="a4a52ff66d55c6156b695d4f580fcb2b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a52ff66d55c6156b695d4f580fcb2b3">&#9670;&#160;</a></span>snd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Mix_Chunk* PuzzleState::snd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00042">42</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="ab3071c6128822955288a904cc2dfed7c" name="ab3071c6128822955288a904cc2dfed7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3071c6128822955288a904cc2dfed7c">&#9670;&#160;</a></span>startTime</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Uint32 PuzzleState::startTime</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00048">48</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="a6af81703ffc1d752334617dcb0c1e1e7" name="a6af81703ffc1d752334617dcb0c1e1e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6af81703ffc1d752334617dcb0c1e1e7">&#9670;&#160;</a></span>target</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Rect PuzzleState::target</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00047">47</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
+<a id="a7de302012c735a833ab72371794efcbf" name="a7de302012c735a833ab72371794efcbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7de302012c735a833ab72371794efcbf">&#9670;&#160;</a></span>wTex</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Texture* PuzzleState::wTex</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="puzzle_8h_source.html#l00040">40</a> of file <a class="el" href="puzzle_8h_source.html">puzzle.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="puzzle_8h_source.html">puzzle.h</a></li>
 </ul>
